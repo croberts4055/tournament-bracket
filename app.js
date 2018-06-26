@@ -1,3 +1,4 @@
+/** Imports/Requires */
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,14 +8,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var fs = require('fs');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // app.set('port', process.env.PORT || 3001);
 
+// load all model files 
+fs.readdirSync(__dirname + '/models').forEach(function(filename) {
+  if(~filename.indexOf('.js')) require(__dirname + '/models' + '/' + filename); 
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -37,6 +44,7 @@ app.use(function(req, res, next) {
 if('development' === app.get('env')){
   mongoose.connect('mongodb://localhost/test')
 }
+
 
 // error handler
 app.use(function(err, req, res, next) {
