@@ -2,4 +2,48 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  height: 100%;
+}
+
+.app {
+
+}
+
+.form-get-all-teams {
+	color: blue;
+	text-align: center;
+}
+
+.bracket-container {
+	text-align: center;
+	color: maroon;
+}
+
+.tournament-bracket-container {
+	border: 3px solid maroon;
+	height: 50%;
+	margin: 0 auto;
+	padding: 10px 10px;
+}
+
+.tournament-bracket-columns {
+	column-count: 4;
+}
+
+.team-info-name-points {
+	margin: 10px;
+}
+
+.team-info-name {
+	font-weight: bold;
+	font-size: 1em;
+}
+.team-info-points {
+	font-size: 1.25em;
+}
+
+.table-headers, th, tr {
+	color: green;
+	margin: 0 auto;
+	position: center;
 }
