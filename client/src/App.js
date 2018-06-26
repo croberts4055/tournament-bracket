@@ -11,12 +11,23 @@ class App extends Component {
   }
 
   render() {
+
+    // const propsList = [];
+    // for(let propertyName in this.state.users){
+    //   let i = 0;
+    //   propsList.push(<li key={i}>{propertyName}</li>);
+    //   i ++;
+    // }
+
     return (
       <div className="App">
-        <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )}
+        <h1>Accounts</h1>
+        <div>
+          {this.state.users.map(function(user,i){
+            return <p key={i}> {user.email} </p>
+          })}
+         </div> 
+       
       </div>
     );
   }
