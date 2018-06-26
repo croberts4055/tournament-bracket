@@ -22,3 +22,11 @@ install dependencies for the frontend: 'npm install'
 
 Step 8:
 start the application: 'npm start'
+
+Things to Note: 
+- Backend routed to 3001
+- React routed to 3000
+- Front end renders current data in DB by username
+- Click small white button to add an item into DB using a POST request
+- Head to localhost:3001/ to check if DB is functioning
+- Head to localhost:3001/users to see list of all user accounts in DB
