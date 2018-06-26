@@ -14,3 +14,5 @@ var schoolSchema = new Schema({
     cover_img: "",
     articleslink: ""
  });
+
+ module.exports = mongoose.model('Schools',schoolSchema);

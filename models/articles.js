@@ -10,3 +10,5 @@ var articleSchema = new Schema({
     publication_date: "",
     tags: ""
  });
+
+ module.exports = mongoose.model('Article',articleSchema);

@@ -19,3 +19,5 @@ var matchSchema = new Schema({
    streamed: false,
    casters: ""
 });
+
+module.exports = mongoose.model('Matches', matchSchema);

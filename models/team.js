@@ -10,3 +10,5 @@ var teamSchema = new Schema({
     conference: "",
     region: ""
   });
+
+  module.exports = mongoose.model('Teams',teamSchema);
