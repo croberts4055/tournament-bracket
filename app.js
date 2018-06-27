@@ -6,10 +6,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const matchRouter = require('./routes/matches');
-const schoolRouter = require('./routes/schools');
+const indexRouter = require('./api/routes/index');
+const usersRouter = require('./api/routes/users');
+const matchRouter = require('./api/routes/matches');
+const schoolRouter = require('./api/routes/schools');
 const fs = require('fs');
 
 const app = express();
@@ -27,8 +27,8 @@ app.set('view engine', 'jade');
 // app.set('port', process.env.PORT || 3001);
 
 // load all model files 
-fs.readdirSync(__dirname + '/models').forEach(function(filename) {
-  if(~filename.indexOf('.js')) require(__dirname + '/models' + '/' + filename); 
+fs.readdirSync(__dirname + '/api' + '/models').forEach(function(filename) {
+  if(~filename.indexOf('.js')) require(__dirname + '/api'+ '/models' + '/' + filename); 
 });
 
 app.use(logger('dev'));
