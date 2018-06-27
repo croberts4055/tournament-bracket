@@ -3,21 +3,22 @@ var Schema = mongoose.Schema;
 
 
 var matchSchema = new Schema({
-   team_1 : "",
-   team_2 : "",
-   team_1wins: 0,
-   team_2wins: 0,
-   ties: 0,
-   winner: "",
-   game: "",
-   season: "",
-   team1link: "",
-   team2link: "",
-   conferencegame: false,
-   screenshots: "",
-   summary: "",
-   streamed: false,
-   casters: ""
+    _id : Schema.ObjectId,
+   team_1 : String,
+   team_2 : String,
+   team_1wins: Number,
+   team_2wins: Number,
+   ties: Number,
+   winner: String,
+   game: String,
+   season: String,
+   team1link: String,
+   team2link: String,
+   conferencegame: Boolean,
+   screenshots: String,
+   summary: String,
+   streamed: Boolean,
+   casters: {type: Array, "default":[]}
 });
 
 module.exports = mongoose.model('Matches', matchSchema);

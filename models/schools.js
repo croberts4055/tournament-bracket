@@ -3,16 +3,16 @@ var Schema = mongoose.Schema;
 
 var schoolSchema = new Schema({
     _id : Schema.ObjectId,
-    school_name : "",
-    type: {college: false, highschool: false},
-    address: "",
-    logo: "",
-    description: "",
-    admins: "",
-    country: "",
-    state: "",
-    cover_img: "",
-    articleslink: ""
+    school_name : {type: String},
+    type: {type: String, enum: ['Highschool','College']},
+    address: String,
+    logo: String,
+    description: String,
+    admins: String,
+    country: String,
+    state: String,
+    cover_img: String,
+    articleslink: String
  });
 
  module.exports = mongoose.model('Schools',schoolSchema);
