@@ -10,6 +10,7 @@ const indexRouter = require('./api/routes/index');
 const usersRouter = require('./api/routes/users');
 const matchRouter = require('./api/routes/matches');
 const schoolRouter = require('./api/routes/schools');
+const articlesRouter = require('./api/routes/articles');
 const fs = require('fs');
 
 const app = express();
@@ -43,6 +44,10 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/articles',articlesRouter);
+app.use('/matches',matchRouter);
+app.use('/schools',schoolRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

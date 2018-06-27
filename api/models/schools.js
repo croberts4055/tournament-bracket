@@ -8,7 +8,7 @@ var schoolSchema = new Schema({
     address: String,
     logo: String,
     description: String,
-    admins: String,
+    admins: {type: Array, "default": []},
     country: String,
     state: String,
     cover_img: String,

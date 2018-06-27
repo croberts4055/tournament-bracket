@@ -38,4 +38,43 @@ router.post('/add',function(req,res){
     })
 })
 
+// Update operations
+
+router.patch('/:matchId',(req,res,next)=>{
+    const id = req.params.matchId;
+    // Our dynamic property assignment
+    const updateOps = {};
+    for(const ops of req.body){
+        updateOps[ops.propName] = ops.value;
+    }
+    Matches.update( {_id: id},{$set: updateOps})
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            message: "failed to update match data."
+        })
+    })
+})
+
+// Delete operations 
+
+router.delete('/:matchId',(req,res,next)=>{
+    const id = req.params.matchId;
+    Matches.removeById({_id: id})
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(result);
+    })
+})
+
 module.exports = router;
