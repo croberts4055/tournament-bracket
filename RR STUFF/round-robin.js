@@ -30,10 +30,10 @@ function checkInput() {
   		oddTeamDefaultRounds(field_get_teams);
   	}
   	else if(field_get_rounds > field_get_teams) {
-  		incomplete();
+  		oddTeamExtraRounds(field_get_teams, field_get_rounds);
   	}
   	else if(field_get_rounds < field_get_teams) {
-  		incomplete();
+  		oddTeamLessRounds(field_get_teams, field_get_rounds);
   	}
   	else {
   		inputInvalid();
@@ -140,9 +140,107 @@ function shiftArray(teamOne, teamTwo) {
 }
 
 function evenTeamExtraRounds(even_teams, extra_rounds) {
-	incomplete();
+	document.getElementById("field_return_input_status").innerHTML = "You've entered an EVEN number of teams with EXTRA rounds.";
+
+	var teamOne = [];
+	var teamTwo = [];
+	initializeTeams(teamOne, teamTwo, even_teams, 1);
+
+	document.getElementById("return-round-robin-teams").innerHTML = "Team One: " + teamOne + "<br />" + "Team Two: " + teamTwo;
+	// concatentate results of round-robin
+	document.getElementById("return-round-robin").innerHTML = "";
+
+	var teamSize = even_teams/2;
+	var totalRounds = extra_rounds;
+	for (var i = 0; i < totalRounds; i++) {
+		document.getElementById("return-round-robin").innerHTML += "Round " + i + "<br />"; 
+		for (var position = 0; position < teamSize; position++) {
+			document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
+		}
+		document.getElementById("return-round-robin").innerHTML += "<br />";
+		shiftArray(teamOne, teamTwo);
+	}
 }
 
 function evenTeamLessRounds(even_teams, less_rounds) {
-	incomplete();
+	document.getElementById("field_return_input_status").innerHTML = "You've entered an EVEN number of teams with LESS rounds.";
+
+	var teamOne = [];
+	var teamTwo = [];
+	initializeTeams(teamOne, teamTwo, even_teams, 1);
+
+	document.getElementById("return-round-robin-teams").innerHTML = "Team One: " + teamOne + "<br />" + "Team Two: " + teamTwo;
+	// concatentate results of round-robin
+	document.getElementById("return-round-robin").innerHTML = "";
+
+	var teamSize = even_teams/2;
+	var totalRounds = less_rounds;
+	for (var i = 0; i < totalRounds; i++) {
+		document.getElementById("return-round-robin").innerHTML += "Round " + i + "<br />"; 
+		for (var position = 0; position < teamSize; position++) {
+			document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
+		}
+		document.getElementById("return-round-robin").innerHTML += "<br />";
+		shiftArray(teamOne, teamTwo);
+	}
+}
+
+function oddTeamExtraRounds(odd_teams, extra_rounds) {
+	document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams with EXTRA rounds.";
+
+	var teamOne = [];
+	var teamTwo = [];
+	initializeTeams(teamOne, teamTwo, odd_teams, -1);
+
+	document.getElementById("return-round-robin-teams").innerHTML = "Team One: " + teamOne + "<br />" + "Team Two: " + teamTwo;
+	document.getElementById("return-round-robin").innerHTML = "";
+
+	var teamSize = odd_teams/2;
+	var totalRounds = extra_rounds;
+	for (var i = 0; i < totalRounds; i++) {
+		document.getElementById("return-round-robin").innerHTML += "Round " + i + "<br />"; 
+		for (var position = 0; position < teamSize; position++) {
+			if(teamOne[position] == -1) {
+				document.getElementById("return-round-robin").innerHTML += " BYE" + " - " + teamTwo[position] + "<br />";
+			}
+			else if(teamTwo[position] == -1) {
+				document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + "BYE" + "<br />";
+			}
+			else {
+				document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
+			}
+		}
+		document.getElementById("return-round-robin").innerHTML += "<br />";
+		shiftArray(teamOne, teamTwo);
+	}
+}
+
+function oddTeamLessRounds(odd_teams, less_rounds) {
+	document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams with LESS rounds.";
+
+	var teamOne = [];
+	var teamTwo = [];
+	initializeTeams(teamOne, teamTwo, odd_teams, -1);
+
+	document.getElementById("return-round-robin-teams").innerHTML = "Team One: " + teamOne + "<br />" + "Team Two: " + teamTwo;
+	document.getElementById("return-round-robin").innerHTML = "";
+
+	var teamSize = odd_teams/2;
+	var totalRounds = less_rounds;
+	for (var i = 0; i < totalRounds; i++) {
+		document.getElementById("return-round-robin").innerHTML += "Round " + i + "<br />"; 
+		for (var position = 0; position < teamSize; position++) {
+			if(teamOne[position] == -1) {
+				document.getElementById("return-round-robin").innerHTML += " BYE" + " - " + teamTwo[position] + "<br />";
+			}
+			else if(teamTwo[position] == -1) {
+				document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + "BYE" + "<br />";
+			}
+			else {
+				document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
+			}
+		}
+		document.getElementById("return-round-robin").innerHTML += "<br />";
+		shiftArray(teamOne, teamTwo);
+	}
 }
