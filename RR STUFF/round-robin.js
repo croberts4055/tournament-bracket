@@ -186,7 +186,7 @@ function evenTeamLessRounds(even_teams, less_rounds) {
 }
 
 function oddTeamExtraRounds(odd_teams, extra_rounds) {
-	document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams.";
+	document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams with EXTRA rounds.";
 
 	var teamOne = [];
 	var teamTwo = [];
@@ -216,7 +216,7 @@ function oddTeamExtraRounds(odd_teams, extra_rounds) {
 }
 
 function oddTeamLessRounds(odd_teams, less_rounds) {
-	document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams.";
+	document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams with LESS rounds.";
 
 	var teamOne = [];
 	var teamTwo = [];
