@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import MyNav from './components/Nav';
 import Bracket from './components/Bracket';
 
 class App extends Component {
@@ -23,6 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
+        <MyNav/> 
         <div className="form-get-all-teams">
           <form>
             <label>
