@@ -1,23 +1,25 @@
 /** Imports/Requires */
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var fs = require('fs');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const indexRouter = require('./api/routes/index');
+const usersRouter = require('./api/routes/users');
+const matchRouter = require('./api/routes/matches');
+const schoolRouter = require('./api/routes/schools');
+const articlesRouter = require('./api/routes/articles');
+const fs = require('fs');
 
-var app = express();
+const app = express();
 
 //Set up mongoose connection
-// var mongoose = require('mongoose');
-// var mongoDB = 'mongodb://egftest:testingegf5@ds117701.mlab.com:17701/egf_tournament_test';
+// const mongoDB = 'mongodb://egftest:testingegf5@ds117701.mlab.com:17701/egf_tournament_test';
 // mongoose.connect(mongoDB);
 // mongoose.Promise = global.Promise;
-// var db = mongoose.connection;
+// const db = mongoose.connection;
 // db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
@@ -26,8 +28,8 @@ app.set('view engine', 'jade');
 // app.set('port', process.env.PORT || 3001);
 
 // load all model files 
-fs.readdirSync(__dirname + '/models').forEach(function(filename) {
-  if(~filename.indexOf('.js')) require(__dirname + '/models' + '/' + filename); 
+fs.readdirSync(__dirname + '/api' + '/models').forEach(function(filename) {
+  if(~filename.indexOf('.js')) require(__dirname + '/api'+ '/models' + '/' + filename); 
 });
 
 app.use(logger('dev'));
@@ -42,6 +44,10 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/articles',articlesRouter);
+app.use('/matches',matchRouter);
+app.use('/schools',schoolRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
