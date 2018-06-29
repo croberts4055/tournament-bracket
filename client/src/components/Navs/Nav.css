@@ -19,12 +19,14 @@
     margin: auto;
     padding-top: 2px;
     background-size: contain;
+    overflow: hidden;
 }
 
 /* This is the dropdown list. Setting items to white and changing font.*/
 ul.nav.navbar-nav.navbar-right {
  font-size: 12px; 
  color: white;
+ overflow: hidden;
 }
 
 /* This is the text box. Change background to match header/footer, white border and uniform font.*/
@@ -43,4 +45,29 @@ ul.nav.navbar-nav.navbar-right {
 /* Uniform font*/
 a {
     font-family: 'Forza Medium';
+}
+
+.flex-container {
+    height: 30px;
+    line-height: 30px;
+    margin: auto;
+    width: 100%;
+    color:white;
+    display: flex;
+    background: #73A744;
+    font-size: 15px;
+    font-family: 'Forza Medium';
+    text-align: center;
+    justify-content: center;
+}
+
+.flex-container > button {
+    line-height: 30px;
+    height: 20px;
+    font-size: 15px;
+    border-radius: 15%;
+    font-family: 'Forza Medium';
+    text-align: center;
+    color: rgba(189, 53, 53, 0.803);
+    background-color: white;
 }
