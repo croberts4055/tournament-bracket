@@ -1,0 +1,46 @@
+/* Importing the custom font */
+
+@font-face {
+    font-family: 'Forza Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Forza Medium'), url('Forza-Medium.woff') format('woff');
+}
+
+/* Setting size of EGF logo, floating to left of navbar*/
+#brand-image {
+    height: 50px;
+    width: 150px;
+    float: left;
+}
+
+/* Margin = auto so the bar is maxwidth of page. Top padding to help center logo. */
+.navbar-brand {
+    margin: auto;
+    padding-top: 2px;
+    background-size: contain;
+}
+
+/* This is the dropdown list. Setting items to white and changing font.*/
+ul.nav.navbar-nav.navbar-right {
+ font-size: 12px; 
+ color: white;
+}
+
+/* This is the text box. Change background to match header/footer, white border and uniform font.*/
+.form-control {
+    background:#333;
+    border-color: white;
+    font-family: 'Forza Medium';
+}
+
+/* This changes the color of dropdown items. Need to find EGF font! */
+#basic-nav-dropdown {
+    font-family: 'Forza Medium';
+    color: white;
+}
+
+/* Uniform font*/
+a {
+    font-family: 'Forza Medium';
+}

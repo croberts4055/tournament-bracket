@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import MyNav from './components/Nav';
+import MyNav from './components/Navs/Nav';
 import Bracket from './components/Bracket';
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends Component {
           </form>
           <Bracket totalRounds={this.state.totalTeams/2} teams={this.state.totalTeams}/>
         </div>
+        <Footer/>
       </div>
     );
   }
