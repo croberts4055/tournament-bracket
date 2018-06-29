@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import {Form, FormGroup, FormControl,Navbar,Nav,NavItem,NavDropdown,MenuItem} from 'react-bootstrap';
+import {FormGroup, FormControl,Navbar,Nav,NavItem,NavDropdown,MenuItem} from 'react-bootstrap';
+import './Nav.css';
+
+/**
+ * Navbar still needs to not wrap/stack items at mid-range sizes
+ * set the breakpoint for the navbar to be lower so it jumps straight 
+ * to mobile. 
+ */
 
 class MyNav extends Component {
     
     render(){
         return (
             <div className="Nav">
-            <Navbar fixedTop inverse collapseOnSelect>
-                <Navbar.Header>
+            <Navbar fixedTop fluid inverse collapseOnSelect>
+                <Navbar.Header >
                     <Navbar.Brand>
                     <a href="#brand">
                         <img id="brand-image" alt="logo" src="/main_logo.png"/>
