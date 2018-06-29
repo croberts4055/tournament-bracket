@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar,Nav,NavItem,NavDropdown,MenuItem} from 'react-bootstrap';
+import {Form, FormGroup, FormControl,Navbar,Nav,NavItem,NavDropdown,MenuItem} from 'react-bootstrap';
 
 class MyNav extends Component {
     
@@ -9,11 +9,18 @@ class MyNav extends Component {
             <Navbar fixedTop inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                    <a href="#brand"></a>
+                    <a href="#brand">
+                        <img id="brand-image" alt="logo" src="/main_logo.png"/>
+                    </a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
+                    <Navbar.Form pullRight>
+                        <FormGroup>
+                            <FormControl type="text" placeholder="Search" />
+                            </FormGroup>{' '}
+                    </Navbar.Form>
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title="COLLEGE CLUB" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>
@@ -47,6 +54,9 @@ class MyNav extends Component {
                     </NavItem>
                     <NavItem eventKey={2} href="#">
                         EVENTS
+                    </NavItem>
+                    <NavItem eventKey={3} href="#">
+                        VIDEO
                     </NavItem>
                     </Nav>
                 </Navbar.Collapse>
