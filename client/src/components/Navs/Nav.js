@@ -10,8 +10,8 @@ import './Nav.css';
 
 class MyNav extends Component {
     
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
             watchingLive : false,
             gameStreaming : "Overwatch",
@@ -96,9 +96,9 @@ class MyNav extends Component {
     }
 
     render(){
-        if(!this.state.watchingLive){
-            return this.renderLiveBar();
-        }
+        // if(!this.state.watchingLive){
+        //     return this.renderLiveBar();
+        // }
         return (
             <div className="Nav">
             <Navbar fixedTop fluid inverse collapseOnSelect>
