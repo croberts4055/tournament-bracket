@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MyNav from './components/Navs/Nav';
-import Bracket from './components/Bracket';
+// import Bracket from './components/Bracket';
 import Footer from './components/Footer/Footer';
 
 class App extends Component {
@@ -25,16 +25,6 @@ class App extends Component {
     return (
       <div className="app">
         <MyNav/> 
-        <div className="form-get-all-teams">
-          <form>
-            <label>
-              <h3>Enter Total Teams: </h3>
-                <input type="number" value={this.state.value} onChange={this.handleChange} />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-          <Bracket totalRounds={this.state.totalTeams/2} teams={this.state.totalTeams}/>
-        </div>
         <Footer/>
       </div>
     );
@@ -50,6 +40,18 @@ class App extends Component {
     password: "",
     type: ""
   }
+
+  <div className="form-get-all-teams">
+          <form>
+            <label>
+              <h3>Enter Total Teams: </h3>
+                <input type="number" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+          <Bracket totalRounds={this.state.totalTeams/2} teams={this.state.totalTeams}/>
+        </div>
+
 
   componentDidMount() {
     fetch('http://localhost:3001/users')

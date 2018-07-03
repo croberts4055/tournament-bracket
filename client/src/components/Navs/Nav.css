@@ -7,6 +7,16 @@
     src: local('Forza Medium'), url('Forza-Medium.woff') format('woff');
 }
 
+.NavContainer {
+    height: 125px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    margin: 0;
+}
+
+
 /* Setting size of EGF logo, floating to left of navbar*/
 #brand-image {
     height: 50px;
@@ -22,38 +32,95 @@
     overflow: hidden;
 }
 
-/* This is the dropdown list. Setting items to white and changing font.*/
-ul.nav.navbar-nav.navbar-right {
- font-size: 12px; 
- color: white;
- overflow: hidden;
-}
 
 /* This is the text box. Change background to match header/footer, white border and uniform font.*/
 .form-control {
     background:#333;
     border-color: white;
+    line-height: 30px;
     font-family: 'Forza Medium';
+    border-radius: 5%;
+    height: 50%;
 }
 
 /* This changes the color of dropdown items. Need to find EGF font! */
 #basic-nav-dropdown {
     font-family: 'Forza Medium';
+    font-size: 12px;
     color: white;
 }
 
 /* Uniform font*/
 a {
     font-family: 'Forza Medium';
+    font-size: 12px;
 }
 
-.flex-container {
-    height: 30px;
-    line-height: 30px;
+.HeaderNav {
+    flex-basis:100%;
+    margin: 0;
+}
+/* News Nav Styling */ 
+
+.NewsNavContainer {
+    height: 37px;
+    margin: 0;
+    background-color: #333;
+    width: 100%;
+    flex-basis: 100%;
+}
+
+/* .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #fff;
+    background-color: #73A744;
+} */
+
+.nav-justified {
+    height: 37px;
+    background-color: #333;
+}
+
+.selectionTools {
     margin: auto;
+}
+
+.nav-pills>li {
+    /* text-align: center;
+    padding: 10px;
+    font-size: 12px; */
+    /* width: 50px;
+    height: 35px; */
+    /* vertical-align: middle; */
+}
+
+.nav-pills>li>a {
+    /* padding: 10px; */
+    color:white;
+    height: 100%;
+    border-radius: 0%;
+}
+
+.nav-pills>li>a:focus {
+    background-color: #486433;
+}
+
+.nav-pills>li>a:hover {
+    background-color: #486433;
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #73A744;
+}
+
+/* Watch Live Bar Styling */
+
+.LiveBarContainer {
+    /* padding-top: 50px; */
+    height: 30px;
+    /* line-height: 30px; */
+    /* vertical-align: middle; */
+    /* margin: auto; */
     width: 100%;
     color:white;
-    display: flex;
     background: #73A744;
     font-size: 15px;
     font-family: 'Forza Medium';
@@ -61,8 +128,8 @@ a {
     justify-content: center;
 }
 
-.flex-container > button {
-    line-height: 30px;
+.LiveBarContainer > button {
+    /* line-height: 30px; */
     height: 20px;
     font-size: 15px;
     border-radius: 15%;
