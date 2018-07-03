@@ -7,15 +7,24 @@
     src: local('Forza Medium'), url('Forza-Medium.woff') format('woff');
 }
 
+/************************** The top-level container that holds all the navs ****************/
 .NavContainer {
-    height: 125px;
+    height: 182px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
+    /* flex-direction: column;
     align-content: flex-end;
-    margin: 0;
+    flex-basis: 100%; */
+    margin: auto;
 }
 
+/**************************** Header Nav.****************************/
+
+#HeaderNav {
+    flex-basis:100%;
+    height: 51px;
+    /* margin: 0; */
+}
 
 /* Setting size of EGF logo, floating to left of navbar*/
 #brand-image {
@@ -36,9 +45,11 @@
 /* This is the text box. Change background to match header/footer, white border and uniform font.*/
 .form-control {
     background:#333;
+    color:white;
     border-color: white;
     line-height: 30px;
     font-family: 'Forza Medium';
+    font-size: 12px;
     border-radius: 5%;
     height: 50%;
 }
@@ -56,14 +67,12 @@ a {
     font-size: 12px;
 }
 
-.HeaderNav {
-    flex-basis:100%;
-    margin: 0;
-}
-/* News Nav Styling */ 
+
+/**************************** News Nav  ****************************/ 
 
 .NewsNavContainer {
-    height: 37px;
+    margin: auto;
+    height: 36.25px;
     margin: 0;
     background-color: #333;
     width: 100%;
@@ -76,12 +85,12 @@ a {
 } */
 
 .nav-justified {
-    height: 37px;
+    height: auto;
     background-color: #333;
 }
 
-.selectionTools {
-    margin: auto;
+#formControlsSelect {
+    margin-right: 25px;
 }
 
 .nav-pills>li {
@@ -111,11 +120,13 @@ a {
     color: #73A744;
 }
 
-/* Watch Live Bar Styling */
+/***************************** Watch Live Bar  *****************************/
 
 .LiveBarContainer {
     /* padding-top: 50px; */
-    height: 30px;
+    height: 25px;
+    margin: auto;
+    display: flex;
     /* line-height: 30px; */
     /* vertical-align: middle; */
     /* margin: auto; */
@@ -126,15 +137,111 @@ a {
     font-family: 'Forza Medium';
     text-align: center;
     justify-content: center;
+    align-items: center;
 }
 
 .LiveBarContainer > button {
-    /* line-height: 30px; */
+    line-height: 20px;
     height: 20px;
-    font-size: 15px;
+    font-size: 11px;
     border-radius: 15%;
     font-family: 'Forza Medium';
     text-align: center;
     color: rgba(189, 53, 53, 0.803);
     background-color: white;
+}
+
+#divider {
+    background-color: #73A744;
+    width: 75px;
+}
+
+/***************************** ScheduleBar  *****************************/ 
+
+.ScheduleBar{
+    margin: auto;
+    height: 40px;
+    font-family: 'Forza Medium';
+    display: flex;
+    width: 100%;
+    flex-basis: 100%;
+    background-color: #486433;
+}
+
+
+#scheduleDiv{
+    display: flex;
+    background-color: #73A744;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    border: none;
+    padding: none;
+}
+
+#viewScheduleDiv{
+    background-color: #73A744;
+    display:flex;
+    align-items: center;
+    width: auto;
+    justify-content: center;
+    border: none;
+}
+
+#viewScheduleDiv > a{
+    color: white;
+    font-size: 10px;
+}
+
+.ScheduleBar > div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    background-color: #486433;
+    color: white;
+    padding: 15px;
+    font-family: 'Forza Medium';
+    font-size: 10px;
+    text-align: center;
+    border-width: 0 1px 0 0 ;
+    border-color: white;
+    border-style: solid;
+}
+
+/***************************** Secondary Nav (navigation by weeks) *****************************/ 
+
+.SecondaryNav {
+    display: flex;
+    margin: auto;
+    height: 30px;
+    width: 100%;
+    flex-basis: 100%;
+    font-family: 'Forza Medium';
+    background: black;
+    color: white;
+}
+
+.SecondaryNav > div {
+    height: 100%;
+    display: flex;
+    font-size: 10px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 150px;
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    border-color: #73A744;
+}
+
+.SecondaryNav > div > a {
+    color: white;
+}
+
+#weekDiv {
+    flex-direction: row;
+}
+
+#endBlock {
+    border: none;
 }
