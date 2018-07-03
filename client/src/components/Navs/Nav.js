@@ -98,11 +98,11 @@ class MyNav extends Component {
                     </FormGroup>      
                 </Navbar.Form>
             <Nav bsStyle="pills" justified activekey={1}>
-                <NavItem eventKey={1.1} href="#">STANDINGS</NavItem>
-                <NavItem eventKey={1.2} href="#">STATISTICS</NavItem>
-                <NavItem eventKey={1.3} href="#">SCHEDULE</NavItem>
-                <NavItem eventKey={1.4} href="#">VODS</NavItem>
-                <NavItem eventKey={1.5} href="#">RULES</NavItem> 
+                <NavItem eventKey={1.1} href="/standings">STANDINGS</NavItem>
+                <NavItem eventKey={1.2} href="/statistics">STATISTICS</NavItem>
+                <NavItem eventKey={1.3} href="/schedule">SCHEDULE</NavItem>
+                <NavItem eventKey={1.4} href="/vods">VODS</NavItem>
+                <NavItem eventKey={1.5} href="/rules">RULES</NavItem> 
             </Nav>
 
         </div>
@@ -132,13 +132,13 @@ class MyNav extends Component {
                                 </FormGroup>{' '}
                         </Navbar.Form>
                         <Nav pullRight>
-                        <NavItem eventKey={1} href="#">
+                        <NavItem eventKey={1} href="/news">
                             NEWS
                         </NavItem>
-                        <NavItem eventKey={2} href="#">
+                        <NavItem eventKey={2} href="/events">
                             EVENTS
                         </NavItem>
-                        <NavItem eventKey={3} href="#">
+                        <NavItem eventKey={3} href="/video">
                             VIDEO
                         </NavItem>
                         </Nav>
