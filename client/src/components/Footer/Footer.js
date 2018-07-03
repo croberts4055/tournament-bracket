@@ -10,8 +10,14 @@ class Footer extends Component{
     render(){
         return(
             <div className="footer">
-                <footer className="footer">
-                    <div className="container">
+                <div id="linksContainer">
+                    <div>ABOUT EGF<br/>CONTACT<br/>PROGRAMS</div>
+                    <div>JOIN EGF<br/>TEAMS<br/>PARENTAL INFO</div>
+                    <div>TERMS OF USE<br/>PRIVACY POLICY<br/>COPYRIGHT</div>
+                    <div id="checkBoxes"></div>
+                </div>
+                <footer className="foot">
+                    <div id="container">
                         <span className="text muted">
                             &copy; Copyright Electronic Gaming Federation INC. 2016. All rights reserved
                         </span>
