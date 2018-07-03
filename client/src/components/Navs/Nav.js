@@ -13,10 +13,13 @@ class MyNav extends Component {
     constructor(){
         super();
         this.state = {
-            watchingLive : false,
-            gameStreaming : "Overwatch",
+            currentUrl : "",
+            currentGame : "Overwatch",
             competitors: "Robert Morris University vs UCLA"
         }
+        /** Handlers needed : 
+         *  Submitting text
+         */
         this.onClick = this.onClick.bind(this);
     }
 
@@ -31,10 +34,50 @@ class MyNav extends Component {
         console.log("made it");
         return (
                 <div className="LiveBarContainer">
-                    {this.state.gameStreaming} - {this.state.competitors}
+                    {this.state.currentGame} - {this.state.competitors}
+                    <div id="divider"></div>
                     <button className="flex-component" onClick={this.onClick}>WATCH LIVE</button> 
                 </div>
             
+        );
+    }
+
+    renderSecondaryNav(){
+        return(
+            <div className="SecondaryNav">
+                <div id="endBlock"></div>
+                <div id="weekDiv"><b>WEEK</b></div>
+                <div><a href="#">1</a></div>
+                <div><a href="#">2</a></div>
+                <div><a href="#">3</a></div>
+                <div><a href="#">4</a></div>
+                <div><a href="#">5</a></div>
+                <div><a href="#">6</a></div>
+                <div><a href="#">7</a></div>
+                <div><a href="#">8</a></div>
+                <div><a href="#">9</a></div>
+                <div id="endBlock"></div>
+                <div id="endBlock"></div>
+            </div>
+        );
+    }
+
+    renderScheduleBar(){
+        return (
+            <div className="ScheduleBar">
+                <div id="scheduleDiv">SCHEDULE</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
+                <div id="viewScheduleDiv"><a href="#">VIEW SCHEDULE</a></div>
+            </div>
         );
     }
 
@@ -42,7 +85,7 @@ class MyNav extends Component {
     renderNewsNav(){
         return (
         <div className="NewsNavContainer">
-            <Navbar.Form className="selectionTools" pullRight>
+            <Navbar.Form id="selectionTools" pullRight>
                     <FormGroup controlId="formControlsSelect">
                         <FormControl componentClass="select" placeholder="REGION">
                         <option value="region">Region</option>
@@ -68,13 +111,11 @@ class MyNav extends Component {
     }
 
     render(){
-        // if(!this.state.watchingLive){
-        //     return this.renderLiveBar();
-        // }
+        const urlCopy = this.state.currentUrl;
         return (
             // Main Nav Begin 
             <div className="NavContainer">
-                <div className="HeaderNav">
+                <div id="HeaderNav">
                 <Navbar fixedTop fluid inverse collapseOnSelect>
                     <Navbar.Header >
                         <Navbar.Brand>
@@ -131,12 +172,17 @@ class MyNav extends Component {
                     </Navbar.Collapse>
                     </Navbar>
                     </div>
-            {this.renderLiveBar()}
-            {this.renderNewsNav()}
-            </div>
-            // Main Nav end 
-            
+                {/* {urlCopy === "/watch" ? this.renderLiveBar() : urlCopy } */}
+                {/* {urlCopy === "/home" ? this.renderScheduleBar() : urlCopy } */}
+                {/* {urlCopy !== "watch" ? this.NewsBar() : urlCopy } */}
+                {/* {urlCopy === "/teams" ? this.SecondaryNav() : urlCopy } */}
 
+                {this.renderLiveBar()}
+                {this.renderScheduleBar()}
+                {this.renderNewsNav()}
+                {this.renderSecondaryNav()}
+            </div>
+            // Nav container end! 
         )
     }
 }
