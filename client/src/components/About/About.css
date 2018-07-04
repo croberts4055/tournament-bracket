@@ -1,0 +1,63 @@
+/* Main block */ 
+
+.mainDiv {
+    display: flex;
+    margin-top: -5px;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+}
+
+/* Splash block */
+
+#splash {
+    height: 350px;
+    width: 100%;
+    background: linear-gradient(lightslategray,lightgray);
+}
+
+/* Caption block */
+#caption {
+    display: flex;
+    height : 200px;
+    background-color: #333;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Forza Medium';
+    color:white;
+    text-align: center;
+}
+
+#caption > p {
+    width: 700px;
+}
+
+/* Team Info Block */
+
+#team {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    height : 800px;
+    width: 100%;
+}
+
+#headshots {
+    display: flex;
+    flex-flow: row wrap;
+    align-items:center;
+    height: 600px;
+    width: 1200px;
+}
+
+#headshots > div {
+    background-color: lightgray;
+    margin: 50px;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+}

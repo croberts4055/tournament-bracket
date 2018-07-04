@@ -9,12 +9,9 @@
 
 /************************** The top-level container that holds all the navs ****************/
 .NavContainer {
-    height: 182px;
+    height: 142px;
     width: 100%;
     display: inline-block;
-    /* flex-direction: column;
-    align-content: flex-end;
-    flex-basis: 100%; */
     margin: auto;
 }
 
