@@ -10,28 +10,20 @@ import './Nav.css';
 
 class MyNav extends Component {
     
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            currentUrl : "",
+            currentUrl : this.props.url,
             currentGame : "Overwatch",
             competitors: "Robert Morris University vs UCLA"
         }
         /** Handlers needed : 
          *  Submitting text
          */
-        this.onClick = this.onClick.bind(this);
-    }
-
-    onClick(e){
-        let isWatching = !this.state.watchingLive;
-        this.setState({
-            watchingLive : isWatching
-        });
     }
 
     renderLiveBar(){
-        console.log("made it");
+        console.log(this.state.currentUrl);
         return (
                 <div className="LiveBarContainer">
                     {this.state.currentGame} - {this.state.competitors}
@@ -119,7 +111,7 @@ class MyNav extends Component {
                 <Navbar fixedTop fluid inverse collapseOnSelect>
                     <Navbar.Header >
                         <Navbar.Brand>
-                        <a href="#brand">
+                        <a href="/">
                             <img id="brand-image" alt="logo" src="/main_logo.png"/>
                         </a>
                         </Navbar.Brand>
@@ -178,7 +170,7 @@ class MyNav extends Component {
                 {/* {urlCopy === "/teams" ? this.SecondaryNav() : urlCopy } */}
 
                 {this.renderLiveBar()}
-                {this.renderScheduleBar()}
+                {/* {this.renderScheduleBar()} */}
                 {this.renderNewsNav()}
                 {this.renderSecondaryNav()}
             </div>

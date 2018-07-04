@@ -6,8 +6,8 @@ class Vods extends Component {
     render() {
         return (
             <div>
-                <MyNav/> 
-                <p>You are on the VODS page!</p>
+                <MyNav url={this.props.location.pathname}/> 
+                <p>You are on the VODS page! Current url is: {this.props.location.pathname}</p>
                 <Footer/>
             </div>
         );
