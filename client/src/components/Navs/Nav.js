@@ -38,7 +38,7 @@ class MyNav extends Component {
                     {this.state.currentGame} - {this.state.competitors}
                     <div id="divider"></div>
                     <a href="http://twitch.tv/officialegf" target="_blank">
-                        <button className="flex-component" onClick={this.onClick}>WATCH LIVE</button> 
+                        <button className="flex-component" onClick={this.onClick}>WATCH LIVE ON TWITCH</button> 
                     </a>
                 </div>
             

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 
-import App from './App';
+import Homepage from './components/Homepage/Homepage';
 import Statistics from './components/Statistics/Statistic';
 import Standings from './components/Standings/Standings';
 import Schedule from './components/Schedule/Schedule';
@@ -27,7 +27,7 @@ ReactDOM.render(
             <Route path="/news" component={News} />
             <Route path="/rules" component={Rules} />
             <Route path="/vods" component={Vods} />
-            <Route path="/" component={App} />
+            <Route path="/" component={Homepage} />
         </Switch>
     </div>
     </BrowserRouter>
