@@ -17,7 +17,7 @@ class Footer extends Component{
                         <a href="#">PROGRAMS</a> <br />
                     </div>
                     <div>
-                        <a href="#">JOIN EGF</a> <br />
+                        <a href="/joinegf">JOIN EGF</a> <br />
                         <a href="#">TEAMS</a> <br />
                         <a href="#">PARENTAL INFO</a> <br />
                     </div>
