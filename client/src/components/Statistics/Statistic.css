@@ -1,0 +1,15 @@
+.tableLayout {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 1200px;
+    margin: 0 auto;
+    height: 500px;
+}
+
+.tableLayout > table {
+    background-color: #333;
+    height: 100%;
+    
+}
