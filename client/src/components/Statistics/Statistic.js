@@ -11,7 +11,11 @@ class Statistics extends Component {
         this.state= {
             game: "",
             players: [
-                {
+            /**       
+             * DUMMY DATA!!! THIS IS AN EXAMPLE OF WHAT THE TABLE SHOULD LOOK LIKE. 
+             * THE DATA PULLED FROM THE DATABASE MUST BE FORMATTED IN THIS STYLE. 
+             * PULLING STATS REQUIRES PULLING FROM RIOT'S API. 
+             * { 
                 ign : "doublelift",
                 team: "tsm",
                 position: "adc",
@@ -29,22 +33,65 @@ class Statistics extends Component {
                     {name: "DEATHS", value: 0},
                     {name:"ASSISTS", value: 4}
                     ]
-                }    
-            ] , // the user's name will contain their team also. 
+                }   */    
+           
+            ] // the user's name will contain their team also. 
         }
     }
 
     // will need an API/fetch function to pass the proper data player data
 
+    componentDidMount(){
+        this.getPlayerData();
+    }
+
     getPlayerData(){
-        //
+        fetch("http://localhost:3001/users",{
+            method: "get",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            console.log(response);
+            var formattedArray = [];
+            response.forEach(player => {
+                var element = {
+                    ign: player.email, //temporary
+                    team: player.email, // also temporary 
+                    position : player.email // also temporary 
+                }
+                formattedArray.push(element);
+            });
+            if(formattedArray){
+                this.setState({
+                    players: formattedArray
+                });
+            }
+        })
+        .then (console.log(this.state.players));
     }
 
 
     // will need an API call to Riot games API to retrieve players' stats
 
     getLOLStats(){
-        //
+        this.state.players.forEach((player)=>{
+        var accountId = 0;
+        fetch("/lol/summoner/v3/summoners/by-name/{player.ign}/RGAPI-27597533-a67f-4f55-891b-3c33fdf7b2e4",{
+            method: "get",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type' : 'application/json;charset=utf-8'
+                }
+            })
+            .then( (response) => {
+                accountId = response.accountId;
+            })
+            .then( )
+        })
     }
     
     renderTableHeads(){
@@ -108,14 +155,15 @@ class Statistics extends Component {
 
     render() {
 
+
         return (
             <div>
                 <MyNav url={this.props.location.pathname}/>
                 <div className="tableLayout">
                 <Table responsive bordered hover>
-                    <thead>
+                    {/* <thead>
                         {this.renderTableHeads()}
-                    </thead>
+                    </thead> */}
                         {this.renderTableCells()}
                 </Table>
                 </div> 

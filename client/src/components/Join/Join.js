@@ -29,8 +29,25 @@ class Join extends Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        // need to do some error checking to make sure fields were filled out! 
         event.preventDefault();
+        console.log("something");
+        console.log(this.state.email);
+        fetch("http://localhost:3001/users", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.name,
+                email : this.state.email
+            })
+        })
+        .then( (response) => response.json())
+        .then( (response )=> {
+            console.log(response);
+        })
     }
 
     render() {
@@ -70,7 +87,7 @@ class Join extends Component {
                             <br />
 
                             <label>CONFIRM EMAIL</label>
-                            <input type="text" name="confirmemail" onChange={this.handleChange} />
+                            <input type="text" name="email" onChange={this.handleChange} />
                             <br />
 
                             <label>SPECIFIC AREA OF INTEREST</label>
@@ -81,8 +98,8 @@ class Join extends Component {
                             <input type="number" name="played" onChange={this.handleChange} />
                             <br />
 
-                            <label>SYSTEMS USED TO PLAY GAMESS</label>
-                            <input type="text" name="systems" onChange={this.handleChange} />
+                            <label>PLATFORM</label>
+                            <input type="text" name="platform" onChange={this.handleChange} />
                             <br />
 
                             <input type="submit" value="Submit" />

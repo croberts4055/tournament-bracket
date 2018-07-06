@@ -3,10 +3,10 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     _id : Schema.Types.ObjectId,
-    email : {type: String, required: true},
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-    type: {type: String, enum: ['Highschool','College'], required: true},
+    email : {type: String },
+    username: {type: String },
+    password: {type: String },
+    type: {type: String, enum: ['Highschool','College'] },
     subtype: {type: String},
     city: {type: String},
     state: {type: String},
@@ -25,7 +25,8 @@ var userSchema = new Schema({
     name: {type: String},
     ign: {type: String},
     gender: {type: String, enum: ['Male','Female']},
-    dob: {type: String , required: true}
+    dob: {type: String }
+    // leave out requireds for now
   }); 
 
   module.exports = mongoose.model('Users',userSchema);
