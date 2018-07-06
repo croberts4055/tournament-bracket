@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import MyNav from './components/Navs/Nav';
+//import MyNav from './components/Navs/Nav';
 // import Bracket from './components/Bracket';
-import Footer from './components/Footer/Footer';
+//import Footer from './components/Footer/Footer';
+import Homepage from './components/Homepage/Homepage';
 
 class App extends Component {
   constructor(props) {
@@ -24,8 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <MyNav/> 
-        <Footer/>
+        <Homepage />
       </div>
     );
   }

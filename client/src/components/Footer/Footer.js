@@ -11,9 +11,21 @@ class Footer extends Component{
         return(
             <div className="footer">
                 <div id="linksContainer">
-                    <div><a href="/about">ABOUT EGF</a><br/>CONTACT<br/>PROGRAMS</div>
-                    <div>JOIN EGF<br/>TEAMS<br/>PARENTAL INFO</div>
-                    <div>TERMS OF USE<br/>PRIVACY POLICY<br/>COPYRIGHT</div>
+                    <div>
+                        <a href="/about">ABOUT EGF</a> <br />
+                        <a href="/contact">CONTACT</a> <br />
+                        <a href="#">PROGRAMS</a> <br />
+                    </div>
+                    <div>
+                        <a href="/joinegf">JOIN EGF</a> <br />
+                        <a href="#">TEAMS</a> <br />
+                        <a href="#">PARENTAL INFO</a> <br />
+                    </div>
+                    <div>
+                        <a href="#">TERMS OF USE</a> <br />
+                        <a href="#">PRIVACY POLICY</a> <br />
+                        <a href="#">COPYRIGHT</a> <br />
+                    </div>
                     <div id="checkBoxes"></div>
                 </div>
                 <footer className="foot">

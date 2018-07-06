@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {FormGroup, FormControl,Navbar,Nav,NavItem,NavDropdown,MenuItem} from 'react-bootstrap';
 import './Nav.css';
+import { Link } from 'react-router-dom';
 
 /**
  * Navbar still needs to not wrap/stack items at mid-range sizes
@@ -10,25 +11,35 @@ import './Nav.css';
 
 class MyNav extends Component {
     
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state = {
-            currentUrl : this.props.url,
+            currentUrl : "",
             currentGame : "Overwatch",
             competitors: "Robert Morris University vs UCLA"
         }
         /** Handlers needed : 
          *  Submitting text
          */
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(e){
+        let isWatching = !this.state.watchingLive;
+        this.setState({
+            watchingLive : isWatching
+        });
     }
 
     renderLiveBar(){
-        console.log(this.state.currentUrl);
+        console.log("made it");
         return (
                 <div className="LiveBarContainer">
                     {this.state.currentGame} - {this.state.competitors}
                     <div id="divider"></div>
-                    <button className="flex-component" onClick={this.onClick}>WATCH LIVE</button> 
+                    <a href="http://twitch.tv/officialegf" target="_blank">
+                        <button className="flex-component" onClick={this.onClick}>WATCH LIVE ON TWITCH</button> 
+                    </a>
                 </div>
             
         );
@@ -111,7 +122,7 @@ class MyNav extends Component {
                 <Navbar fixedTop fluid inverse collapseOnSelect>
                     <Navbar.Header >
                         <Navbar.Brand>
-                        <a href="/">
+                        <a href="#brand">
                             <img id="brand-image" alt="logo" src="/main_logo.png"/>
                         </a>
                         </Navbar.Brand>
@@ -170,7 +181,7 @@ class MyNav extends Component {
                 {/* {urlCopy === "/teams" ? this.SecondaryNav() : urlCopy } */}
 
                 {this.renderLiveBar()}
-                {/* {this.renderScheduleBar()} */}
+                {this.renderScheduleBar()}
                 {this.renderNewsNav()}
                 {this.renderSecondaryNav()}
             </div>
