@@ -32,7 +32,6 @@ class MyNav extends Component {
     }
 
     renderLiveBar(){
-        console.log("made it");
         return (
                 <div className="LiveBarContainer">
                     {this.state.currentGame} - {this.state.competitors}
