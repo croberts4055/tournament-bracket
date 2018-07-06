@@ -78,22 +78,10 @@ class Statistics extends Component {
     // will need an API call to Riot games API to retrieve players' stats
 
     getLOLStats(){
-        this.state.players.forEach((player)=>{
-        var accountId = 0;
-        fetch("/lol/summoner/v3/summoners/by-name/{player.ign}/RGAPI-27597533-a67f-4f55-891b-3c33fdf7b2e4",{
-            method: "get",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type' : 'application/json;charset=utf-8'
-                }
-            })
-            .then( (response) => {
-                accountId = response.accountId;
-            })
-            .then( )
-        })
+        // need tournament API key for this 
     }
     
+    // *************** NOT USING RENDERING TABLE HEADS YET, CAUSE NEED GAME STATS!!! ***** 
     renderTableHeads(){
 
         // If the player data isn't empty, then render the headers based on the 
