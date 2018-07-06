@@ -8,6 +8,9 @@ class Video extends Component {
             <div>
                 <MyNav url={this.props.location.pathname}/> 
                 <p>You are on the video page! Current url is: {this.props.location.pathname}</p>
+                <div className="videos-container">
+                    
+                </div>
                 <Footer/>
             </div>
         );

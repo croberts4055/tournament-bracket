@@ -1,36 +1,40 @@
 .join-egf-container {
-    height: 700px;
-    background-color: lightblue;
-    margin-top: -5px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    background-color: pink;
 }
 
-.join-egf-logo {
-    margin-left: 5%;
-    margin-right: 5%;
+.join-egf-form {
+    height: 475px;
+    width: 100%;
+    background-color: lightblue;
+    margin-top: -5px;
+    padding-top: 2.5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2.5%;
+    overflow: auto;
 }
 
 .college-logo {
     background-color: blue;
     height: 60px;
-    width: 30%;
-    padding: auto;
+    width: 33%;
     float: left;
 }
 
 .highschool-logo {
     background-color: orange;
     height: 60px;
-    width: 30%;
-    padding-left: 10%;
+    width: 33%;
     float: left;
 }
 
 .media-logo {
     background-color: yellow;
     height: 60px;
-    width: 30%;
-    padding-left: 10%;
+    width: 33%;
     float: left;
+}
+
+.join-egf-form-fields > label {
+    width: 50%;
 }
