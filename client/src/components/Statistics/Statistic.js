@@ -79,17 +79,17 @@ class Statistics extends Component {
         return(
             <tbody>
                {    /** Map all player data, then we pass all of the player objects
-                    to the Object.keys method which returns an array of each players'
-                    properties. Once we have each players' properties, we then need
-                    to return the values of their properties as table cells. The 'stats'
-                    property is an array, so we need to check if we are at 'stats' by using
-                    Array.isArray(). If it's an array, then we need to map the array values onto
-                    their own table cells. If not, we map the original data onto its cell. */
+                        to the Object.keys method which returns an array of each players'
+                        properties. Once we have each players' properties, we then need
+                        to return the values of their properties as table cells. The 'stats'
+                        property is an array, so we need to check if we are at 'stats' by using
+                        Array.isArray(). If it's an array, then we need to map the array values onto
+                        their own table cells. If not, we map the original data onto its cell. 
+                        In outer for loop that iterates over every player object,
+                    *   we need to make sure that when we are finished with this player 
+                    *   object we go on to a new row. 
+                    */
                    this.state.players.map((player,i)=>{
-                       /** In outer for loop that iterates over every player object,
-                        *  we need to make sure that when we are finished with this player 
-                        *  object we go on to a new row. 
-                        */
                         return <tr key={i}>
                         {(Object.keys(player).map((name,index)=>{
                             if(Array.isArray(player[name])){
