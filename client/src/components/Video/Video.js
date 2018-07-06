@@ -20,7 +20,7 @@ class Video extends Component {
                     team2: "YALE",
                     game: 5,
                     source: "https://www.youtube.com/embed/GOQ2Co6nW3c?ecver=2",
-                    description: "In case you missed it, professional competetive gaming is a thing. It's called esports and it's how professional gamers compete for millions of dolalrs in sold out stadiums around the world. They're watched by hundreds of millions of viewers, and you can even find them on TV networks like ESPN and TBS.",
+                    description: "In case you missed it, professional competetive gaming is a thing. It's called esports and it's how professional gamers compete for millions of dolalrs in sold out stadiums around the world. They're watched by hundreds of millions of viewers, and you can even find them on TV networks like ESPN and TBS. In case you missed it, professional competetive gaming is a thing. It's called esports and it's how professional gamers compete for millions of dolalrs in sold out stadiums around the world. They're watched by hundreds of millions of viewers, and you can even find them on TV networks like ESPN and TBS. In case you missed it, professional competetive gaming is a thing. It's called esports and it's how professional gamers compete for millions of dolalrs in sold out stadiums around the world. They're watched by hundreds of millions of viewers, and you can even find them on TV networks like ESPN and TBS.",
                 },
                 {
                     team1: "BARUCH",
@@ -46,11 +46,12 @@ class Video extends Component {
                                     GAME {video.game}: {video.team1} VS {video.team2}
                                 </div>
                                 <iframe className="player"
+                                        style={{ border:"2px solid white" }}
                                         type="text/html"
                                         allow="autoplay; encrypted-media" 
                                         allowfullscreen
                                         width="40%"
-                                        height="100%"
+                                        height="300px"
                                         src={video.source}
                                         frameborder="0"/>
                                 <div id="description"> {video.description}</div>

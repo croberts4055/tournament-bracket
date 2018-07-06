@@ -2,7 +2,7 @@
 .blockDiv {
     display: block;
     width: 1200px;
-    margin: 10px auto;
+    margin: 0 auto;
     background-color: #333;
     height: auto;
     font-family: 'Forza Medium';
@@ -17,7 +17,10 @@
     width: 100%;
     justify-content: left;
     font-size: 20px;
+    font-weight: bold;
     align-items: center;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
     /* align-self: flex-start; */
 }
 
@@ -32,12 +35,15 @@
     border-style: solid;
     border-width: 2px;
     float: left;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #description {
     display: flex;
     color: white;
-    width: auto;
+    margin-left: 20px;
     justify-content: right;
     font-size: 15px;
     /* align-items: center; */
@@ -46,4 +52,5 @@
 .player {
     float: left;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
