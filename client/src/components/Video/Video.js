@@ -7,7 +7,7 @@ class Video extends Component {
     constructor(props){
         super(props);
         this.state = {
-            videos : [
+            videos: [
                 {
                     team1: "HUNTER",
                     team2: "CCNY",
