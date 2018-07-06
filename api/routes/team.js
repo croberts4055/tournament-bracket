@@ -17,6 +17,7 @@ router.get('/',function(req, res){
     const team = new Teams({
       _id: new mongoose.Types.ObjectId(),
       division: req.body.division,
+      upcoming_matches: req.body.matches,
       players: req.body.players,
       logo: req.body.logo,
       game: req.body.game,
