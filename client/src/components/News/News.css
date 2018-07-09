@@ -1,0 +1,110 @@
+.news-container {
+    display: block;
+}
+
+.main-article-container {
+    position: relative;
+    width: 100%;
+    background-color: pink;
+    height: auto;
+    font-family: 'Forza Medium';
+    padding: 5px;
+    overflow: auto;
+    float: left;
+    display: block;
+    margin-bottom: 2%;
+}
+
+.main-article {
+    position: relative;
+    background-image: url("");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 66.66%;
+    height: 300px;
+    float: left;
+    border: 2px solid white;
+}
+
+.side-articles {
+    position: relative;
+    display: block;
+    width: 33.33%;
+    margin: 0 auto;
+    height: 300px;
+    font-family: 'Forza Medium';
+    overflow: auto;
+}
+
+.side-article {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50%;
+    border: 2px solid white;
+    background-image: url("");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.main-info {
+    font-family: 'Forza Medium';
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+}
+
+.sub-info {
+
+}
+
+.sub-article-container {
+    width: 100%; 
+    background-color: pink;
+    height: auto;
+    font-family: 'Forza Medium';
+    padding: 5px;
+    overflow: auto;
+    float: left;
+    display: block;
+    padding-left: 20%;
+    padding-right: 20%;
+    border: 2px solid white;
+}
+
+.top-sub-articles {
+    background-color: blueviolet;
+    width: 100%;
+}
+
+.top-sub-article-small {
+    width: 33.33%;
+    background-color: gray;
+    float: left;
+    height: 150px;
+    border: 2px solid white;
+}
+
+.top-sub-article-big {
+    width: 100%;
+    background-color: orange;
+    height: 150px;
+    border: 2px solid white;
+}
+
+.bottom-sub-articles {
+    background-color: blue;
+    width: 100%;
+    float: left;
+}
+
+.bottom-sub-article-small {
+    float: left;
+    width: 33.33%;
+    height: 150px;
+    border-left: 1.5px solid white;
+    border-right: 1.5px solid white;
+}
