@@ -45,23 +45,26 @@ class News extends Component {
             <div className="news-container">
                 <MyNav url={this.props.location.pathname}/> 
                 <div className="main-article-container">
-                    <div className="main-article" style={{backgroundImage: "url(" + this.state.articles[0].image + ")"}}>
+                    <div className="main-article">
+                        <img src={this.state.articles[0].image} />
                         <div className="main-info">
                             {this.state.articles[0].title}
                             <br />
                             BY {this.state.articles[0].author} | {this.state.articles[0].month} {this.state.articles[0].day}, {this.state.articles[0].year}
                         </div>
                     </div>
-                    <div className="side-articles">
-                        <div className="side-article" style={{backgroundImage: "url(" + this.state.articles[1].image + ")"}}>
-                            <div className="main-info">
+                    <div className="side-article-container">
+                        <div className="side-article">
+                            <img src={this.state.articles[1].image} />
+                            <div className="side-info">
                                 {this.state.articles[1].title}
                                 <br />
                                 BY {this.state.articles[1].author} | {this.state.articles[1].month} {this.state.articles[1].day}, {this.state.articles[1].year}
                             </div>
                         </div>
-                        <div className="side-article" style={{backgroundImage: "url(" + this.state.articles[2].image + ")"}}>
-                            <div className="main-info">
+                        <div className="side-article">
+                            <img src={this.state.articles[2].image} />
+                            <div className="side-info">
                                 {this.state.articles[2].title}
                                 <br />
                                 BY {this.state.articles[2].author} | {this.state.articles[2].month} {this.state.articles[2].day}, {this.state.articles[2].year}
