@@ -3,8 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const User = require('../models/users');
 const Schema = mongoose.Schema;
-
-
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 10;
 
 /** Test models to see if our data shows up!
 // var myModel = mongoose.model('accounts',accountsSchema);
@@ -43,33 +43,53 @@ router.get('/',function(req, res){
   User.find(function(err,users){
     res.send(users);
   });
- 
 });
 
-// Adding to database -- 
+/********************* POST requests ******************************/ 
 router.post('/',function(req,res){
-  const user = new User({
-    _id: new mongoose.Types.ObjectId(),
-    email: req.body.email,
-    password: req.body.password,
-    username: req.body.username,
-    type: req.body.type,
-    dob: req.body.dob
-  })
-
-  user
-  .save()
-  .then(result => {
-    res.status(200).json(result);
-    console.log(result);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json({
-      error: err
-    })
-  })
-
+  // check if there's already an email OR username that exists
+  User.find( {$or: [{email: req.body.email},{username:req.body.username}]},
+    function(err,matches){
+    if(err) console.log(err);
+    // if there are any matches...
+    if(matches.length){
+      // send a 400 response (bad request)
+      res.status(400).json({
+        error: "A user with this email or username already exists."
+      })
+      // exit the function. 
+      return;
+    }
+    // otherwise, create the user's account with some password encryption. 
+    // use updateOps to also create a user possibly?? 
+    else {
+      bcrypt.hash(req.body.password, SALT_ROUNDS, function(err,hash){
+         if(err) console.log("error");
+            const user = new User({
+                      _id: new mongoose.Types.ObjectId(),
+                      locked : req.body.locked,
+                      email: req.body.email,
+                      username: req.body.username,
+                      password: hash,
+                      type: req.body.type,
+                      subtype: req.body.subtype,
+                      name: req.body.name
+                    })             
+              user
+              .save()
+              .then(result => {
+                res.status(200).json(result);
+                console.log(result);
+              })
+              .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                  error: err
+                })
+              })
+            })  
+        }
+    }) 
 });
 
 
