@@ -5,37 +5,15 @@
 .main-article-container {
     position: relative;
     width: 100%;
-    background-color: pink;
+    background-color: #333;
     height: auto;
     font-family: 'Forza Medium';
     padding: 5px;
     overflow: auto;
     float: left;
     display: block;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
-
-/* .main-article {
-    position: relative;
-    background-image: url("");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width: 66.66%;
-    height: 300px;
-    float: left;
-    border: 2px solid white;
-} */
-
-/* .main-article {
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 66.66%;
-    height: 300px;
-    float: left;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
-    border: 2px solid white;
-} */
 
 .main-article {
     position: relative;
@@ -43,9 +21,10 @@
     width: 66.66%;
     height: 300px;
     float: left;
+    border: 2px solid white;
 }
 
-.main-article:after {
+.main-article::after {
     content: '';
     position: absolute;
     left: 0;
@@ -88,12 +67,8 @@
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
 }
 
-img {
-    height: 100%;
-    width: 100%;
-}
-
 .main-info {
+    position: relative;
     font-family: 'Forza Medium';
     font-weight: bold;
     color: white;
@@ -101,6 +76,7 @@ img {
     position: absolute;
     bottom: 1%;
     left: 1%;
+    z-index: 1;
 }
 
 .side-info {
@@ -111,15 +87,37 @@ img {
     position: absolute;
     bottom: 1%;
     left: 1%;
+    z-index: 1;
 }
 
-.sub-info {
+/* TODO */
 
+.sub-info {
+    font-family: 'Forza Medium';
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    z-index: 1;
+}
+
+.sub-info-big {
+    font-family: 'Forza Medium';
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    bottom: 1%;
+    left: 1%;
+    z-index: 1;
 }
 
 .sub-article-container {
+    position: relative;
     width: 100%; 
-    background-color: pink;
+    background-color: #333;
     height: auto;
     font-family: 'Forza Medium';
     padding: 5px;
@@ -129,6 +127,7 @@ img {
     padding-left: 20%;
     padding-right: 20%;
     border: 2px solid white;
+    margin-bottom: 5%;
 }
 
 .top-sub-articles {
@@ -137,18 +136,49 @@ img {
 }
 
 .top-sub-article-small {
+    position: relative;
     width: 33.33%;
-    background-color: gray;
-    float: left;
     height: 150px;
     border: 2px solid white;
+    background-image: url("");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.top-sub-article-small::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+    float: left;
 }
 
 .top-sub-article-big {
-    width: 100%;
-    background-color: orange;
+    position: relative;
+    width: 66.66%;
     height: 150px;
     border: 2px solid white;
+    background-image: url("");
+    background-size: 100% 100%;
+    float: left;
+    background-repeat: no-repeat;
+}
+
+.top-sub-article-big::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    float: left;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
 }
 
 .bottom-sub-articles {
@@ -158,9 +188,27 @@ img {
 }
 
 .bottom-sub-article-small {
+    position: relative;
     float: left;
     width: 33.33%;
     height: 150px;
     border-left: 1.5px solid white;
     border-right: 1.5px solid white;
+}
+
+.bottom-sub-article-small::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    float: left;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+}
+
+img {
+    height: 100%;
+    width: 100%;
 }

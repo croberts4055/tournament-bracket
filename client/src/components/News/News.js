@@ -36,6 +36,60 @@ class News extends Component {
                     day: 3,
                     year: 2018,
                 },
+                {
+                    title: "fnatic-caps-eus-victory-over-na",
+                    url: "https://www.lolesports.com/en_US/articles/fnatic-caps-eus-victory-over-na",
+                    image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/43195620472_78d72c185b_k.jpg?nmBWQi3j8L73u.JKzUC8czOBxiVNdygx&itok=ilUXr92b",
+                    author: "Kien Lam",
+                    month: "July",
+                    day: 7,
+                    year: 2018,
+                },
+                {
+                    title: "Rift Rivals NA vs. EU Roundup",
+                    url: "https://www.lolesports.com/en_US/articles/rift-rivals-na-vs-eu-roundup",
+                    image: "https://esports-assets.s3.amazonaws.com/production/files/NALCS18_Sum_PlayerFeatures/RRNAEU/RR_Chart.jpg",
+                    author: "LOLESPORTS STAFF",
+                    month: "July",
+                    day: 5,
+                    year: 2018,
+                },
+                {
+                    title: "NA LCS Stats Breakdown Summer Week 3",
+                    url: "https://www.lolesports.com/en_US/articles/na-lcs-stats-breakdown-summer-week-3",
+                    image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/2018_nalcs_summersplit_infographic_week3_v3.jpg?rHyqqAlXKZCdFS.W011_j5oVudeI7Ecr&itok=Qm7TNVEc",
+                    author: "NAUGHTY PENGUINS",
+                    month: "July",
+                    day: 3,
+                    year: 2018,
+                },
+                {
+                    title: "fnatic-caps-eus-victory-over-na",
+                    url: "https://www.lolesports.com/en_US/articles/fnatic-caps-eus-victory-over-na",
+                    image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/43195620472_78d72c185b_k.jpg?nmBWQi3j8L73u.JKzUC8czOBxiVNdygx&itok=ilUXr92b",
+                    author: "Kien Lam",
+                    month: "July",
+                    day: 7,
+                    year: 2018,
+                },
+                {
+                    title: "Rift Rivals NA vs. EU Roundup",
+                    url: "https://www.lolesports.com/en_US/articles/rift-rivals-na-vs-eu-roundup",
+                    image: "https://esports-assets.s3.amazonaws.com/production/files/NALCS18_Sum_PlayerFeatures/RRNAEU/RR_Chart.jpg",
+                    author: "LOLESPORTS STAFF",
+                    month: "July",
+                    day: 5,
+                    year: 2018,
+                },
+                {
+                    title: "NA LCS Stats Breakdown Summer Week 3",
+                    url: "https://www.lolesports.com/en_US/articles/na-lcs-stats-breakdown-summer-week-3",
+                    image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/2018_nalcs_summersplit_infographic_week3_v3.jpg?rHyqqAlXKZCdFS.W011_j5oVudeI7Ecr&itok=Qm7TNVEc",
+                    author: "NAUGHTY PENGUINS",
+                    month: "July",
+                    day: 3,
+                    year: 2018,
+                },
             ]
         };
     }
@@ -75,36 +129,46 @@ class News extends Component {
                 <div className="sub-article-container">
                     <div className="top-sub-articles">
                         <div className="top-sub-article-small">
-                            {/* <div className="sub-info">
-                                SUB 1
-                            </div> */}
-                            SUB 1
+                            <img src={this.state.articles[3].image} />
+                            <div className="sub-info">
+                                {this.state.articles[3].title}
+                                <br />
+                                BY {this.state.articles[3].author} | {this.state.articles[3].month} {this.state.articles[3].day}, {this.state.articles[3].year}
+                            </div>
                         </div>
                         <div className="top-sub-article-big">
-                            {/* <div className="sub-info">
-                                SUB 2
-                            </div> */}
-                            SUB 2
+                            <img src={this.state.articles[4].image} />
+                            <div className="sub-info-big">
+                                {this.state.articles[4].title}
+                                <br />
+                                BY {this.state.articles[4].author} | {this.state.articles[4].month} {this.state.articles[4].day}, {this.state.articles[4].year}
+                            </div>
                         </div>
                     </div>
                     <div className="bottom-sub-articles">
                         <div className="bottom-sub-article-small">
-                            {/* <div className="sub-info">
-                                SUB 3
-                            </div> */}
-                            SUB 3
+                            <img src={this.state.articles[5].image} />
+                            <div className="sub-info">
+                                {this.state.articles[5].title}
+                                <br />
+                                BY {this.state.articles[5].author} | {this.state.articles[5].month} {this.state.articles[5].day}, {this.state.articles[5].year}
+                            </div>
                         </div>
                         <div className="bottom-sub-article-small">
-                            {/* <div className="sub-info">
-                                SUB 4
-                            </div> */}
-                            SUB 4
+                            <img src={this.state.articles[6].image} />
+                            <div className="sub-info">
+                                {this.state.articles[6].title}
+                                <br />
+                                BY {this.state.articles[6].author} | {this.state.articles[6].month} {this.state.articles[6].day}, {this.state.articles[6].year}
+                            </div>
                         </div>
                         <div className="bottom-sub-article-small">
-                            {/* <div className="sub-info">
-                                SUB 5
-                            </div> */}
-                            SUB 5
+                            <img src={this.state.articles[7].image} />
+                            <div className="sub-info">
+                                {this.state.articles[7].title}
+                                <br />
+                                BY {this.state.articles[7].author} | {this.state.articles[7].month} {this.state.articles[7].day}, {this.state.articles[7].year}
+                            </div>
                         </div>
                     </div>
                 </div>
