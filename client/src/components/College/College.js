@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import MyNav from '../Navs/Nav';
-import Footer from '../Footer/Footer';
 import './College.css';
 
+// post fix for numbers when displaying their standings
 var numberPostFix = [
     "ST", // 1ST
     "ND", // 2ND
@@ -46,6 +45,7 @@ class College extends Component {
         };
     }
 
+    /* function to receive prop from standings page, will change based on region */
     componentDidMount() {
         const selectedRegion = this.props.collegeRegion;
         this.setState({
@@ -56,32 +56,30 @@ class College extends Component {
     render() {
         return(
             <div>
-                <MyNav />
-                    <div className="college-region">
-                        Currently Selected Region: {this.state.collegeRegion}
-                    </div>
-                    {this.state.colleges.map((college, i)=>{
-                        return(
-                            <div className="blockDiv">
-                                <div className="college-container">
-                                    <div className="college-image">
-                                        <img src={this.state.colleges[i].logo} />
-                                    </div>
-                                    <div className="college-name">
-                                        {this.state.colleges[i].name}
-                                    </div>
-                                    <div className="college-standings">
-                                        {i+1}{numberPostFix[i]}
-                                        {/* if standing number is greater than 4, find way to attach the numberPostFix of "TH" to the end of the standing */}
-                                    </div>
-                                    <div className="college-wl-stats">
-                                        {this.state.colleges[i].wins} W | {this.state.colleges[i].losses} L
-                                    </div>
+                <div className="college-region">
+                    Currently Selected Region: {this.state.collegeRegion}
+                </div>
+                {this.state.colleges.map((college, i)=>{
+                    return(
+                        <div className="blockDiv">
+                            <div className="college-container">
+                                <div className="college-image">
+                                    <img src={this.state.colleges[i].logo} />
+                                </div>
+                                <div className="college-name">
+                                    {this.state.colleges[i].name}
+                                </div>
+                                <div className="college-standings">
+                                    {i+1}{numberPostFix[i]}
+                                    {/* if standing number is greater than 4, find way to attach the numberPostFix of "TH" to the end of the standing */}
+                                </div>
+                                <div className="college-wl-stats">
+                                    {this.state.colleges[i].wins} W | {this.state.colleges[i].losses} L
                                 </div>
                             </div>
-                        );
-                    })}
-                <Footer />
+                        </div>
+                    );
+                })}
             </div>
         );
     }
