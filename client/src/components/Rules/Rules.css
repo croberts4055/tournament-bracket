@@ -1,0 +1,55 @@
+.rules-container {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #333;
+    height: auto;
+    font-family: 'Forza Medium';
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    overflow: auto;
+    margin-top: -5px;
+}
+
+.left-column {
+    width: 40%;
+    float: left;
+}
+
+.right-column {
+    width: 60%;
+    float: left;
+}
+
+.table-of-content-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.section-titles {
+    margin: 5% 1%;
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.article-container {
+    width: 100%;
+    padding: 1% 1%;
+}
+
+.article-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.article-text {
+    color: white;
+    font-size: 15px;
+}
