@@ -1,0 +1,76 @@
+.college-region {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #333;
+    height: auto;
+    font-family: 'Forza Medium';
+    font-size: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+.blockDiv {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #333;
+    height: auto;
+    font-family: 'Forza Medium';
+    font-size: 20px;
+    overflow: auto;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+.college-container {
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: blue;
+}
+
+.college-image {
+    height: 150px;
+    width: 25%;
+    background-image: url("");
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.college-name {
+    height: 150px;
+    width: 20%;
+    /* background-color: pink; */
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.college-standings {
+    width: 35%;
+    height: 150px;
+    color: white;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.college-wl-stats {
+    width: 20%;
+    height: 150px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
