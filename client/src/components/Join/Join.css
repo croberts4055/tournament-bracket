@@ -5,7 +5,7 @@
 }
 
 .join-egf-form {
-    height: auto;
+    height: 100%;
     width: 900px;
     margin: 0 auto;
     background-color: #333;
@@ -45,3 +45,4 @@
 .join-egf-form-fields > label {
     width: 50%;
 }
+

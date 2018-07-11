@@ -14,27 +14,26 @@ class MyNav extends Component {
     constructor(){
         super();
         this.state = {
-            currentUrl : "",
             currentGame : "Overwatch",
-            competitors: "Robert Morris University vs UCLA"
+            competitors: {
+                team1: "Robert Morris University",
+                team2: "UCLA"
+            }
         }
         /** Handlers needed : 
          *  Submitting text
          */
-        this.onClick = this.onClick.bind(this);
+        
     }
 
-    onClick(e){
-        let isWatching = !this.state.watchingLive;
-        this.setState({
-            watchingLive : isWatching
-        });
-    }
-
+  
     renderLiveBar(){
+        if(this.props.url==="/about"){
+            return null;
+        }
         return (
                 <div className="LiveBarContainer">
-                    {this.state.currentGame} - {this.state.competitors}
+                    {this.state.currentGame} - {this.state.competitors.team1} v. {this.state.competitors.team2}
                     <div id="divider"></div>
                     <a href="http://twitch.tv/officialegf" target="_blank">
                         <button className="flex-component" onClick={this.onClick}>WATCH LIVE ON TWITCH</button> 
@@ -45,27 +44,31 @@ class MyNav extends Component {
     }
 
     renderSecondaryNav(){
-        return(
+        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule"){
+          return(
             <div className="SecondaryNav">
                 <div id="endBlock"></div>
                 <div id="weekDiv"><b>WEEK</b></div>
-                <div><a href="#">1</a></div>
-                <div><a href="#">2</a></div>
-                <div><a href="#">3</a></div>
-                <div><a href="#">4</a></div>
-                <div><a href="#">5</a></div>
-                <div><a href="#">6</a></div>
-                <div><a href="#">7</a></div>
-                <div><a href="#">8</a></div>
-                <div><a href="#">9</a></div>
+                <div><a href="/">1</a></div>
+                <div><a href="/">2</a></div>
+                <div><a href="/">3</a></div>
+                <div><a href="/">4</a></div>
+                <div><a href="/">5</a></div>
+                <div><a href="/">6</a></div>
+                <div><a href="/">7</a></div>
+                <div><a href="/">8</a></div>
+                <div><a href="/">9</a></div>
                 <div id="endBlock"></div>
                 <div id="endBlock"></div>
             </div>
-        );
+            );  
+        }
+        else return null;
     }
 
     renderScheduleBar(){
-        return (
+        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule"){
+           return (
             <div className="ScheduleBar">
                 <div id="scheduleDiv">SCHEDULE</div>
                 <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
@@ -80,12 +83,16 @@ class MyNav extends Component {
                 <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
                 <div id="viewScheduleDiv"><a href="#">VIEW SCHEDULE</a></div>
             </div>
-        );
+        ); 
+    }
+    else return null;    
     }
 
 
     renderNewsNav(){
-        return (
+        if(this.props.url==="/rules" || this.props.url === "/news" ||
+            this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule"){
+            return (
         <div className="NewsNavContainer">
             <Navbar.Form id="selectionTools" pullRight>
                     <FormGroup controlId="formControlsSelect">
@@ -109,11 +116,11 @@ class MyNav extends Component {
 
         </div>
         );
-
+    }
+    else return null;        
     }
 
     render(){
-        const urlCopy = this.state.currentUrl;
         return (
             // Main Nav Begin 
             <div className="NavContainer">
@@ -121,7 +128,7 @@ class MyNav extends Component {
                 <Navbar fixedTop fluid inverse collapseOnSelect>
                     <Navbar.Header >
                         <Navbar.Brand>
-                        <a href="#brand">
+                        <a href="/">
                             <img id="brand-image" alt="logo" src="/main_logo.png"/>
                         </a>
                         </Navbar.Brand>
@@ -174,11 +181,6 @@ class MyNav extends Component {
                     </Navbar.Collapse>
                     </Navbar>
                     </div>
-                {/* {urlCopy === "/watch" ? this.renderLiveBar() : urlCopy } */}
-                {/* {urlCopy === "/home" ? this.renderScheduleBar() : urlCopy } */}
-                {/* {urlCopy !== "watch" ? this.NewsBar() : urlCopy } */}
-                {/* {urlCopy === "/teams" ? this.SecondaryNav() : urlCopy } */}
-
                 {this.renderLiveBar()}
                 {this.renderScheduleBar()}
                 {this.renderNewsNav()}
