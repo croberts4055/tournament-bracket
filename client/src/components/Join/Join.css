@@ -1,17 +1,23 @@
 .join-egf-container {
-    background-color: pink;
+    background: linear-gradient(lightslategray,lightgray);
+    width: 100%;
+    height: 100%;
 }
 
 .join-egf-form {
-    height: 475px;
-    width: 100%;
-    background-color: lightblue;
+    height: auto;
+    width: 900px;
+    margin: 0 auto;
+    background-color: #333;
+    color: white;
     font-family: 'Forza Medium';
     margin-top: -5px;
     padding-top: 2.5%;
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 2.5%;
+    border-style: groove;
+    border-color: lightgray;
     overflow: auto;
 }
 

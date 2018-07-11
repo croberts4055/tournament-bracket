@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
-// import './Join.css';
+import './Join.css';
 import {ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
 
 class Join extends Component {
@@ -124,11 +124,31 @@ class Join extends Component {
 
 
     handleRequestSubmit(event) {
-        let isLocked = this.state.locked;
-        this.setState({
-            locked : !isLocked
-        });
-        // create an account with the locked attribute. 
+        event.preventDefault();
+        if(this.state.password !== this.state.confirmpassword){
+            alert("Provided passwords do not match.");
+            return;
+        }
+        fetch("http://localhost:3001/users", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                locked: true,
+                email : this.state.email,
+                username: this.state.username,
+                password: this.state.password,
+                type: this.state.type,
+                subtype: this.state.subtype,
+                name: this.state.name
+            })
+        })
+        .then( (response) => response.json())
+        .then( (response )=> {
+            console.log(response);
+        })
     }
 
 
@@ -158,21 +178,25 @@ class Join extends Component {
         })
         .then( (response) => response.json())
         .then( (response )=> {
-            alert(response);
+            console.log(response);
         })
     }
 
     passwordValidate(){
-        if(this.state.password !== this.state.confirmpassword || 
-            this.state.password.length === 0){
-          return 'error';
+        if(this.state.password.length === 0){
+            return null;
+        }
+        else if(this.state.password!==this.state.confirmpassword){
+            return 'error';
         }
         return 'success';
     }
 
     renderMediaForm(){
         return(
-            <form>
+        <div className="join-egf-form">
+            <h2> WHAT COMMUNITY ARE YOU LOOKING TO JOIN?</h2>
+            <form onSubmit={this.handleRequestSubmit}> 
                 <FormGroup className="textfields">
                     <ControlLabel>Name: </ControlLabel>
                     <FormControl
@@ -236,7 +260,9 @@ class Join extends Component {
                     <FormControl name="dob" componentClass="select" placeholder="Month"/>
                 {/* { Dynamically render available years!} */}
                 </FormGroup>
+                <input type="submit" value="Submit"/>
             </form>
+        </div>
         );
     }
 
@@ -322,6 +348,7 @@ class Join extends Component {
             <div className="join-egf-container">
                 <MyNav url={this.props.location.pathname}/> 
                 {this.renderMediaForm()}
+                {/* {this.renderStudentForm()} */}
                 <Footer />
             </div>
         );
