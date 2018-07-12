@@ -1,0 +1,29 @@
+.rules-and-code-of-conduct-container {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #333;
+    height: auto;
+    overflow: auto;
+    margin-top: -5px;
+    color: white;
+    height: 100vh;
+    margin-bottom: 60px;
+}
+
+.switch-for-views {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.react-switch-1 {
+    margin-left: 10%;
+}

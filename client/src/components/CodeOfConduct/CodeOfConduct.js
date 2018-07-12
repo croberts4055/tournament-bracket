@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import MyNav from '../Navs/Nav';
-import Footer from '../Footer/Footer';
 import './CodeOfConduct.css';
 
-const CodeOfConduct = [
+const CodeOfConductData = [
     {
         section: "Article I - Policy",
         subheading: "Members of each team including players, staff, and their communities, are expected to act with respect and in accordance with the league’s Code of Conduct, both inside and outside the game.",
@@ -94,7 +92,7 @@ const CodeOfConduct = [
     }
 ];
 
-class Rules extends Component {
+class CodeOfConduct extends Component {
     constructor(props) {
         super(props);
 
@@ -143,7 +141,7 @@ class Rules extends Component {
     renderSectionTitles() {
         return (
             <div className="section-title-container">
-                {CodeOfConduct.map((section, index)=>{
+                {CodeOfConductData.map((section, index)=>{
                     return (
                         <div className="individual-section-title">
                             <button
@@ -151,7 +149,7 @@ class Rules extends Component {
                                 onClick={() => {
                                     this.setState({ currentlySelectedIndex: index })
                                 }} >
-                                {CodeOfConduct[index].section}
+                                {CodeOfConductData[index].section}
                             </button>
                         </div>
                     );
@@ -162,8 +160,8 @@ class Rules extends Component {
 
     // render different articles based on what section was clicked
     renderSections() {
-        var sectionSubheading = CodeOfConduct[this.state.currentlySelectedIndex].subheading;
-        var descriptions = CodeOfConduct[this.state.currentlySelectedIndex].descriptions;
+        var sectionSubheading = CodeOfConductData[this.state.currentlySelectedIndex].subheading;
+        var descriptions = CodeOfConductData[this.state.currentlySelectedIndex].descriptions;
         return (
             <div className="individual-section-container">
                 <div className="section-subheading">
@@ -188,23 +186,21 @@ class Rules extends Component {
     render() {
         return (
             <div>
-                <MyNav url={this.props.location.pathname}/> 
-                    <div className="coc-container">
-                        <div className="code-of-conduct">
-                            {this.renderCodeOfConductHeader()}
-                        </div>
-                        <div className="left-column">
-                            {this.renderTableOfContentsHeader()}
-                            {this.renderSectionTitles()}
-                        </div>
-                        <div className="right-column">
-                            {this.renderSections()}
-                        </div>
+                <div className="coc-container">
+                    <div className="code-of-conduct">
+                        {this.renderCodeOfConductHeader()}
                     </div>
-                <Footer/>
+                    <div className="left-column">
+                        {this.renderTableOfContentsHeader()}
+                        {this.renderSectionTitles()}
+                    </div>
+                    <div className="right-column">
+                        {this.renderSections()}
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
-export default Rules;
+export default CodeOfConduct;
