@@ -83,7 +83,6 @@ class MyNav extends Component {
         );
     }
 
-
     renderNewsNav(){
         return (
         <div className="NewsNavContainer">
@@ -104,7 +103,7 @@ class MyNav extends Component {
                 <NavItem eventKey={1.2} href="/statistics">STATISTICS</NavItem>
                 <NavItem eventKey={1.3} href="/schedule">SCHEDULE</NavItem>
                 <NavItem eventKey={1.4} href="/vods">VODS</NavItem>
-                <NavItem eventKey={1.5} href="/rules">RULES</NavItem> 
+                <NavItem eventKey={1.5} href="/rulesandcodeofconduct">RULES AND CODE OF CONDUCT</NavItem> 
             </Nav>
 
         </div>

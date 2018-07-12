@@ -10,7 +10,7 @@ class News extends Component {
         this.state = {
             articles: [
                 {
-                    title: "fnatic-caps-eus-victory-over-na",
+                    title: "0. fnatic-caps-eus-victory-over-na",
                     url: "https://www.lolesports.com/en_US/articles/fnatic-caps-eus-victory-over-na",
                     image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/43195620472_78d72c185b_k.jpg?nmBWQi3j8L73u.JKzUC8czOBxiVNdygx&itok=ilUXr92b",
                     author: "Kien Lam",
@@ -19,7 +19,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "Rift Rivals NA vs. EU Roundup",
+                    title: "1. Rift Rivals NA vs. EU Roundup",
                     url: "https://www.lolesports.com/en_US/articles/rift-rivals-na-vs-eu-roundup",
                     image: "https://esports-assets.s3.amazonaws.com/production/files/NALCS18_Sum_PlayerFeatures/RRNAEU/RR_Chart.jpg",
                     author: "LOLESPORTS STAFF",
@@ -28,7 +28,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "NA LCS Stats Breakdown Summer Week 3",
+                    title: "2. NA LCS Stats Breakdown Summer Week 3",
                     url: "https://www.lolesports.com/en_US/articles/na-lcs-stats-breakdown-summer-week-3",
                     image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/2018_nalcs_summersplit_infographic_week3_v3.jpg?rHyqqAlXKZCdFS.W011_j5oVudeI7Ecr&itok=Qm7TNVEc",
                     author: "NAUGHTY PENGUINS",
@@ -37,7 +37,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "fnatic-caps-eus-victory-over-na",
+                    title: "3. fnatic-caps-eus-victory-over-na",
                     url: "https://www.lolesports.com/en_US/articles/fnatic-caps-eus-victory-over-na",
                     image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/43195620472_78d72c185b_k.jpg?nmBWQi3j8L73u.JKzUC8czOBxiVNdygx&itok=ilUXr92b",
                     author: "Kien Lam",
@@ -46,7 +46,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "Rift Rivals NA vs. EU Roundup",
+                    title: "4. Rift Rivals NA vs. EU Roundup",
                     url: "https://www.lolesports.com/en_US/articles/rift-rivals-na-vs-eu-roundup",
                     image: "https://esports-assets.s3.amazonaws.com/production/files/NALCS18_Sum_PlayerFeatures/RRNAEU/RR_Chart.jpg",
                     author: "LOLESPORTS STAFF",
@@ -55,7 +55,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "NA LCS Stats Breakdown Summer Week 3",
+                    title: "5. NA LCS Stats Breakdown Summer Week 3",
                     url: "https://www.lolesports.com/en_US/articles/na-lcs-stats-breakdown-summer-week-3",
                     image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/2018_nalcs_summersplit_infographic_week3_v3.jpg?rHyqqAlXKZCdFS.W011_j5oVudeI7Ecr&itok=Qm7TNVEc",
                     author: "NAUGHTY PENGUINS",
@@ -64,7 +64,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "fnatic-caps-eus-victory-over-na",
+                    title: "6. fnatic-caps-eus-victory-over-na",
                     url: "https://www.lolesports.com/en_US/articles/fnatic-caps-eus-victory-over-na",
                     image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/43195620472_78d72c185b_k.jpg?nmBWQi3j8L73u.JKzUC8czOBxiVNdygx&itok=ilUXr92b",
                     author: "Kien Lam",
@@ -73,7 +73,7 @@ class News extends Component {
                     year: 2018,
                 },
                 {
-                    title: "Rift Rivals NA vs. EU Roundup",
+                    title: "7. Rift Rivals NA vs. EU Roundup",
                     url: "https://www.lolesports.com/en_US/articles/rift-rivals-na-vs-eu-roundup",
                     image: "https://esports-assets.s3.amazonaws.com/production/files/NALCS18_Sum_PlayerFeatures/RRNAEU/RR_Chart.jpg",
                     author: "LOLESPORTS STAFF",
@@ -81,13 +81,33 @@ class News extends Component {
                     day: 5,
                     year: 2018,
                 },
+            ],
+            listArticles: [
                 {
-                    title: "NA LCS Stats Breakdown Summer Week 3",
+                    title: "00. NA LCS Stats Breakdown Summer Week 3",
                     url: "https://www.lolesports.com/en_US/articles/na-lcs-stats-breakdown-summer-week-3",
                     image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/2018_nalcs_summersplit_infographic_week3_v3.jpg?rHyqqAlXKZCdFS.W011_j5oVudeI7Ecr&itok=Qm7TNVEc",
                     author: "NAUGHTY PENGUINS",
                     month: "July",
                     day: 3,
+                    year: 2018,
+                },
+                {
+                    title: "01. fnatic-caps-eus-victory-over-na",
+                    url: "https://www.lolesports.com/en_US/articles/fnatic-caps-eus-victory-over-na",
+                    image: "https://riot-web-cdn.s3-us-west-1.amazonaws.com/lolesports/s3fs-public/styles/centered/public/43195620472_78d72c185b_k.jpg?nmBWQi3j8L73u.JKzUC8czOBxiVNdygx&itok=ilUXr92b",
+                    author: "Kien Lam",
+                    month: "July",
+                    day: 7,
+                    year: 2018,
+                },
+                {
+                    title: "02. Rift Rivals NA vs. EU Roundup",
+                    url: "https://www.lolesports.com/en_US/articles/rift-rivals-na-vs-eu-roundup",
+                    image: "https://esports-assets.s3.amazonaws.com/production/files/NALCS18_Sum_PlayerFeatures/RRNAEU/RR_Chart.jpg",
+                    author: "LOLESPORTS STAFF",
+                    month: "July",
+                    day: 5,
                     year: 2018,
                 },
             ]
@@ -171,6 +191,20 @@ class News extends Component {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className="list-articles">
+                    {this.state.listArticles.map((listArticle, i)=>{
+                        return(
+                            <div className="list-article-container" key={i}>
+                                <img src={this.state.listArticles[i].image} />
+                                    <div className="list-article-info">
+                                        {this.state.articles[i].title}
+                                        <br />
+                                        BY {this.state.articles[i].author} | {this.state.articles[i].month} {this.state.articles[i].day}, {this.state.articles[i].year}
+                                    </div>
+                            </div>
+                        );
+                    })}
                 </div>
                 <Footer/>
             </div>
