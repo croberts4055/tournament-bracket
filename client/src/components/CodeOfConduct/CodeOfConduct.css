@@ -1,0 +1,132 @@
+.coc-container {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #333;
+    height: auto;
+    overflow: auto;
+    margin-top: -5px;
+    color: white;
+    height: 100vh;
+    margin-bottom: 60px;
+}
+
+/* 
+    CSS for Code of Conduct
+*/
+
+.code-of-conduct {
+    width: 100%;
+    height: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.code-of-conduct-container {
+    width: 100%;
+    height: auto;
+}
+
+.code-of-conduct-header {
+    color: green;
+    font-family: 'Forza Medium';
+    font-size: 3em;
+}
+
+.code-of-conduct-text {
+    font-size: 1em;
+}
+
+/*
+    CSS for contents on left column
+    such as Table of Contents and Section Titles
+*/
+
+.left-column {
+    width: 33.33%;
+    float: left;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.table-of-content-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    font-size: 2.5em;
+    margin-bottom: 7.5%;
+    font-family: 'Forza Medium';
+}
+
+.section-title-container {
+    width: 100%;
+    height: auto;
+}
+
+.individual-section-title {
+    margin: 5% 1%;
+    font-size: 22.5px;
+}
+
+button {
+    background: transparent;
+    border: none !important;
+    text-align: left;
+}
+
+/*
+    CSS for contents on right column
+    such as section headers, section subheading and section descriptions
+*/
+
+.right-column {
+    width: 66.66%;
+    float: left;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.individual-section-container {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.individual-section-number {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2.5%;
+}
+
+.section-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    margin-bottom: .5%;
+    font-size: 2.25em;
+    font-family: 'Forza Medium';
+}
+
+.section-subheading {
+    font-size: 1.25em;
+    margin-bottom: 1.5%;
+    font-weight: bold;
+}
+
+.section-text {
+    font-size: 1.15em;
+}
+
+/* 
+    general css styling
+*/
+
+li {
+    list-style-type: none;
+}

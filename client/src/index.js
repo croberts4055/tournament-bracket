@@ -13,7 +13,7 @@ import Events from './components/Events/Events';
 import Video from './components/Video/Video';
 import Join from './components/Join/Join';
 import News from './components/News/News';
-import Rules from './components/Rules/Rules';
+import CodeOfConduct from './components/CodeOfConduct/CodeOfConduct';
 import Vods from './components/Vods/Vods';
 
 ReactDOM.render(
@@ -29,7 +29,7 @@ ReactDOM.render(
             <Route path="/video" component={Video} />
             <Route path="/joinegf" component={Join} />
             <Route path="/news" component={News} />
-            <Route path="/rules" component={Rules} />
+            <Route path="/codeofconduct" component={CodeOfConduct} />
             <Route path="/vods" component={Vods} />
             <Route path="/" component={Homepage} />
         </Switch>
