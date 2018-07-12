@@ -45,6 +45,36 @@ router.get('/',function(req, res){
   });
 });
 
+//Get info by userId you FEEL me
+router.get('/:userId');
+
+// Get acc info based on user and pass provided by login form
+router.get('/login/:username/:password',function(req,res){
+  User.find({username: req.params.username},function(err,item){
+    if(err) console.log(err);
+    if(item){
+      bcrypt.compare(req.params.password,item.password,function(err,match){
+        if(match===true){
+          var id = item._id;
+        }
+       // currently no check for how many incorrect attempts 
+      })
+    }
+    else return;
+  })
+  .exec()
+  .then(result=> {
+    res.status(200).json({
+      message: "Success! Account has been properly found."
+    });
+  })
+  .catch(err => {
+    res.status(500).json({
+      message: "Incorrect username or password."
+    })
+  })
+})
+
 /********************* POST requests ******************************/ 
 router.post('/',function(req,res){
   // check if there's already an email OR username that exists

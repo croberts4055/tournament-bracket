@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
-// import './Join.css';
+import './Join.css';
 import {ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
 
 class Join extends Component {
@@ -25,6 +25,7 @@ class Join extends Component {
                 schooladminm: false
             },
             name: "",
+            userid: "",
             username: "",
             password: "",
             confirmpassword: "",
@@ -43,19 +44,20 @@ class Join extends Component {
             socialinfo: []
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleAccountSubmit = this.handleAccountSubmit.bind(this);
+        this.handleAccountCreate = this.handleAccountCreate.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
         this.handleHighschoolChecked = this.handleHighschoolChecked.bind(this);
         this.handleCollegeChecked = this.handleCollegeChecked.bind(this);
         this.handleMediaChecked = this.handleMediaChecked.bind(this);
         this.handleRequestSubmit = this.handleRequestSubmit.bind(this);
         this.passwordValidate = this.passwordValidate.bind(this);
-
+        this.goToLogin = this.goToLogin.bind(this);
     }
     
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
-
+  
     handleHighschoolChecked(event) {
         let typeNow = this.state.student;
         let subNow = this.state.subtype.highschool;
@@ -124,15 +126,58 @@ class Join extends Component {
 
 
     handleRequestSubmit(event) {
-        let isLocked = this.state.locked;
-        this.setState({
-            locked : !isLocked
-        });
-        // create an account with the locked attribute. 
+        event.preventDefault();
+        if(this.state.password !== this.state.confirmpassword){
+            alert("Provided passwords do not match.");
+            return;
+        }
+        fetch("http://localhost:3001/users", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                locked: true,
+                email : this.state.email,
+                username: this.state.username,
+                password: this.state.password,
+                type: this.state.type,
+                subtype: this.state.subtype,
+                name: this.state.name
+            })
+        })
+        .then( (response) => response.json())
+        .then( (response )=> {
+            console.log(response);
+        })
+    }
+
+    handleLogin(event) {
+        var url = "http://localhost:3001/users/login/" + this.state.username + "/" + this.state.password;
+        event.preventDefault();
+        fetch(url, {
+            method: "get",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }   
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            console.log(response);
+        })
+        // .then( (response) => {
+        //     if(response._id){
+        //        this.setState({
+        //         userid: response._id
+        //         }, ()=> console.log(this.state.userid)) 
+        //     }
+        // })
     }
 
 
-    handleAccountSubmit(event) {
+    handleAccountCreate(event) {
         // refactor later to make sure that the information is posted in an efficient way
         // make use of looping to auto store the info that you need 
         event.preventDefault();
@@ -140,7 +185,7 @@ class Join extends Component {
             alert("Provided passwords do not match.");
             return;
         }
-        fetch("http://localhost:3001/users", {
+        fetch("http://localhost:3001/users/create", {
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -158,21 +203,55 @@ class Join extends Component {
         })
         .then( (response) => response.json())
         .then( (response )=> {
-            alert(response);
+            console.log(response);
         })
     }
 
     passwordValidate(){
-        if(this.state.password !== this.state.confirmpassword || 
-            this.state.password.length === 0){
-          return 'error';
+        if(this.state.password.length === 0){
+            return null;
+        }
+        else if(this.state.password!==this.state.confirmpassword){
+            return 'error';
         }
         return 'success';
     }
 
+    goToLogin(event){
+        event.preventDefault();
+        return this.renderLogin();
+    }
+
+    renderLogin(){
+        return(
+            <div className="join-egf-form">
+                <h2>WELCOME BACK.</h2>
+                <form onSubmit={this.handleLogin}>
+                    <FormGroup className="textfields">
+                        <ControlLabel>Username:</ControlLabel>
+                        <FormControl 
+                            type="text"
+                            name="username"
+                            onChange={this.handleChange} />
+                    </FormGroup>
+                    <FormGroup className="textfields">
+                        <ControlLabel>Password:</ControlLabel>
+                        <FormControl 
+                            type="password"
+                            name="password"
+                            onChange={this.handleChange} />
+                    </FormGroup>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        )
+    }
+
     renderMediaForm(){
         return(
-            <form>
+        <div className="join-egf-form">
+            <h2> WHAT COMMUNITY ARE YOU LOOKING TO JOIN?</h2>
+            <form onSubmit={this.handleRequestSubmit}> 
                 <FormGroup className="textfields">
                     <ControlLabel>Name: </ControlLabel>
                     <FormControl
@@ -236,13 +315,16 @@ class Join extends Component {
                     <FormControl name="dob" componentClass="select" placeholder="Month"/>
                 {/* { Dynamically render available years!} */}
                 </FormGroup>
+                <input type="submit" value="Submit"/>
             </form>
+            <button onClick={this.goToLogin}>Login instead!</button>
+        </div>
         );
     }
 
     renderStudentForm(){
         return(
-           <form className="join-egf-form" onSubmit={this.handleAccountSubmit}>
+           <form className="join-egf-form" onSubmit={this.handleAccountCreate}>
                         WHAT COMMUNITY ARE YOU LOOKING TO JOIN?
                         <div className="join-egf-form-fields">
                             <label>NAME - FULL</label>
@@ -321,7 +403,9 @@ class Join extends Component {
         return (
             <div className="join-egf-container">
                 <MyNav url={this.props.location.pathname}/> 
-                {this.renderMediaForm()}
+                {/* {this.renderMediaForm()} */}
+                {this.renderLogin()}
+                {/* {this.renderStudentForm()} */}
                 <Footer />
             </div>
         );

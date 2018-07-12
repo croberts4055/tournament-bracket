@@ -49,11 +49,11 @@ class Video extends Component {
                                         style={{ border:"2px solid white" }}
                                         type="text/html"
                                         allow="autoplay; encrypted-media" 
-                                        allowfullscreen
+                                        allowFullScreen
                                         width="40%"
                                         height="300px"
                                         src={video.source}
-                                        frameborder="0"/>
+                                        frameBorder="0"/>
                                 <div id="description"> {video.description}</div>
                             </div>
                         );
