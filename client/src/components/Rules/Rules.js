@@ -8,38 +8,75 @@ class Rules extends Component {
         super(props);
 
         this.state = {
-            sectionTitles: [
-                "section title 1",
-                "section title 2",
-                "section title 3",
-                "section title 4",
-                "section title 5",
-                "section title 6",
-                "section title 7",
-                "section title 8",
-                "section title 9",
-                "section title 10",
-            ],
-            articles: [
-                [
-                    "random text 1",
-                    "erjerekrjelkre",
-                    "Erkjkejr",
-                ],
-                [
-                    "random text 2",
-                    "erkerererere",
-                ],
-                [
-                    "random text 3",
-                    "ErelrelrereRE",
-                    "sdvcnmvncvmcnvc",
-                ],
+            currentlySelectedSection: 0,
+            rules: [
+                {
+                    section: "CODE OF CONDUCT",
+                    articles: [
+                        {
+                            description: "example article 1 for code of condutct",
+                        },
+                        {
+                            description: "ejrekrhkjerere",
+                        },
+                        {
+                            description: "21311354",
+                        },
+                    ],
+                },
+                {
+                    section: "AFFILIATIONS",
+                    articles: [
+                        {
+                            description: "example article 2 for code of condutct",
+                        },
+                    ],
+
+                },
+                {
+                    section: "BEHAVIOR",
+                    articles: [
+                        {
+                            description: "example article 3 for code of condutct",
+                        },
+                        {
+                            description: "21311354",
+                        },
+                    ]
+                },
             ],
         };
     }
 
+
+    renderArticle() {
+        var index = this.state.currentlySelectedSection;
+        return(
+            <div className="article-container">
+                {this.state.rules.map((item, index)=>{
+                    <div className="article-header">                        ">
+                        <h1>ARTICLE {index}</h1>
+                    </div>
+                    {(Object.keys(item).map((obj, i)=>{
+                        if(Array.isArray(obj[i])){
+                            return(
+                                    obj[i].map((desc, j)=>{
+                                    return(
+                                        <div className="article-text">
+                                            {obj[i][j].desc}
+                                        </div>
+                                    );
+                                })
+                            );
+                        }
+                    }))}
+                })}
+            </div>
+        );
+    }
+
     render() {
+        const currentlySelectedSection = this.state.currentlySelectedSection;
         return (
             <div>
                 <MyNav url={this.props.location.pathname}/> 
@@ -49,29 +86,22 @@ class Rules extends Component {
                             <div className="table-of-content-header">
                                 <h1>TABLE OF CONTENT</h1>
                             </div>
-                            {this.state.sectionTitles.map((sectionTitle, i)=> {
+                            {this.state.rules.map((rule, index)=>{
                                 return(
                                     <div className="section-titles">
-                                        {this.state.sectionTitles[i]}
-                                    </div> 
+                                        <button
+                                            key={index}        
+                                            onClick={() => {
+                                                this.setState({ currentlySelectedSection: index })
+                                            }} >
+                                            {this.state.rules[index].section}
+                                        </button>
+                                    </div>
                                 );
                             })}
                         </div>
                         <div className="right-column">
-                            {this.state.articles.map((article, i)=>{
-                                return(
-                                    <div className="article-container">
-                                        <div className="article-header">
-                                            <h1>ARTICLE {i+1}</h1>
-                                        </div>
-                                        {article[i].map((a, j)=>{
-                                            <div className="article-text">
-                                                {a}
-                                            </div>        
-                                        })}
-                                    </div>
-                                );
-                            })}
+                            {this.renderArticle()}
                         </div>
                     </div>
                 <Footer/>
