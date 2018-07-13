@@ -53,6 +53,7 @@ class Join extends Component {
         this.handleRequestSubmit = this.handleRequestSubmit.bind(this);
         this.passwordValidate = this.passwordValidate.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
+        this.logOutHandler = this.logOutHandler.bind(this);
     }
     
     handleChange(event) {
@@ -127,7 +128,7 @@ class Join extends Component {
 
 
     handleRequestSubmit(event) {
-    
+        event.preventDefault();
         let caseInsensitiveEmail = this.state.email.toLowerCase();
         if(this.state.password !== this.state.confirmpassword){
             alert("Provided passwords do not match.");
@@ -156,16 +157,20 @@ class Join extends Component {
     }
 
     handleLogin(event) {
-        var url = "http://localhost:3001/users/login/" + this.state.username + "/" + this.state.password;
-       
-        fetch(url, {
-            method: "get",
+        event.preventDefault();
+        fetch("http://localhost:3001/users/login", {
+            method: "post",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }   
+            },   
+        body: JSON.stringify({
+            username: this.state.username,
+            password: this.state.password
+            })
         })
-        .then( (response) => response.json())
+        
+        // .then( (response) => response.json())
         .then( (response) => {
             console.log(response);
         })
@@ -176,6 +181,20 @@ class Join extends Component {
         //         }, ()=> console.log(this.state.userid)) 
         //     }
         // })
+    }
+
+    logOutHandler(event){
+        fetch("http://localhost:3001/users/logout",{
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            console.log(response);
+        })
     }
 
 
@@ -245,7 +264,7 @@ class Join extends Component {
                             name="password"
                             onChange={this.handleChange} />
                     </FormGroup>
-                    <input type="submit" value="Submit" />
+                    <input className="submitButton" type="submit" value="LOG IN"/>
                 </form>
             </div>
         )
@@ -319,7 +338,7 @@ class Join extends Component {
                     <FormControl name="dob" componentClass="select" placeholder="Month"/>
                 { Dynamically render available years!}
                 </FormGroup> */}
-                <input type="submit" value="Submit"/>
+                < input className="submitButton" type="submit" value="SIGN UP"/>
             </form>
             <button onClick={this.goToLogin}>Login instead!</button>
         </div>
@@ -328,76 +347,76 @@ class Join extends Component {
 
     renderStudentForm(){
         return(
-           <form className="join-egf-form" onSubmit={this.handleAccountCreate}>
-                        WHAT COMMUNITY ARE YOU LOOKING TO JOIN?
-                        <div className="join-egf-form-fields">
-                            <label>NAME - FULL</label>
-                            <input type="text" name="name" onChange={this.handleChange} />
-                            <br />
-                            
-                            <label>E-MAIL</label>
-                            <input type="text" name="email" onChange={this.handleChange} />
-                            <br />
-
-                            <label>CONFIRM E-MAIL</label>
-                            <input type="text" name="email" onChange={this.handleChange} />
-                            <br />
-
-                            <label>USERNAME</label>
-                            <input type="text" name="username" onChange={this.handleChange} />
-                            <br />
-
-                            <label>PASSWORD</label>
-                            <input type="password" name="password" onChange={this.handleChange} />
-                            <br />
-
-                            <label>CITY</label>
-                            <input type="text" name="city" onChange={this.handleChange} />
-                            <br />
-
-                            <label>STATE</label>
-                            <input type="text" name="state" onChange={this.handleChange} />
-                            <br />
-
-                            <label>DATE OF BIRTH</label>
-                            <input type="number" name="dob" onChange={this.handleChange} />
-                            <br />
-
-                            <label>BIO</label>
-                            <input type="text" name="bio" onChange={this.handleChange} />
-                            <br />
-
-                            <label>SOCIAL LINKS</label>
-                            <input type="text" name="socialinfo" onChange={this.handleChange} />
-                            <br />
-
-                            <label>SCHOOL</label>
-                            <input type="text" name="school" onChange={this.handleChange} />
-                            <br />
-
-                            <label>POSITION</label>
-                            <input type="text" name="position" onChange={this.handleChange} />
-                            <br />
-
-                            <label>MAJOR</label>
-                            <input type="text" name="major" onChange={this.handleChange} />
-                            <br />
-
-                            <label>PHOTO</label>
-                            <input type="text" name="photo" onChange={this.handleChange} />
-                            <br />
-
-                            <label>IGN</label>
-                            <input type="text" name="ign" onChange={this.handleChange} />
-                            <br />
-
-                            <label>GENDER</label>
-                            <input type="text" name="gender" onChange={this.handleChange} />
-                            <br />
-
-                            <input type="submit" value="Submit" />
-                        </div>
-                    </form>
+            <div className="join-egf-form">
+            <h2> WHAT COMMUNITY ARE YOU LOOKING TO JOIN?</h2>
+            <form onSubmit={this.handleRequestSubmit}> 
+                <FormGroup className="textfields">
+                    <ControlLabel>Name: </ControlLabel>
+                    <FormControl
+                        type="text"
+                        name="name"
+                        onChange = {this.handleChange} />
+                </FormGroup>
+                <FormGroup className="textfields">
+                    <ControlLabel>E-mail:</ControlLabel>
+                    <FormControl
+                        type="text"
+                        name="email"
+                        onChange = {this.handleChange} />
+                </FormGroup>
+                <FormGroup className="textfields">
+                    <ControlLabel>Username: </ControlLabel>
+                    <FormControl
+                        type="text"
+                        name="username"
+                        onChange = {this.handleChange} />
+                </FormGroup>
+                <FormGroup className="textfields" validationState={this.passwordValidate()}>
+                    <ControlLabel>Password:</ControlLabel>
+                    <FormControl
+                        type="password"
+                        name="password"
+                        onChange = {this.handleChange} />
+                </FormGroup>
+                <FormGroup className="textfields" validationState={this.passwordValidate()}>
+                    <ControlLabel>Confirm Password:</ControlLabel>
+                    <FormControl
+                        type="password"
+                        name="confirmpassword"
+                        onChange = {this.handleChange} />
+                </FormGroup>
+                {/* <FormGroup controlId="stateSelection">
+                    <ControlLabel>Select your state:</ControlLabel>
+                    <FormControl name="state" componentClass="select" placeholder="Select..."
+                        onChange = {this.handleChange}>
+                        <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option>
+                        <option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option>
+                        <option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option>
+                        <option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option>
+                        <option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
+                        <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option>
+                        <option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option>
+                        <option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option>
+                        <option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option>
+                        <option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
+                        <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option>
+                        <option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option>
+                        <option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option>
+                        <option value="SD">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option>
+                        <option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option>
+                        <option value="WA">WA</option><option value="WV">WV</option><option value="AL">WI</option>
+                        <option value="AL">WY</option>
+                    </FormControl>
+                </FormGroup>
+                <FormGroup controlId="dobSelection">
+                    <ControlLabel>Select your date of birth:</ControlLabel>
+                    <FormControl name="dob" componentClass="select" placeholder="Month"/>
+                { Dynamically render available years!}
+                </FormGroup> */}
+                < input className="submitButton" type="submit" value="SIGN UP"/>
+            </form>
+            <button onClick={this.goToLogin}>LOGIN INSTEAD</button>
+        </div>
 
             );
                
@@ -408,8 +427,9 @@ class Join extends Component {
             <div className="join-egf-container">
                 <MyNav url={this.props.location.pathname} token={this.state.token}/> 
                 {this.renderMediaForm()}
-                {this.renderLogin()}
+                {/* {this.renderLogin()} */}
                 {/* {this.renderStudentForm()} */}
+                {/* <button onClick={this.logOutHandler}>LOGOUT</button> */}
                 <Footer />
             </div>
         );
