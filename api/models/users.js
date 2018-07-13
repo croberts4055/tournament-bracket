@@ -49,5 +49,11 @@ var userSchema = new Schema({
 
   }); 
   
-
   module.exports = mongoose.model('Users',userSchema);
+
+  module.exports.comparePassword = function(toTest, hash, callback){
+    bcrypt.compare(toTest,hash,function(err,match){
+      if(err) throw err;
+      callback(null,match);
+    })
+  }

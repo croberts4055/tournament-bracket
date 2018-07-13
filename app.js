@@ -40,12 +40,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'test',
+  saveUninitialized: false,
+  resave: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/articles',articlesRouter);
@@ -74,14 +81,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.use(session({
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: true
-}))
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 
 

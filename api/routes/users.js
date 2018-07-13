@@ -5,6 +5,9 @@ const User = require('../models/users');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
+var passport = require('passport'),
+LocalStrategy = require('passport-local').Strategy;
+
 
 /** Test models to see if our data shows up!
 // var myModel = mongoose.model('accounts',accountsSchema);
@@ -31,7 +34,28 @@ myModel.create({id: 1,email:"aron@gmail.com"}, function(err, modelInstance){
 
 mongoose.model('users',{name: String});
 
-*/ 
+********* Set up passport local strategy. *****/ 
+
+passport.use(new LocalStrategy(
+  function(username,password,done){
+    User.findOne({username: username},function(err,user){
+      if(err) {return done(err);}
+      if(!user){
+        return done(null, false, {message: 'Incorrect username.'});
+      }
+  
+      User.comparePassword(password,user.password,function(err,match){
+        if(err) throw err;
+        if(match){
+          return done(null,user);
+        }
+        else {
+          return done(null,false,{message:'Invalid password'});
+        }
+      })
+    })
+  }
+))
 
 /******************************  API CALLS  ************************************************************/  
 /*********************************************************************************************/  
@@ -45,36 +69,45 @@ router.get('/',function(req, res){
   });
 });
 
+router.get('/logout',function(req,res){
+  req.logout();
+  console.log(req.user);
+  // req.flash('success_msg', 'You have been logged out.');
+})
+
 //Get info by userId you FEEL me
 router.get('/:userId');
 
+
+
+
 // Get acc info based on user and pass provided by login form
-router.get('/login/:username/:password',function(req,res){
-  User.find({username: req.params.username},function(err,item){
-    if(err) console.log(err);
-    if(item){
-      bcrypt.compare(req.params.password,item.password,function(err,match){
-        if(match===true){
-          var id = item._id;
-        }
-       // currently no check for how many incorrect attempts 
-       // check for valid email 
-      })
-    }
-    else return;
-  })
-  .exec()
-  .then(result=> {
-    res.status(200).json({
-      message: "Success! Account has been found."
-    });
-  })
-  .catch(err => {
-    res.status(500).json({
-      message: "Incorrect username or password."
-    })
-  })
-})
+// router.get('/login/:username/:password',function(req,res){
+//   User.find({username: req.params.username},function(err,item){
+//     if(err) console.log(err);
+//     if(item){
+//       bcrypt.compare(req.params.password,item.password,function(err,match){
+//         if(match===true){
+//           var id = item._id;
+//         }
+//        // currently no check for how many incorrect attempts 
+//        // check for valid email 
+//       })
+//     }
+//     else return;
+//   })
+//   .exec()
+//   .then(result=> {
+//     res.status(200).json({
+//       message: "Success! Account has been found."
+//     });
+//   })
+//   .catch(err => {
+//     res.status(500).json({
+//       message: "Incorrect username or password."
+//     })
+//   })
+// })
 
 /********************* POST requests ******************************/ 
 router.post('/signup',function(req,res){
@@ -86,7 +119,7 @@ router.post('/signup',function(req,res){
     if(matches.length){
       // send a 400 response (bad request)
       res.status(200);
-      alert("A user with this email/username already exists.");
+      // alert("A user with this email/username already exists.");
       // exit the function. 
       return;
     }
@@ -104,7 +137,11 @@ router.post('/signup',function(req,res){
                       type: req.body.type,
                       subtype: req.body.subtype,
                       name: req.body.name
-                    })             
+                    })
+              req.login(user,function(err){
+                if(err) {return next(err);}
+              })
+              passport.authenticate('local');             
               user
               .save()
               .then(result => {
@@ -122,6 +159,22 @@ router.post('/signup',function(req,res){
     }) 
 });
 
+router.post('/login',passport.authenticate('local'), function(req,res){
+  console.log(req.user);
+  console.log(req.isAuthenticated());
+});
+
+passport.serializeUser(function(user, done) {
+  console.log("user with id " + user._id + " serialized");
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  console.log("deserializing user with id " + id + " ");
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 // Delete operations
 

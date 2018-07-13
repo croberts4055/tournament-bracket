@@ -26,7 +26,6 @@ class Article extends Component {
         return(
             <div>
                 <MyNav url={this.props.location.pathname}/> 
-                <p>You are on the video page! Current url is: {this.props.location.pathname}</p>
                 <Footer />
             </div>
         );

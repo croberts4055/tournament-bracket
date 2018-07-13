@@ -2,7 +2,6 @@
 
 .mainDiv {
     display: flex;
-    margin-top: -5px;
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;

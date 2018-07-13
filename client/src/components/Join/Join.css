@@ -11,7 +11,6 @@
     background-color: #333;
     color: white;
     font-family: 'Forza Medium';
-    margin-top: -5px;
     padding-top: 2.5%;
     padding-left: 5%;
     padding-right: 5%;
@@ -21,28 +20,32 @@
     overflow: auto;
 }
 
+.submitButton {
+    border-radius: 15%;
+    color: white;
+    background-color: black;
+}
+
 .college-logo {
-    background-color: blue;
+   
     height: 60px;
     width: 33%;
     float: left;
 }
 
 .highschool-logo {
-    background-color: orange;
+   
     height: 60px;
     width: 33%;
     float: left;
 }
 
 .media-logo {
-    background-color: yellow;
+   
     height: 60px;
     width: 33%;
     float: left;
 }
 
-.join-egf-form-fields > label {
-    width: 50%;
-}
+
 
