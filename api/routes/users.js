@@ -58,6 +58,7 @@ router.get('/login/:username/:password',function(req,res){
           var id = item._id;
         }
        // currently no check for how many incorrect attempts 
+       // check for valid email 
       })
     }
     else return;
@@ -65,7 +66,7 @@ router.get('/login/:username/:password',function(req,res){
   .exec()
   .then(result=> {
     res.status(200).json({
-      message: "Success! Account has been properly found."
+      message: "Success! Account has been found."
     });
   })
   .catch(err => {
@@ -76,7 +77,7 @@ router.get('/login/:username/:password',function(req,res){
 })
 
 /********************* POST requests ******************************/ 
-router.post('/',function(req,res){
+router.post('/signup',function(req,res){
   // check if there's already an email OR username that exists
   User.find( {$or: [{email: req.body.email},{username:req.body.username}]},
     function(err,matches){
@@ -84,9 +85,8 @@ router.post('/',function(req,res){
     // if there are any matches...
     if(matches.length){
       // send a 400 response (bad request)
-      res.status(400).json({
-        error: "A user with this email or username already exists."
-      })
+      res.status(200);
+      alert("A user with this email/username already exists.");
       // exit the function. 
       return;
     }
@@ -123,7 +123,7 @@ router.post('/',function(req,res){
 });
 
 
-// Delete operations from DB 
+// Delete operations
 
 router.delete('/:userId',(req,res,next)=>{
   const id = req.params.userId;

@@ -12,6 +12,9 @@ const usersRouter = require('./api/routes/users');
 const matchRouter = require('./api/routes/matches');
 const schoolRouter = require('./api/routes/schools');
 const articlesRouter = require('./api/routes/articles');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const session = require('express-session');
 const fs = require('fs');
 
 const app = express();
@@ -70,5 +73,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 module.exports = app;
