@@ -16,7 +16,6 @@ class Standings extends Component {
         return (
             <div>
                 <MyNav url={this.props.location.pathname}/> 
-                <p>You are on the standings page! Current url is: {this.props.location.pathname}</p>
                 <College collegeRegion={this.state.selectedRegion}/>
                 <Footer/>
             </div>

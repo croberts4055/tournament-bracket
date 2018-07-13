@@ -1,0 +1,137 @@
+.main-div {
+    display: block;
+    width: 100%;
+}
+
+.brand-info {
+    background-color: #333;
+    color: white;
+    height: 500px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.brand-info-container {
+    display: block;
+    background-color: #333;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    padding: 5px 5px;
+    text-align: center;
+    height: 100%;
+    overflow: auto;
+}
+
+.egf-logo-college, .egf-logo-highschool, .egf-logo-media {
+    width: 30%;
+    /* height: 150px; */
+}
+
+.egf-info-college, .egf-info-highschool, .egf-info-media {
+    width: 70%;
+    height: 150px;
+}
+
+/* .egf-logo-college {
+   
+}
+
+.egf-logo-highschool {
+}
+
+.egf-logo-media {
+} */
+
+
+.article-container {
+    display: flex;
+    font-family: 'Forza Medium';
+}
+
+.big-article {
+    display: flex;
+    width: 100%;
+    margin-right: 20px;
+    height: 500px;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(lightslategray,lightgray);
+}
+
+.side-articles-container {
+    display: block;
+    margin-left : auto;
+    width:  500px;
+    height: 500px;
+}
+
+#sideArticleOne {
+    display: flex;
+    width: 100%;
+    background: linear-gradient(lightslategray, lightgray);
+    margin-bottom: 10px;
+    height: 230px;
+}
+
+#sideArticleTwo {
+    display: flex;
+    width: 100%;
+    background: linear-gradient(lightslategray,lightgray);
+    margin-top: 10px;
+    height: 230px;
+}
+
+
+
+
+/*** Schedule Bar  ***/
+.ScheduleBar{
+    /* margin: auto; */
+    height: 40px;
+    font-family: 'Forza Medium';
+    display: flex;
+    width: 100%;
+    flex-basis: 100%;
+    background-color: #486433;
+}
+
+
+#scheduleDiv{
+    display: flex;
+    background-color: #73A744;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    border: none;
+    padding: none;
+}
+
+#viewScheduleDiv{
+    background-color: #73A744;
+    display:flex;
+    align-items: center;
+    width: auto;
+    justify-content: center;
+    border: none;
+}
+
+#viewScheduleDiv > a{
+    color: white;
+    font-size: 10px;
+}
+
+.ScheduleBar > div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    background-color: #486433;
+    color: white;
+    padding: 15px;
+    font-family: 'Forza Medium';
+    font-size: 10px;
+    text-align: center;
+    border-width: 0 1px 0 0 ;
+    border-color: white;
+    border-style: solid;
+}

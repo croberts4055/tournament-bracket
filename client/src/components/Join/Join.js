@@ -41,7 +41,8 @@ class Join extends Component {
             position: "",
             team: "",
             year: 0,
-            socialinfo: []
+            socialinfo: [],
+            token: "1"
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAccountCreate = this.handleAccountCreate.bind(this);
@@ -126,12 +127,13 @@ class Join extends Component {
 
 
     handleRequestSubmit(event) {
-        event.preventDefault();
+    
+        let caseInsensitiveEmail = this.state.email.toLowerCase();
         if(this.state.password !== this.state.confirmpassword){
             alert("Provided passwords do not match.");
             return;
         }
-        fetch("http://localhost:3001/users", {
+        fetch("http://localhost:3001/users/signup", {
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -139,7 +141,7 @@ class Join extends Component {
             },
             body: JSON.stringify({
                 locked: true,
-                email : this.state.email,
+                email : caseInsensitiveEmail,
                 username: this.state.username,
                 password: this.state.password,
                 type: this.state.type,
@@ -155,7 +157,7 @@ class Join extends Component {
 
     handleLogin(event) {
         var url = "http://localhost:3001/users/login/" + this.state.username + "/" + this.state.password;
-        event.preventDefault();
+       
         fetch(url, {
             method: "get",
             headers: {
@@ -181,11 +183,13 @@ class Join extends Component {
         // refactor later to make sure that the information is posted in an efficient way
         // make use of looping to auto store the info that you need 
         event.preventDefault();
+        let caseInsensitiveEmail = this.state.email.toLowerCase();
+        // check for valid email 
         if(this.state.password !== this.state.confirmpassword){
             alert("Provided passwords do not match.");
             return;
         }
-        fetch("http://localhost:3001/users/create", {
+        fetch("http://localhost:3001/users/signup", {
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -193,7 +197,7 @@ class Join extends Component {
             },
             body: JSON.stringify({
                 locked: this.state.locked,
-                email : this.state.email,
+                email : caseInsensitiveEmail,
                 username: this.state.username,
                 password: this.state.password,
                 type: this.state.type,
@@ -287,7 +291,7 @@ class Join extends Component {
                         name="confirmpassword"
                         onChange = {this.handleChange} />
                 </FormGroup>
-                <FormGroup controlId="stateSelection">
+                {/* <FormGroup controlId="stateSelection">
                     <ControlLabel>Select your state:</ControlLabel>
                     <FormControl name="state" componentClass="select" placeholder="Select..."
                         onChange = {this.handleChange}>
@@ -313,8 +317,8 @@ class Join extends Component {
                 <FormGroup controlId="dobSelection">
                     <ControlLabel>Select your date of birth:</ControlLabel>
                     <FormControl name="dob" componentClass="select" placeholder="Month"/>
-                {/* { Dynamically render available years!} */}
-                </FormGroup>
+                { Dynamically render available years!}
+                </FormGroup> */}
                 <input type="submit" value="Submit"/>
             </form>
             <button onClick={this.goToLogin}>Login instead!</button>
@@ -402,8 +406,8 @@ class Join extends Component {
     render() {
         return (
             <div className="join-egf-container">
-                <MyNav url={this.props.location.pathname}/> 
-                {/* {this.renderMediaForm()} */}
+                <MyNav url={this.props.location.pathname} token={this.state.token}/> 
+                {this.renderMediaForm()}
                 {this.renderLogin()}
                 {/* {this.renderStudentForm()} */}
                 <Footer />

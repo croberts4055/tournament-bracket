@@ -1,0 +1,10 @@
+const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var userSessionSchema = new Schema({
+    _id : {type: String, default: -1},
+    timestamp: {type: Date, default: Date.now()},
+    isDeleted: {type: Boolean, default: false}
+});
+
+module.exports = mongoose.model('UserSession',userSessionSchema);
