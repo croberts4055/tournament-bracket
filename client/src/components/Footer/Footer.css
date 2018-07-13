@@ -1,47 +1,70 @@
-.footer {
-  position: relative;
-  display: flex;
-  color: lightgray;
-  text-align: center;
-  bottom: 0;
-  width: 100%;
-  font-family: 'Forza Medium';
-  /* Set the fixed height of the footer here */
-  height: 65px;
-  line-height: 65px; /* Vertically center the text there */
-  background-color: #111111;
-  margin: auto;
-  font-size: 9px;
-}
-
-#container {
-    display: block;
-    padding-left: 200px;
-    align-self: center;
-    width: 700px;
-}
-
-#linksContainer {
-    width: 450px;
-    height: 60px;
+.footer-container {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    /* flex-basis:100%; */
-}
-
-#linksContainer > div {
-    margin-top: 5px;
+    color: lightgray;
+    bottom: 0;
+    width: 100%;
     font-family: 'Forza Medium';
+    /* Set the fixed height of the footer here */
+    height: 85px;
+    background-color: #111111;
+    margin: none;
+    padding: 1% 1.25%;
     display: flex;
-    z-index: 1;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    line-height: 18px;
-    width: 150px;
-    height: 60px;
-    border-width : 0 1px 0 0;
-    border-color: white;
-    border-style: solid;
+    justify-content: left;
+    align-items: center;
 }
 
+.egf-links-container {
+    width: 35%;
+    height: 100%;
+}
+
+.egf-list-container {
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    padding-left: 3.5%;
+    padding-right: 3.5%;
+    border-right: 1px solid white;
+}
+
+.egf-list-container > a {
+    display: block;
+    height: 33.33%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: .75em;
+    color: white;
+    width: fit-content;
+}
+
+.social-media-links-container {
+    width: auto;
+    height: 100%;
+    margin-right: 5%;
+    margin-left: 1.25%;
+}
+
+.social-media-container {
+    padding-left: 3.5%;
+}
+
+.social-media-container > a {
+    display: block;
+    height: 25%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: .75em;
+    color: white;
+}
+
+.copyright-container {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+}

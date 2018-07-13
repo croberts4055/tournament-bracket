@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 /** 
@@ -9,34 +10,37 @@ import './Footer.css';
 class Footer extends Component{
     render(){
         return(
-            <div className="footer">
-                <div id="linksContainer">
-                    <div>
-                        <a href="/about">ABOUT EGF</a> <br />
-                        <a href="/contact">CONTACT</a> <br />
-                        <a href="#">PROGRAMS</a> <br />
+            <div className="footer-container">
+                <div className="egf-links-container">
+                    <div className="egf-list-container">
+                        <Link to="/about">ABOUT EGF</Link>
+                        <Link to="/contact">CONTACT</Link>
+                        <Link to="#">PROGRAMS</Link>
                     </div>
-                    <div>
-                        <a href="/joinegf">JOIN EGF</a> <br />
-                        <a href="#">TEAMS</a> <br />
-                        <a href="#">PARENTAL INFO</a> <br />
+                    <div className="egf-list-container">
+                        <Link to="/joinegf">JOIN EGF</Link>
+                        <Link to="#">TEAMS</Link>
+                        <Link to="#">PARENTAL INFO</Link>
                     </div>
-                    <div>
-                        <a href="#">TERMS OF USE</a> <br />
-                        <a href="#">PRIVACY POLICY</a> <br />
-                        <a href="#">COPYRIGHT</a> <br />
+                    <div className="egf-list-container">
+                        <Link to="#">TERMS OF USE</Link>
+                        <Link to="#">PRIVACY POLICY</Link>
+                        <Link to="#">COPYRIGHT</Link>
                     </div>
-                    <div id="checkBoxes"></div>
                 </div>
-                <footer className="foot">
-                    <div id="container">
-                        <span className="text muted">
-                            &copy; Copyright Electronic Gaming Federation INC. 2016. All rights reserved
-                        </span>
-        
+                <div className="social-media-links-container">
+                    <div className="social-media-container">
+                        <Link to="https://www.facebook.com/egfederation" target="_blank">FACEBOOK</Link>
+                        <Link to="https://www.twitch.tv/officialegf" target="_blank">TWITCH.TV</Link>
+                        <Link to="https://twitter.com/officialegf" target="_blank">TWITTER</Link>
+                        <Link to="https://www.youtube.com/channel/UCSO32htVpc6ZObgIHUwSOPQ" target="_blank">YOUTUBE</Link>
                     </div>
-
-                </footer>
+                </div>
+                <div className="copyright-container">
+                    <span className="text muted">
+                        &copy; Copyright Electronic Gaming Federation INC. 2016. All rights reserved
+                    </span>
+                </div>
             </div>
         );
     }
