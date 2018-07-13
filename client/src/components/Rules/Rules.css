@@ -1,0 +1,164 @@
+.rag-container {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #333;
+    height: auto;
+    overflow: auto;
+    margin-top: -5px;
+    color: white;
+    height: 100vh;
+    margin-bottom: 60px;
+    padding-right: 0px;
+}
+
+/* 
+    CSS for Rules & Regulations
+*/
+
+.rules-and-regulations {
+    width: 100%;
+    height: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.rules-and-regulations-container {
+    width: auto;
+    height: auto;
+}
+
+.rules-and-regulations-header {
+    color: green;
+    font-family: 'Forza Medium';
+    font-size: 3em;
+}
+
+.rules-and-regulations-text {
+    font-size: 2em;
+}
+
+/*
+    CSS for top contents on left column
+*/
+
+.left-column {
+    width: 33.33%;
+    float: left;
+    padding-left: 2.5%;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.left-column-top {
+    height: 30%;
+    margin-bottom: 2.5%;
+}
+
+.section-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    font-size: 1.75em;
+    margin-bottom: 2.5%;
+    font-family: 'Forza Medium';
+}
+
+.section-container {
+    width: 100%;
+    height: auto;
+}
+
+.individual-section-container {
+    margin: 2.5% 1%;
+    font-size: 1.25em;
+}
+
+button {
+    background: transparent;
+    border: none !important;
+    text-align: left;
+}
+
+/*
+    CSS for bottom contents on left column
+*/
+
+.left-column-bottom {
+    height: 100%;
+}
+
+.subsection-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    font-size: 1.75em;
+    margin-bottom: 2.5%;
+    font-family: 'Forza Medium';
+}
+
+.subsection-container {
+    width: 100%;
+    height: auto;
+}
+
+.individual-subsection-container {
+    margin: 2.5% 1%;
+    font-size: 1.25em;
+}
+
+/*
+    CSS for contents on right column
+*/
+
+.right-column {
+    width: 66.66%;
+    float: left;
+    padding-left: 1%;
+    padding-right: 2.5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.description-container {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.description-main-heading {
+    font-size: 1.25em;
+    margin-bottom: 1.5%;
+    font-weight: bold;
+}
+
+.individual-description-container {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2.5%;
+}
+
+.description-sub-heading {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    margin-bottom: .5%;
+    font-size: 1.75em;
+    font-family: 'Forza Medium';
+}
+
+.description-header {
+    font-weight: bold;
+    color: green;
+    width: 100%;
+    margin-bottom: .5%;
+    font-size: 1.5em;
+    font-family: 'Forza Medium';
+}
+
+.description-text {
+    font-size: 1.15em;
+}

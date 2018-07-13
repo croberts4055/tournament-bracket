@@ -69,6 +69,7 @@ class RulesAndCodeOfConduct extends Component {
                     <div>
                         {/* if displayPage == false, show rules page, else show code of conduct page */}
                         {displayPage ? (<Rules />) : (<CodeOfConduct />)}
+                        {/* {displayPage ? (<CodeOfConduct />) : (<Rules />)} */}
                     </div>
                 </div>
             <Footer />
