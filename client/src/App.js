@@ -8,19 +8,8 @@ import Homepage from './components/Homepage/Homepage';
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      totalTeams: 0
-    };
-    
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      totalTeams: event.target.value
-    });
-  }
 
   render() {
     return (

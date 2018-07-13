@@ -18,7 +18,8 @@ class MyNav extends Component {
             competitors: {
                 team1: "Robert Morris University",
                 team2: "UCLA"
-            }
+            },
+            user: "John"
         }
         /** Handlers needed : 
          *  Submitting text
@@ -44,7 +45,7 @@ class MyNav extends Component {
     }
 
     renderSecondaryNav(){
-        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule"){
+        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule" || this.props.url==="/standings"){
           return(
             <div className="SecondaryNav">
                 <div id="endBlock"></div>
@@ -66,31 +67,10 @@ class MyNav extends Component {
         else return null;
     }
 
-    renderScheduleBar(){
-        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule"){
-           return (
-            <div className="ScheduleBar">
-                <div id="scheduleDiv">SCHEDULE</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div id="viewScheduleDiv"><a href="#">VIEW SCHEDULE</a></div>
-            </div>
-        ); 
-    }
-    else return null;    
-    }
 
     renderNewsNav(){
         if(this.props.url==="/rules" || this.props.url === "/news" ||
-            this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule"){
+            this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule" || this.props.url==="/standings"){
             return (
         <div className="NewsNavContainer">
             <Navbar.Form id="selectionTools" pullRight>
@@ -110,7 +90,7 @@ class MyNav extends Component {
                 <NavItem eventKey={1.2} href="/statistics">STATISTICS</NavItem>
                 <NavItem eventKey={1.3} href="/schedule">SCHEDULE</NavItem>
                 <NavItem eventKey={1.4} href="/vods">VODS</NavItem>
-                <NavItem eventKey={1.5} href="/rulesandcodeofconduct">RULES AND CODE OF CONDUCT</NavItem> 
+                <NavItem eventKey={1.5} href="/rulesandcodeofconduct">RULES</NavItem> 
             </Nav>
 
         </div>
@@ -128,7 +108,7 @@ class MyNav extends Component {
                     <Navbar.Header >
                         <Navbar.Brand>
                         <a href="/">
-                            <img id="brand-image" alt="logo" src="/main_logo.png"/>
+                            <img id="brand-image" alt="logo" src="/images/main_logo.png"/>
                         </a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
@@ -177,11 +157,18 @@ class MyNav extends Component {
                                 <MenuItem eventKey={3.3}>Separated link</MenuItem>
                             </NavDropdown>
                         </Nav>
+                        <Nav pullRight>
+                            <NavDropdown pullRight eventKey={3} title={"WELCOME, " + this.state.user} id="login-dropdown">
+                                <MenuItem eventKey={3.1}>View My Profile</MenuItem>
+                                <MenuItem eventKey={3.2}>Account Settings</MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey={3.3}>Log-out</MenuItem>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
                     </Navbar>
                     </div>
                 {this.renderLiveBar()}
-                {this.renderScheduleBar()}
                 {this.renderNewsNav()}
                 {this.renderSecondaryNav()}
             </div>

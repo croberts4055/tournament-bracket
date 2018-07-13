@@ -70,9 +70,8 @@ class Events extends Component {
 
     render() {
         return (
-            <div>
+            <div id="main-div">
                 <MyNav url={this.props.location.pathname}/> 
-                <p>You are on the events page! Current url is: {this.props.location.pathname}</p>
                 <div className="events-container">
                     <div className="events-search-and-filter">
                         <div className="user-option-location">
