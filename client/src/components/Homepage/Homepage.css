@@ -1,48 +1,54 @@
 .main-div {
-    display: block;
+    /* display: block; */
     width: 100%;
 }
 
-.brand-info {
-    background-color: #333;
-    color: white;
-    height: 500px;
-    overflow: hidden;
-    width: 100%;
-}
+/* 
+    CSS for brand logos and text
+*/
 
 .brand-info-container {
-    display: block;
     background-color: #333;
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-    padding: 5px 5px;
-    text-align: center;
-    height: 100%;
+    width: 100%;
+    padding: 1% 1%;
+    height: auto;
     overflow: auto;
+    color: white;
 }
 
-.egf-logo-college, .egf-logo-highschool, .egf-logo-media {
-    width: 30%;
-    /* height: 150px; */
+.egf-college, .egf-highschool, .egf-media {
+    width: 100%;
+    height: 250px;
+    padding: 1% 5%;
+}
+
+.egf-logo-college > img {
+    float: left;
+    height: 100%;
+    width: 25%;
+}
+
+.egf-logo-highschool > img {
+    float: left;
+    height: 100%;
+    width: 25%;
+}
+
+.egf-logo-media > img {
+    float: left;
+    height: 100%;
+    width: 25%;
 }
 
 .egf-info-college, .egf-info-highschool, .egf-info-media {
-    width: 70%;
+    width: auto;
+    float: left;
     height: 150px;
 }
 
-/* .egf-logo-college {
-   
-}
-
-.egf-logo-highschool {
-}
-
-.egf-logo-media {
-} */
-
+/* 
+    CSS for articles
+*/
 
 .article-container {
     display: flex;
