@@ -9,9 +9,6 @@ class Join extends Component {
         super();
 
         this.state = {
-            highschoolCheck: false,
-            collegeCheck: false,
-            mediaCheck: false,
             locked : false,
             type: {
                     student: false,
@@ -24,6 +21,7 @@ class Join extends Component {
                 fan: false,
                 schooladminm: false
             },
+            loginToggled: false,
             name: "",
             userid: "",
             username: "",
@@ -31,18 +29,8 @@ class Join extends Component {
             confirmpassword: "",
             ign: "",
             email: "",
-            city: "",
-            state: "",
-            dob: 0,
-            bio: "",
-            gender: "",
             school: "",
-            major: "",
-            position: "",
-            team: "",
-            year: 0,
-            socialinfo: [],
-            token: "1"
+            team: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleAccountCreate = this.handleAccountCreate.bind(this);
@@ -50,10 +38,9 @@ class Join extends Component {
         this.handleHighschoolChecked = this.handleHighschoolChecked.bind(this);
         this.handleCollegeChecked = this.handleCollegeChecked.bind(this);
         this.handleMediaChecked = this.handleMediaChecked.bind(this);
-        this.handleRequestSubmit = this.handleRequestSubmit.bind(this);
         this.passwordValidate = this.passwordValidate.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
-        this.logOutHandler = this.logOutHandler.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
     
     handleChange(event) {
@@ -63,11 +50,8 @@ class Join extends Component {
     handleHighschoolChecked(event) {
         let typeNow = this.state.student;
         let subNow = this.state.subtype.highschool;
-        let isChecked = this.state.highschoolCheck;
         this.setState({
-            highschoolCheck : !isChecked,
-            collegeCheck: false,
-            medieCheck : false,
+            locked: false,
             type: {
                 student: !typeNow,
                 admin : false
@@ -79,17 +63,14 @@ class Join extends Component {
                 fan: false,
                 schooladmin: false
             }
-        }, ()=>console.log(this.state.highschoolCheck))
+        })
     }
 
     handleCollegeChecked(event) {
         let typeNow = this.state.student;
         let subNow = this.state.subtype.college;
-        let isChecked = this.state.collegeCheck;
         this.setState({
-            collegeCheck : !isChecked,
-            highschoolCheck : false,
-            mediaCheck : false,
+            locked: false,
             type: {
                 student: !typeNow,
                 admin : false
@@ -101,17 +82,14 @@ class Join extends Component {
                 fan: false,
                 schooladmin: false
             }
-        }, ()=> console.log(this.state.collegeCheck))
+        })
     }
 
     handleMediaChecked(event) {
         let typeNow = this.state.admin;
         let subNow = this.state.subtype.media;
-        let isChecked = this.state.mediaCheck;
         this.setState({
-            mediaCheck : !isChecked,
-            highschoolCheck : false,
-            collegeCheck : false,
+            locked: true,
             type: {
                 student: false,
                 admin : !typeNow
@@ -123,36 +101,6 @@ class Join extends Component {
                 fan: false,
                 schooladmin: false
             }
-        }, ()=>console.log(this.state.mediaCheck))
-    }
-
-
-    handleRequestSubmit(event) {
-        event.preventDefault();
-        let caseInsensitiveEmail = this.state.email.toLowerCase();
-        if(this.state.password !== this.state.confirmpassword){
-            alert("Provided passwords do not match.");
-            return;
-        }
-        fetch("http://localhost:3001/users/signup", {
-            method: "post",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                locked: true,
-                email : caseInsensitiveEmail,
-                username: this.state.username,
-                password: this.state.password,
-                type: this.state.type,
-                subtype: this.state.subtype,
-                name: this.state.name
-            })
-        })
-        .then( (response) => response.json())
-        .then( (response )=> {
-            console.log(response);
         })
     }
 
@@ -169,8 +117,6 @@ class Join extends Component {
             password: this.state.password
             })
         })
-        
-        // .then( (response) => response.json())
         .then( (response) => {
             console.log(response);
         })
@@ -183,7 +129,7 @@ class Join extends Component {
         // })
     }
 
-    logOutHandler(event){
+    handleLogout(event){
         fetch("http://localhost:3001/users/logout",{
             method: "get",
             headers: {
@@ -203,10 +149,12 @@ class Join extends Component {
         // make use of looping to auto store the info that you need 
         event.preventDefault();
         let caseInsensitiveEmail = this.state.email.toLowerCase();
-        // check for valid email 
         if(this.state.password !== this.state.confirmpassword){
             alert("Provided passwords do not match.");
             return;
+        }
+        if(!this.state.email.includes("@")){
+            alert("Invalid e-mail address.");
         }
         fetch("http://localhost:3001/users/signup", {
             method: "post",
@@ -226,7 +174,9 @@ class Join extends Component {
         })
         .then( (response) => response.json())
         .then( (response )=> {
-            console.log(response);
+            if(response.message){
+                alert(response.message);
+            }
         })
     }
 
@@ -242,14 +192,18 @@ class Join extends Component {
 
     goToLogin(event){
         event.preventDefault();
-        return this.renderLogin();
+        var negative = !this.state.loginToggled;
+        this.setState({
+            loginToggled : negative
+        })
     }
 
     renderLogin(){
         return(
             <div className="join-egf-form">
                 <h2>WELCOME BACK.</h2>
-                <form onSubmit={this.handleLogin}>
+                <button className="switchButton"onClick={this.goToLogin}>Sign in instead?</button>
+                <form className="formBlock" onSubmit={this.handleLogin}>
                     <FormGroup className="textfields">
                         <ControlLabel>Username:</ControlLabel>
                         <FormControl 
@@ -264,17 +218,40 @@ class Join extends Component {
                             name="password"
                             onChange={this.handleChange} />
                     </FormGroup>
-                    <input className="submitButton" type="submit" value="LOG IN"/>
+                    <input className="submitButton" type="submit" value="LOG IN"/>    
                 </form>
+                
             </div>
         )
     }
 
-    renderMediaForm(){
+    renderSignup(){
         return(
         <div className="join-egf-form">
-            <h2> WHAT COMMUNITY ARE YOU LOOKING TO JOIN?</h2>
-            <form onSubmit={this.handleRequestSubmit}> 
+            <h2>JOIN A COMMUNITY.</h2>
+            <div className="radioBlock">
+                <div className="logoBlock">
+                    <img src="/images/egfh_badge.png"/>
+                    <FormGroup>
+                        <Radio defaultChecked onClick={this.handleHighschoolChecked}name="community">Highschool</Radio>
+                    </FormGroup>
+                </div>
+                <div className="logoBlock">
+                    <img src="/images/egfc_badge.png"/>
+                    <FormGroup>
+                        <Radio onClick={this.handleCollegeChecked} name="community">College</Radio>
+                    </FormGroup>
+                </div>
+                <div className="logoBlock">
+                    <img src="/images/egfm_badge.png"/>
+                    <FormGroup>
+                        <Radio onClick={this.handleMediaChecked} name="community">Media</Radio>
+                    </FormGroup>
+                </div>
+            </div>
+            <div className="divider"></div>
+            <button className="switchButton" onClick={this.goToLogin}>Login instead?</button>
+            <form onSubmit={this.handleAccountCreate}> 
                 <FormGroup className="textfields">
                     <ControlLabel>Name: </ControlLabel>
                     <FormControl
@@ -310,149 +287,56 @@ class Join extends Component {
                         name="confirmpassword"
                         onChange = {this.handleChange} />
                 </FormGroup>
-                {/* <FormGroup controlId="stateSelection">
-                    <ControlLabel>Select your state:</ControlLabel>
-                    <FormControl name="state" componentClass="select" placeholder="Select..."
-                        onChange = {this.handleChange}>
-                        <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option>
-                        <option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option>
-                        <option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option>
-                        <option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option>
-                        <option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
-                        <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option>
-                        <option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option>
-                        <option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option>
-                        <option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option>
-                        <option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
-                        <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option>
-                        <option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option>
-                        <option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option>
-                        <option value="SD">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option>
-                        <option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option>
-                        <option value="WA">WA</option><option value="WV">WV</option><option value="AL">WI</option>
-                        <option value="AL">WY</option>
-                    </FormControl>
-                </FormGroup>
-                <FormGroup controlId="dobSelection">
-                    <ControlLabel>Select your date of birth:</ControlLabel>
-                    <FormControl name="dob" componentClass="select" placeholder="Month"/>
-                { Dynamically render available years!}
-                </FormGroup> */}
-                < input className="submitButton" type="submit" value="SIGN UP"/>
+                <input className="submitButton" type="submit" value="SIGN UP"/>
             </form>
-            <button onClick={this.goToLogin}>Login instead!</button>
+           
         </div>
         );
     }
 
-    renderStudentForm(){
-        return(
-            <div className="join-egf-form">
-            <h2> WHAT COMMUNITY ARE YOU LOOKING TO JOIN?</h2>
-            <form onSubmit={this.handleRequestSubmit}> 
-                <FormGroup className="textfields">
-                    <ControlLabel>Name: </ControlLabel>
-                    <FormControl
-                        type="text"
-                        name="name"
-                        onChange = {this.handleChange} />
-                </FormGroup>
-                <FormGroup className="textfields">
-                    <ControlLabel>E-mail:</ControlLabel>
-                    <FormControl
-                        type="text"
-                        name="email"
-                        onChange = {this.handleChange} />
-                </FormGroup>
-                <FormGroup className="textfields">
-                    <ControlLabel>Username: </ControlLabel>
-                    <FormControl
-                        type="text"
-                        name="username"
-                        onChange = {this.handleChange} />
-                </FormGroup>
-                <FormGroup className="textfields" validationState={this.passwordValidate()}>
-                    <ControlLabel>Password:</ControlLabel>
-                    <FormControl
-                        type="password"
-                        name="password"
-                        onChange = {this.handleChange} />
-                </FormGroup>
-                <FormGroup className="textfields" validationState={this.passwordValidate()}>
-                    <ControlLabel>Confirm Password:</ControlLabel>
-                    <FormControl
-                        type="password"
-                        name="confirmpassword"
-                        onChange = {this.handleChange} />
-                </FormGroup>
-                {/* <FormGroup controlId="stateSelection">
-                    <ControlLabel>Select your state:</ControlLabel>
-                    <FormControl name="state" componentClass="select" placeholder="Select..."
-                        onChange = {this.handleChange}>
-                        <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option>
-                        <option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option>
-                        <option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option>
-                        <option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option>
-                        <option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
-                        <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option>
-                        <option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option>
-                        <option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option>
-                        <option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option>
-                        <option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
-                        <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option>
-                        <option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option>
-                        <option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option>
-                        <option value="SD">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option>
-                        <option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option>
-                        <option value="WA">WA</option><option value="WV">WV</option><option value="AL">WI</option>
-                        <option value="AL">WY</option>
-                    </FormControl>
-                </FormGroup>
-                <FormGroup controlId="dobSelection">
-                    <ControlLabel>Select your date of birth:</ControlLabel>
-                    <FormControl name="dob" componentClass="select" placeholder="Month"/>
-                { Dynamically render available years!}
-                </FormGroup> */}
-                < input className="submitButton" type="submit" value="SIGN UP"/>
-            </form>
-            <button onClick={this.goToLogin}>LOGIN INSTEAD</button>
-        </div>
-
-            );
-               
-    }
+    
 
     render() {
         return (
             <div className="join-egf-container">
                 <MyNav url={this.props.location.pathname} token={this.state.token}/> 
-                {this.renderMediaForm()}
-                {/* {this.renderLogin()} */}
-                {/* {this.renderStudentForm()} */}
-                {/* <button onClick={this.logOutHandler}>LOGOUT</button> */}
+                {this.state.loginToggled ? this.renderLogin() : this.renderSignup()}
+                
+                {/* <button onClick={this.handleLogout}>LOGOUT</button> */}
                 <Footer />
             </div>
         );
     }
 }
-/* <div className="join-egf-logos">
-                            <div className="college-logo">
-                                <Checkbox name="college" onChange={this.handleCollegeChecked}>
-                                    College
-                                </Checkbox>
-                            </div>
-                            <div className="highschool-logo">
-                                <Checkbox name="highschool" onChange={this.handleHighschoolChecked}>
-                                    High School
-                                </Checkbox>
-                            </div>
-                            <div className="media-logo">
-                                <Checkbox name="media" onChange={this.handleMediaChecked}>
-                                    Media
-                                </Checkbox>
-                            </div>
-                        </div>
-                    {this.state.highschoolCheck ? this.renderStudentForm() : this.state.highschoolCheck}
-                    {this.state.collegeCheck ? this.renderStudentForm() : this.state.collegeCheck}
-                    {this.state.mediaCheck ? this.renderMediaForm() : this.state.mediaCheck} */
+
 export default Join;
+
+
+/* <FormGroup controlId="stateSelection">
+                    <ControlLabel>Select your state:</ControlLabel>
+                    <FormControl name="state" componentClass="select" placeholder="Select..."
+                        onChange = {this.handleChange}>
+                        <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option>
+                        <option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option>
+                        <option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option>
+                        <option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option>
+                        <option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
+                        <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option>
+                        <option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option>
+                        <option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option>
+                        <option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option>
+                        <option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
+                        <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option>
+                        <option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option>
+                        <option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option>
+                        <option value="SD">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option>
+                        <option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option>
+                        <option value="WA">WA</option><option value="WV">WV</option><option value="AL">WI</option>
+                        <option value="AL">WY</option>
+                    </FormControl>
+                </FormGroup>
+                <FormGroup controlId="dobSelection">
+                    <ControlLabel>Select your date of birth:</ControlLabel>
+                    <FormControl name="dob" componentClass="select" placeholder="Month"/>
+                { Dynamically render available years!}
+                </FormGroup> */

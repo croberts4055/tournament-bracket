@@ -27,7 +27,7 @@ class Homepage extends Component {
                 <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
                 <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
                 <div>DATE | TIME <br></br> RMU vs UC Berkeley</div>
-                <div id="viewScheduleDiv"><a href="#">VIEW SCHEDULE</a></div>
+                <div id="viewScheduleDiv"><a href="/">VIEW SCHEDULE</a></div>
             </div>
             {/* <div className="brand-info"> */}
 

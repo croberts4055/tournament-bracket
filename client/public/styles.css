@@ -13,3 +13,73 @@
     height: 100%;
 }
 
+.footer-container {
+    position: relative;
+    display: flex;
+    color: lightgray;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Forza Medium';
+    /* Set the fixed height of the footer here */
+    height: 85px;
+    background-color: #111111;
+    margin: none;
+    padding: 1% 1.25%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.egf-links-container {
+    width: 35%;
+    height: 100%;
+}
+
+.egf-list-container {
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    padding-left: 3.5%;
+    padding-right: 3.5%;
+    border-right: 1px solid white;
+}
+
+.egf-list-container > a {
+    display: block;
+    height: 33.33%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: .75em;
+    color: white;
+    width: fit-content;
+}
+
+.social-media-links-container {
+    width: auto;
+    height: 100%;
+    margin-right: 5%;
+    margin-left: 1.25%;
+}
+
+.social-media-container {
+    padding-left: 3.5%;
+}
+
+.social-media-container > a {
+    display: block;
+    height: 25%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: .75em;
+    color: white;
+}
+
+.copyright-container {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+}

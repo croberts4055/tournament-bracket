@@ -64,14 +64,22 @@ passport.use(new LocalStrategy(
 // Chain exec(), then(), catch (). Asynchronous calls, each require 
 // a callback.
 router.get('/',function(req, res){
-  User.find(function(err,users){
-    res.send(users);
-  });
+  // User.find(function(err,users){
+  //   res.send(users);
+  // });
+ console.log(req.user);
+ console.log(req.session);
+ res.end('success');
+  // if(req.session.passport.user){
+  //   console.log(req.session.passport.user);
+  //   res.send(req.user);
+  // }
 });
 
 router.get('/logout',function(req,res){
   req.logout();
   console.log(req.user);
+  res.end('success');
   // req.flash('success_msg', 'You have been logged out.');
 })
 
@@ -118,9 +126,10 @@ router.post('/signup',function(req,res){
     // if there are any matches...
     if(matches.length){
       // send a 400 response (bad request)
-      res.status(200);
+      res.status(200).json({
+        message: 'A user with this email/username already exists.'
+      })
       // alert("A user with this email/username already exists.");
-      // exit the function. 
       return;
     }
     // otherwise, create the user's account with some password encryption. 
@@ -162,6 +171,8 @@ router.post('/signup',function(req,res){
 router.post('/login',passport.authenticate('local'), function(req,res){
   console.log(req.user);
   console.log(req.isAuthenticated());
+  console.log(req.session);
+  res.end('success');
 });
 
 passport.serializeUser(function(user, done) {
