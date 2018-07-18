@@ -1,10 +1,12 @@
 .join-egf-container {
     background: linear-gradient(lightslategray,lightgray);
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .join-egf-form {
+    display: block;
+    text-align: center;
     height: 100%;
     width: 900px;
     margin: 0 auto;
@@ -24,6 +26,46 @@
     border-radius: 15%;
     color: white;
     background-color: black;
+}
+
+.switchButton {
+    color: white;
+    background-color: black;
+    font-family: 'Forza Medium';
+    border: white;
+    border-radius: 15%;
+}
+
+.switchButton:hover {
+    background-color: #73A744;
+}
+
+label {
+    text-align: left;
+    padding: 0 0 0 0;
+}
+
+.formBlock {
+    width: 100%;
+}
+
+.radioBlock {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+}
+
+.logoBlock {
+    display: flex;
+    flex-wrap: wrap;
+    height: 300px;
+    margin: 0 0 0 0;
+    width: 33%;
+}
+
+.logoBlock > div {
+    margin: 0 auto;
 }
 
 .college-logo {
@@ -47,5 +89,9 @@
     float: left;
 }
 
-
+.divider {
+    height: 60px;
+    background-color: #333;
+    width: 100%;
+}
 

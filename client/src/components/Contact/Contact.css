@@ -1,22 +1,36 @@
-label {
-    width: 200px;
-    clear: left;
-    text-align: right;
-    padding-right: 10px;
-    padding-bottom: 10px;
-}
-
 input, label, textarea {
     float: left;
 }
 
-h3 {
-    font-weight: bold;
-    color: orange;
+.contact-container {
+    background: linear-gradient(lightslategray,lightgray);
+    min-height: 100vh;
 }
 
-.contact-form {
-    margin-top: -5px;
-    background-color: gray;
+.contact-form-container {
+    display: block;
+    height: auto;
+    width: 900px;
+    margin: 0 auto;
+    background-color: #333;
+    color: white;
+    font-family: 'Forza Medium';
+    padding-top: 2.5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2.5%;
+    border-style: groove;
+    border-color: lightgray;
     overflow: auto;
+}
+
+.contactSubmit {
+    margin-top: 10px;
+    color: #73A744;
+    background-color: white;
+}
+
+.contactSubmit:hover {
+    margin-top: 10px;
+    background-color: lightblue;
 }

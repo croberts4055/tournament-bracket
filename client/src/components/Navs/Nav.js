@@ -27,9 +27,28 @@ class MyNav extends Component {
         
     }
 
+    componentDidMount(){
+        var current_user = "";
+        fetch("http://localhost:3001/users/", {
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json'
+            }        
+        })
+        // .then( (response)=> response.json())
+        .then( (response)=> {
+            if(response.user!==current_user){
+                current_user = response.user;
+                this.setState({
+                    user: current_user
+                }), ()=> console.log(response);
+            }
+        })
+    }
   
     renderHeaderNav(){
-        if(this.props.token!==""){
+        if(this.state.user){
             return(<div id="HeaderNav">
             <Navbar fixedTop fluid inverse collapseOnSelect>
                 <Navbar.Header >
@@ -85,7 +104,7 @@ class MyNav extends Component {
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                        <NavDropdown pullRight eventKey={3} title={"WELCOME, " + this.props.token} id="login-dropdown">
+                        <NavDropdown pullRight eventKey={3} title={"WELCOME, " + this.state.user} id="login-dropdown">
                             <MenuItem eventKey={3.1}>View My Profile</MenuItem>
                             <MenuItem eventKey={3.2}>Account Settings</MenuItem>
                             <MenuItem divider />
@@ -177,9 +196,7 @@ class MyNav extends Component {
                 <div className="LiveBarContainer">
                     {this.state.currentGame} - {this.state.competitors.team1} v. {this.state.competitors.team2}
                     <div id="divider"></div>
-                    <a href="http://twitch.tv/officialegf" target="_blank">
-                        <button className="flex-component" onClick={this.onClick}>WATCH LIVE ON TWITCH</button> 
-                    </a>
+                    <a href="http://twitch.tv/officialegf" className="btn btn-default" target="_blank" id="twitchbtn">WATCH LIVE ON TWITCH</a>
                 </div>
             
         );

@@ -1,15 +1,13 @@
+.tableContainer {
+    min-height: 100vh;
+}
+
 .tableLayout {
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
-    width: 1200px;
+    width: auto;
     margin: 0 auto;
-    height: 500px;
-}
-
-.tableLayout > table {
+    height: auto;
     background-color: #333;
-    height: 100%;
-    
 }

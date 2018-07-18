@@ -13,7 +13,7 @@
     border-bottom: 1px solid white;
 }
 
-.blockDiv {
+.block-Div {
     width: 100%;
     height: 200px;
     margin: 0 auto;
@@ -31,9 +31,7 @@
 
 .college-container {
     width: 100%;
-    margin-top: 1%;
     margin-bottom: 1%;
-    background-color: blue;
 }
 
 .college-image {
