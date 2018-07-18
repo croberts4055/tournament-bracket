@@ -1,3 +1,5 @@
+// this js file is for testing purposes
+
 var teamObject = {
 	team_name: null,
 	win: false,
@@ -68,20 +70,74 @@ function startSingleElimination(teamSize) {
 }
 
 function fillSingleElinationArray(array, teamSize, rounds) {
-	array[1] = 100;
-	array[2] = 101;
+	var winner = {
+		team_name: "winner",
+		win: "TBD",
+	}
+	array[0] = winner;
 
-	var currentTeamNumber = 101;
-	var nextTeamNumber = 102;
-	var teamsAdded = 2;
+	var filler1 = {
+		team_name: "waiting",
+		win: "TBD"
+	}
+	array[1] = filler1;
+
+	var filler2 = {
+		team_name: "waiting",
+		win: "TBD"
+	}
+	array[2] = filler2;
+
+	var obj1 = {
+		team_name: 100,
+		win: true
+	}
+	array[3] = obj1;
+
+	var obj2 = {
+		team_name: 103,
+		win: false
+	}
+	array[4] = obj2;
+
+	var obj3 = {
+		team_name: 101,
+		win: true
+	}
+	array[5] = obj3;
+
+	var obj4 = {
+		team_name: 102,
+		win: false
+	}
+	array[6] = obj4;
+
+	var currentTeamNumber = 103;
+	var nextTeamNumber = 104;
+	var teamsAdded = 4;
 	var direction = 1;
 	while(teamsAdded < teamSize) {
-		var indexToMove = array.indexOf(currentTeamNumber);
-		var x = "X";
+		var findObj = {
+			team_name: currentTeamNumber,
+			win: false,
+		};
+		var indexToMove = findIndexInArray(array, currentTeamNumber);
 		if(direction == 1) { // move right along the array
-			array[indexToMove] = "waiting for index " + ((2*indexToMove)+1) + " and " + ((2*indexToMove)+2);
-			array[(2*indexToMove)+1] = currentTeamNumber;
-			array[(2*indexToMove)+2] = nextTeamNumber;
+			var placeHolderObj = {
+				team_name: "waiting for " + currentTeamNumber + " and " + nextTeamNumber,
+				win: "TBD",
+			}
+			array[indexToMove] = placeHolderObj;
+			var temp1 = {
+				team_name: currentTeamNumber,
+				win: true
+			}
+			array[(2*indexToMove)+1] = temp1;
+			var temp2 = {
+				team_name: nextTeamNumber,
+				win: false
+			}
+			array[(2*indexToMove)+2] = temp2;
 			// only switch directions if currentTeamNumber is greater than nextTeamNumber
 			if(currentTeamNumber < nextTeamNumber) {
 				direction = -1;
@@ -92,9 +148,21 @@ function fillSingleElinationArray(array, teamSize, rounds) {
 			}
 		}
 		else if(direction == -1) { // -1 means to move left along the array
-			array[indexToMove] = "waiting for index " + ((2*indexToMove)+1) + " and " + ((2*indexToMove)+2);
-			array[(2*indexToMove)+1] = currentTeamNumber;
-			array[(2*indexToMove)+2] = nextTeamNumber;
+			var placeHolderObj = {
+				team_name: "waiting for " + currentTeamNumber + " and " + nextTeamNumber,
+				win: "TBD",
+			}
+			array[indexToMove] = placeHolderObj;
+			var temp1 = {
+				team_name: currentTeamNumber,
+				win: true
+			}
+			array[(2*indexToMove)+1] = temp1;
+			var temp2 = {
+				team_name: nextTeamNumber,
+				win: false
+			}
+			array[(2*indexToMove)+2] = temp2;
 			// switch directions if currentTeamNumber is back to top team
 			if(currentTeamNumber == 100) {
 				direction = 1;
@@ -127,8 +195,11 @@ function showTeams(array, rounds) {
 			document.getElementById("return_winners_bracket").innerHTML += "<h5>Winners Bracket Round " + ((rounds+1)-i) + "</h5>";
 		}
 		for (var j = 0; j < Math.pow(2, power); j++) {
-			if(array[lastPosition] != "X") {
-				document.getElementById("return_winners_bracket").innerHTML += index + ": " + array[lastPosition] + " | ";
+			if(array[lastPosition].team_name != null) {
+				document.getElementById("return_winners_bracket").innerHTML += array[lastPosition].team_name + " ||| ";
+			}
+			else {
+				document.getElementById("return_winners_bracket").innerHTML += "none | ";
 			}
 			lastPosition++;
 			index++;
@@ -136,4 +207,15 @@ function showTeams(array, rounds) {
 		document.getElementById("return_winners_bracket").innerHTML += "<br />";
 		power++;
 	}
+}
+
+function findIndexInArray(array, target) {
+	for (var i = 0; i < array.length; i++) {
+		if(array[i].hasOwnProperty('team_name')) {
+			if(array[i].team_name == target) {
+				return i;
+			}
+		}
+	}
+	return -1;
 }
