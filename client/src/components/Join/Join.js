@@ -117,8 +117,11 @@ class Join extends Component {
             password: this.state.password
             })
         })
-        .then( (response) => {
-            console.log(response);
+        .then( (response) => response.json())
+        .then( (response )=> {
+            if(response.message){
+                alert(response.message);
+            }
         })
         // .then( (response) => {
         //     if(response._id){
@@ -298,11 +301,11 @@ class Join extends Component {
 
     render() {
         return (
-            <div className="join-egf-container">
-                <MyNav url={this.props.location.pathname} token={this.state.token}/> 
+            <div>
+                <MyNav url={this.props.location.pathname} token={this.state.token}/>
+                <div className="join-egf-container"> 
                 {this.state.loginToggled ? this.renderLogin() : this.renderSignup()}
-                
-                {/* <button onClick={this.handleLogout}>LOGOUT</button> */}
+                </div>
                 <Footer />
             </div>
         );
@@ -311,7 +314,7 @@ class Join extends Component {
 
 export default Join;
 
-
+ /* <button onClick={this.handleLogout}>LOGOUT</button> */
 /* <FormGroup controlId="stateSelection">
                     <ControlLabel>Select your state:</ControlLabel>
                     <FormControl name="state" componentClass="select" placeholder="Select..."

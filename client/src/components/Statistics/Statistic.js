@@ -147,15 +147,16 @@ class Statistics extends Component {
         return (
             <div>
                 <MyNav url={this.props.location.pathname}/>
-                <div className="tableLayout">
-                <Table responsive bordered hover>
-                    {/* <thead>
-                        {this.renderTableHeads()}
-                    </thead> */}
-                        {this.renderTableCells()}
-                </Table>
-                </div> 
-                <p>You are on the statistics page! Current url is: {this.props.location.pathname}</p>
+                <div className="tableContainer">
+                    <div className="tableLayout">
+                    <Table responsive bordered hover>
+                        {/* <thead>
+                            {this.renderTableHeads()}
+                        </thead> */}
+                            {this.renderTableCells()}
+                    </Table>
+                    </div> 
+                </div>
                 <Footer/>
             </div>
         );

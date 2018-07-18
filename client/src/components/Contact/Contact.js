@@ -27,8 +27,16 @@ class Contact extends Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
+        let flag = false;
+        Object.keys(this.state).map(i => {
+            if(this.state[i].length === 0){
+                if(!flag){
+                    alert("Field " + i + " must not be empty");
+                }
+                flag = true;
+            }
+        })
     }
 
     messageValidate(){
@@ -40,68 +48,71 @@ class Contact extends Component {
 
     render() {
         return (
-            <div className="contact-block">
+            <div>
                 <MyNav url={this.props.location.pathname}/> 
-                <div className="contact">
-                <h2>REACH OUT TO US.</h2>
-                <form className="formBlock" onSubmit={this.handleSubmit}>
-                    <FormGroup className="textfields">
-                        <ControlLabel>Name:</ControlLabel>
-                        <FormControl 
-                            type="text"
-                            name="name"
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup className="textfields">
-                        <ControlLabel>Email:</ControlLabel>
-                        <FormControl 
-                            type="text"
-                            name="email"
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup className="textfields">
-                        <ControlLabel>I am a:</ControlLabel>
-                        <FormControl 
-                            type="text"
-                            name="title"
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup className="textfields">
-                        <ControlLabel>Organization:</ControlLabel>
-                        <FormControl 
-                            type="text"
-                            name="organization"
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup className="textfields">
-                        <ControlLabel>Location:</ControlLabel>
-                        <FormControl 
-                            type="text"
-                            name="location"
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup className="textfields">
-                        <ControlLabel>Subject:</ControlLabel>
-                        <FormControl 
-                            type="text"
-                            name="subject"
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup className="textarea" validationState={this.messageValidate()}>
-                        <ControlLabel>Message:</ControlLabel>
-                        <FormControl 
-                            componentClass = "textarea"
-                            type="text"
-                            name="message"
-                            placeholder = "Message goes here..."
-                            onChange={this.handleChange} />
-                         <FormControl.Feedback />
-                         <HelpBlock>Please limit your response to 250 characters.</HelpBlock>
-                    </FormGroup>
-                    <input className="contactSubmit" type="submit" value="SEND!"/>
-                    {/* NEED CAPTCHA ON THIS FORM */}    
-                </form>
+                <div className="contact-container">
+                    <div className="contact-form-container">
+                    <h2>REACH OUT TO US.</h2>
+                    <form className="formBlock" onSubmit={this.handleSubmit}>
+                        <FormGroup className="textfields">
+                            <ControlLabel>Name:</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                name="name"
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup className="textfields">
+                            <ControlLabel>Email:</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                name="email"
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup className="textfields">
+                            <ControlLabel>I am a:</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                name="title"
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup className="textfields">
+                            <ControlLabel>Organization:</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                name="organization"
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup className="textfields">
+                            <ControlLabel>Location:</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                name="location"
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup className="textfields">
+                            <ControlLabel>Subject:</ControlLabel>
+                            <FormControl 
+                                type="text"
+                                name="subject"
+                                onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup className="textarea" validationState={this.messageValidate()}>
+                            <ControlLabel>Message:</ControlLabel>
+                            <FormControl 
+                                componentClass = "textarea"
+                                type="text"
+                                name="message"
+                                placeholder = "Message goes here..."
+                                onChange={this.handleChange} />
+                            <FormControl.Feedback />
+                            <HelpBlock>Please limit your response to 250 characters.</HelpBlock>
+                        </FormGroup>
+                        <input className="contactSubmit" type="submit" value="SEND!"/>
+                        {/* NEED CAPTCHA ON THIS FORM */}    
+                    </form>
+                    </div>
                 </div>
+                <Footer/>
             </div>
         );
     }

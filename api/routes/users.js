@@ -24,15 +24,9 @@ myModel.findByIdAndRemove(1,(function(err){
 }));
 
 Clear database 
-myModel.remove({}, function(err){
-  if(err) return console.log("error");
-});
-
-myModel.create({id: 1,email:"aron@gmail.com"}, function(err, modelInstance){
- if (err) return handleError(err);
-});
-
-mongoose.model('users',{name: String});
+ User.remove({},function(err){
+   if(err) console.log(err);
+ })
 
 ********* Set up passport local strategy. *****/ 
 
@@ -64,12 +58,11 @@ passport.use(new LocalStrategy(
 // Chain exec(), then(), catch (). Asynchronous calls, each require 
 // a callback.
 router.get('/',function(req, res){
-  // User.find(function(err,users){
-  //   res.send(users);
-  // });
+  User.find(function(err,users){
+    res.send(users);
+  });
  console.log(req.user);
  console.log(req.session);
- res.end('success');
   // if(req.session.passport.user){
   //   console.log(req.session.passport.user);
   //   res.send(req.user);
@@ -79,7 +72,7 @@ router.get('/',function(req, res){
 router.get('/logout',function(req,res){
   req.logout();
   console.log(req.user);
-  res.end('success');
+  
   // req.flash('success_msg', 'You have been logged out.');
 })
 
@@ -172,7 +165,7 @@ router.post('/login',passport.authenticate('local'), function(req,res){
   console.log(req.user);
   console.log(req.isAuthenticated());
   console.log(req.session);
-  res.end('success');
+  
 });
 
 passport.serializeUser(function(user, done) {

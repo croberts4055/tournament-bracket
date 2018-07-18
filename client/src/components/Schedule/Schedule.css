@@ -4,7 +4,7 @@
     width: 1200px;
     margin: 0 auto;
     background-color: #333;
-    height: auto;
+    min-height: 100vh;
     font-family: 'Forza Medium';
     font-size: 20px;
     padding: 20px;

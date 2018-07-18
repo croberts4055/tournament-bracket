@@ -61,7 +61,7 @@ class College extends Component {
                 </div>
                 {this.state.colleges.map((college, i)=>{
                     return(
-                        <div className="blockDiv">
+                        <div className="block-Div">
                             <div className="college-container">
                                 <div className="college-image">
                                     <img src={this.state.colleges[i].logo} />
