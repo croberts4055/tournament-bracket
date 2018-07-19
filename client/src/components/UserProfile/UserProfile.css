@@ -1,0 +1,106 @@
+.profile-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    padding: 1.5%;
+}
+
+.playerinfo-block {
+    display: block;
+    padding: 2.5%;
+    width: 33%;
+    min-height: inherit;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: white;
+}
+
+.playerinfo-block > div > ul {
+    padding: 0;
+    color: white;
+    float: left;
+    overflow: hidden;
+}
+
+.playerinfo-block > div > ul > li {
+    padding: 5%;
+}
+
+
+.matches-block {
+    display: block;
+    width: 40%;
+    min-height: inherit;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: white;
+}
+
+.articles-block {
+    width: 27%;
+    min-height: inherit;
+}
+
+#user-profile-image {
+    font-family: 'Forza Medium';
+    font-size: 25px;
+    display: flex;
+    width: 100%;
+    height: 250px;
+    text-align: left;
+    line-height: 450px;
+    color: #73A744;
+    margin: 5px;
+}
+
+#ingame-info {
+    font-family: 'Forza Medium';
+    font-size: 15px;
+    display: block;
+    width: 100%;
+    height: 150px;
+    text-align: left;
+    color: #73A744;
+    margin: 5px;
+}
+
+#ingame-text {
+    width: 100%;
+}
+
+#bio-header{
+    text-align: left;
+}
+
+#player-bio-block {
+    font-family: 'Forza Medium';
+    font-size: 15px;
+    display: block;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    color: #73A744;
+    margin: 5px;
+}
+
+
+#bio {
+    color: white;
+    font-size: 13px;
+    padding: 5px;
+}
+
+#player-stat-block {
+    font-family: 'Forza Medium';
+    margin: 5px;
+    font-size: 15px;
+    display: block;
+    width: 100%;
+    height: 250px;
+    text-align: left;
+    color: #73A744;
+}

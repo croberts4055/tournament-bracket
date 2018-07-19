@@ -31,6 +31,7 @@ class MyNav extends Component {
         var current_user = "";
         fetch("http://localhost:3001/users/", {
             method: "get",
+            credentials : 'same-origin',
             headers: {
                 'Accept':'application/json',
                 'Content-Type': 'application/json'
@@ -51,7 +52,7 @@ class MyNav extends Component {
         if(this.state.user){
             return(<div id="HeaderNav">
             <Navbar fixedTop fluid inverse collapseOnSelect>
-                <Navbar.Header >
+                <Navbar.Header>
                     <Navbar.Brand>
                     <a href="/">
                         <img id="brand-image" alt="logo" src="/images/main_logo.png"/>

@@ -16,11 +16,13 @@ import News from './components/News/News';
 import RulesAndCodeOfConduct from './components/RulesAndCodeOfConduct/RulesAndCodeOfConduct';
 import Vods from './components/Vods/Vods';
 import SchoolProfile from './components/SchoolProfile/SchoolProfile';
+import UserProfile from './components/UserProfile/UserProfile';
 
 ReactDOM.render(
     <BrowserRouter>
     <div>
         <Switch>
+            <Route path="/userprofiletest" component={UserProfile} />
             <Route path="/statistics" component={Statistics} />
             <Route path="/standings" component={Standings} />
             <Route path="/schedule" component={Schedule} />
