@@ -20,16 +20,16 @@ const fs = require('fs');
 const app = express();
 
 //Set up mongoose connection
-// const mongoDB = 'mongodb://egftest:testingegf5@ds117701.mlab.com:17701/egf_tournament_test';
-// mongoose.connect(mongoDB);
-// mongoose.Promise = global.Promise;
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const mongoDB = 'mongodb://egftest:testingegf5@ds117701.mlab.com:17701/egf_tournament_test';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-// app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3001);
 
 // load all model files 
 fs.readdirSync(__dirname + '/api' + '/models').forEach(function(filename) {
