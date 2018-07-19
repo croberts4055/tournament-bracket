@@ -58,11 +58,13 @@ passport.use(new LocalStrategy(
 // Chain exec(), then(), catch (). Asynchronous calls, each require 
 // a callback.
 router.get('/',function(req, res){
-  User.find(function(err,users){
-    res.send(users);
-  });
+
+ 
+ User.find(function(err,users){
+  res.send(users);
+});
  console.log(req.user);
- console.log(req.session);
+ console.log(req.session.cookie + " " + req.session.id);
   // if(req.session.passport.user){
   //   console.log(req.session.passport.user);
   //   res.send(req.user);
@@ -165,7 +167,7 @@ router.post('/login',passport.authenticate('local'), function(req,res){
   console.log(req.user);
   console.log(req.isAuthenticated());
   console.log(req.session);
-  
+  res.end();
 });
 
 passport.serializeUser(function(user, done) {

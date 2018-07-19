@@ -20,7 +20,8 @@ var userSchema = new Schema({
       college: {type: Boolean, required: true, default:false},
       media: {type: Boolean, required: true, default: false},
       fan: {type:Boolean, required: true, default: false},
-      schooladmin: {type:Boolean, required: true, default: false}
+      schooladmin: {type:Boolean, required: true, default: false},
+      captain: {type:Boolean, required: true, default: false}
     },
     city: {type: String},
     state: {type: String, enum: [
