@@ -15,8 +15,8 @@ import Join from './components/Join/Join';
 import News from './components/News/News';
 import RulesAndCodeOfConduct from './components/RulesAndCodeOfConduct/RulesAndCodeOfConduct';
 import Vods from './components/Vods/Vods';
+import SchoolProfile from './components/SchoolProfile/SchoolProfile';
 import UserProfile from './components/UserProfile/UserProfile';
-
 
 ReactDOM.render(
     <BrowserRouter>
@@ -28,6 +28,7 @@ ReactDOM.render(
             <Route path="/schedule" component={Schedule} />
             <Route path="/events" component={Events} />
             <Route path="/contact" component={Contact} />
+            <Route path="/schoolprofile" component={SchoolProfile} />
             <Route path="/about" component={About} />
             <Route path="/video" component={Video} />
             <Route path="/joinegf" component={Join} />
