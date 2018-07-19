@@ -15,17 +15,17 @@ class Footer extends Component{
                     <div className="egf-list-container">
                         <a href="/about">ABOUT EGF</a>
                         <a href="/contact">CONTACT</a>
-                        <a href="#">PROGRAMS</a>
+                        <a href="/">PROGRAMS</a>
                     </div>
                     <div className="egf-list-container">
                         <a href="/joinegf">JOIN EGF</a>
-                        <a href="#">TEAMS</a>
-                        <a href="#">PARENTAL INFO</a>
+                        <a href="/">TEAMS</a>
+                        <a href="/">PARENTAL INFO</a>
                     </div>
                     <div className="egf-list-container">
-                        <a href="#">TERMS OF USE</a>
-                        <a href="#">PRIVACY POLICY</a>
-                        <a href="#">COPYRIGHT</a>
+                        <a href="/userprofiletest">TERMS OF USE</a>
+                        <a href="/">PRIVACY POLICY</a>
+                        <a href="/">COPYRIGHT</a>
                     </div>
                 </div>
                 <div className="social-media-links-container">
