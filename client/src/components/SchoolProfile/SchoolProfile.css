@@ -2,10 +2,9 @@
     display: block;
     min-height: 100vh;
     width: 100%;
-    margin: 0 0;
+    margin: 2.5% none;
     background-color: #333;
     height: auto;
-    font-family: 'Forza Medium';
     color: black;
     padding: 0.5% 0.5%;
     overflow: auto;
@@ -13,23 +12,53 @@
 
 .school-profile-image {
     width: 100%;
-    height: 20vh;
-    background-color: goldenrod;
-    border: 1px solid white;
+    max-width: 1500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .school-profile-content {
     width: 100%;
-    height: 80vh;
-    border: 1px solid white;
-    padding: 0.5% 0.5%;
-    background-color: blueviolet;
+    height: auto;
+    background-color: #333;
+    display: block;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
-.selected-game {
+.game-tabs {
     width: 100%;
     height: auto;
-    border: 1px solid black;
+    background-color: #333;
+    margin-top: 1%;
+}
+
+.game-tab-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.game-tab-name {
+    width: auto;
+    float: left;
+    color: gray;
+}
+
+.school-profile-overview-history {
+    width: 100%;
+    height: auto;
+    float: left;
+    color: white;
+    position: relative;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.school-profile-overview-history > .section-heading {
+    padding-top: 0;
 }
 
 .section-heading {
@@ -37,41 +66,31 @@
     font-family: 'Forza Medium';
     width: 100%;
     height: auto;
-    padding-left: 1%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-}
-
-.school-profile-quick-info {
-    width: 100%;
-    height: 15%;
-    border: 1px solid black;
+    font-size: 1.5em;
+    padding: 1% 1%;
+    float: left;
 }
 
 .overview {
-    width: 75%;
-    height: 100%;
-    background-color: pink;
-    float: left;
-    font-size: .75em;
-    justify-content: center;
-    align-items: center;
-    display: block;
+    width: 100%;
+    height: fit-content;
+    position: relative;
 }
 
 .overview-text {
-    width: 100%;
-    height: auto;
+    width: 75%;
+    height: fit-content;
     padding-left: 1%;
     padding-right: 1%;
-    padding-bottom: 1%;
+    float: left;
+    border-right: 2px solid green;
 }
 
-.history {
+.overview-history {
     width: 25%;
-    height: 100%;
-    background-color: blue;
-    font-size: 1em;
+    float: left;
+    right: 0;
+    top: 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,37 +98,127 @@
 
 .school-profile-details {
     width: 100%;
-    height: 75%;
-    border: 1px solid black;
-    background-color: royalblue;
+    height: auto;
+    border: 1px solid gainsboro;
+    background-color: #333;
+    float: left;
 }
 
 .roster {
     width: 33.33%;
-    height: 100%;
-    background-color: red;
+    height: auto;
+    background-color: #333;
     float: left;
+}
+
+.roster-container {
+    width: 100%;
+    height: auto;
+    padding: 1% 1%;
+    float: left;
+}
+
+.player-details {
+    width: 100%;
+    height: auto;
+    float: left;
+    border-bottom: 2px solid white;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+}
+
+.player-image {
+    height: 150px;
+    width: 50%;
+    min-width: 175px;
+    max-width: 200px;
+    background-image: url("");
+    float: left;
+}
+
+.player-info {
+    font-family: 'Forza Medium';
+    float: left;
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 50;
+    color: white;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    padding-left: 5%;
 }
 
 .schedule-and-match-history {
     width: 33.33%;
-    height: 100%;
+    height: auto;
     float: left;
 }
 
 .schedule {
-    height: 50%;
-    background-color: orange;
+    width: 100%;
+    height: auto;
+    padding: 1% 1%;
+    float: left;
+}
+
+.schedule-container {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+}
+
+.schedule-details {
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: white;
+}
+
+.schedule-school-and-date {
+    width: 100%;
+    float: left;
+    height: auto;
+    position: relative;
+}
+
+.schedule-school-name {
+    font-family: 'Forza Medium';
+    font-size: 1.25em;
+}
+
+.schedule-time {
+    float: left;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .match-history {
+    width: 100%;
     height: 50%;
     background-color: yellow;
+    float: left
+}
+
+.news-section {
+    width: 33.33%;
+    height: auto;
+    float: left;
 }
 
 .news {
     height: 100%;
-    width: 33.33%;
-    background-color: beige;
+    width: 100%;
     float: left;
+    background-color: beige;
 }
