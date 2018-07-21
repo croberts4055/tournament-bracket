@@ -8,8 +8,29 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuth : false,
-            showAuthView : false
+            isAuth : true,
+            showAuthView : false,
+            username: "Aaron",
+            schedule: [
+                {
+                    school1: "cal tech",
+                    school2: "berkeley",
+                    date: Date.now()
+                },
+                {
+                    school1: "yale",
+                    school2: "berkeley",
+                    date: Date.now()
+                }
+            ],
+            history : ['yale','berkeley','stuy','msit'],
+            articles : [
+                {
+                    title: "first one",
+                    author: "james franco",
+                    date: Date.now()
+                }
+            ]
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -30,6 +51,12 @@ class UserProfile extends Component {
        console.log(url);
     }
 
+    renderGear(){
+        return(
+                <Glyphicon onClick={this.handleClick} glyph="cog"/>
+        );
+    }
+
     renderVisitorView(){
         /* if isAuth - render the gear icon
          if(this.state.isAuth){
@@ -40,7 +67,7 @@ class UserProfile extends Component {
             <div className="playerinfo-block">
                 <div id="user-profile-image">USERNAME</div>
                 <div id="ingame-info">
-                <div id="ingame-text">INGAME PROFILE</div>
+                <div id="ingame-text">INGAME PROFILE {this.state.isAuth ? this.renderGear() : null }</div>
                     <ul>
                         <li>Game played</li>
                         <li>Role played</li>
@@ -65,8 +92,40 @@ class UserProfile extends Component {
                 </div>
             </div>
             <div className="matches-block">
-            </div>
+                <div id="match-banner">SCHEDULE</div>
+                {this.state.schedule.map((item,key) => {
+                    return (
+                    <div key={key} id="match-section">
+                    <div key={key+1}id="schedule-section">
+                        {item.school1} vs {item.school2}
+                    </div>
+                        <div key={key+2} id="date-section">
+                        {item.date}
+                        </div>
+                    </div>
+                    );
+                })}
+
+                <div id="history-section">
+                    <div id="history-banner">MATCH HISTORY</div>
+                    {this.state.history.map((item,index)=>{
+                        return (
+                            <div key={item} id="history-block">
+                            vs. {item}
+                            </div>
+                        );
+                    })}
+                </div>
+                </div>
             <div className="articles-block">
+                    <div id="article-banner">ARTICLES</div>
+                    {this.state.articles.map((item,index)=> {
+                        return(
+                            <div id="article-block" key={index}>
+                            {item.title}
+                            </div>
+                        );
+                    })}
             </div>
         </div>
          );
@@ -74,6 +133,14 @@ class UserProfile extends Component {
 
     renderAuthView(){
         // access settings page via a gear icon. 
+        return(
+            <div className="profile-container">
+                <div className="settings-container">
+                    <div id="info-column">WELCOME, {this.state.username} </div>
+                    <div id="settings-column"></div>
+                </div>
+            </div>
+        );
     }
 
     render() {
