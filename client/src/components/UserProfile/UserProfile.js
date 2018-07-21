@@ -13,21 +13,21 @@ class UserProfile extends Component {
             username: "Aaron",
             schedule: [
                 {
-                    school1: "cal tech",
-                    school2: "berkeley",
+                    school1: "CALTECH",
+                    school2: "BERKELEY",
                     date: Date.now()
                 },
                 {
-                    school1: "yale",
-                    school2: "berkeley",
+                    school1: "YALE",
+                    school2: "HARVARD",
                     date: Date.now()
                 }
             ],
-            history : ['yale','berkeley','stuy','msit'],
+            history : ['YALE','BERKELEY','STUYVESANT','M.S.I.T'],
             articles : [
                 {
-                    title: "first one",
-                    author: "james franco",
+                    title: "Video Games are Now Banished from China",
+                    author: "James Franco",
                     date: Date.now()
                 }
             ]
@@ -72,7 +72,7 @@ class UserProfile extends Component {
                         <li>Game played</li>
                         <li>Role played</li>
                         <li>IGN</li>
-                        <li>Personal twitch</li>
+                        <li>Personal Twitch</li>
                     </ul>
                 </div>
                 <div id="player-bio-block">
