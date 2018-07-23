@@ -16,7 +16,7 @@
     height: 500px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1%;
+    margin-top: none;
     margin-bottom: 1%;
 }
 
@@ -99,7 +99,6 @@
 .school-profile-details {
     width: 100%;
     height: auto;
-    border: 1px solid gainsboro;
     background-color: #333;
     float: left;
 }
@@ -109,6 +108,7 @@
     height: auto;
     background-color: #333;
     float: left;
+    padding-right: 2.5%;
 }
 
 .roster-container {
@@ -131,7 +131,7 @@
 .player-image {
     height: 150px;
     width: 50%;
-    min-width: 175px;
+    /* min-width: 175px; */
     max-width: 200px;
     background-image: url("");
     float: left;
@@ -141,28 +141,35 @@
     font-family: 'Forza Medium';
     float: left;
     width: 50%;
-    position: absolute;
-    right: 0;
-    top: 50;
     color: white;
-    height: auto;
-    display: flex;
-    justify-content: left;
-    align-items: left;
+    height: 150px;
     padding-left: 5%;
+    float: left;
+}
+
+.player-name, .player-tag, .player-position {
+    float: left;
+    width: 100%;
+    height: 33.33%;
+    /* max-height: 33.33%; */
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    font-size: 1em;
 }
 
 .schedule-and-match-history {
     width: 33.33%;
     height: auto;
     float: left;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 
 .schedule {
     width: 100%;
     height: auto;
     padding: 1% 1%;
-    padding-right: 20%;
+    padding-right: 10%;
     float: left;
 }
 
@@ -223,6 +230,11 @@
 .history-details {
     width: 100%;
     height: auto;
+    float: left;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    color: white;
+    border-bottom: 2px solid white;
 }
 
 .history-school {
@@ -230,26 +242,26 @@
     width: 75%;
     height: auto;
     float: left;
-    padding-top: 2%;
-    padding-bottom: 2%;
 }
 
-.history-view-icon {
-    width: 25%;
+.history-view-icon > button {
     height: auto;
-    float: left;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    float: right;
+    display: flex;
+    justify-content: right;
+    align-items: right;
 }
 
 .news-section {
     width: 33.33%;
     height: auto;
     float: left;
+    padding-left: 2.5%;
 }
 
 .news {
-    height: 100%;
     width: 100%;
+    height: auto;
+    padding: 1% 1%;
     float: left;
 }

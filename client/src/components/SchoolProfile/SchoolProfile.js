@@ -78,6 +78,20 @@ class SchoolProfile extends Component {
                     year: "2018",
                     time: "9:00AM EST",
                 },
+                {
+                    school: "Hamtaro Squad",
+                    month: "February",
+                    day: "4",
+                    year: "2019",
+                    time: "10:00PM EST",
+                },
+                {
+                    school: "Hunter Blue Bears",
+                    month: "April",
+                    day: "7",
+                    year: "2019",
+                    time: "3:30AM EST",
+                },
             ],
             history: [
                 "Baruch College",
@@ -85,6 +99,9 @@ class SchoolProfile extends Component {
                 "City College",
                 "NYU",
                 "Berkeley College",
+                "St. John",
+                "Brooklyn College",
+                "Queens College",
             ],
         }
     }
@@ -119,11 +136,15 @@ class SchoolProfile extends Component {
                                 <img src={this.state.roster[i].image} />
                             </div>
                             <div className="player-info">
-                                Name: {this.state.roster[i].name}
-                                <br />
-                                Tag: {this.state.roster[i].gamertag}
-                                <br />
-                                Role: {this.state.roster[i].position}
+                                <div className="player-name">
+                                    Name: {this.state.roster[i].name}
+                                </div>
+                                <div className="player-tag">
+                                    Tag: {this.state.roster[i].gamertag}
+                                </div>
+                                <div className="player-position">
+                                    Role: {this.state.roster[i].position}
+                                </div>
                             </div>
                         </div>
                     )
@@ -164,7 +185,9 @@ class SchoolProfile extends Component {
                                 vs. {this.state.history[index]}
                             </div>
                             <div className="history-view-icon">
-                                view icon here
+                                <button href="#">
+                                    VIEW
+                                </button>
                             </div>
                         </div>
                     )
@@ -226,7 +249,7 @@ class SchoolProfile extends Component {
                                     NEWS
                                 </div>
                                 <div className="news">
-                                    NEWS HERE
+                                    {/* news articles go here */}
                                 </div>
                             </div>
                         </div>

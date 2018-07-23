@@ -81,7 +81,7 @@ class MyNav extends Component {
                     </NavItem>
                     </Nav>
                     <Nav pullRight>
-                        <NavDropdown pullRight eventKey={3} title="COLLEGE CLUB" id="basic-nav-dropdown">
+                        <NavDropdown pullRight eventKey={3} title="FORMS" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
@@ -153,7 +153,7 @@ class MyNav extends Component {
                         </NavItem>
                         </Nav>
                         <Nav pullRight>
-                            <NavDropdown pullRight eventKey={3} title="COLLEGE CLUB" id="basic-nav-dropdown">
+                            <NavDropdown pullRight eventKey={3} title="FORMS" id="basic-nav-dropdown">
                                 <MenuItem eventKey={3.1}>Action</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>
