@@ -33,6 +33,7 @@
 
 .matches-block {
     display: block;
+    padding: 2.5%;
     width: 40%;
     min-height: inherit;
     border-right-width: 2px;
@@ -42,6 +43,8 @@
 
 .articles-block {
     width: 27%;
+    padding: 2.5%;
+    display: block;
     min-height: inherit;
 }
 
@@ -103,4 +106,90 @@
     height: 250px;
     text-align: left;
     color: #73A744;
+}
+
+#match-banner {
+    width: 100%;
+    color: #73A744;
+    font-size: 20px;
+    font-family: 'Forza Medium';
+}
+
+#match-section {
+    display: block;
+    margin: 15px;
+    font-family: 'Forza Medium';
+    font-size: 15px;
+}
+
+#schedule-section {
+    height: auto;
+    width: 100%;
+    color: white;
+}
+
+#date-section {
+    height: auto;
+    width: 100%;
+    color: white;
+} 
+
+#history-section {
+    height: auto;
+    width: 100%;
+    color: white;
+}
+
+#history-banner {
+    color: #73A744;
+    font-family: 'Forza Medium';
+    font-size: 20px;
+}
+
+#history-block {
+    font-family: 'Forza Medium';
+    margin: 15px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+
+#article-banner {
+    width: 100%;
+    color: #73A744;
+    font-family: 'Forza Medium';
+    font-size: 20px;
+}
+
+#article-block {
+    margin: 15px;
+    width: 100%;
+    color: white;
+    font-size: 15px;
+    font-family: 'Forza Medium'
+}
+
+.settings-container {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    width: 75%;
+    margin: 0 auto;
+    min-height: inherit;
+}
+
+#info-column {
+    color: #73A744;
+    font-family: 'Forza Medium';
+    font-size: 20px;
+    width: 100%;
+    min-height: inherit;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: white;
+}
+
+#settings-column {
+    width: 100%;
+    min-height: inherit;
 }
