@@ -78,7 +78,14 @@ class SchoolProfile extends Component {
                     year: "2018",
                     time: "9:00AM EST",
                 },
-            ]
+            ],
+            history: [
+                "Baruch College",
+                "BMCC",
+                "City College",
+                "NYU",
+                "Berkeley College",
+            ],
         }
     }
 
@@ -147,6 +154,25 @@ class SchoolProfile extends Component {
         )
     }
 
+    renderHistory() {
+        return (
+            <div classname="history-container">
+                {this.state.history.map((hist, index)=>{
+                    return (
+                        <div className="history-details">
+                            <div className="history-school">
+                                vs. {this.state.history[index]}
+                            </div>
+                            <div className="history-view-icon">
+                                view icon here
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+
     render() {
         return (
             <div>
@@ -192,7 +218,7 @@ class SchoolProfile extends Component {
                                     MATCH HISTORY
                                 </div>
                                 <div className="match-history">
-                                    MATCH HISTORY HERE
+                                    {this.renderHistory()}
                                 </div>
                             </div>
                             <div className="news-section">
