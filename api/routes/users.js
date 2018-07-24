@@ -57,14 +57,14 @@ passport.use(new LocalStrategy(
 // Display all users in the database - get from database 
 // Chain exec(), then(), catch (). Asynchronous calls, each require 
 // a callback.
-router.get('/',function(req, res){
-
- 
- User.find(function(err,users){
-  res.send(users);
-});
- console.log(req.user);
- console.log(req.session.cookie + " " + req.session.id);
+router.get('/',function(req, res, next){
+//  console.log(req.user);
+ console.log(req.headers.cookie);
+//  console.log(req.session);
+//  User.find(function(err,users){
+//   res.send(users);
+// });
+  res.end();
   // if(req.session.passport.user){
   //   console.log(req.session.passport.user);
   //   res.send(req.user);

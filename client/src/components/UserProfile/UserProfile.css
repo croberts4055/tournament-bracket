@@ -193,3 +193,11 @@
     width: 100%;
     min-height: inherit;
 }
+
+/*  AUTH VIEW STYLING */
+
+#headshot-block {
+    height: auto;
+    display: block;
+    width: 100%;
+}
