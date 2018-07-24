@@ -30,16 +30,17 @@ class MyNav extends Component {
     componentDidMount(){
         var current_user = "";
         fetch("http://localhost:3001/users/", {
+            // credentials: 'include',
+            credentials: 'include',
             method: "get",
-            credentials : 'same-origin',
             headers: {
                 'Accept':'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }        
         })
         // .then( (response)=> response.json())
         .then( (response)=> {
-            if(response.user!==current_user){
+            if(response.user){
                 current_user = response.user;
                 this.setState({
                     user: current_user
@@ -81,16 +82,7 @@ class MyNav extends Component {
                     </NavItem>
                     </Nav>
                     <Nav pullRight>
-                        <NavDropdown pullRight eventKey={3} title="COLLEGE CLUB" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                        </NavDropdown>
-                    </Nav>
-                    <Nav pullRight>
-                        <NavDropdown pullRight eventKey={3} title="COLLEGE VARSITY" id="basic-nav-dropdown">
+                        <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
@@ -152,17 +144,9 @@ class MyNav extends Component {
                             VIDEO
                         </NavItem>
                         </Nav>
+    
                         <Nav pullRight>
-                            <NavDropdown pullRight eventKey={3} title="COLLEGE CLUB" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavDropdown pullRight eventKey={3} title="COLLEGE VARSITY" id="basic-nav-dropdown">
+                            <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
                                 <MenuItem eventKey={3.1}>Action</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>

@@ -11,11 +11,11 @@ class Join extends Component {
         this.state = {
             locked : false,
             type: {
-                    student: false,
+                    student: true,
                     admin: false, 
                   },
             subtype: {
-                highschool: false,
+                highschool: true,
                 college: false,
                 media: false,
                 fan: false,
@@ -48,16 +48,14 @@ class Join extends Component {
     }
   
     handleHighschoolChecked(event) {
-        let typeNow = this.state.student;
-        let subNow = this.state.subtype.highschool;
         this.setState({
             locked: false,
             type: {
-                student: !typeNow,
+                student: true,
                 admin : false
             },
             subtype: {
-                highschool: !subNow,
+                highschool: true,
                 college : false,
                 media: false,
                 fan: false,
@@ -67,17 +65,15 @@ class Join extends Component {
     }
 
     handleCollegeChecked(event) {
-        let typeNow = this.state.student;
-        let subNow = this.state.subtype.college;
         this.setState({
             locked: false,
             type: {
-                student: !typeNow,
+                student: true,
                 admin : false
             },
             subtype: {
                 highschool: false,
-                college : !subNow,
+                college : true,
                 media: false,
                 fan: false,
                 schooladmin: false
@@ -86,18 +82,16 @@ class Join extends Component {
     }
 
     handleMediaChecked(event) {
-        let typeNow = this.state.admin;
-        let subNow = this.state.subtype.media;
         this.setState({
             locked: true,
             type: {
                 student: false,
-                admin : !typeNow
+                admin : true
             },
             subtype: {
                 highschool: false,
                 college : false,
-                media: !subNow,
+                media: true,
                 fan: false,
                 schooladmin: false
             }
@@ -107,6 +101,8 @@ class Join extends Component {
     handleLogin(event) {
         event.preventDefault();
         fetch("http://localhost:3001/users/login", {
+            credentials: 'include',
+            // credentials: 'same-origin',
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -117,7 +113,7 @@ class Join extends Component {
             password: this.state.password
             })
         })
-        .then( (response) => response.json())
+        // .then( (response) => response.json())
         .then( (response )=> {
             if(response.message){
                 alert(response.message);
@@ -160,6 +156,7 @@ class Join extends Component {
             alert("Invalid e-mail address.");
         }
         fetch("http://localhost:3001/users/signup", {
+            credentials: 'same-origin',
             method: "post",
             headers: {
                 'Accept': 'application/json',

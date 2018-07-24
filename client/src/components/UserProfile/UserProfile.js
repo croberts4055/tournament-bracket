@@ -62,6 +62,19 @@ class UserProfile extends Component {
          if(this.state.isAuth){
             return(Glyphicon...)
          } */
+
+         var today = new Date();
+         var dd = today.getDate();
+         var mm = today.getMonth()+1; //January is 0!
+         var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+         today = mm + '/' + dd + '/' + yyyy;
+
          return(
         <div className="profile-container">
             <div className="playerinfo-block">
@@ -100,7 +113,7 @@ class UserProfile extends Component {
                         {item.school1} vs {item.school2}
                     </div>
                         <div key={key+2} id="date-section">
-                        {item.date}
+                        {today}
                         </div>
                     </div>
                     );
@@ -136,7 +149,14 @@ class UserProfile extends Component {
         return(
             <div className="profile-container">
                 <div className="settings-container">
-                    <div id="info-column">WELCOME, {this.state.username} </div>
+                    <div id="info-column">
+                        <div id="headshot-block">
+                            <div id=""></div>
+                        </div>
+                    </div>
+                        <div id="msg-block"></div>
+                        <div id="sched-block2"></div>
+                        <div id="match-block2"></div>
                     <div id="settings-column"></div>
                 </div>
             </div>
