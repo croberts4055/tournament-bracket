@@ -12,38 +12,49 @@
     width: 100%;
     padding: 1% 1%;
     height: auto;
-    overflow: auto;
+    overflow: hidden;
     color: white;
 }
 
 .egf-college, .egf-highschool, .egf-media {
     width: 100%;
+    display: flex;
+    flex-direction: row;
     height: 250px;
     padding: 1% 5%;
+}
+
+.egf-logo-college, .egf-logo-highschool, .egf-logo-media {
+    height: 100%;
+    width: 25%;
 }
 
 .egf-logo-college > img {
     float: left;
     height: 100%;
-    width: 25%;
+    width: 60%;
 }
 
 .egf-logo-highschool > img {
     float: left;
     height: 100%;
-    width: 25%;
+    width: 60%;
 }
 
 .egf-logo-media > img {
     float: left;
     height: 100%;
-    width: 25%;
+    width: 60%;
 }
 
 .egf-info-college, .egf-info-highschool, .egf-info-media {
-    width: auto;
-    float: left;
-    height: 150px;
+    font-family: 'Forza Medium';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    text-align: center;
 }
 
 /* 
@@ -59,6 +70,7 @@
     display: flex;
     width: 100%;
     margin-right: 20px;
+    margin: 2.5%;
     height: 500px;
     align-items: center;
     justify-content: center;
@@ -76,7 +88,7 @@
     display: flex;
     width: 100%;
     background: linear-gradient(lightslategray, lightgray);
-    margin-bottom: 10px;
+    margin: 2.5%;
     height: 230px;
 }
 
@@ -84,7 +96,7 @@
     display: flex;
     width: 100%;
     background: linear-gradient(lightslategray,lightgray);
-    margin-top: 10px;
+    margin: 2.5%;
     height: 230px;
 }
 
@@ -94,7 +106,7 @@
 /*** Schedule Bar  ***/
 .ScheduleBar{
     /* margin: auto; */
-    height: 40px;
+    height: 50px;
     font-family: 'Forza Medium';
     display: flex;
     width: 100%;

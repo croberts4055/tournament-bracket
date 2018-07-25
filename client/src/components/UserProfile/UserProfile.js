@@ -8,9 +8,9 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuth : true,
+            isAuth : false,
             showAuthView : false,
-            username: "Aaron",
+            user: {},
             schedule: [
                 {
                     school1: "CALTECH",
@@ -38,11 +38,35 @@ class UserProfile extends Component {
     // on component did mount, check if user is auth
     // and then set the state variable. 
 
+    componentDidMount(){
+        fetch("http://localhost:3001/users/auth", {
+            credentials: 'include',
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            }        
+        })
+        .then( (response)=> response.json())
+        .then( (response)=> {
+            if(response.user){
+                let current_user = JSON.stringify(response.user);
+                current_user = current_user.slice(1,current_user.length-1); // remove the first and last characters, which are quotes
+                Object.keys(response.user).map(i => {
+                    this.state.user[i] = response.user[i]
+                })
+                this.setState({
+                    isAuth: true
+                })
+            }
+        })
+    }
+
     handleClick(event){
         if(this.state.isAuth){
             this.setState({
                 showAuthView : !this.state.showAuthView
-            }), () => console.log(this.state.showAuthView);
+            })
         }
     }
 
@@ -78,19 +102,19 @@ class UserProfile extends Component {
          return(
         <div className="profile-container">
             <div className="playerinfo-block">
-                <div id="user-profile-image">USERNAME</div>
+                <div id="user-profile-image">{this.state.user.username}</div>
                 <div id="ingame-info">
                 <div id="ingame-text">INGAME PROFILE {this.state.isAuth ? this.renderGear() : null }</div>
                     <ul>
-                        <li>Game played</li>
-                        <li>Role played</li>
-                        <li>IGN</li>
+                        <li>Game played </li>
+                        <li>Role played : {this.state.user.position}</li>
+                        <li>IGN : {this.state.user.ign} </li>
                         <li>Personal Twitch</li>
                     </ul>
                 </div>
                 <div id="player-bio-block">
                     <div id="bio-header">PLAYER PROFILE</div>
-                    <div id="bio">Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti
+                    <div id="bio"> Bio: {this.state.user.bio} Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti
                     Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti
                     Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti</div> 
                 </div>

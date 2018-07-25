@@ -8,7 +8,46 @@ import './Footer.css';
  */
 
 class Footer extends Component{
+
+    constructor(){
+        super();
+        this.state = {
+            loggedIn : false
+        }
+    }
+
+    componentDidMount(){
+        fetch("http://localhost:3001/users/auth", {
+            credentials: 'include',
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            }        
+        })
+        .then( (response)=> response.json())
+        .then ( (response) => {
+            if(response.user){
+                this.setState({
+                    loggedIn : true
+                })
+            }
+            else this.setState({loggedIn: false});
+        })
+    }
+
+
     render(){
+        var link="";
+        var text="";
+        if(this.state.loggedIn){
+            link="/userprofiletest";
+            text="MY SETTINGS";
+        }
+        else {
+            link="/joinegf";
+            text="JOIN EGF";
+        }
         return(
             <div className="footer-container">
                 <div className="egf-links-container">
@@ -18,14 +57,14 @@ class Footer extends Component{
                         <a href="/">PROGRAMS</a>
                     </div>
                     <div className="egf-list-container">
-                        <a href="/joinegf">JOIN EGF</a>
+                        <a href={link}>{text}</a>
                         <a href="/">TEAMS</a>
                         <a href="/">PARENTAL INFO</a>
                     </div>
                     <div className="egf-list-container">
-                        <a href="/userprofiletest">TERMS OF USE</a>
-                        <a href="/">PRIVACY POLICY</a>
-                        <a href="/">COPYRIGHT</a>
+                        <a href="/rulesandcodeofconduct">TERMS OF USE</a>
+                        <a href="/rulesandcodeofconduct">PRIVACY POLICY</a>
+                        <a href="/rulesandcodeofconduct">COPYRIGHT</a>
                     </div>
                 </div>
                 <div className="social-media-links-container">
