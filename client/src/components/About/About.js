@@ -10,10 +10,7 @@ class About extends Component {
             <div>
                 <MyNav url={this.props.location.pathname}/> 
                 <div className="mainDiv">
-                    <div id="splash">
-                    This is the splash/backdrop.
-                    <p>You are on the ABOUT page! Current url is: {this.props.location.pathname}</p>                
-                    </div>
+                    <div id="splash"></div>
                     <div id="caption">
                     <p>
                     In case you missed it, professional competitive gaming is a thing. It's called esports
