@@ -5,8 +5,6 @@ function checkInput() {
   	inputInvalid();
   }
   else {
-	document.getElementById("return_round_one").innerHTML = "sdjsdksjdhskjhskjdhkshdksdjks";
-
   	document.getElementById("return_input_status").innerHTML = "Input OK" + "<br />";
   	start(field_get_teams);
   }
@@ -51,27 +49,43 @@ function createRoundOne(teamSize) {
 		arraySize += Math.pow(2, i);
 	}
 
-	var roundOneArray = [];
 	var index = 0;
+	var leftChildIndex = 0;
+	var rightChildIndex = 0;
+
+	var roundOneArray = [];
 	for (index; index < 3; index++) {
+		leftChildIndex = ((2*index)+1);
+		rightChildIndex = ((2*index)+2);
+		if(leftChildIndex >= arraySize) {
+			leftChildIndex = null;
+			rightChildIndex = null;
+		}
 		var teamObject = {
-			name: index,
+			name: null,
 			status: "WAIT",
-			team1: ((2*index)+1),
-			team2: ((2*index)+2),
+			team1: leftChildIndex,
+			team2: rightChildIndex,
 		}
 		roundOneArray.push(teamObject);
 	}
 
 	var roundOneInitialNames = [100, 103, 101, 102];
 	for (var j = 0; j < roundOneInitialNames.length; j++) {
+		leftChildIndex = ((2*index)+1);
+		rightChildIndex = ((2*index)+2);
+		if(leftChildIndex >= arraySize) {
+			leftChildIndex = null;
+			rightChildIndex = null;
+		}
 		var teamObject = {
 			name: roundOneInitialNames[j],
 			status: "IN PROGRESS",
-			team1: ((2*index)+1),
-			team2: ((2*index)+2),
+			team1: leftChildIndex,
+			team2: rightChildIndex,
 		}
 		roundOneArray.push(teamObject);
+		index++;
 	}
 
 	showRoundOne(roundOneArray, rounds);
@@ -79,13 +93,18 @@ function createRoundOne(teamSize) {
 
 function showRoundOne(array, rounds) {
 	document.getElementById("return_round_one").innerHTML = "";
-	var position = 0;
+	var index = 0;
 	for (var r = 0; r <= rounds; r++) {
-		for (var p = 0; p < Math.pow(2, round); p++) {
-			document.getElementById("return_round_one").innerHTML += array[position].name + "<br />";
-			position++;
+		for (var p = 0; p < Math.pow(2, r); p++) {
+			if(array[index].status == "IN PROGRESS") {
+				document.getElementById("return_round_one").innerHTML += "[" + index + "] Team: " + array[index].name + " (" + array[index].status + ")" + " [" + array[index].team1 + "] [" + array[index].team2 + "]<br />";
+			}
+			else if(array[index].status == "WAIT") {
+				document.getElementById("return_round_one").innerHTML += "[" + index + "] (" + array[index].status + ")" + " [" + array[index].team1 + "] [" + array[index].team2 + "]<br />";
+			}
+			index++;
 		}
-		document.getElementById("return_round_one").innerHTML = "sdjsdksjdhskjhskjdhkshdksdjks";
+		document.getElementById("return_round_one").innerHTML += "---------------------------<br />";
 	}
 }
 
