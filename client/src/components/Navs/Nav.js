@@ -48,6 +48,7 @@ class MyNav extends Component {
                 })
             }
         })
+        
     }
     
     logOutHandler(event){
@@ -88,6 +89,7 @@ class MyNav extends Component {
                             <FormControl type="text" placeholder="SEARCH" />
                             </FormGroup>{' '}
                     </Navbar.Form>
+                    
                     <Nav pullRight>
                     <NavItem eventKey={1} href="/schoolprofile">
                         SCHOOL PROFILE
@@ -151,6 +153,11 @@ class MyNav extends Component {
                                 </FormGroup>{' '}
                         </Navbar.Form>
                         <Nav pullRight>
+                        <NavItem eventKey={1} href="/joinegf">
+                            LOG-IN
+                        </NavItem>
+                        </Nav>
+                        <Nav pullRight>
                         <NavItem eventKey={1} href="/schoolprofile">
                             SCHOOL PROFILE
                         </NavItem>
@@ -183,11 +190,7 @@ class MyNav extends Component {
                                 <MenuItem eventKey={3.3}>Separated link</MenuItem>
                             </NavDropdown>
                         </Nav>
-                        <Nav pullRight>
-                        <NavItem eventKey={1} href="/joinegf">
-                            LOG-IN
-                        </NavItem>
-                        </Nav>
+                        
                         {/* <Nav pullRight>
                             <NavDropdown pullRight eventKey={3} title={"WELCOME, " + this.state.user} id="login-dropdown">
                                 <MenuItem eventKey={3.1}>View My Profile</MenuItem>
