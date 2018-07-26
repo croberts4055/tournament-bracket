@@ -26,6 +26,12 @@ function start(teamSize) {
 function initialize(teamSize) {
 	// roundOne should contain the roundOneArray that has the algorithm to separate the teams and the format of how they play one another
 	var roundOne = createRoundOne(teamSize);
+	var loserBracket = createLoserBracket((teamSize/2));
+}
+
+// this function should take in half of what the user input because half of all participants loses... 1/2 wins, 1/2 loses
+function createLoserBracket(size) {
+
 }
 
 // this function purpose is to create round one, where all participants play another team based on their seed. After this point, everyone will split into two groups, the winners bracket and the losers bracket
@@ -61,8 +67,8 @@ function createRoundOne(teamSize) {
 	// with at least four teams, the tree would require at least an array with size 7, the first three are mock data and the next four are the initial teams
 	var roundOneArray = [];
 	for (index; index < 3; index++) {
-		leftChildIndex = ((2*index)+1);
-		rightChildIndex = ((2*index)+2);
+		leftChildIndex = (2*index)+1;
+		rightChildIndex = (2*index)+2;
 		if(leftChildIndex >= arraySize) {
 			leftChildIndex = null;
 			rightChildIndex = null;
@@ -79,8 +85,8 @@ function createRoundOne(teamSize) {
 	// must be at least 4 teams to participate in double elimination
 	var roundOneInitialNames = [100, 103, 101, 102];
 	for (var j = 0; j < roundOneInitialNames.length; j++) {
-		leftChildIndex = ((2*index)+1);
-		rightChildIndex = ((2*index)+2);
+		leftChildIndex = (2*index)+1;
+		rightChildIndex = (2*index)+2;
 		if(leftChildIndex >= arraySize) {
 			leftChildIndex = null;
 			rightChildIndex = null;
