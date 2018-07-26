@@ -229,5 +229,38 @@ router.patch('/:userId',(req,res,next)=>{
   })
 })
 
+router.put('/auth',(req,res,next)=>{
+  if(!req.user){
+    res.status(401);
+  }
+  console.log(req.user._id);
+  const id = req.user.id;
+  // looping over req.body, dynamically storing all props
+  /**
+   *  EXPECTS A REQ.BODY IN THE FORM OF : 
+   *  [
+   *    {"propName:" prop, "value": val}
+   *   ]
+   */
+  const updateOps = {};
+  for(const ops of req.body){
+    updateOps[ops.propName] = ops.value;
+  }
+  // need to use $set to pass object you want to update it to
+  User.update( {_id: id}, {$set: updateOps})
+  .exec()
+  .then( result => {
+    console.log(result);
+    res.status(200).json(result);
+  })
+  .catch( err => {
+    console.log(err);
+    res.status(500).json({
+      message: "failed to update data."
+    })
+  })
+
+})
+
 
 module.exports = router;

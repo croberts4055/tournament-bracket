@@ -183,6 +183,7 @@
     font-family: 'Forza Medium';
     font-size: 20px;
     width: 100%;
+    padding: 2.5%;
     min-height: inherit;
     border-right-width: 2px;
     border-right-style: solid;
@@ -192,12 +193,57 @@
 #settings-column {
     width: 100%;
     min-height: inherit;
+    padding: 2.5%;
 }
 
 /*  AUTH VIEW STYLING */
+
+.divider {
+    width: 100%;
+    height: 100px;
+}
 
 #headshot-block {
     height: auto;
     display: block;
     width: 100%;
+}
+
+#edit-banner {
+    width: 100%;
+    height: auto;
+    color: #73A744;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #73A744;
+    font-family: 'Forza Medium';
+    font-size: 20px;
+}
+
+.subheader-banner {
+    padding: 2.5%;
+    width: 100%;
+    height: auto;
+    color: white;
+    font-family: 'Forza Medium';
+    font-size: 18px;
+}
+
+#settings-form {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+#userSettings {
+    margin: 2.5%;
+    background-color: #555;
+    border-radius: 0%;
+}
+
+.saveButton {
+    background-color: #73A744;
+    color: white;
+    font-family: 'Forza Medium';
+    margin: 2.5%;
 }

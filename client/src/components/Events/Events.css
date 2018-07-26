@@ -27,6 +27,7 @@
 }
 
 .user-option-location > input {
+    color: black;
     width: 250px;
 }
 
@@ -37,11 +38,19 @@
     margin-bottom: 10px;
 }
 
+.user-option-state > input {
+    color: black;
+}
+
 .user-option-filter {
     width: 20%;
     float: left;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.user-option-filter > input {
+    color: black;
 }
 
 .user-add-event {
