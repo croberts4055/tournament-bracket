@@ -24,12 +24,12 @@ class MyNav extends Component {
         /** Handlers needed : 
          *  Submitting text
          */
-        
+        this.logOutHandler = this.logOutHandler.bind(this);
     }
 
     componentDidMount(){
         var current_user = "";
-        fetch("http://localhost:3001/users/", {
+        fetch("http://localhost:3001/users/auth", {
             // credentials: 'include',
             credentials: 'include',
             method: "get",
@@ -38,17 +38,39 @@ class MyNav extends Component {
                 'Content-Type': 'application/json',
             }        
         })
-        // .then( (response)=> response.json())
+        .then( (response)=> response.json())
         .then( (response)=> {
             if(response.user){
-                current_user = response.user;
+                let current_user = JSON.stringify(response.user.username); 
+                current_user = current_user.slice(1,current_user.length-1); // remove the first and last characters, which are quotes
                 this.setState({
                     user: current_user
-                }), ()=> console.log(response);
+                })
+            }
+        })
+        
+    }
+    
+    logOutHandler(event){
+        fetch("http://localhost:3001/users/auth/logout", {
+            // credentials: 'include',
+            credentials: 'include',
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            }        
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            console.log(response);
+            if(response.message){
+                alert(response.message);
+                window.location.reload();
             }
         })
     }
-  
+
     renderHeaderNav(){
         if(this.state.user){
             return(<div id="HeaderNav">
@@ -67,6 +89,7 @@ class MyNav extends Component {
                             <FormControl type="text" placeholder="SEARCH" />
                             </FormGroup>{' '}
                     </Navbar.Form>
+                    
                     <Nav pullRight>
                     <NavItem eventKey={1} href="/schoolprofile">
                         SCHOOL PROFILE
@@ -82,20 +105,7 @@ class MyNav extends Component {
                     </NavItem>
                     </Nav>
                     <Nav pullRight>
-
                         <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
-
-                        <NavDropdown pullRight eventKey={3} title="FORMS" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
-                            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                            <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                        </NavDropdown>
-                    </Nav>
-                    <Nav pullRight>
-                        <NavDropdown pullRight eventKey={3} title="COLLEGE VARSITY" id="basic-nav-dropdown">
-
                             <MenuItem eventKey={3.1}>Action</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
@@ -105,7 +115,7 @@ class MyNav extends Component {
                     </Nav>
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title="HIGH SCHOOL" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
+                            <MenuItem componentClass={Link} href="/" to="/" eventKey={3.1}>Action</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
                             <MenuItem divider />
@@ -114,10 +124,9 @@ class MyNav extends Component {
                     </Nav>
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title={"WELCOME, " + this.state.user} id="login-dropdown">
-                            <MenuItem eventKey={3.1}>View My Profile</MenuItem>
-                            <MenuItem eventKey={3.2}>Account Settings</MenuItem>
+                            <MenuItem componentClass={Link} href="/userprofiletest" to="userprofiletest" eventKey={3.1}>My Profile</MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Log-out</MenuItem>
+                            <MenuItem onClick={this.logOutHandler}eventKey={3.3}>Log-out</MenuItem>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
@@ -144,6 +153,11 @@ class MyNav extends Component {
                                 </FormGroup>{' '}
                         </Navbar.Form>
                         <Nav pullRight>
+                        <NavItem eventKey={1} href="/joinegf">
+                            LOG-IN
+                        </NavItem>
+                        </Nav>
+                        <Nav pullRight>
                         <NavItem eventKey={1} href="/schoolprofile">
                             SCHOOL PROFILE
                         </NavItem>
@@ -159,20 +173,7 @@ class MyNav extends Component {
                         </Nav>
     
                         <Nav pullRight>
-
                             <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
-
-                            <NavDropdown pullRight eventKey={3} title="FORMS" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavDropdown pullRight eventKey={3} title="COLLEGE VARSITY" id="basic-nav-dropdown">
-
                                 <MenuItem eventKey={3.1}>Action</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>
@@ -189,6 +190,7 @@ class MyNav extends Component {
                                 <MenuItem eventKey={3.3}>Separated link</MenuItem>
                             </NavDropdown>
                         </Nav>
+                        
                         {/* <Nav pullRight>
                             <NavDropdown pullRight eventKey={3} title={"WELCOME, " + this.state.user} id="login-dropdown">
                                 <MenuItem eventKey={3.1}>View My Profile</MenuItem>

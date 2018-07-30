@@ -3,6 +3,7 @@ import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
 import './Join.css';
 import {ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
+import {Redirect} from 'react-router-dom';
 
 class Join extends Component {
     constructor() {
@@ -118,6 +119,7 @@ class Join extends Component {
             if(response.message){
                 alert(response.message);
             }
+            else this.props.history.push("/");
         })
         // .then( (response) => {
         //     if(response._id){
@@ -177,6 +179,7 @@ class Join extends Component {
             if(response.message){
                 alert(response.message);
             }
+            else this.props.history.push("/");
         })
     }
 
@@ -202,7 +205,7 @@ class Join extends Component {
         return(
             <div className="join-egf-form">
                 <h2>WELCOME BACK.</h2>
-                <button className="switchButton"onClick={this.goToLogin}>Sign in instead?</button>
+                <button className="switchButton"onClick={this.goToLogin}>Take Me To Signup.</button>
                 <form className="formBlock" onSubmit={this.handleLogin}>
                     <FormGroup className="textfields">
                         <ControlLabel>Username:</ControlLabel>
@@ -250,7 +253,7 @@ class Join extends Component {
                 </div>
             </div>
             <div className="divider"></div>
-            <button className="switchButton" onClick={this.goToLogin}>Login instead?</button>
+            <button className="switchButton" onClick={this.goToLogin}>Take Me To Login.</button>
             <form onSubmit={this.handleAccountCreate}> 
                 <FormGroup className="textfields">
                     <ControlLabel>Name: </ControlLabel>

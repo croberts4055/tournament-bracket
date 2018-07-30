@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
 import './UserProfile.css';
-import {Button, Glyphicon} from 'react-bootstrap';
+import {Button, Glyphicon, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuth : true,
+            isAuth : false,
             showAuthView : false,
-            username: "Aaron",
+            user: {},
             schedule: [
                 {
                     school1: "CALTECH",
@@ -33,16 +33,93 @@ class UserProfile extends Component {
             ]
         }
         this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.updateSettings = this.updateSettings.bind(this);
     }
     
     // on component did mount, check if user is auth
     // and then set the state variable. 
 
+    componentDidMount(){
+
+        fetch("http://localhost:3001/users/auth", {
+            credentials: 'include',
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            }        
+        })
+        .then( (response)=> response.json())
+        .then( (response)=> {
+            if(response.user){
+                let current_user = JSON.stringify(response.user);
+                current_user = current_user.slice(1,current_user.length-1); // remove the first and last characters, which are quotes
+                Object.keys(response.user).map(i => {
+                    this.state.user[i] = response.user[i]
+                })
+                this.setState({
+                    isAuth: true,
+                    showAuthView: false
+                })
+            }
+        })
+
+        fetch("http://localhost:3001/users", {
+            credentials: 'include',
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            }        
+        })
+        .then( (response)=> response.json())
+        .then( (response)=> {
+            console.log(response);
+        })
+    }
+
+    updateSettings(event){
+        event.preventDefault();
+        var updateProps = [
+            {}
+        ];
+        Object.keys(this.state.user).map( i => {
+            updateProps.push({
+                propName : i,
+                value : this.state.user[i]
+            })
+        })
+
+        fetch("http://localhost:3001/users/auth", {
+            credentials: "include",
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                updateProps
+            })
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            console.log(response);
+        })
+    }
+
+    handleChange(event) {
+        Object.keys(this.state.user).map((val) => {
+            this.state.user[event.target.name] = event.target.value
+        })
+        console.log(this.state.user);
+    }
+
     handleClick(event){
         if(this.state.isAuth){
             this.setState({
                 showAuthView : !this.state.showAuthView
-            }), () => console.log(this.state.showAuthView);
+            })
         }
     }
 
@@ -78,19 +155,19 @@ class UserProfile extends Component {
          return(
         <div className="profile-container">
             <div className="playerinfo-block">
-                <div id="user-profile-image">USERNAME</div>
+                <div id="user-profile-image">{this.state.user.username}</div>
                 <div id="ingame-info">
                 <div id="ingame-text">INGAME PROFILE {this.state.isAuth ? this.renderGear() : null }</div>
                     <ul>
-                        <li>Game played</li>
-                        <li>Role played</li>
-                        <li>IGN</li>
+                        <li>Game played </li>
+                        <li>Role played : {this.state.user.position}</li>
+                        <li>IGN : {this.state.user.ign} </li>
                         <li>Personal Twitch</li>
                     </ul>
                 </div>
                 <div id="player-bio-block">
                     <div id="bio-header">PLAYER PROFILE</div>
-                    <div id="bio">Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti
+                    <div id="bio"> Bio: {this.state.user.bio} Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti
                     Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti
                     Spaghetti Spaghetti Spaghetti Spaghetti Spaghetti</div> 
                 </div>
@@ -131,7 +208,7 @@ class UserProfile extends Component {
                 </div>
                 </div>
             <div className="articles-block">
-                    <div id="article-banner">ARTICLES</div>
+                    <div id="article-banner">FEATURED ARTICLES</div>
                     {this.state.articles.map((item,index)=> {
                         return(
                             <div id="article-block" key={index}>
@@ -153,11 +230,59 @@ class UserProfile extends Component {
                         <div id="headshot-block">
                             <div id=""></div>
                         </div>
+                        <div id="msg-block">hi</div>
+                        <div id="sched-block2">hi</div>
+                        <div id="match-block2">hi</div>
                     </div>
-                        <div id="msg-block"></div>
-                        <div id="sched-block2"></div>
-                        <div id="match-block2"></div>
-                    <div id="settings-column"></div>
+                        
+                    <div id="settings-column">
+                        <div id="edit-banner">EDIT SETTINGS</div>
+                        <div className="subheader-banner">PERSONAL INFO</div>
+                    <form id="settings-form" onSubmit={this.updateSettings}>
+                            <FormGroup controlId="userSettings">
+                                <FormControl 
+                                    type="text"
+                                    name="name"
+                                    placeholder="Name"
+                                    onChange={this.handleChange} />
+                                <FormControl name="state" componentClass="select" placeholder="State" onChange={this.handleChange}>
+                                <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option>
+                                <option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option>
+                                <option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option>
+                                <option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option>
+                                <option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option>
+                                <option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option>
+                                <option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option>
+                                <option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option>
+                                <option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option>
+                                <option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option>
+                                <option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option>
+                                <option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option>
+                                <option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option>
+                                <option value="SD">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option>
+                                <option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option>
+                                <option value="WA">WA</option><option value="WV">WV</option><option value="AL">WI</option>
+                                <option value="AL">WY</option>
+                                </FormControl>
+                                <FormControl type="text"  name="city" placeholder="City" onChange={this.handleChange}/>
+                                <FormControl type="text"  name="zip" placeholder="Zip Code" onChange={this.handleChange}/>
+                                <FormControl type="text"  name="dob" placeholder="Date of Birth" onChange={this.handleChange}/>
+                                <FormControl type="text"  name="email" placeholder="first.last@school.edu" onChange={this.handleChange}/>
+                                <FormControl type="text"  name="phone" placeholder="(000)-000-0000 (Phone)" onChange={this.handleChange}/>
+                            </FormGroup>
+                            <input className="saveButton" type="submit" value="SAVE CHANGES"/>    
+                        </form>
+                        <div className="divider"></div>
+                        <div className="subheader-banner">CHANGE PASSWORD</div>
+                            <form id="change-password" onSubmit={this.updateSettings}>
+                            <FormGroup controlId="userSettings">
+                                <FormControl type="text" name="new_pw" placeholder="NEW PASSWORD" onChange={this.handleChange}/>
+                                <FormControl type="password" name="confirm_pw" placeholder="CONFIRM PASSWORD" onChange={this.handleChange}/>
+                            </FormGroup>
+                            <input className="saveButton" type="submit" value="SAVE CHANGES"/>
+                            </form>
+                    </div>
+                    
                 </div>
             </div>
         );

@@ -57,24 +57,30 @@ passport.use(new LocalStrategy(
 // Display all users in the database - get from database 
 // Chain exec(), then(), catch (). Asynchronous calls, each require 
 // a callback.
-router.get('/',function(req, res, next){
-//  console.log(req.user);
- console.log(req.headers.cookie);
-//  console.log(req.session);
-//  User.find(function(err,users){
-//   res.send(users);
-// });
-  res.end();
-  // if(req.session.passport.user){
-  //   console.log(req.session.passport.user);
-  //   res.send(req.user);
-  // }
+router.get('/',function(req,res,next){
+  User.find(function(err,users){
+    res.send(users);
+  })
+})
+
+router.get('/auth',function(req, res, next){
+  console.log(req.user);
+  if(req.user){
+    console.log(req.user.username);
+    res.json({
+      user: req.user
+    })
+  }
+  else res.status(200).json({
+    message: 'no user currently logged in'
+  })
 });
 
-router.get('/logout',function(req,res){
+router.get('/auth/logout',function(req,res){
   req.logout();
-  console.log(req.user);
-  
+  res.json({
+    message: 'You have been logged out.'
+  });
   // req.flash('success_msg', 'You have been logged out.');
 })
 
@@ -142,13 +148,10 @@ router.post('/signup',function(req,res){
                       subtype: req.body.subtype,
                       name: req.body.name
                     })
-              req.login(user,function(err){
-                if(err) {return next(err);}
-              })
-              passport.authenticate('local');             
               user
               .save()
               .then(result => {
+                passport.authenticate('local');
                 res.status(200).json(result);
                 console.log(result);
               })
@@ -164,9 +167,6 @@ router.post('/signup',function(req,res){
 });
 
 router.post('/login',passport.authenticate('local'), function(req,res){
-  console.log(req.user);
-  console.log(req.isAuthenticated());
-  console.log(req.session);
   res.end();
 });
 
@@ -227,6 +227,39 @@ router.patch('/:userId',(req,res,next)=>{
       message: "failed to update data."
     })
   })
+})
+
+router.put('/auth',(req,res,next)=>{
+  if(!req.user){
+    res.status(401);
+  }
+  console.log(req.user._id);
+  const id = req.user.id;
+  // looping over req.body, dynamically storing all props
+  /**
+   *  EXPECTS A REQ.BODY IN THE FORM OF : 
+   *  [
+   *    {"propName:" prop, "value": val}
+   *   ]
+   */
+  const updateOps = {};
+  for(const ops of req.body){
+    updateOps[ops.propName] = ops.value;
+  }
+  // need to use $set to pass object you want to update it to
+  User.update( {_id: id}, {$set: updateOps})
+  .exec()
+  .then( result => {
+    console.log(result);
+    res.status(200).json(result);
+  })
+  .catch( err => {
+    console.log(err);
+    res.status(500).json({
+      message: "failed to update data."
+    })
+  })
+
 })
 
 
