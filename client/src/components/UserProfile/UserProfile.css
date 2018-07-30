@@ -1,3 +1,12 @@
+/*  General stuff */
+
+.borderless-banner {
+    width: 100%;
+    color: #73A744;
+    font-size: 20px;
+    font-family: 'Forza Medium';
+}
+
 .profile-container {
     min-height: 100vh;
     display: flex;
@@ -142,6 +151,7 @@
 
 #history-banner {
     color: #73A744;
+    width: 100%;
     font-family: 'Forza Medium';
     font-size: 20px;
 }
@@ -245,5 +255,36 @@
     background-color: #73A744;
     color: white;
     font-family: 'Forza Medium';
+    margin: 2.5%;
+}
+
+#match-content > tbody > tr {
+    color: white;
+    
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    font-size: 15px;
+}
+
+#match-content > tbody > tr > td {
+    margin: 2.5%;
+}
+
+#msg-block{ 
+    margin: 2.5%;
+}
+
+#msg-content{
+    margin: 2.5%;
+    font-size: 15px;
+    color: white;
+}
+
+#sched-block2 {
+    margin: 2.5%;
+}
+
+#match-block2 {
     margin: 2.5%;
 }

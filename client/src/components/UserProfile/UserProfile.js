@@ -11,6 +11,13 @@ class UserProfile extends Component {
             isAuth : false,
             showAuthView : false,
             user: {},
+            new_pw: "",
+            confirm_pw: "",
+            messages: [
+                {sender:"Ninja",topic:"Last week"},
+                {sender:"Faker",topic:"League"},
+                {sender:"Tyler",topic:"eSports"}
+            ],
             schedule: [
                 {
                     school1: "CALTECH",
@@ -23,7 +30,11 @@ class UserProfile extends Component {
                     date: Date.now()
                 }
             ],
-            history : ['YALE','BERKELEY','STUYVESANT','M.S.I.T'],
+            history : [
+                {opponent:"HUNTER",date: Date.now()},
+                {opponent:"CORNELL", date: Date.now()},
+                {opponent:"MICROSOFT", date: Date.now()}
+            ],
             articles : [
                 {
                     title: "Video Games are Now Banished from China",
@@ -81,6 +92,8 @@ class UserProfile extends Component {
 
     updateSettings(event){
         event.preventDefault();
+        //Create an array of objects that will be in the form of "propname", "value",
+        //where propname is the attribute of the user, and value is the corresponding val.
         var updateProps = [
             {}
         ];
@@ -93,18 +106,19 @@ class UserProfile extends Component {
 
         fetch("http://localhost:3001/users/auth", {
             credentials: "include",
-            method: "PUT",
+            method: "PATCH",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                updateProps
-            })
+            body: JSON.stringify(updateProps) // pass this array of objects directly to the req.body.
         })
         .then( (response) => response.json())
         .then( (response) => {
-            console.log(response);
+            if(response.message){
+                alert(response.message);
+            }
+            else console.log(response);
         })
     }
 
@@ -112,7 +126,6 @@ class UserProfile extends Component {
         Object.keys(this.state.user).map((val) => {
             this.state.user[event.target.name] = event.target.value
         })
-        console.log(this.state.user);
     }
 
     handleClick(event){
@@ -126,6 +139,16 @@ class UserProfile extends Component {
     getUserData(){
        var url = this.props.location.pathname;
        console.log(url);
+    }
+
+    passwordValidate(){
+        if(this.state.new_pw.length === 0){
+            return null;
+        }
+        else if(this.state.new_pw!==this.state.confirm_pw){
+            return 'error';
+        }
+        return 'success';
     }
 
     renderGear(){
@@ -182,7 +205,7 @@ class UserProfile extends Component {
                 </div>
             </div>
             <div className="matches-block">
-                <div id="match-banner">SCHEDULE</div>
+                <div className="borderless-banner">SCHEDULE</div>
                 {this.state.schedule.map((item,key) => {
                     return (
                     <div key={key} id="match-section">
@@ -197,18 +220,18 @@ class UserProfile extends Component {
                 })}
 
                 <div id="history-section">
-                    <div id="history-banner">MATCH HISTORY</div>
+                    <div className="borderless-banner">MATCH HISTORY</div>
                     {this.state.history.map((item,index)=>{
                         return (
-                            <div key={item} id="history-block">
-                            vs. {item}
+                            <div key={index} id="history-block">
+                            vs. {item.opponent}
                             </div>
                         );
                     })}
                 </div>
                 </div>
             <div className="articles-block">
-                    <div id="article-banner">FEATURED ARTICLES</div>
+                    <div className="borderless-banner">FEATURED ARTICLES</div>
                     {this.state.articles.map((item,index)=> {
                         return(
                             <div id="article-block" key={index}>
@@ -223,16 +246,76 @@ class UserProfile extends Component {
 
     renderAuthView(){
         // access settings page via a gear icon. 
+        var today = new Date();
+         var dd = today.getDate();
+         var mm = today.getMonth()+1; //January is 0!
+         var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd = '0'+dd
+            } 
+            if(mm<10) {
+                mm = '0'+mm
+            } 
+         today = mm + '/' + dd + '/' + yyyy;
+
         return(
             <div className="profile-container">
                 <div className="settings-container">
                     <div id="info-column">
                         <div id="headshot-block">
-                            <div id=""></div>
+                            <div id="headshot-left"></div>
+                            <div id="headshot-right">
+                                <div className="borderless-banner">WELCOME {this.state.user.username},
+                                </div>
+                            </div>
                         </div>
-                        <div id="msg-block">hi</div>
-                        <div id="sched-block2">hi</div>
-                        <div id="match-block2">hi</div>
+                        <div id="msg-block">
+                            <div className="borderless-banner">MESSAGES</div>
+                                {
+                                    this.state.messages.map((item,key) => {
+                                        return (
+                                            <div key={key} id="msg-content">
+                                                From: {item.sender} Topic: {item.topic}
+                                            </div>
+                                        );
+                                    })
+                                }
+                        </div>
+                        <div id="sched-block2">
+                            <div className="borderless-banner">SCHEDULE</div>
+                             {
+                                 this.state.schedule.map((item,key)=> {
+                                     return (
+                                        <div key={key} id="match-section">
+                                        <div key={key+1}id="schedule-section">
+                                        {item.school1} vs {item.school2}
+                                        </div>
+                                        <div key={key+2} id="date-section">
+                                        {today}
+                                        </div>
+                                        </div>
+                                     );
+                                 })
+                             }
+                        </div>
+                        <div id="match-block2">
+                            <div className="borderless-banner">MATCH HISTORY</div>
+                                {
+                                    this.state.history.map((item,key)=> {
+                                        return (
+                                            <table key={key} id="match-content">
+                                            <tbody key={key+1}>
+                                            <tr key={key+2} >
+                                            <td key={key+3}> vs {item.opponent}</td>
+                                            <td key={key+4}> {today}</td>
+                                            <td key={key+5}> {Date.now()} </td>
+                                            </tr>
+                                            </tbody>
+                                            </table>
+                                        );
+                                    })
+                                }
+                        </div>
                     </div>
                         
                     <div id="settings-column">
@@ -266,7 +349,7 @@ class UserProfile extends Component {
                                 </FormControl>
                                 <FormControl type="text"  name="city" placeholder="City" onChange={this.handleChange}/>
                                 <FormControl type="text"  name="zip" placeholder="Zip Code" onChange={this.handleChange}/>
-                                <FormControl type="text"  name="dob" placeholder="Date of Birth" onChange={this.handleChange}/>
+                                <FormControl type="text"  name="dob" placeholder=" MM / DD / YYYY" onChange={this.handleChange}/>
                                 <FormControl type="text"  name="email" placeholder="first.last@school.edu" onChange={this.handleChange}/>
                                 <FormControl type="text"  name="phone" placeholder="(000)-000-0000 (Phone)" onChange={this.handleChange}/>
                             </FormGroup>
@@ -276,8 +359,8 @@ class UserProfile extends Component {
                         <div className="subheader-banner">CHANGE PASSWORD</div>
                             <form id="change-password" onSubmit={this.updateSettings}>
                             <FormGroup controlId="userSettings">
-                                <FormControl type="text" name="new_pw" placeholder="NEW PASSWORD" onChange={this.handleChange}/>
-                                <FormControl type="password" name="confirm_pw" placeholder="CONFIRM PASSWORD" onChange={this.handleChange}/>
+                                <FormControl type="password" name="new_pw" placeholder="NEW PASSWORD" onChange={this.handleChange} validationState={this.passwordValidate()}/>
+                                <FormControl type="password" name="confirm_pw" placeholder="CONFIRM PASSWORD" onChange={this.handleChange} validationState={this.passwordValidate()}/>
                             </FormGroup>
                             <input className="saveButton" type="submit" value="SAVE CHANGES"/>
                             </form>
