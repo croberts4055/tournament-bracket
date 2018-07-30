@@ -5,105 +5,131 @@ function checkInput() {
 	var field_get_teams;
 	var field_get_rounds;
 
-  field_get_teams = document.getElementById("field_get_teams").value;
-  field_get_rounds = document.getElementById("field_get_rounds").value;
+  	field_get_teams = document.getElementById("field_get_teams").value;
+  	field_get_rounds = document.getElementById("field_get_rounds").value;
 
-  document.getElementById("field_return_input_status").innerHTML = "";
+ 	document.getElementById("field_return_input_status").innerHTML = "";
 
-  if ((isNaN(field_get_teams) || field_get_teams < 2 || field_get_teams > 16) || (isNaN(field_get_rounds))) {
-    inputInvalid();
-  }
-  else if(field_get_teams % 2 == 0) { // even number of teams
-  	if(field_get_rounds == field_get_teams-1) {
-  		evenTeamDefaultRounds(field_get_teams);
-  	}
-  	else if(field_get_rounds > field_get_teams-1) {
-  		evenTeamExtraRounds(field_get_teams, field_get_rounds);
-  	}
-  	else if(field_get_rounds < field_get_teams-1) {
-  		evenTeamLessRounds(field_get_teams, field_get_rounds);
+  	if ((isNaN(field_get_teams) || field_get_teams < 2 || field_get_teams > 16) || (isNaN(field_get_rounds))) {
+    	inputInvalid();
   	}
   	else {
-  		inputInvalid();
+		document.getElementById("field_return_input_status").innerHTML = "Input OK";
+		document.getElementById("return_swiss").innerHTML = "";
+		start(field_get_teams, field_get_rounds);
   	}
-  }
-  else if(field_get_teams % 2 != 0) { // odd number of teams
-  	if(field_get_rounds == field_get_teams) {
-  		oddTeamDefaultRounds(field_get_teams);
-  	}
-  	else if(field_get_rounds > field_get_teams) {
-  		oddTeamExtraRounds(field_get_teams, field_get_rounds);
-  	}
-  	else if(field_get_rounds < field_get_teams) {
-  		oddTeamLessRounds(field_get_teams, field_get_rounds);
-  	}
-  	else {
-  		inputInvalid();
-  	}
-  }
-  else {
-  	inputInvalid();
-  }
 }
 
 /* function to return invalid values inputted by user */
 function inputInvalid() {
 	document.getElementById("field_return_input_status").innerHTML = "Teams and Rounds must be a number";
-	document.getElementById("return-round-robin-teams").innerHTML = "";
-	document.getElementById("return-round-robin").innerHTML = "";
+	document.getElementById("return_swiss").innerHTML = "";
 }
 
-/* initializes all team based on odd or even teams, uses integers as their team name */
-function initializeTeams(teamOne, teamTwo, teamCount, evenOrOdd) {
-	var splitTeam = teamCount/2; // define the size of each team
-	var teamNumber = 0; // assign each team a number starting from 0
-	for (var teamIndex = 0; teamIndex < splitTeam; teamIndex++) {
-		teamOne[teamIndex] = teamNumber++;
-	}
-	teamNumber = teamCount-1; // second team must start from the end
-	// if evenOrOdd flag is 1, don't include dummy team
-	if(evenOrOdd == 1) {
-			for (var teamTwoIndex = 0; teamTwoIndex < splitTeam; teamTwoIndex++) {
-				teamTwo[teamTwoIndex] = teamNumber--;
-			}
+function start(teamSize, rounds) {
+	var array = initializeArray(teamSize);
+	play(array, rounds);
+}
 
-			document.getElementById("field_return_input_status").innerHTML = "You've entered an EVEN number of teams.";
+function play(array, rounds) {
+	var r = 0;
+	var nextRound = array;
+	while(r < rounds) {
+		document.getElementById("return_swiss").innerHTML += "<br />";
+		document.getElementById("return_swiss").innerHTML += "Round: " + r + "<br />";
+		nextRound = randomizeWinOrLose(array);
+		nextRound.sort(compareWins);
+		showTeams(nextRound);
+		r++;
 	}
-	else { // include dummy team in first position
-		teamTwo[0] = -1;
-		for (var teamTwoIndex = 1; teamTwoIndex < splitTeam; teamTwoIndex++) {
-			teamTwo[teamTwoIndex] = teamNumber--;
+}
+
+function randomizeWinOrLose(array) {
+	for (let index = 0; index < array.length; index+=2) {
+		if(array[index].name == null) {
+			array[index].losses++;
+			array[index+1].wins++;
 		}
-		document.getElementById("field_return_input_status").innerHTML = "You've entered an ODD number of teams.";
+		else {
+			var random = Math.random() >= 0.5; // returns 0 or 1
+			if(random == 0) { // first index increase win, second increase loss
+				if(array[index].name == null) {
+					array[index].losses++;
+					array[index+1].wins++
+				}
+				else {
+					array[index].wins++;
+					array[index+1].losses++
+				}
+			}
+			else { // first index increase loss, second increase win
+				if(array[index+1].name == null) {
+					array[index+1].losses++;
+					array[index].wins++
+				}
+				else {
+					array[index].losses++;
+					array[index+1].wins++
+				}
+			}
+		}
 	}
-
-	document.getElementById("return-round-robin-teams").innerHTML = "Team One: " + teamOne + "<br />" + "Team Two: " + teamTwo;
+	return array;
 }
 
-function seedTeams(totalTeams){
-    // seeding teams with default seeding/no qualifications   
-    var teams = [];
-    for(let i=0;i<totalTeams;i++){
-        teams.push(
-            {
-                id : i,
-                runningSum: 0,
-                opponent: 0
-            }
-        )
-    }
-   
-    
-
-    
+function adjust(array) {
+	if((array.length%2) != 0) {
+		var obj = {
+			name: null,
+			power: null,
+			wins: null,
+			losses: null,
+		}
+		array.unshift(obj);
+	}
+	return array;
 }
 
-// if(totalTeams >= 9 && totalTeams <= 32){
-//     rounds = 5;
-// }
-// else if(totalTeams >= 33 && totalTeams <= 64){
-//     rounds = 6;
-// }
-// else if(totalTeams >= 65 && totalTeams <= 128){
-//     rounds = 7;
-// }
+function initializeArray(teamSize) {
+	var array = [];
+	for (let index = 0; index < teamSize; index++) {
+		var powerLevel = randomPowerLevel();
+		var obj = {
+			name: index+50,
+			power: powerLevel,
+			wins: 0,
+			losses: 0,
+		}
+		array.push(obj);
+	}
+	array.sort(compareIndexFound); // sorts the array from highest power level to lowest
+	if(array.length%2 != 0) {
+		array = adjust(array);
+	}
+	var adjustedArray = [];
+	for (let j = 0; j < array.length; j++) {
+		adjustedArray[j] = array[j];
+	}
+	showTeams(adjustedArray);
+	return adjustedArray;
+}
+
+function randomPowerLevel() {
+	var randomNumber = 0;
+	randomNumber = Math.floor(Math.random() * 89) + 10;
+	return randomNumber;
+}
+
+function showTeams(array) {
+	for (let i = 0; i < array.length; i++) {
+		document.getElementById("return_swiss").innerHTML += "Team " + array[i].name + ", power level: " + array[i].power + " | W: " + array[i].wins + " L: " + array[i].losses + "<br />";
+	}
+}
+
+function compareIndexFound(a, b) {
+	return b.power - a.power;
+}
+
+function compareWins(a, b) {
+	return (b.wins - a.wins);
+}
