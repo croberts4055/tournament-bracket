@@ -7,11 +7,11 @@
     overflow: auto;
     color: white;
     height: 100vh;
-    margin-bottom: 60px;
 }
 
 .switch-for-views {
-    margin-top: 1.5%;
+    margin-top: .5%;
+    margin-bottom: 1%;
     width: auto;
     display: flex;
     justify-content: center;

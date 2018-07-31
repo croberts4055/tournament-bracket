@@ -5,11 +5,8 @@
     background-color: #333;
     height: auto;
     overflow: auto;
-    margin-top: -5px;
     color: white;
-    height: 100vh;
-    margin-bottom: 60px;
-    padding-right: 0px;
+    height: auto;
 }
 
 /* 
@@ -33,7 +30,7 @@
 .rules-and-regulations-header {
     color: green;
     font-family: 'Forza Medium';
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 .rules-and-regulations-text {
@@ -160,5 +157,6 @@ button {
 }
 
 .description-text {
-    font-size: 1.15em;
+    font-size: 1.25em;
+    margin-bottom: 2.5%;
 }
