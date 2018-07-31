@@ -16,7 +16,6 @@ function inputInvalid() {
 	document.getElementById("return_round_one").innerHTML = "";
 	document.getElementById("return_winners_bracket").innerHTML = "";
 	document.getElementById("return_losers_bracket").innerHTML = "";
-
 }
 
 function start(teamSize) {
