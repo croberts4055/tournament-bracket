@@ -19,19 +19,19 @@ class College extends Component {
             colleges: [
                 {
                     logo: "https://urbanaffairsassociation.org/wp-content/uploads/2017/03/hunter-college-logo.png",
-                    name: "HUNTER COLLEGE",
+                    name: "HUNTER",
                     wins: 12,
                     losses: 3,
                 },
                 {
                     logo: "http://www.baruch.cuny.edu/OCMPA/images/BCstacked_PMS288.jpg",
-                    name: "BARUCH COLLEGE",
+                    name: "BARUCH",
                     wins: 9,
                     losses: 6,
                 },
                 {
                     logo: "http://www.qc.cuny.edu/PublishingImages/QC_PL_WhiteBG_RGB.jpg",
-                    name: "QUEENS COLLEGE",
+                    name: "QUEENS",
                     wins: 7,
                     losses: 8,
                 },
