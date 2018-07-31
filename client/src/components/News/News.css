@@ -1,6 +1,7 @@
 .news-container {
     display: block;
     background-color: #333;
+    font-family: 'Forza Medium';
 }
 
 .main-article-container {
@@ -8,8 +9,8 @@
     width: auto;
     background-color: #333;
     height: auto;
-    font-family: 'Forza Medium';
-    padding: 5px;
+    padding-left: 1%;
+    padding-right: 1%;
     overflow: auto;
     float: left;
     display: block;
@@ -22,7 +23,7 @@
     width: 66.66%;
     height: 300px;
     float: left;
-    border: 2px solid white;
+    border: 1px solid white;
 }
 
 .main-article::after {
@@ -42,7 +43,6 @@
     width: 33.33%;
     margin: 0 auto;
     height: 300px;
-    font-family: 'Forza Medium';
     overflow: auto;
 }
 
@@ -51,7 +51,7 @@
     display: block;
     width: 100%;
     height: 50%;
-    border: 2px solid white;
+    border: 1px solid white;
     background-image: url("");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -70,10 +70,9 @@
 
 .main-info {
     position: relative;
-    font-family: 'Forza Medium';
     font-weight: bold;
     color: white;
-    font-size: 40px;
+    font-size: 2em;
     position: absolute;
     bottom: 1%;
     left: 1%;
@@ -81,20 +80,16 @@
 }
 
 .side-info {
-    font-family: 'Forza Medium';
     font-weight: bold;
     color: white;
-    font-size: 20px;
+    font-size: 1.5em;
     position: absolute;
     bottom: 1%;
     left: 1%;
     z-index: 1;
 }
 
-/* TODO */
-
 .sub-info {
-    font-family: 'Forza Medium';
     font-weight: bold;
     color: white;
     font-size: 15px;
@@ -105,7 +100,6 @@
 }
 
 .sub-info-big {
-    font-family: 'Forza Medium';
     font-weight: bold;
     color: white;
     font-size: 20px;
@@ -120,19 +114,15 @@
     width: 100%; 
     background-color: #333;
     height: auto;
-    font-family: 'Forza Medium';
-    padding: 5px;
     overflow: auto;
     float: left;
     display: block;
-    padding-left: 20%;
-    padding-right: 20%;
-    border: 2px solid white;
+    padding-left: 10%;
+    padding-right: 10%;
     margin-bottom: 1%;
 }
 
 .top-sub-articles {
-    background-color: blueviolet;
     width: 100%;
 }
 
@@ -140,7 +130,6 @@
     position: relative;
     width: 33.33%;
     height: 150px;
-    border: 2px solid white;
     background-image: url("");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -163,7 +152,7 @@
     position: relative;
     width: 66.66%;
     height: 150px;
-    border: 2px solid white;
+    border: 1px solid white;
     background-image: url("");
     background-size: 100% 100%;
     float: left;
@@ -183,7 +172,6 @@
 }
 
 .bottom-sub-articles {
-    background-color: blue;
     width: 100%;
     float: left;
 }
@@ -193,8 +181,7 @@
     float: left;
     width: 33.33%;
     height: 150px;
-    border-left: 1.5px solid white;
-    border-right: 1.5px solid white;
+    border: 1px solid white;
 }
 
 .bottom-sub-article-small::after {
@@ -216,14 +203,13 @@ img {
 
 .list-articles {
     display: block;
-    width: 75%;
+    width: 100%;
     margin: 0 auto;
-    background-color: #333;
+    padding-left: 15%;
+    padding-right: 15%;
     height: auto;
-    font-family: 'Forza Medium';
     overflow: auto;
-    border: 2px solid white;
-    margin-bottom: 4.25%;
+    margin-bottom: 1%;
 }
 
 .list-article-container {
@@ -231,11 +217,7 @@ img {
     float: left;
     width: 100%;
     height: 150px;
-    /* border: 2px solid white; */
-    border-left: 1.5px solid white;
-    border-right: 1.5px solid white;
-    border-top: 1.5px solid white;
-    border-bottom: 1.5px solid white;
+    border: 1px solid white;
 }
 
 .list-article-container::after {
@@ -251,10 +233,9 @@ img {
 }
 
 .list-article-info {
-    font-family: 'Forza Medium';
     font-weight: bold;
     color: white;
-    font-size: 12px;
+    font-size: 1.5em;
     position: absolute;
     bottom: 1%;
     left: 1%;

@@ -124,7 +124,7 @@ class News extends Component {
                         <div className="main-info">
                             {this.state.articles[0].title}
                             <br />
-                            BY {this.state.articles[0].author} | {this.state.articles[0].month} {this.state.articles[0].day}, {this.state.articles[0].year}
+                            By {this.state.articles[0].author} | {this.state.articles[0].month} {this.state.articles[0].day}, {this.state.articles[0].year}
                         </div>
                     </div>
                     <div className="side-article-container">
@@ -133,7 +133,7 @@ class News extends Component {
                             <div className="side-info">
                                 {this.state.articles[1].title}
                                 <br />
-                                BY {this.state.articles[1].author} | {this.state.articles[1].month} {this.state.articles[1].day}, {this.state.articles[1].year}
+                                By {this.state.articles[1].author} | {this.state.articles[1].month} {this.state.articles[1].day}, {this.state.articles[1].year}
                             </div>
                         </div>
                         <div className="side-article">
@@ -141,7 +141,7 @@ class News extends Component {
                             <div className="side-info">
                                 {this.state.articles[2].title}
                                 <br />
-                                BY {this.state.articles[2].author} | {this.state.articles[2].month} {this.state.articles[2].day}, {this.state.articles[2].year}
+                                By {this.state.articles[2].author} | {this.state.articles[2].month} {this.state.articles[2].day}, {this.state.articles[2].year}
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ class News extends Component {
                             <div className="sub-info">
                                 {this.state.articles[3].title}
                                 <br />
-                                BY {this.state.articles[3].author} | {this.state.articles[3].month} {this.state.articles[3].day}, {this.state.articles[3].year}
+                                By {this.state.articles[3].author} | {this.state.articles[3].month} {this.state.articles[3].day}, {this.state.articles[3].year}
                             </div>
                         </div>
                         <div className="top-sub-article-big">
@@ -161,7 +161,7 @@ class News extends Component {
                             <div className="sub-info-big">
                                 {this.state.articles[4].title}
                                 <br />
-                                BY {this.state.articles[4].author} | {this.state.articles[4].month} {this.state.articles[4].day}, {this.state.articles[4].year}
+                                By {this.state.articles[4].author} | {this.state.articles[4].month} {this.state.articles[4].day}, {this.state.articles[4].year}
                             </div>
                         </div>
                     </div>
@@ -171,7 +171,7 @@ class News extends Component {
                             <div className="sub-info">
                                 {this.state.articles[5].title}
                                 <br />
-                                BY {this.state.articles[5].author} | {this.state.articles[5].month} {this.state.articles[5].day}, {this.state.articles[5].year}
+                                By {this.state.articles[5].author} | {this.state.articles[5].month} {this.state.articles[5].day}, {this.state.articles[5].year}
                             </div>
                         </div>
                         <div className="bottom-sub-article-small">
@@ -179,7 +179,7 @@ class News extends Component {
                             <div className="sub-info">
                                 {this.state.articles[6].title}
                                 <br />
-                                BY {this.state.articles[6].author} | {this.state.articles[6].month} {this.state.articles[6].day}, {this.state.articles[6].year}
+                                By {this.state.articles[6].author} | {this.state.articles[6].month} {this.state.articles[6].day}, {this.state.articles[6].year}
                             </div>
                         </div>
                         <div className="bottom-sub-article-small">
@@ -187,7 +187,7 @@ class News extends Component {
                             <div className="sub-info">
                                 {this.state.articles[7].title}
                                 <br />
-                                BY {this.state.articles[7].author} | {this.state.articles[7].month} {this.state.articles[7].day}, {this.state.articles[7].year}
+                                By {this.state.articles[7].author} | {this.state.articles[7].month} {this.state.articles[7].day}, {this.state.articles[7].year}
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@ class News extends Component {
                                     <div className="list-article-info">
                                         {this.state.articles[i].title}
                                         <br />
-                                        BY {this.state.articles[i].author} | {this.state.articles[i].month} {this.state.articles[i].day}, {this.state.articles[i].year}
+                                        By {this.state.articles[i].author} | {this.state.articles[i].month} {this.state.articles[i].day}, {this.state.articles[i].year}
                                     </div>
                             </div>
                         );

@@ -1,11 +1,11 @@
 .college-region {
     width: 100%;
-    height: 200px;
+    height: auto;
     margin: 0 auto;
     background-color: #333;
     height: auto;
     font-family: 'Forza Medium';
-    font-size: 30px;
+    font-size: 2.5em;
     color: white;
     display: flex;
     justify-content: center;
@@ -15,8 +15,10 @@
 
 .block-Div {
     width: 100%;
-    height: 200px;
-    margin: 0 auto;
+    height: auto;
+    margin: 0 0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
     background-color: #333;
     height: auto;
     font-family: 'Forza Medium';
@@ -31,42 +33,32 @@
 
 .college-container {
     width: 100%;
-    margin-bottom: 1%;
+    padding: 1% 0%;
 }
 
 .college-image {
-    height: 150px;
-    width: 25%;
+    min-width: 25%;
+    width: 35%;
     background-image: url("");
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .college-name {
-    height: 150px;
-    width: 20%;
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 25%;
 }
 
 .college-standings {
-    width: 35%;
-    height: 150px;
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 20%;
 }
 
 .college-wl-stats {
     width: 20%;
+}
+
+.college-image, .college-name, .college-standings, .college-wl-stats {
     height: 150px;
     float: left;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0% 1%;
 }
