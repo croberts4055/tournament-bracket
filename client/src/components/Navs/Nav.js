@@ -222,7 +222,7 @@ class MyNav extends Component {
     }
 
     renderSecondaryNav(){
-        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule" || this.props.url==="/standings"){
+        if(this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule" || this.props.url==="/standings" || this.props.url ==="/bracket"){
           return(
             <div className="SecondaryNav">
                 <div id="endBlock"></div>
@@ -246,7 +246,7 @@ class MyNav extends Component {
 
     renderNewsNav(){
         if(this.props.url==="/rules" || this.props.url === "/news" ||
-            this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule" || this.props.url==="/standings"){
+            this.props.url==="/statistics" || this.props.url==="/vods" || this.props.url==="/schedule" || this.props.url==="/standings" || this.props.url ==="/bracket"){
             return (
         <div className="NewsNavContainer">
             <Navbar.Form id="selectionTools" pullRight>
@@ -262,11 +262,12 @@ class MyNav extends Component {
                     </FormGroup>      
                 </Navbar.Form>
             <Nav bsStyle="pills" justified activekey={1}>
-                <NavItem eventKey={1.1} href="/standings">STANDINGS</NavItem>
-                <NavItem eventKey={1.2} href="/statistics">STATISTICS</NavItem>
-                <NavItem eventKey={1.3} href="/schedule">SCHEDULE</NavItem>
-                <NavItem eventKey={1.4} href="/vods">VODS</NavItem>
-                <NavItem eventKey={1.5} href="/rulesandcodeofconduct">RULES</NavItem> 
+                 <NavItem eventKey={1.1} href="/bracket">BRACKET</NavItem>
+                <NavItem eventKey={1.2} href="/standings">STANDINGS</NavItem>
+                <NavItem eventKey={1.3} href="/statistics">STATISTICS</NavItem>
+                <NavItem eventKey={1.4} href="/schedule">SCHEDULE</NavItem>
+                <NavItem eventKey={1.5} href="/vods">VODS</NavItem>
+                <NavItem eventKey={1.6} href="/rulesandcodeofconduct">RULES</NavItem> 
             </Nav>
 
         </div>

@@ -17,12 +17,16 @@ import RulesAndCodeOfConduct from './components/RulesAndCodeOfConduct/RulesAndCo
 import Vods from './components/Vods/Vods';
 import SchoolProfile from './components/SchoolProfile/SchoolProfile';
 import UserProfile from './components/UserProfile/UserProfile';
+import Bracket from './components/Bracket/Bracket';
+import TournamentForm from './components/Tournament/TournamentForm';
 import Tournament from './components/Tournaments/Tournament';
 
 ReactDOM.render(
     <BrowserRouter>
     <div>
         <Switch>
+            <Route path="/tournamentform" component={TournamentForm} />
+            <Route path="/bracket" component={Bracket} />
             <Route path="/tournaments" component={Tournament} />
             <Route path="/userprofiletest" component={UserProfile} />
             <Route path="/statistics" component={Statistics} />
