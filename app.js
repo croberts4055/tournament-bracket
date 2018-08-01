@@ -13,12 +13,17 @@ const usersRouter = require('./api/routes/users');
 const matchRouter = require('./api/routes/matches');
 const schoolRouter = require('./api/routes/schools');
 const articlesRouter = require('./api/routes/articles');
+const mailRouter = require('./api/routes/mailer');
+const tourneyRouter = require('./api/routes/tournament')
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const fs = require('fs');
+const nodemailer = require('nodemailer');
 
 const app = express();
+
+
 
 var whitelist = ['http://localhost:3000'];
 var corsOptions = {
@@ -73,7 +78,8 @@ app.use('/users', usersRouter);
 app.use('/articles',articlesRouter);
 app.use('/matches',matchRouter);
 app.use('/schools',schoolRouter);
-
+app.use('/mailer',mailRouter);
+app.use('/tournament',tourneyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

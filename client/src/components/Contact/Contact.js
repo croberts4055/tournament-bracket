@@ -37,6 +37,28 @@ class Contact extends Component {
                 flag = true;
             }
         })
+        if(flag){
+            return;
+        }
+        fetch("http://localhost:3001/mailer",{
+            method: 'post',
+            headers: {
+                'Accept' : 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: this.state.email,
+                subject: this.state.subject,
+                text: "Name: " +this.state.name + "\n" + "I am a: " + this.state.title + "\n" + "Organization: " + this.state.organization + "\n" +
+                "Location: " + this.state.location + "\n" + "Body: " + this.state.message
+            })
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            if(response.message){
+                console.log(response.message);
+            }
+        })
     }
 
     messageValidate(){
