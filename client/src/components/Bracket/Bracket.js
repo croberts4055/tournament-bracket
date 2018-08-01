@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 import TeamInfo from './TeamInfo';
+import MyNav from '../Navs/Nav';
+import Footer from '../Footer/Footer';
+
+import './Bracket.css';
 
 const mockTeams = [
   {name: 'Cough Drops', points: '74'},
@@ -53,16 +57,20 @@ class Bracket extends Component {
 
 	render() {
 		return(
-			<div className="bracket-container">
-				<h1>Tournament Bracket Homepage</h1>
-				<div className="tournament-bracket-container">
-					{tableHeaders}
-					{this.renderTeams()}
+			<div className="class-bracket">
+				<MyNav/>
+				<div className="bracket-container">
+					<h1>Tournament Bracket Homepage</h1>
+					<div className="tournament-bracket-container">
+						{tableHeaders}
+						{this.renderTeams()}
+					</div>
+					<h4>Total Teams:</h4>
+						{this.props.teams}
+					<h4>Total Rounds:</h4>
+						{this.props.totalRounds}
 				</div>
-				<h4>Total Teams:</h4>
-					{this.props.teams}
-				<h4>Total Rounds:</h4>
-					{this.props.totalRounds}
+				<Footer />
 			</div>
 		);
 	}
