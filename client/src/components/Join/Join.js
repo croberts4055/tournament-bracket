@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
 import './Join.css';
-import {ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
+import {Alert, ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 
 class Join extends Component {
@@ -22,7 +22,6 @@ class Join extends Component {
                 fan: false,
                 schooladminm: false
             },
-            loginToggled: false,
             name: "",
             userid: "",
             username: "",
@@ -31,10 +30,16 @@ class Join extends Component {
             ign: "",
             email: "",
             school: "",
-            team: ""
+            team: "",
+            loginToggled: false,
+            alert : {
+                show: false,
+                text: "",
+                type: ""
+            }
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleAccountCreate = this.handleAccountCreate.bind(this);
+        this.handleSignup = this.handleSignup.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleHighschoolChecked = this.handleHighschoolChecked.bind(this);
         this.handleCollegeChecked = this.handleCollegeChecked.bind(this);
@@ -42,8 +47,18 @@ class Join extends Component {
         this.passwordValidate = this.passwordValidate.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleDismiss = this.handleDismiss.bind(this);
     }
-    
+
+    handleDismiss(){
+        this.setState({
+            alert : { show: false}
+        })
+        if(this.state.alert.type === "success"){
+            this.props.history.push("/");
+        }
+    }
+
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
@@ -101,23 +116,29 @@ class Join extends Component {
 
     handleLogin(event) {
         event.preventDefault();
+        let formattedUser = this.state.username.trim();
         fetch("http://localhost:3001/users/login", {
             credentials: 'include',
-            // credentials: 'same-origin',
             method: "post",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },   
+            },
         body: JSON.stringify({
-            username: this.state.username,
+            username: formattedUser,
             password: this.state.password
             })
         })
         // .then( (response) => response.json())
         .then( (response )=> {
             if(response.message){
-                alert(response.message);
+                this.setState({
+                    alert : {
+                        show: true,
+                        type: "danger",
+                        text: response.message
+                    }
+                })
             }
             else this.props.history.push("/");
         })
@@ -145,20 +166,39 @@ class Join extends Component {
     }
 
 
-    handleAccountCreate(event) {
+    handleSignup(event) {
         // refactor later to make sure that the information is posted in an efficient way
         // make use of looping to auto store the info that you need 
         event.preventDefault();
-        let caseInsensitiveEmail = this.state.email.toLowerCase();
+        let formattedEmail = this.state.email.trim();
+        let formattedUser = this.state.username.trim();
+        let formattedName = this.state.name.trim();
+        formattedEmail = this.state.email.toLowerCase();
+        
+        formattedName.toLowerCase();
+
         if(this.state.password !== this.state.confirmpassword){
-            alert("Provided passwords do not match.");
+            this.setState({
+                alert: {
+                    show: true,
+                    text: "Your passwords don't match. Try re-typing them again.",
+                    type: "warning"
+                }
+            })
             return;
         }
-        if(!this.state.email.includes("@")){
-            alert("Invalid e-mail address.");
+        if(!this.state.email.includes("@") || !this.state.email.includes(".")){
+            this.setState({
+                alert: {
+                    show: true,
+                    text: "That's an invalid e-mail. Please use a fully qualified e-mail address!",
+                    type: "warning"
+                }
+            })
+            return;
         }
         fetch("http://localhost:3001/users/signup", {
-            credentials: 'same-origin',
+            credentials: 'include',
             method: "post",
             headers: {
                 'Accept': 'application/json',
@@ -166,20 +206,36 @@ class Join extends Component {
             },
             body: JSON.stringify({
                 locked: this.state.locked,
-                email : caseInsensitiveEmail,
-                username: this.state.username,
+                email : formattedEmail,
+                username: formattedUser,
                 password: this.state.password,
                 type: this.state.type,
                 subtype: this.state.subtype,
-                name: this.state.name
+                name: formattedName
             })
         })
         .then( (response) => response.json())
         .then( (response )=> {
             if(response.message){
-                alert(response.message);
+                this.setState({
+                    alert: {
+                        show: true,
+                        text: response.message,
+                        type: "danger"
+                    }
+                })
             }
-            else this.props.history.push("/");
+            else {
+                this.setState({
+                    alert : {
+                        show: true,
+                        text: "Thanks for joining! A confirmation e-mail has been sent to " + this.state.email + ". You will be redirected in 5 seconds!",
+                        type: "success"
+                    }
+                })
+                setTimeout( () => {this.props.history.push("/")}, 5000);
+                
+            }
         })
     }
 
@@ -201,12 +257,25 @@ class Join extends Component {
         })
     }
 
+    renderAlert(){
+        return(
+            <div className="alert">
+            <Alert bsStyle={this.state.alert.type} onDismiss={this.handleDismiss}>
+                    <p>{this.state.alert.text}</p>
+            </Alert>
+            </div>
+        );
+    }
+
     renderLogin(){
         return(
             <div className="join-egf-form">
                 <h2>WELCOME BACK.</h2>
                 <button className="switchButton"onClick={this.goToLogin}>Take Me To Signup.</button>
                 <form className="formBlock" onSubmit={this.handleLogin}>
+
+                {this.state.alert.show ? this.renderAlert() : null}
+
                     <FormGroup className="textfields">
                         <ControlLabel>Username:</ControlLabel>
                         <FormControl 
@@ -254,7 +323,10 @@ class Join extends Component {
             </div>
             <div className="divider"></div>
             <button className="switchButton" onClick={this.goToLogin}>Take Me To Login.</button>
-            <form onSubmit={this.handleAccountCreate}> 
+            <form onSubmit={this.handleSignup}> 
+
+            {this.state.alert.show ? this.renderAlert() : null}
+
                 <FormGroup className="textfields">
                     <ControlLabel>Name: </ControlLabel>
                     <FormControl
@@ -291,12 +363,14 @@ class Join extends Component {
                         onChange = {this.handleChange} />
                 </FormGroup>
                 <input className="submitButton" type="submit" value="SIGN UP"/>
+        
             </form>
            
         </div>
         );
     }
 
+    
     
 
     render() {

@@ -22,6 +22,11 @@
     overflow: auto;
 }
 
+.alert {
+    position: relative;
+    width: 100%;
+}
+
 .submitButton {
     border-radius: 15%;
     color: white;

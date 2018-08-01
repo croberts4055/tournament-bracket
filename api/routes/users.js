@@ -37,7 +37,11 @@ passport.use(new LocalStrategy(
       if(!user){
         return done(null, false, {message: 'Incorrect username.'});
       }
-  
+      
+      if(user.locked){
+        return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
+      }
+      
       User.comparePassword(password,user.password,function(err,match){
         if(err) throw err;
         if(match){
@@ -136,9 +140,8 @@ router.post('/signup',function(req,res){
               user
               .save()
               .then(result => {
-                passport.authenticate('local');
                 res.status(200).json(result);
-                console.log(result);
+                // console.log(result);
               })
               .catch(err => {
                 console.log(err);

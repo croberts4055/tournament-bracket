@@ -106,7 +106,7 @@ class MyNav extends Component {
                     </Nav>
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
-                            <MenuItem eventKey={3.1}>Action</MenuItem>
+                            <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
                             <MenuItem divider />
@@ -115,7 +115,7 @@ class MyNav extends Component {
                     </Nav>
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title="HIGH SCHOOL" id="basic-nav-dropdown">
-                            <MenuItem componentClass={Link} href="/" to="/" eventKey={3.1}>Action</MenuItem>
+                        <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
                             <MenuItem divider />
@@ -174,7 +174,7 @@ class MyNav extends Component {
     
                         <Nav pullRight>
                             <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
+                                <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>
                                 <MenuItem divider />
@@ -183,7 +183,7 @@ class MyNav extends Component {
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown pullRight eventKey={3} title="HIGH SCHOOL" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
+                                <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>
                                 <MenuItem divider />

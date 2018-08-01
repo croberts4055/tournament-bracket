@@ -46,7 +46,7 @@ var userSchema = new Schema({
     name: {type: String, required: true},
     ign: {type: String},
     gender: {type: String, enum: ['Male','Female']},
-    dob: {type: Number }
+    dob: {type: String }
 
   }); 
   

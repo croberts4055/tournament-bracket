@@ -43,10 +43,10 @@
     background:#333;
     color:white;
     border-color: white;
-    line-height: 30px;
+    /* line-height: 30px; */
     font-family: 'Forza Medium';
     font-size: 12px;
-    border-radius: 5%;
+    border-radius: 0%;
     height: 50%;
 }
 
