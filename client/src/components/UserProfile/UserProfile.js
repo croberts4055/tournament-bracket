@@ -151,12 +151,6 @@ class UserProfile extends Component {
         return 'success';
     }
 
-    renderGear(){
-        return(
-                <Glyphicon onClick={this.handleClick} glyph="cog"/>
-        );
-    }
-
     renderVisitorView(){
         /* if isAuth - render the gear icon
          if(this.state.isAuth){
@@ -180,7 +174,7 @@ class UserProfile extends Component {
             <div className="playerinfo-block">
                 <div id="user-profile-image">{this.state.user.username}</div>
                 <div id="ingame-info">
-                <div id="ingame-text">INGAME PROFILE {this.state.isAuth ? this.renderGear() : null }</div>
+                <div id="ingame-text">INGAME PROFILE {this.state.isAuth ? <Glyphicon onClick={this.handleClick} glyph="cog"/> : null }</div>
                     <ul>
                         <li>Game played </li>
                         <li>Role played : {this.state.user.position}</li>
