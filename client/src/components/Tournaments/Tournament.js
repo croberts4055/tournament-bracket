@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
 import './Tournament.css';
-import {Col,Form,Button,FormGroup, ControlLabel, Alert, FormControl, Radio, Checkbox, Card} from 'react-bootstrap';
+import {Panel,Modal,Col,Form,Button,FormGroup, ControlLabel, Alert, FormControl, Radio, Checkbox, Card} from 'react-bootstrap';
 
 class Tournament extends Component {
     constructor(){
@@ -18,7 +18,8 @@ class Tournament extends Component {
                 roundRobin: false
             },
             rounds: 32,
-            participants: []
+            participants: [],
+            tournaments: []
         }
         this.goToCreate = this.goToCreate.bind(this);
         this.goBack = this.goBack.bind(this);
@@ -26,7 +27,24 @@ class Tournament extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // getData();
+    getTournaments(){
+        fetch("http://localhost:3001/tournament", {
+            credentials: 'include',
+            method: "get",
+            headers: {
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then( (response) => response.json())
+        .then( (response) => {
+            if(response){
+                this.setState({
+                    tournaments: response
+                })
+            }
+        })
+    }
 
     handleChange(event){
         event.preventDefault();
@@ -73,6 +91,8 @@ class Tournament extends Component {
 
     componentDidMount(){
 
+        this.getTournaments();
+
         this.setState({
             showCreateView: false
         })
@@ -93,15 +113,38 @@ class Tournament extends Component {
                 })
             }
         })
-    }  
-    
+
+    }   
+
+
     renderSpectatorView(){
+
+        var currentTournaments = this.state.tournaments;
         return(
-            <div className="page-wrapper">
-                            {/* BOOTSTRAP MODAL */}
+            <div className="page-wrapper">                  
             {this.state.isAuth ? <Button onClick={this.goToCreate} bsStyle="primary">Create Tournament</Button> : null}
+            <div className="tournament-wrapper">
+                     { 
+                         currentTournaments.map((tourney,index) => {
+                             return(
+                                <Panel key={index}>
+                                    <Panel.Heading>
+                                        <Panel.Title>{tourney.title}</Panel.Title>
+                                    </Panel.Heading>
+                                        <Panel.Body>{tourney.game}</Panel.Body>
+                                </Panel> 
+                             );
+                         })
+                     }
+            </div>
             </div>
         );
+    }
+
+    renderTournaments(){
+        var currentTournaments = this.state.tournaments;
+        console.log("entered");
+
     }
 
     renderCreateView(){

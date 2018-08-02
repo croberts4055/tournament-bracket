@@ -4,6 +4,18 @@ const express = require('express'),
     Schema = mongoose.Schema,
     Tournament = require('../models/tournament');
 
+router.get('/',function(req,res){
+    Tournament.find({},function(err,tournaments){
+        if(err) {
+            res.status(404); 
+            console.log(err);
+        }
+        else {
+            res.send(tournaments);
+        }
+    })
+})
+
 
 router.post('/create',function(req,res){
     Tournament.find({title: req.body.title},function(err,match){
