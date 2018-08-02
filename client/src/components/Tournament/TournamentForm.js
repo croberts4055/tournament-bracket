@@ -10,15 +10,31 @@ class TournamentForm extends Component {
         super(props);
 
         this.state = {
-            value: ''
+            title: '',
+            description: '',
+            game: '',
         };
     
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     handleSubmit(event) {
         alert('form submitted');
         event.preventDefault();
+    }
+
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSelect(eventKey, event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     render() {
@@ -30,12 +46,41 @@ class TournamentForm extends Component {
                         <div className="form-header">
                             TOURNAMENT FORM
                         </div>
-                        <form className="form" onSubmit={this.handleSubmit}>
-                            {/* School Name will be queried through the database */}
-                            School Name:
+
+                        <form className="form-body" onSubmit={this.handleSubmit}>
+
+                            <div className="section">
+                                <div className="title-container">
+                                    Title
+                                </div>
+                                <input type="text" name="title" placeholder="Tournament title..." value={this.state.title} onChange={this.handleChange}/>
+                            </div>
+
+                            <div className="section">
+                                <div className="title-container">
+                                    Description
+                                </div>
+                                <input type="text" name="description" placeholder="Tournament description..." value={this.state.description} onChange={this.handleChange}/>
+                            </div>
+
+                            <div className="section">
+                                <div className="title-container">
+                                    Game
+                                </div>
+                                <ButtonToolbar>
+                                    <DropdownButton title={this.state.game} onSelect={this.handleSelect}>
+                                        <MenuItem eventKey="1" name="game" value="League Of Legends">League Of Legends</MenuItem>
+                                        <MenuItem eventKey="2" name="game" value="Overwatch">Overwatch</MenuItem>
+                                        <MenuItem eventKey="3" name="game" value="Hearthstone">Hearthstone</MenuItem>
+                                        <MenuItem eventKey="4" name="game" value="Dota 2">Dota 2</MenuItem>
+                                    </DropdownButton>
+                                </ButtonToolbar>
+                            </div>
+                    
+                            <label for="school-name-label">SCHOOL NAME</label>
                             <ButtonToolbar>
-                                <DropdownButton title="Select School" id="dropdown-size-medium">
-                                    <MenuItem eventKey="1">School 1</MenuItem>
+                                <DropdownButton title={this.state.schoolTitle} id="dropdown-size-medium" onSelect={this.handleSelect}>
+                                    <MenuItem eventKey="1" value="hello">School 1</MenuItem>
                                     <MenuItem eventKey="2">School 2</MenuItem>
                                     <MenuItem eventKey="3">School 3</MenuItem>
                                     <MenuItem eventKey="4">School 4</MenuItem>
