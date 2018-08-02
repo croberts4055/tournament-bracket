@@ -40,7 +40,7 @@ class Contact extends Component {
         if(flag){
             return;
         }
-        fetch("http://localhost:3001/mailer",{
+        fetch("http://localhost:3001/mailer/contact",{
             method: 'post',
             headers: {
                 'Accept' : 'application/json',

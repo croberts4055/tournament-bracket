@@ -24,7 +24,7 @@ myModel.findByIdAndRemove(1,(function(err){
 }));
 
 Clear database 
- User.remove({},function(err){
+User.remove({},function(err){
    if(err) console.log(err);
  })
 
@@ -65,6 +65,7 @@ router.get('/',function(req,res,next){
   User.find(function(err,users){
     res.send(users);
   })
+  
 })
 
 router.get('/auth',function(req, res, next){
@@ -130,6 +131,7 @@ router.post('/signup',function(req,res){
             const user = new User({
                       _id: new mongoose.Types.ObjectId(),
                       locked : req.body.locked,
+                      token : req.body.token,
                       email: req.body.email,
                       username: req.body.username,
                       password: hash,

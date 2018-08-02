@@ -4,6 +4,8 @@ import Footer from '../Footer/Footer';
 import './Join.css';
 import {Alert, ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
+const cryptoRandomString = require('crypto-random-string');
+
 
 class Join extends Component {
     constructor() {
@@ -165,18 +167,29 @@ class Join extends Component {
         })
     }
 
-
-    handleSignup(event) {
-        // refactor later to make sure that the information is posted in an efficient way
-        // make use of looping to auto store the info that you need 
-        event.preventDefault();
-        let formattedEmail = this.state.email.trim();
-        let formattedUser = this.state.username.trim();
-        let formattedName = this.state.name.trim();
-        formattedEmail = this.state.email.toLowerCase();
+    sendConfirmationMail(myEmail,myToken){
         
-        formattedName.toLowerCase();
+        fetch("http://localhost:3001/mailer/confirmation",{
+            credentials: 'include',
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: myEmail,
+                token: myToken
+            })
+        })
+        .then((response)=> response.json())
+        .then((response)=> {
+            if(response.message){
+                alert(response.message);
+            }
+        })
+    }
 
+    isValidSubmission(){
         if(this.state.password !== this.state.confirmpassword){
             this.setState({
                 alert: {
@@ -185,9 +198,9 @@ class Join extends Component {
                     type: "warning"
                 }
             })
-            return;
+            return false;
         }
-        if(!this.state.email.includes("@") || !this.state.email.includes(".")){
+        else if(!this.state.email.includes("@") || !this.state.email.includes(".")){
             this.setState({
                 alert: {
                     show: true,
@@ -195,9 +208,24 @@ class Join extends Component {
                     type: "warning"
                 }
             })
-            return;
+            return false;
         }
-        fetch("http://localhost:3001/users/signup", {
+        else return true;
+    }
+
+    handleSignup(event) {
+        // refactor later to make sure that the information is posted in an efficient way
+        // make use of looping to auto store the info that you need 
+        event.preventDefault();
+        let newToken = cryptoRandomString(12);
+        let formattedEmail = this.state.email.trim();
+        let formattedUser = this.state.username.trim();
+        let formattedName = this.state.name.trim();
+        
+        formattedEmail.toLowerCase();
+        formattedName.toLowerCase();
+        if(this.isValidSubmission){
+            fetch("http://localhost:3001/users/signup", {
             credentials: 'include',
             method: "post",
             headers: {
@@ -205,7 +233,8 @@ class Join extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                locked: this.state.locked,
+                locked: true,
+                token: newToken,
                 email : formattedEmail,
                 username: formattedUser,
                 password: this.state.password,
@@ -233,10 +262,12 @@ class Join extends Component {
                         type: "success"
                     }
                 })
+                this.sendConfirmationMail(formattedEmail,newToken);
                 setTimeout( () => {this.props.history.push("/")}, 5000);
-                
             }
         })
+    }
+        
     }
 
     passwordValidate(){

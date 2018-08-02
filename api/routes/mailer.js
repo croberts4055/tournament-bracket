@@ -11,12 +11,36 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-  router.post('/',function(req,res){
+  router.post('/contact',function(req,res){
     var mailOptions = {
         from: 'aarondtaveras@gmail.com',
         to: req.body.email,
         subject: req.body.subject,
         text: req.body.text
+    }
+    
+    transporter.sendMail(mailOptions,function(err,info){
+        if(err){
+            console.log(err);
+            res.status(500).json({
+                message: 'Could not send mail.'
+            })
+        }
+        else {
+           res.status(200);
+           console.log('Email sent!')
+        }
+    })
+  
+  });
+
+  router.post('/confirmation',function(req,res){
+    var mailOptions = {
+        from: 'aarondtaveras@gmail.com',
+        to: req.body.email,
+        subject: "Your EGF Confirmation E-mail!",
+        text: "Here is your confirmation token! " + req.body.token,
+        html: '<h3> Welcome to the EGF family! </h3> <a href="http://localhost:3001/users/"' + req.body.token + '> Click here to verify your e-mail! </a>'
     }
     
     transporter.sendMail(mailOptions,function(err,info){
