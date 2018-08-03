@@ -38,9 +38,9 @@ passport.use(new LocalStrategy(
         return done(null, false, {message: 'Incorrect username.'});
       }
       
-      if(user.locked){
-        return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
-      }
+      // if(user.locked){
+      //   return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
+      // }
       
       User.comparePassword(password,user.password,function(err,match){
         if(err) throw err;
@@ -88,14 +88,13 @@ router.get('/auth/logout',function(req,res){
 })
 
 
-router.get('/auth/:permalink/:token', function(req,res){
-  var _permalink = req.params.permalink;
+router.get('/verify/:token', function(req,res){
+  console.log("entered");
   var _token = req.params.token;
-
-  User.findOne({permalink : _permalink},function(err,user){
+  User.findOne({token : _token},function(err,user){
     if(user.token === _token){
       console.log('token is correct');
-      User.findOneAndUpdate({permalink : _permalink},{locked: false},function(err,resp){
+      User.findOneAndUpdate({token : _token},{locked: false},function(err,resp){
         if(err){
           console.log(err);
         }

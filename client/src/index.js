@@ -20,11 +20,13 @@ import UserProfile from './components/UserProfile/UserProfile';
 import Bracket from './components/Bracket/Bracket';
 import TournamentForm from './components/Tournament/TournamentForm';
 import Tournament from './components/Tournaments/Tournament';
+import Verified from './components/Verified/Verified';
 
 ReactDOM.render(
     <BrowserRouter>
     <div>
         <Switch>
+            <Route path="/verified" component={Verified} />
             <Route path="/tournamentform" component={TournamentForm} />
             <Route path="/bracket" component={Bracket} />
             <Route path="/tournaments" component={Tournament} />

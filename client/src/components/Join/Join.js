@@ -184,7 +184,13 @@ class Join extends Component {
         .then((response)=> response.json())
         .then((response)=> {
             if(response.message){
-                alert(response.message);
+                this.setState({
+                    alert: {
+                        show: true,
+                        text: response.message,
+                        type: "danger"
+                    }
+                })
             }
         })
     }
@@ -224,7 +230,7 @@ class Join extends Component {
         
         formattedEmail.toLowerCase();
         formattedName.toLowerCase();
-        if(this.isValidSubmission){
+        if(this.isValidSubmission()===true){
             fetch("http://localhost:3001/users/signup", {
             credentials: 'include',
             method: "post",
@@ -253,6 +259,7 @@ class Join extends Component {
                         type: "danger"
                     }
                 })
+            
             }
             else {
                 this.setState({
@@ -262,6 +269,7 @@ class Join extends Component {
                         type: "success"
                     }
                 })
+
                 this.sendConfirmationMail(formattedEmail,newToken);
                 setTimeout( () => {this.props.history.push("/")}, 5000);
             }
@@ -402,8 +410,6 @@ class Join extends Component {
     }
 
     
-    
-
     render() {
         return (
             <div>
