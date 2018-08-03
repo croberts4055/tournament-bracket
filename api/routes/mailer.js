@@ -35,12 +35,14 @@ const transporter = nodemailer.createTransport({
   });
 
   router.post('/confirmation',function(req,res){
+    var url;
+    req.body.token.length > 0 ? url = "http://localhost:3000/verified/" + req.body.token : url = "http://localhost:3000/verified/";
     var mailOptions = {
         from: 'aarondtaveras@gmail.com',
         to: req.body.email,
         subject: "Your EGF Confirmation E-mail!",
-        text: "Here is your confirmation token! " + req.body.token,
-        html: '<h3> Welcome to the EGF family! </h3> <a href="http://localhost:3001/users/"' + req.body.token + '> Click here to verify your e-mail! </a>'
+        text: "Here is your confirmation token! ",
+        html: `<h3>Welcome to the family.</h3> <br></br> <a href=${url}>Click here to verify your account and get started.</a>`
     }
     
     transporter.sendMail(mailOptions,function(err,info){
