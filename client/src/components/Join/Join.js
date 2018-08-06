@@ -118,6 +118,17 @@ class Join extends Component {
 
     handleLogin(event) {
         event.preventDefault();
+        var usernameregularexpression = /^[a-zA-Z0-9]+$/;
+        if(!usernameregularexpression.test(this.state.username)){
+            this.setState({
+                alert: {
+                    show: true,
+                    text: "That's an invalid username. Please use numbers and letters only!",
+                    type: "warning"
+                }
+            })
+            return false;
+        }
         let formattedUser = this.state.username.trim();
         fetch("http://localhost:3001/users/login", {
             credentials: 'include',
@@ -126,23 +137,25 @@ class Join extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        body: JSON.stringify({
-            username: formattedUser,
-            password: this.state.password
+            body: JSON.stringify({
+                username: formattedUser,
+                password: this.state.password
             })
         })
         // .then( (response) => response.json())
         .then( (response )=> {
-            if(response.message){
+            if(response.status === 200){
+                this.props.history.push("/")
+            }
+            else {
                 this.setState({
                     alert : {
                         show: true,
                         type: "danger",
-                        text: response.message
+                        text: "Wrong Username/Password."
                     }
                 })
             }
-            else this.props.history.push("/");
         })
         // .then( (response) => {
         //     if(response._id){
@@ -197,6 +210,7 @@ class Join extends Component {
 
     isValidSubmission(){
         var emailregularexpression  = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+        var passwordregularexpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
         var usernameregularexpression = /^[a-zA-Z0-9]+$/;
         var nameregularexpression = /^[a-zA-Z ]+$/;
 
@@ -219,7 +233,17 @@ class Join extends Component {
                 }
             })
             return false;
-        } 
+        }
+        else if(!passwordregularexpression.test(this.state.password)){
+            this.setState({
+                alert: {
+                    show: true,
+                    text: "Your password must have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters.",
+                    type: "warning"
+                }
+            })
+            return false;
+        }
         else if(!emailregularexpression.test(this.state.email)){
             this.setState({
                 alert: {
