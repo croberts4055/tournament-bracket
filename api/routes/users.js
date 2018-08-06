@@ -109,6 +109,35 @@ router.get('/:userId');
 
 /********************* POST requests ******************************/ 
 router.post('/signup',function(req,res){
+  var emailregularexpression  = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+  var passwordregularexpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+  var usernameregularexpression = /^[a-zA-Z0-9]+$/;
+  var nameregularexpression = /^[a-zA-Z ]+$/;
+
+  if(!emailregularexpression.test(req.body.email)){
+    res.status(200).json({
+      message: "That's an invalid e-mail. Please use a fully qualified e-mail address!",
+    })
+    return;
+  }
+  else if(!passwordregularexpression.test(req.body.password)){
+    res.status(200).json({
+      message: "Your password must have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters.",
+    })
+    return;    
+  }
+  else if(!usernameregularexpression.test(req.body.username)){
+    res.status(200).json({
+      message: "That's an invalid username. Please use numbers and letters only!",
+    })
+    return;    
+  }
+  else if(!nameregularexpression.test(req.body.name)){
+    res.status(200).json({
+      message: "That's an invalid name. Please use letters only!",
+    })
+    return;    
+  }
   // check if there's already an email OR username that exists
   User.find( {$or: [{email: req.body.email},{username:req.body.username}]},
     function(err,matches){
