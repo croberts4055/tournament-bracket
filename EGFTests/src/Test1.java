@@ -195,7 +195,6 @@ public class Test1 {
 	@Test
 	public void LoginFormTest()  {
 		signupFormScript("John Doe", "JohnDoeTestAccount", "qwerty123", "qwerty123");
-
 	}
 
 
