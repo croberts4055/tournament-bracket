@@ -118,6 +118,17 @@ class Join extends Component {
 
     handleLogin(event) {
         event.preventDefault();
+        var usernameregularexpression = /^[a-zA-Z0-9]+$/;
+        if(!usernameregularexpression.test(this.state.username)){
+            this.setState({
+                alert: {
+                    show: true,
+                    text: "That's an invalid username. Please use numbers and letters only!",
+                    type: "warning"
+                }
+            })
+            return false;
+        }
         let formattedUser = this.state.username.trim();
         fetch("http://localhost:3001/users/login", {
             credentials: 'include',
@@ -126,23 +137,25 @@ class Join extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-        body: JSON.stringify({
-            username: formattedUser,
-            password: this.state.password
+            body: JSON.stringify({
+                username: formattedUser,
+                password: this.state.password
             })
         })
         // .then( (response) => response.json())
         .then( (response )=> {
-            if(response.message){
+            if(response.status === 200){
+                this.props.history.push("/")
+            }
+            else {
                 this.setState({
                     alert : {
                         show: true,
                         type: "danger",
-                        text: response.message
+                        text: "Wrong Username/Password."
                     }
                 })
             }
-            else this.props.history.push("/");
         })
         // .then( (response) => {
         //     if(response._id){
