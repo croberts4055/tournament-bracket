@@ -1,27 +1,33 @@
-/* .tournamentform-class {
+.tournamentform {
     background-color: #333;
     height: 100vh;
     color: white;
-    padding: 0% 5%;
+    padding: 0% 10%;
+    /* padding-bottom: none; */
 }
 
 .tournament-form {
-    background-color: #334;
-    padding: 2.5% 5%;
+    background-color: #333;
+    padding: none 5%;
+    height: auto;
 }
 
 .form-header {
-    background-color: #335;
+    background-color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2.5em;
-    padding: 2.5% 5%;
+    padding: 0px 5%;
+    padding-top: 5%;
+    font-weight: bold;
 }
 
 .form-body {
-    background-color: #336;
+    background-color: #333;
     padding: 2.5% 2.5%;
+    height: auto;
+    /* padding-top: 0px; */
 }
 
 .title-container {
@@ -30,18 +36,102 @@
     align-items: left;
     justify-content: left;
     float: left;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 1.5em;
+    color: white;
 }
 
-input {
+input[type=number], select {
     color: black;
     width: auto;
-    margin-bottom: 15px;
     border-radius: 5px;
     padding: 5px 5px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-} */
+    color: black;
+}
+
+input[type=text], select {
+    color: black;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+input[type=radio], select {
+    color: black;
+    width: auto;
+    float: left;
+    padding-left: 20px;
+}
+
+.section {
+    width: 100%;
+    padding: 0px 10px;
+    height: 75px;
+    background-color: #333;
+}
+
+.section-description {
+    width: 100%;
+    padding: 0px 10px;
+    height: 150px;
+    background-color: #333;
+}
+
+.section-half {
+    width: 50%;
+    padding: 0px 5px;
+    height: 75px;
+    background-color: #333;
+    float: left;
+    position: relative;
+}
+
+.game-and-format, .rounds-and-best-of, .start-and-end-dates {
+    width: 100%;
+    padding: 0px 5px;
+    height: 75px;
+    position: relative;
+}
+
+.tournament-order {
+    width: 100%;
+    height: 75px;
+    width: auto;
+}
+
+.order-container {
+    width: auto;
+    float: left;
+    margin-right: 25px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    color: black;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+input[type=submit] {
+    width: 50%;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    margin-left: 25%;
+}
