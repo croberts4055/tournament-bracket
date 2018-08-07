@@ -8,6 +8,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { timingSafeEqual } from 'crypto';
 
 
 class TournamentForm extends Component {
@@ -36,11 +37,32 @@ class TournamentForm extends Component {
                 'Seeded',
                 'Participant\'s List',
                 'Random'
-            ]
+            ],
+            filterOptions: [
+                "STATE",
+                "SECTION",
+                "TEAMS"
+            ],
+            selectedState: 'Choose State',
+            states: [
+                'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+                'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
+                'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
+                'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+                'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri',
+                'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey',
+                'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio',
+                'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+                'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+                'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
+            ],
+            selectedSection: 'Choose Section',
+            selectedTeam: 'ChooseTeam',
         };
 
         this.handleSubformClicked = this.handleSubformClicked.bind(this);
         this.handleOrderClicked = this.handleOrderClicked.bind(this);
+        this.handleStateClicked = this.handleStateClicked.bind(this);
     
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleStartDate = this.handleStartDate.bind(this);
@@ -177,13 +199,13 @@ class TournamentForm extends Component {
                     <div className="title-container">
                         Best Of
                     </div>
-                        <DropdownButton title={this.state.bestof} id="dropdown-size-medium">
-                            <MenuItem onSelect={this.handleSelect} eventKey="1" name="bestof">1</MenuItem>
-                            <MenuItem onSelect={this.handleSelect} eventKey="3" name="bestof">3</MenuItem>
-                            <MenuItem onSelect={this.handleSelect} eventKey="5" name="bestof">5</MenuItem>
-                            <MenuItem onSelect={this.handleSelect} eventKey="7" name="bestof">7</MenuItem>
-                            <MenuItem onSelect={this.handleSelect} eventKey="9" name="bestof">9</MenuItem>
-                        </DropdownButton>
+                    <DropdownButton title={this.state.bestof} id="dropdown-size-medium">
+                        <MenuItem onSelect={this.handleSelect} eventKey="1" name="bestof">1</MenuItem>
+                        <MenuItem onSelect={this.handleSelect} eventKey="3" name="bestof">3</MenuItem>
+                        <MenuItem onSelect={this.handleSelect} eventKey="5" name="bestof">5</MenuItem>
+                        <MenuItem onSelect={this.handleSelect} eventKey="7" name="bestof">7</MenuItem>
+                        <MenuItem onSelect={this.handleSelect} eventKey="9" name="bestof">9</MenuItem>
+                    </DropdownButton>
                 </div>
             </div>
         )
@@ -234,6 +256,44 @@ class TournamentForm extends Component {
         })
     }
 
+    renderFilters(event) {
+        return (
+            <div className="section">
+                <div className="title-container">
+                    Filter Options
+                </div>
+                <div className="filters">
+                    {this.state.filterOptions.map((filter, index)=> {
+                        return (
+                            <div className="filter-container">
+                                <div className="filter-title">
+                                    {filter}
+                                </div>
+                                <DropdownButton className="drop-down" title={this.state.selectedState} dropup id="split-button-dropup">
+                                    {this.state.states.map((s, index)=>{
+                                        return (
+                                            <div>
+                                                <MenuItem onSelect={this.handleStateClicked} eventKey={s}>
+                                                    {s}
+                                                </MenuItem>
+                                            </div>
+                                        )
+                                    })}
+                                </DropdownButton>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        )
+    }
+
+    handleStateClicked(eventKey, event) {
+        this.setState({
+            selectedState: eventKey
+        })
+    }
+
     renderSubmitButton(event) {
         return (
             <div className="submit-button">
@@ -258,6 +318,7 @@ class TournamentForm extends Component {
                             {this.renderRoundsAndBestOf()}
                             {this.renderStartAndEndDates()}
                             {this.renderOrdering()}
+                            {this.renderFilters()}
                             {this.renderSubmitButton()}
 
                         </form>
