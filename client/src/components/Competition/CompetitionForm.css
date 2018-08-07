@@ -1,33 +1,52 @@
-.tournamentform {
+.competition-form-class {
     background-color: #333;
-    height: 100vh;
+    width: 100%;
+    height: auto;
+    overflow: auto;
     color: white;
     padding: 0% 10%;
-    /* padding-bottom: none; */
 }
 
-.tournament-form {
-    background-color: #333;
-    padding: none 5%;
-    height: auto;
+.competition-form-container {
+    padding: 0 0;
 }
 
 .form-header {
-    background-color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2.5em;
     padding: 0px 5%;
-    padding-top: 5%;
+    padding-top: 2.5%;
     font-weight: bold;
 }
 
+.subforms-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    font-size: 1.25em;
+    padding: 5px 10px;
+
+}
+
+.subforms-tab-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 5%;
+    padding-bottom: 2%;
+}
+
+.subform-tabs {
+    color: white;
+    border: 1px solid white
+}
+
 .form-body {
-    background-color: #333;
-    padding: 2.5% 2.5%;
+    padding: 0 0;
     height: auto;
-    /* padding-top: 0px; */
 }
 
 .title-container {
@@ -72,21 +91,21 @@ input[type=radio], select {
 
 .section {
     width: 100%;
-    padding: 0px 10px;
+    padding: 0 2.5%;
     height: 75px;
     background-color: #333;
 }
 
 .section-description {
     width: 100%;
-    padding: 0px 10px;
-    height: 150px;
+    padding: 0 2.5%;
+    height: 140px;
     background-color: #333;
 }
 
 .section-half {
     width: 50%;
-    padding: 0px 5px;
+    padding: 0 1.25%;
     height: 75px;
     background-color: #333;
     float: left;
@@ -95,21 +114,20 @@ input[type=radio], select {
 
 .game-and-format, .rounds-and-best-of, .start-and-end-dates {
     width: 100%;
-    padding: 0px 5px;
+    padding: 0 1.25%;
     height: 75px;
     position: relative;
 }
 
-.tournament-order {
+.competition-order {
     width: 100%;
-    height: 75px;
-    width: auto;
+    height: auto;
 }
 
 .order-container {
     width: auto;
     float: left;
-    margin-right: 25px;
+    margin-right: 20px;
 }
 
 textarea {
@@ -130,8 +148,67 @@ input[type=submit] {
     background-color: green;
     color: white;
     padding: 10px 20px;
-    margin: 8px 0;
     border: none;
     border-radius: 5px;
     margin-left: 25%;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 0 50px;
+}
+
+button:focus {
+    background-color: green;
+}
+
+button:hover {
+    background-color: gray;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #333;
+}
+
+.drop-down {
+    overflow-y: scroll;
+}
+
+ul.dropdown-menu {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: black;
+}
+
+.filter-container {
+    width: 33%;
+    float: left;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.filter-title {
+    width: auto;
+    float: left;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 1em;
+}
+
+.filters {
+    width: 100%;
+    max-height: 75px;
 }
