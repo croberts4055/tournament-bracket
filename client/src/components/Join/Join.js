@@ -418,7 +418,6 @@ class Join extends Component {
                     </FormGroup>
                 </div>
             </div>
-            <div className="divider"></div>
             <button className="switchButton" onClick={this.goToLogin}>Take Me To Login.</button>
             <form onSubmit={this.handleSignup}> 
 
@@ -467,13 +466,12 @@ class Join extends Component {
         );
     }
 
-    
     render() {
         return (
             <div>
                 <MyNav url={this.props.location.pathname} token={this.state.token}/>
                 <div className="join-egf-container"> 
-                {this.state.loginToggled ? this.renderLogin() : this.renderSignup()}
+                    {this.state.loginToggled ? this.renderLogin() : this.renderSignup()}
                 </div>
                 <Footer />
             </div>

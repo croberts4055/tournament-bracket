@@ -214,7 +214,6 @@ class MyNav extends Component {
         return (
                 <div className="LiveBarContainer">
                     {this.state.currentGame} - {this.state.competitors.team1} v. {this.state.competitors.team2}
-                    <div id="divider"></div>
                     <a href="http://twitch.tv/officialegf" className="btn btn-default" target="_blank" id="twitchbtn">WATCH LIVE ON TWITCH</a>
                 </div>
             

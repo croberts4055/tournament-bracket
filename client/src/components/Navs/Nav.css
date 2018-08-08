@@ -129,16 +129,13 @@ a {
 
 .LiveBarContainer {
     /* padding-top: 50px; */
-    height: 25px;
-    margin: auto;
+    height: auto;
+    padding: 1% 2.5%;
     display: flex;
-    /* line-height: 30px; */
-    /* vertical-align: middle; */
-    /* margin: auto; */
     width: 100%;
     color:white;
     background: #73A744;
-    font-size: 15px;
+    font-size: 1em;
     font-family: 'Forza Medium';
     text-align: center;
     justify-content: center;
@@ -146,19 +143,15 @@ a {
 }
 
 #twitchbtn {
-    height: 20px;
+    height: auto;
+    width: auto;
+    margin-left: 5%;
     overflow: hidden;
     line-height: 12.5px;
     font-family: 'Forza Medium';
     color: rgba(189, 53, 53, 0.803);
     background-color: white;
 }
-
-#divider {
-    background-color: #73A744;
-    width: 75px;
-}
-
 
 /***************************** Secondary Nav (navigation by weeks) *****************************/ 
 
