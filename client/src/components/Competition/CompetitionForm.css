@@ -60,7 +60,7 @@
     color: white;
 }
 
-input[type=number], select {
+div.section input[type=number], select {
     color: black;
     width: auto;
     border-radius: 5px;
@@ -71,7 +71,7 @@ input[type=number], select {
     color: black;
 }
 
-input[type=text], select {
+div.section input[type=text], select {
     color: black;
     width: 100%;
     border-radius: 5px;
@@ -82,7 +82,7 @@ input[type=text], select {
     color: black;
 }
 
-input[type=radio], select {
+div.section input[type=radio], select {
     color: black;
     width: auto;
     float: left;
@@ -143,7 +143,7 @@ textarea {
     color: black;
 }
 
-input[type=submit] {
+div.submit-button input[type=submit] {
     width: 50%;
     background-color: green;
     color: white;
@@ -154,15 +154,15 @@ input[type=submit] {
     margin-bottom: 10px;
 }
 
-button {
+div.subform-tabs button {
     padding: 0 50px;
 }
 
-button:focus {
+div.subform-tabs button:focus {
     background-color: green;
 }
 
-button:hover {
+div.subform-tabs button:hover {
     background-color: gray;
 }
 
@@ -175,18 +175,18 @@ button:hover {
     overflow-y: scroll;
 }
 
-ul.dropdown-menu {
+div.section ul.dropdown-menu {
     max-height: 250px;
     overflow-y: scroll;
 }
 
-li {
+div.section li {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-a {
+div.section a {
     color: black;
 }
 
