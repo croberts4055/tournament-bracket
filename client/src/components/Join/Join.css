@@ -8,15 +8,12 @@
     display: block;
     text-align: center;
     height: 100%;
-    width: 900px;
+    width: 100%;
     margin: 0 auto;
     background-color: #333;
     color: white;
     font-family: 'Forza Medium';
-    padding-top: 2.5%;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 2.5%;
+    padding: 0 1%;
     border-style: groove;
     border-color: lightgray;
     overflow: auto;
@@ -38,6 +35,7 @@
     background-color: black;
     font-family: 'Forza Medium';
     border: white;
+    margin-top: 5%;
     border-radius: 15%;
 }
 
@@ -74,29 +72,20 @@ label {
 }
 
 .college-logo {
-   
-    height: 60px;
+    height: 50px;
     width: 33%;
     float: left;
 }
 
 .highschool-logo {
-   
     height: 60px;
     width: 33%;
     float: left;
 }
 
 .media-logo {
-   
     height: 60px;
     width: 33%;
     float: left;
-}
-
-.divider {
-    height: 60px;
-    background-color: #333;
-    width: 100%;
 }
 

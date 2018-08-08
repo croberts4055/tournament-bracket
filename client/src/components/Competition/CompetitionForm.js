@@ -8,8 +8,6 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { DropdownButton, MenuItem } from 'react-bootstrap';
-import { timingSafeEqual } from 'crypto';
-
 
 class TournamentForm extends Component {
     constructor(props) {

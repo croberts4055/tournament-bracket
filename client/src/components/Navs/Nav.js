@@ -107,19 +107,19 @@ class MyNav extends Component {
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
                             <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
+                            {/* <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                            <MenuItem eventKey={3.3}>Separated link</MenuItem> */}
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
                         <NavDropdown pullRight eventKey={3} title="HIGH SCHOOL" id="basic-nav-dropdown">
                         <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
-                            <MenuItem eventKey={3.2}>Another action</MenuItem>
+                            {/* <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
                             <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                            <MenuItem eventKey={3.3}>Separated link</MenuItem> */}
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
@@ -175,19 +175,19 @@ class MyNav extends Component {
                         <Nav pullRight>
                             <NavDropdown pullRight eventKey={3} title="COLLEGE" id="basic-nav-dropdown">
                                 <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
+                                {/* <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                                <MenuItem eventKey={3.3}>Separated link</MenuItem> */}
                             </NavDropdown>
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown pullRight eventKey={3} title="HIGH SCHOOL" id="basic-nav-dropdown">
                                 <MenuItem componentClass={Link} href="/tournaments" to="tournaments" eventKey={3.1}>Tournaments</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
+                                {/* <MenuItem eventKey={3.2}>Another action</MenuItem>
                                 <MenuItem eventKey={3.3}>Something else here</MenuItem>
                                 <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                                <MenuItem eventKey={3.3}>Separated link</MenuItem> */}
                             </NavDropdown>
                         </Nav>
                         
@@ -214,7 +214,6 @@ class MyNav extends Component {
         return (
                 <div className="LiveBarContainer">
                     {this.state.currentGame} - {this.state.competitors.team1} v. {this.state.competitors.team2}
-                    <div id="divider"></div>
                     <a href="http://twitch.tv/officialegf" className="btn btn-default" target="_blank" id="twitchbtn">WATCH LIVE ON TWITCH</a>
                 </div>
             
