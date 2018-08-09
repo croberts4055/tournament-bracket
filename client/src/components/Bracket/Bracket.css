@@ -1,5 +1,62 @@
 .bracket-container {
-    height: 100vh;
+    min-height: 100vh;
     background-color: #333;
     color: white;
+    padding: 0 5%;
+    border: 1px solid white;
+    display: block;
+    overflow: auto;
+}
+
+.rr-form {
+    background-color: blue;
+    height: auto;
+}
+
+.input-container {
+    display: block;
+    flex-direction: row;
+    flex-basis: 100%;
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: black;
+}
+
+.message {
+    width: 33.33%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.message-input {
+    width: auto;
+    height: auto;
+    background-color: blue;
+}
+
+div.rr-submit-container {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+    width: 100%;
+    height: auto;
+    float: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: black;
+    justify-content: center;
+    align-items: center
+}
+
+input.rr-submit {
+    width: 25%;
+    color: black;
 }
