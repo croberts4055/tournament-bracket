@@ -344,19 +344,19 @@ class Join extends Component {
                 <div className="logoBlock">
                     <img src="/images/egfh_badge.png"/>
                     <FormGroup>
-                        <Radio defaultChecked onClick={this.handleHighschoolChecked}name="community">Highschool</Radio>
+                        <Radio defaultChecked onClick={this.handleHighschoolChecked}name="community"  type="Highschool">Highschool</Radio>
                     </FormGroup>
                 </div>
                 <div className="logoBlock">
                     <img src="/images/egfc_badge.png"/>
                     <FormGroup>
-                        <Radio onClick={this.handleCollegeChecked} name="community">College</Radio>
+                        <Radio onClick={this.handleCollegeChecked} name="community" type="College">College</Radio>
                     </FormGroup>
                 </div>
                 <div className="logoBlock">
                     <img src="/images/egfm_badge.png"/>
                     <FormGroup>
-                        <Radio onClick={this.handleMediaChecked} name="community">Media</Radio>
+                        <Radio onClick={this.handleMediaChecked} name="community" type="Media">Media</Radio>
                     </FormGroup>
                 </div>
             </div>

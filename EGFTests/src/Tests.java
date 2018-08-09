@@ -1,88 +1,41 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.After;
 import static org.junit.Assert.*;
 
-import java.util.UUID;
+public class Tests extends MasterHelper{
 
-
-
-public class Test1 {
-
-	// Webdriver instance
-	private WebDriver driver;
-
-	// URLS for all pages on website
-	String homePage = "http://localhost:3000/";
-	String schoolPage = "http://localhost:3000/schoolprofile";
-	String newsPage = "http://localhost:3000/news";
-	String eventsPage = "http://localhost:3000/events";
-	String videoPage = "http://localhost:3000/video";
-	String loginPage = "http://localhost:3000/joinegf";
-	String tournamentsPage = "http://localhost:3000/tournaments";
-	
-	private String randomEmailScript() {
-		// TODO Auto-generated method stub
-		return "random-" + UUID.randomUUID().toString() + "@example.com";
-	}
-	public void signupFormScript(String Name, String Username, String Password, String confirmPassword){
-		driver.navigate().to(loginPage);
-
-		String Email = randomEmailScript();
-
-		WebElement nameBox = driver.findElement(By.name("name"));
-		nameBox.sendKeys(Name);
-
-		WebElement emailBox = driver.findElement(By.name("email"));
-		emailBox.sendKeys(Email);
-
-		WebElement usernameBox = driver.findElement(By.name("username"));
-		usernameBox.sendKeys(Username);
-
-		WebElement passwordBox = driver.findElement(By.name("password"));
-		passwordBox.sendKeys(Password);
-
-		WebElement confirmPasswordBox = driver.findElement(By.name("confirmpassword"));
-		confirmPasswordBox.sendKeys(confirmPassword);
-
-		driver.findElement(By.className("submitButton")).click();
-	}
-	
-	public void loginFormScript(String Username, String Password) {
-		WebElement nameBox = driver.findElement(By.name("username"));
-		nameBox.sendKeys(Username);
-		
-		WebElement passwordBox = driver.findElement(By.name("password"));
-		passwordBox.sendKeys(Password);
-		
-		driver.findElement(By.className("submitButton")).click();
-		
-		
-	}
-	
+	// Runs before every test.
 	@Before
 	public void setUp() {
-		// Setting up the chromedriver
+
+		// Location of the chromedriver on device
 		String chromeDriverLocation = "/Users/chris/Desktop/chromedriver";
+
+		// set up driver
 		System.setProperty("webdriver.chrome.driver",chromeDriverLocation);
+
+		// driver instance is of type Chrome driver. This opens webpage in chrome. (e.g. if using firefox = FirefoxDriver())
 		driver = new ChromeDriver();
 	}
-
+	// Runs after every test.
 	@After
 	public void tearDown() {
-//		driver.quit();
+		// dispose of the chrome window and driver.
+		//		driver.quit();
 	}
-	
+
+	@Test
+	public void LoginFormTest()  {
+		createRandomUser('c');
+	}
 	@Ignore @Test
 	public void TitleTest()  {
 		// Go to the EGF Website Homepage
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// Get the title of the page
 		String title = driver.getTitle();
@@ -94,7 +47,7 @@ public class Test1 {
 	public void schoolPageURLTest() {
 
 		// Go to homepage
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// xPath of school button
 		String school = "//*[@id=\"HeaderNav\"]/nav/div/div[2]/ul[2]/li[1]/a";
@@ -106,11 +59,11 @@ public class Test1 {
 		String currentURL = driver.getCurrentUrl();
 
 		// check if current url matches school page url
-		assertEquals(currentURL,schoolPage);
+		assertEquals(currentURL,schoolURL);
 	}
 	@Ignore @Test
 	public void newsPageURLTest() {
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// xPath of news button
 		String news = "//*[@id=\"HeaderNav\"]/nav/div/div[2]/ul[2]/li[2]/a";
@@ -121,11 +74,11 @@ public class Test1 {
 		String currentURL = driver.getCurrentUrl();
 
 		// check if current url matches news page url.
-		assertEquals(currentURL,newsPage);
+		assertEquals(currentURL,newsURL);
 	}
 	@Ignore @Test
 	public void eventsPageURLTest() {
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// xPath of events button
 		String events = "//*[@id=\"HeaderNav\"]/nav/div/div[2]/ul[2]/li[3]/a";
@@ -137,11 +90,11 @@ public class Test1 {
 		String currentURL = driver.getCurrentUrl();
 
 		// Check if current url is equal to events page
-		assertEquals(currentURL,eventsPage);
+		assertEquals(currentURL,eventsURL);
 	}
 	@Ignore @Test
 	public void videoPageURLTest() {
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// xPath of video button
 		String video = "//*[@id=\"HeaderNav\"]/nav/div/div[2]/ul[2]/li[4]/a";
@@ -153,11 +106,11 @@ public class Test1 {
 		String currentURL = driver.getCurrentUrl();
 
 		// check if url matches video page url
-		assertEquals(currentURL,videoPage);
+		assertEquals(currentURL,videoURL);
 	}
 	@Ignore @Test
 	public void loginPageURLTest() {
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// xPath of login button
 		String login = "//*[@id=\"HeaderNav\"]/nav/div/div[2]/ul[1]/li/a";
@@ -169,11 +122,11 @@ public class Test1 {
 		String currentURL = driver.getCurrentUrl();
 
 		// check if url matches login page url
-		assertEquals(currentURL,loginPage);
+		assertEquals(currentURL,loginURL);
 	}
 	@Ignore @Test
 	public void tournamentPageURLTest() {
-		driver.navigate().to(homePage);
+		driver.get(homeURL);
 
 		// xPath of college button
 		String college = "//*[@id=\"basic-nav-dropdown\"]";
@@ -189,21 +142,6 @@ public class Test1 {
 		String currentURL = driver.getCurrentUrl();
 
 		// check if url matches tournaments page url
-		assertEquals(currentURL,tournamentsPage);
+		assertEquals(currentURL,tournamentsURL);
 	}
-
-	@Test
-	public void LoginFormTest()  {
-		signupFormScript("John Doe", "JohnDoeTestAccount", "qwerty123", "qwerty123");
-	}
-
-
-
-
-
-
-
-
-
-
 }
