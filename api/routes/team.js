@@ -42,6 +42,15 @@ router.get('/',function(req, res){
   });
   
   
+  router.post('/',function(req,res){
+    Tournament.find({state: req.body.state, section: req.body.section},function(err,team){
+        if(err) console.log(err);
+        else{
+            res.send(team)
+        }
+    })
+})
+
   // Delete operations from DB 
   
   router.delete('/:teamId',(req,res,next)=>{

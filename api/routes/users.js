@@ -38,9 +38,9 @@ passport.use(new LocalStrategy(
         return done(null, false, {message: 'Incorrect username.'});
       }
       
-      // if(user.locked){
-      //   return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
-      // }
+      if(user.locked){
+        return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
+      }
       
       User.comparePassword(password,user.password,function(err,match){
         if(err) throw err;
@@ -84,23 +84,37 @@ router.get('/auth/logout',function(req,res){
   res.json({
     message: 'You have been logged out.'
   });
-  // req.flash('success_msg', 'You have been logged out.');
+
 })
 
 
 router.get('/verify/:token', function(req,res){
-  console.log("entered");
-  var _token = req.params.token;
+  if(req.params.token){
+    var _token = req.params.token.slice(req.params.token.indexOf("=")+1);
+  }
+  
   User.findOne({token : _token},function(err,user){
-    if(user.token === _token){
-      console.log('token is correct');
+    if(err){console.log(err);}
+    else if(!user){
+      return;
+    }
+    else if(user.token === _token){
       User.findOneAndUpdate({token : _token},{locked: false},function(err,resp){
         if(err){
           console.log(err);
         }
-        else console.log("user has been verified!");
       })
     }
+  })
+  .then( result => {
+    res.status(200).json({
+      success_message: "Congratulations! Your account has been successfully verified."
+    });
+  })
+  .catch(err => {
+    res.status(200).json({
+      err_message: err
+    })
   })
 });
 
@@ -148,12 +162,12 @@ router.post('/signup',function(req,res){
       res.status(200).json({
         message: 'A user with this email/username already exists.'
       })
-      // alert("A user with this email/username already exists.");
       return;
     }
     // otherwise, create the user's account with some password encryption. 
     // use updateOps to also create a user possibly?? 
     else {
+
       bcrypt.hash(req.body.password, SALT_ROUNDS, function(err,hash){
          if(err) console.log("error");
             const user = new User({
@@ -171,7 +185,6 @@ router.post('/signup',function(req,res){
               .save()
               .then(result => {
                 res.status(200).json(result);
-                // console.log(result);
               })
               .catch(err => {
                 console.log(err);
@@ -267,13 +280,13 @@ router.patch('/auth',(req,res,next)=>{
   .exec()
   .then( result => {
     res.status(200).json({
-      message: "Settings have been successfully updated!"
+      success_message: "Settings have been successfully updated!"
     });
   })
   .catch( err => {
     console.log(err);
     res.status(500).json({
-      message: "Failed to Update Data."
+      fail_message: "Failed to Update Data."
     })
   })
 

@@ -142,20 +142,21 @@ class UserProfile extends Component {
     }
 
     passwordValidate(){
+        var passwordregularexpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+
         if(this.state.new_pw.length === 0){
             return null;
         }
         else if(this.state.new_pw!==this.state.confirm_pw){
             return 'error';
         }
+        else if(!passwordregularexpression.test(this.state.new_pw)){
+            return 'error';
+        }
         return 'success';
     }
 
     renderVisitorView(){
-        /* if isAuth - render the gear icon
-         if(this.state.isAuth){
-            return(Glyphicon...)
-         } */
 
          var today = new Date();
          var dd = today.getDate();
