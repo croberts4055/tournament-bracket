@@ -84,15 +84,22 @@ router.get('/auth/logout',function(req,res){
   res.json({
     message: 'You have been logged out.'
   });
-  // req.flash('success_msg', 'You have been logged out.');
+
 })
 
 
 router.get('/verify/:token', function(req,res){
-  console.log("entered");
-  var _token = req.params.token;
+  console.log(req.params);
+  if(req.params.token){
+    var _token = req.params.token.slice(req.params.token.indexOf("=")+1);
+  }
+  
   User.findOne({token : _token},function(err,user){
-    if(user.token === _token){
+    if(err){console.log(err);}
+    else if(!user){
+      return;
+    }
+    else if(user.token === _token){
       console.log('token is correct');
       User.findOneAndUpdate({token : _token},{locked: false},function(err,resp){
         if(err){
@@ -101,6 +108,14 @@ router.get('/verify/:token', function(req,res){
         else console.log("user has been verified!");
       })
     }
+  })
+  .then( result => {
+    res.status(200);
+  })
+  .catch(err => {
+    res.status(200).json({
+      message: err
+    })
   })
 });
 
@@ -125,6 +140,7 @@ router.post('/signup',function(req,res){
     // otherwise, create the user's account with some password encryption. 
     // use updateOps to also create a user possibly?? 
     else {
+
       bcrypt.hash(req.body.password, SALT_ROUNDS, function(err,hash){
          if(err) console.log("error");
             const user = new User({
@@ -238,13 +254,13 @@ router.patch('/auth',(req,res,next)=>{
   .exec()
   .then( result => {
     res.status(200).json({
-      message: "Settings have been successfully updated!"
+      success_message: "Settings have been successfully updated!"
     });
   })
   .catch( err => {
     console.log(err);
     res.status(500).json({
-      message: "Failed to Update Data."
+      fail_message: "Failed to Update Data."
     })
   })
 

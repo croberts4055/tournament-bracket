@@ -36,7 +36,7 @@ const transporter = nodemailer.createTransport({
 
   router.post('/confirmation',function(req,res){
     var url;
-    req.body.token.length > 0 ? url = "http://localhost:3000/verified/" + req.body.token : url = "http://localhost:3000/verified/";
+    req.body.token ? url = "http://localhost:3000/verified/token=" + req.body.token : url = "http://localhost:3000/verified/";
     var mailOptions = {
         from: 'aarondtaveras@gmail.com',
         to: req.body.email,

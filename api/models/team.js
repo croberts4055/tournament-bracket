@@ -9,8 +9,8 @@ var teamSchema = new Schema({
     logo: {type: String},
     game: {type: String},
     school: {type: String},
-    conference: {type: String},
-    region: {type: String}
+    state: {type: String},
+    sections: {type: String}
   });
 
   module.exports = mongoose.model('Teams',teamSchema);

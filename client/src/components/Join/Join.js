@@ -265,7 +265,7 @@ class Join extends Component {
                 this.setState({
                     alert : {
                         show: true,
-                        text: "Thanks for joining! A confirmation e-mail has been sent to " + this.state.email + ". You will be redirected in 5 seconds!",
+                        text: "Thanks for joining, " + this.state.name +  "! A confirmation e-mail has been sent to " + this.state.email + ". You will be redirected in 5 seconds!",
                         type: "success"
                     }
                 })

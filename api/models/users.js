@@ -53,9 +53,33 @@ var userSchema = new Schema({
   
   module.exports = mongoose.model('Users',userSchema);
 
+  module.exports.encryptPassword = function(toHash, salt, callback){
+    bcrypt.hash(toHash, salt, function(err,hash){
+      if(err) console.log(err); 
+      callback(null,hash);
+    })
+  }
+
   module.exports.comparePassword = function(toTest, hash, callback){
     bcrypt.compare(toTest,hash,function(err,match){
       if(err) throw err;
       callback(null,match);
     })
   }
+
+
+  // bcrypt.hash(req.body.password, SALT_ROUNDS, function(err,hash){
+  //   if(err) console.log("error");
+  //      const user = new User({
+  //                _id: new mongoose.Types.ObjectId(),
+  //                locked : req.body.locked,
+  //                token : req.body.token,
+  //                email: req.body.email,
+  //                username: req.body.username,
+  //                password: hash,
+  //                type: req.body.type,
+  //                subtype: req.body.subtype,
+  //                name: req.body.name
+  //              })
+  //        user
+  //        .save()

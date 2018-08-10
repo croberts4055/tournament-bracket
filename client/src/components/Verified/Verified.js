@@ -8,11 +8,10 @@ const cryptoRandomString = require('crypto-random-string');
 
 
 class Verified extends Component {
-    constructor() {
-        super();
-
+    constructor(props) {
+        super(props);
         this.state = {
-            token : this.props.location.query,
+            token : this.props.location.pathname.slice(this.props.location.pathname.indexOf("=")),
             alert : {
                 show: false,
                 text: "",
@@ -35,7 +34,7 @@ class Verified extends Component {
     }
   
     componentDidMount(){
-        if(this.state.token.length <= 0){
+        if(!this.state.token){
             this.setState({
                 alert: {
                     show: true,
@@ -44,8 +43,10 @@ class Verified extends Component {
                 }
             })
             setTimeout( () => {this.props.history.push("/")}, 5000);
+            return; 
         }
-        var url = "http://localhost:3001/users/verify/token=" + this.state.token;
+        console.log(this.state.token);
+        var url = "http://localhost:3001/users/verify/token" + this.state.token;
         fetch(url,{
             method: "get",
             header: {
@@ -56,6 +57,7 @@ class Verified extends Component {
         .then( (response) => response.json())
         .then( (response) => {
             if(response.message){
+                console.log("if block");
                 this.setState({
                     alert: {
                         show: true,
@@ -65,21 +67,15 @@ class Verified extends Component {
                 })
             }
             else {
+                console.log("else block");
                 this.unlockUser(this.state.token);
-                this.setState({
-                alert: {
-                    show: true,
-                    text: "Congratulations! Your account is now verified. You will now be redirected.",
-                    type: "success"
-                }
-            })
         }
-        setTimeout( () => {this.props.history.push("/joinegf")}, 5000);   
-        })
-    }
+    })
+}
     
 
     unlockUser(token){
+        console.log("entered");
         var updateProps = [{
                 propName: "token",
                 value: this.state.token
@@ -94,8 +90,27 @@ class Verified extends Component {
             body : JSON.stringify(updateProps)
         })
         .then( (response) => response.json())
-        .then( (response) => {
-            console.log(response);
+        .then((response) => {
+            if(response.success_message){
+                this.setState({
+                    alert: {
+                        show: true,
+                        text: "Congratulations! Your account is now verified. You will now be redirected.",
+                        type: "success"
+                    }
+                })
+            }
+            else if(response.fail_message){
+                this.setState({
+                    alert: {
+                        show: true,
+                        text: "We're sorry, your account was not able to be authorized. Try again?",
+                        type: "danger"
+                    }
+                })
+            }
+            setTimeout( () => {this.props.history.push("/joinegf")}, 5000);   
+
         })
     }
 
