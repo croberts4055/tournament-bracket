@@ -29,9 +29,15 @@ router.post('/create',function(req,res){
         else {
             const Tourney = new Tournament({
                 _id : new mongoose.Types.ObjectId(),
+                type: req.body.type,
                 title: req.body.title,
-                expiration: req.body.expiration,
-                game: req.body.game
+                info: req.body.info,
+                startDate: req.body.startDate,
+                endDate: req.body.endDate,
+                game: req.body.game,
+                format: req.body.format,
+                rounds: req.body.rounds,
+                participants: req.body.participants
             })
             Tourney.save().then(result=> {
                 res.status(200).json(result);

@@ -144,26 +144,18 @@ class Join extends Component {
         })
         // .then( (response) => response.json())
         .then( (response )=> {
-            if(response.status === 200){
-                this.props.history.push("/")
-            }
-            else {
+                if(response.message){
                 this.setState({
                     alert : {
                         show: true,
                         type: "danger",
-                        text: "Wrong Username/Password."
+                        text: response.message
                     }
                 })
             }
+            else this.props.history.push("/");
+
         })
-        // .then( (response) => {
-        //     if(response._id){
-        //        this.setState({
-        //         userid: response._id
-        //         }, ()=> console.log(this.state.userid)) 
-        //     }
-        // })
     }
 
     handleLogout(event){
@@ -337,10 +329,15 @@ class Join extends Component {
     }
 
     passwordValidate(){
+        var passwordregularexpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+
         if(this.state.password.length === 0){
             return null;
         }
         else if(this.state.password!==this.state.confirmpassword){
+            return 'error';
+        }
+        else if(!passwordregularexpression.test(this.state.password)){
             return 'error';
         }
         return 'success';

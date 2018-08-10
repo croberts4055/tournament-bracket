@@ -5,14 +5,22 @@ var Schema = mongoose.Schema;
 var tournamentSchema = new Schema({
     _id : Schema.ObjectId,
     title : String,
+    info : String,
+    startDate : String,
     game: String,
-    expiration: Number,
+    endDate: String,
+    type: {
+        season: {type: Boolean, required: true, "default": false},
+        state: {type: Boolean, required: true, "default": false},
+        national: {type: Boolean, required: true, "default": false},
+        invitational: {type: Boolean, required: true, "default": false}
+    },
     format: {
         singleElim: {type: Boolean, required: true, "default": false},
         roundRobin: {type: Boolean, required: true, "default": false}
     },
     rounds: Number,
-    participants: Array
+    participants: {type: Array, "default" : [] }
 });
 
 module.exports = mongoose.model('Tournament', tournamentSchema);

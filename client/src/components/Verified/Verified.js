@@ -18,6 +18,7 @@ class Verified extends Component {
                 type: ""
             }
         };
+        this.handleDismiss = this.handleDismiss.bind(this);
     }
 
     handleDismiss(){
@@ -56,8 +57,7 @@ class Verified extends Component {
         })
         .then( (response) => response.json())
         .then( (response) => {
-            if(response.message){
-                console.log("if block");
+            if(response.err_message){
                 this.setState({
                     alert: {
                         show: true,
@@ -66,10 +66,16 @@ class Verified extends Component {
                     }
                 })
             }
-            else {
-                console.log("else block");
-                this.unlockUser(this.state.token);
+            else if(response.success_message) {
+                this.setState({
+                    alert: {
+                        show: true,
+                        text: response.success_message,
+                        type: "success"
+                    }
+                })
         }
+        else console.log(response);
     })
 }
     

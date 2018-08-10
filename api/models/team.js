@@ -10,7 +10,7 @@ var teamSchema = new Schema({
     game: {type: String},
     school: {type: String},
     state: {type: String},
-    sections: {type: String}
+    section: {type: String}
   });
 
   module.exports = mongoose.model('Teams',teamSchema);

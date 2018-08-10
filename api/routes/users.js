@@ -38,9 +38,9 @@ passport.use(new LocalStrategy(
         return done(null, false, {message: 'Incorrect username.'});
       }
       
-      // if(user.locked){
-      //   return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
-      // }
+      if(user.locked){
+        return done(null,false,{message:'This account is currently unregistered. If you are a student, check your confirmation e-mail.'})
+      }
       
       User.comparePassword(password,user.password,function(err,match){
         if(err) throw err;
@@ -89,7 +89,6 @@ router.get('/auth/logout',function(req,res){
 
 
 router.get('/verify/:token', function(req,res){
-  console.log(req.params);
   if(req.params.token){
     var _token = req.params.token.slice(req.params.token.indexOf("=")+1);
   }
@@ -100,21 +99,21 @@ router.get('/verify/:token', function(req,res){
       return;
     }
     else if(user.token === _token){
-      console.log('token is correct');
       User.findOneAndUpdate({token : _token},{locked: false},function(err,resp){
         if(err){
           console.log(err);
         }
-        else console.log("user has been verified!");
       })
     }
   })
   .then( result => {
-    res.status(200);
+    res.status(200).json({
+      success_message: "Congratulations! Your account has been successfully verified."
+    });
   })
   .catch(err => {
     res.status(200).json({
-      message: err
+      err_message: err
     })
   })
 });
@@ -163,7 +162,6 @@ router.post('/signup',function(req,res){
       res.status(200).json({
         message: 'A user with this email/username already exists.'
       })
-      // alert("A user with this email/username already exists.");
       return;
     }
     // otherwise, create the user's account with some password encryption. 
@@ -187,7 +185,6 @@ router.post('/signup',function(req,res){
               .save()
               .then(result => {
                 res.status(200).json(result);
-                // console.log(result);
               })
               .catch(err => {
                 console.log(err);
