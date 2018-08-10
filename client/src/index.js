@@ -18,7 +18,7 @@ import Vods from './components/Vods/Vods';
 import SchoolProfile from './components/SchoolProfile/SchoolProfile';
 import UserProfile from './components/UserProfile/UserProfile';
 import Bracket from './components/Bracket/Bracket';
-import TournamentForm from './components/Tournament/TournamentForm';
+import CompetitionForm from './components/Competition/CompetitionForm';
 import Tournament from './components/Tournaments/Tournament';
 import Verified from './components/Verified/Verified';
 
@@ -27,7 +27,7 @@ ReactDOM.render(
     <div>
         <Switch>
             <Route path="/verified" component={Verified} />
-            <Route path="/tournamentform" component={TournamentForm} />
+            <Route path="/competitionform" component={CompetitionForm} />
             <Route path="/bracket" component={Bracket} />
             <Route path="/tournaments" component={Tournament} />
             <Route path="/userprofiletest" component={UserProfile} />

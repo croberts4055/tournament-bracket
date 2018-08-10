@@ -1,12 +1,13 @@
+
 /*
 	validate input field and pass input to appropriate functions
 */
-function checkInput() {
-	var field_get_teams;
-	var field_get_rounds;
 
-  field_get_teams = document.getElementById("field_get_teams").value;
-  field_get_rounds = document.getElementById("field_get_rounds").value;
+var resultsArray = [];
+
+export function checkInput(t, r) {
+	var field_get_teams = t;
+	var field_get_rounds = r;
 
   document.getElementById("field_return_input_status").innerHTML = "";
 
@@ -80,8 +81,21 @@ function initializeTeams(teamOne, teamTwo, teamCount, evenOrOdd) {
 	document.getElementById("return-round-robin-teams").innerHTML = "Team One: " + teamOne + "<br />" + "Team Two: " + teamTwo;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* displays the results of RR for an even number of team with n-1 rounds */
 function evenTeamDefaultRounds(even_teams) {
+	resultsArray = []
 	var teamOne = [];
 	var teamTwo = [];
 	initializeTeams(teamOne, teamTwo, even_teams, 1);
@@ -97,12 +111,19 @@ function evenTeamDefaultRounds(even_teams) {
 			document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
 		}
 		document.getElementById("return-round-robin").innerHTML += "<br />";
+		var roundContainer = {
+			round: i,
+			firstArray: teamOne,
+			secondArray: teamTwo
+		}
+		resultsArray.push(roundContainer);
 		shiftArray(teamOne, teamTwo);
 	}
 }
 
 /* displays results of RR for odd number of teams and n rounds */
 function oddTeamDefaultRounds(odd_teams) {
+	resultsArray = []
 	var teamOne = [];
 	var teamTwo = [];
 	initializeTeams(teamOne, teamTwo, odd_teams, -1);
@@ -125,6 +146,12 @@ function oddTeamDefaultRounds(odd_teams) {
 			}
 		}
 		document.getElementById("return-round-robin").innerHTML += "<br />";
+		var roundContainer = {
+			round: i,
+			firstArray: teamOne,
+			secondArray: teamTwo
+		}
+		resultsArray.push(roundContainer);
 		shiftArray(teamOne, teamTwo);
 	}
 }
@@ -139,6 +166,7 @@ function shiftArray(teamOne, teamTwo) {
 
 /* returns result for an even number of team but with EXTRA rounds */
 function evenTeamExtraRounds(even_teams, extra_rounds) {
+	resultsArray = []
 	var teamOne = [];
 	var teamTwo = [];
 	initializeTeams(teamOne, teamTwo, even_teams, 1);
@@ -153,12 +181,19 @@ function evenTeamExtraRounds(even_teams, extra_rounds) {
 			document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
 		}
 		document.getElementById("return-round-robin").innerHTML += "<br />";
+		var roundContainer = {
+			round: i,
+			firstArray: teamOne,
+			secondArray: teamTwo
+		}
+		resultsArray.push(roundContainer);
 		shiftArray(teamOne, teamTwo);
 	}
 }
 
 /* returns result for an even number of team but with LESS rounds */
 function evenTeamLessRounds(even_teams, less_rounds) {
+	resultsArray = []
 	var teamOne = [];
 	var teamTwo = [];
 	initializeTeams(teamOne, teamTwo, even_teams, 1);
@@ -173,12 +208,19 @@ function evenTeamLessRounds(even_teams, less_rounds) {
 			document.getElementById("return-round-robin").innerHTML += teamOne[position] + " - " + teamTwo[position] + "<br />";
 		}
 		document.getElementById("return-round-robin").innerHTML += "<br />";
+		var roundContainer = {
+			round: i,
+			firstArray: teamOne,
+			secondArray: teamTwo
+		}
+		resultsArray.push(roundContainer);
 		shiftArray(teamOne, teamTwo);
 	}
 }
 
 /* returns result for an odd number of team but with EXTRA rounds */
 function oddTeamExtraRounds(odd_teams, extra_rounds) {
+	resultsArray = []
 	var teamOne = [];
 	var teamTwo = [];
 	initializeTeams(teamOne, teamTwo, odd_teams, -1);
@@ -201,12 +243,19 @@ function oddTeamExtraRounds(odd_teams, extra_rounds) {
 			}
 		}
 		document.getElementById("return-round-robin").innerHTML += "<br />";
+		var roundContainer = {
+			round: i,
+			firstArray: teamOne,
+			secondArray: teamTwo
+		}
+		resultsArray.push(roundContainer);
 		shiftArray(teamOne, teamTwo);
 	}
 }
 
 /* returns result for an even number of team but with LESS rounds */
 function oddTeamLessRounds(odd_teams, less_rounds) {
+	resultsArray = []
 	var teamOne = [];
 	var teamTwo = [];
 	initializeTeams(teamOne, teamTwo, odd_teams, -1);
@@ -229,6 +278,12 @@ function oddTeamLessRounds(odd_teams, less_rounds) {
 			}
 		}
 		document.getElementById("return-round-robin").innerHTML += "<br />";
+		var roundContainer = {
+			round: i,
+			firstArray: teamOne,
+			secondArray: teamTwo
+		}
+		resultsArray.push(roundContainer);
 		shiftArray(teamOne, teamTwo);
 	}
 }
