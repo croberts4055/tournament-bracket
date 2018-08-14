@@ -17,7 +17,9 @@ var tournamentSchema = new Schema({
     },
     format: {
         singleElim: {type: Boolean, required: true, "default": false},
-        roundRobin: {type: Boolean, required: true, "default": false}
+        roundRobin: {type: Boolean, required: true, "default": false},
+        swiss: {type: Boolean, required: true, "default": false},
+        doubleElim: {type: Boolean, required: true, "default": false}
     },
     rounds: Number,
     participants: {type: Array, "default" : [] }
