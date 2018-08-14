@@ -7,13 +7,18 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { Button, Glyphicon, ListGroup, ListGroupItem, FormControl,DropdownButton, MenuItem } from 'react-bootstrap';
+import {Alert, Button, Glyphicon, ListGroup, ListGroupItem, FormControl,DropdownButton, MenuItem } from 'react-bootstrap';
 
 class TournamentForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            alert : {
+                show: false,
+                text: "",
+                type: ""
+            },
             selectedSubform: 'Season',
             subforms: [
                 'season',
@@ -97,6 +102,16 @@ class TournamentForm extends Component {
         })
     }
 
+    renderAlert(){
+        return(
+            <div className="alert">
+                <Alert bsStyle={this.state.alert.type} onDismiss={this.handleDismiss}>
+                    <p>{this.state.alert.text}</p>
+                </Alert>
+            </div>
+        );
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         fetch("http://localhost:3001/tournament/create",{
@@ -124,9 +139,44 @@ class TournamentForm extends Component {
         })
         .then((response)=> response.json())
         .then((response)=> {
-            console.log(response);
-            alert("Competition Submitted!");
+            if(response.message){
+                this.setState({
+                    alert: {
+                        show: true,
+                        text: response.message,
+                        type: "danger"
+                    }
+                })
+            }else{
+                this.setState({
+                    alert: {
+                        show: false,
+                        text: "",
+                        type: "danger"
+                    }
+                })
+                alert("Competition Submitted!");
+            }
         })
+        // .then((response)=> response.json())
+        // .then((response)=> {
+        //     if(response.status === 400){
+        //         response.json().then((responseText) =>{
+        //             this.setState({
+        //                 alert: {
+        //                     show: true,
+        //                     text: responseText,
+        //                     type: "warning"
+        //                 }
+        //             })
+        //         })
+                
+        //         // console.log(response.json());
+
+        //     }
+        //     // console.log(response);
+        //     // alert("Competition Submitted!");
+        // })
     }
 
     handleStartDate(date) {
@@ -199,6 +249,7 @@ class TournamentForm extends Component {
     renderTitleAndDescription(event) {
         return (
             <div className="title-and-description-section">
+            {this.state.alert.show ? this.renderAlert() : null}
                 <div className="section">
                     <div className="title-container">
                         Title

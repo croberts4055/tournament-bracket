@@ -16,12 +16,32 @@ router.get('/',function(req,res){
     })
 })
 
-
 router.post('/create',function(req,res){
+    var titleregularexpression = /^[a-zA-Z0-9 ]*$/;
+
+    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds || !req.body.participants){
+        res.status(400).json({
+            message: 'Please fill in all fields.'
+        })
+        return;
+    }
+    else if(!titleregularexpression.test(req.body.title)){
+        res.status(400).json({
+            message: 'Title can only contain numbers and letters.'
+        })
+        return;
+    }
+    else if(req.body.rounds < 2 || req.body.rounds > 16 ){
+        res.status(400).json({
+            message: 'The number of rounds should be between 2 and 16.'
+        })
+        return;
+    }
+
     Tournament.find({title: req.body.title},function(err,match){
         if(err) console.log(err);
         if(match.length){
-            res.status(200).json({
+            res.status(400).json({
                 message: 'A tournament with this title already exists.'
             })
             return;
@@ -40,7 +60,7 @@ router.post('/create',function(req,res){
                 participants: req.body.participants
             })
             Tourney.save().then(result=> {
-                res.status(200).json(result);
+                res.status(200);//.json(result);
                 console.log(result);
             })
             .catch(err => {
