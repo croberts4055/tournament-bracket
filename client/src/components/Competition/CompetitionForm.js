@@ -158,25 +158,6 @@ class TournamentForm extends Component {
                 alert("Competition Submitted!");
             }
         })
-        // .then((response)=> response.json())
-        // .then((response)=> {
-        //     if(response.status === 400){
-        //         response.json().then((responseText) =>{
-        //             this.setState({
-        //                 alert: {
-        //                     show: true,
-        //                     text: responseText,
-        //                     type: "warning"
-        //                 }
-        //             })
-        //         })
-                
-        //         // console.log(response.json());
-
-        //     }
-        //     // console.log(response);
-        //     // alert("Competition Submitted!");
-        // })
     }
 
     handleStartDate(date) {
