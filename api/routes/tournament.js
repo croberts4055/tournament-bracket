@@ -16,7 +16,6 @@ router.get('/',function(req,res){
     })
 })
 
-
 router.post('/create',function(req,res){
     Tournament.find({title: req.body.title},function(err,match){
         if(err) console.log(err);
