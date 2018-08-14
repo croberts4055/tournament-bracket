@@ -14,34 +14,35 @@ class TournamentForm extends Component {
         super(props);
 
         this.state = {
-            selectedSubform: 'Season',
+            subform: null,
             subforms: [
-                'season',
-                'state',
-                'national',
-                'invitational'
+                'Season',
+                'State',
+                'National',
+                'Invitational'
             ],
-            title: '',
-            description: '',
-            game: 'Select Game',
-            school: 'Select School',
-            team: 'Select Team',
-            format: 'Select Format',
-            rounds: 2,
-            bestof: 1,
+
+            title: null,
+            description: null,
+            game: null,
+            format: null,
+            rounds: null,
+            bestof: null,
             start: moment(),
             end: null,
-            selectedOrder: 'Seeded',
+            order: null,
             orders: [
                 'Seeded',
                 'Participant\'s List',
                 'Random'
             ],
+
             filterOptions: [
                 "STATE",
                 "SECTION"
             ],
-            selectedState: 'Choose State',
+
+            state: 'Choose State',
             states: [
                 'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
                 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
@@ -54,15 +55,61 @@ class TournamentForm extends Component {
                 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
                 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
             ],
-            selectedSection: 'Choose Section',
-            selectedTeam: 'ChooseTeam',
-            participants: [
-                {seed: 1,name: 't1'},
-                {seed: 2,name: 't2'},
-                {seed: 3,name: 't3'},
-                {seed: 4,name: 't4'},
-                {seed: 5,name: 't5'},            
-            ]
+            section: null,
+            sections: [
+                {
+                    name: 'Section 1',
+                    teams: [
+                        {
+                            school: 'Hunter College',
+                            team: 'blue tigers'
+                        },
+                        {
+                            school: 'Baruch College',
+                            team: 'yellow dogs'
+                        }
+                    ]   
+                },
+                {
+                    name: 'Section 2',
+                    teams: [
+                        {
+                            school: 'BMCC',
+                            team: 'water bottleheads'
+                        },
+                        {
+                            school: 'Brookdale Campus',
+                            team: 'black ravens'
+                        }
+                    ]
+                },
+                {
+                    name: 'Section 3',
+                    teams: [
+                        {
+                            school: 'Queens College',
+                            team: 'orange naranja'
+                        },
+                        {
+                            school: 'Lehman College',
+                            team: 'grassy lawnmowers',
+                        }
+                    ]
+                },
+                {
+                    name: 'Section 4',
+                    teams: [
+                        {
+                            school: 'City College',
+                            team: 'high clowns'
+                        },
+                        {
+                            school: 'City Tech College',
+                            team: 'pink snubbles'
+                        }
+                    ],
+                },
+            ],
         };
 
         this.handleSubformClicked = this.handleSubformClicked.bind(this);
@@ -108,7 +155,7 @@ class TournamentForm extends Component {
             },
             body: JSON.stringify({
                 type: {
-                    [this.state.selectedSubform] : true
+                    [this.state.subform] : true
                 },
                 title: this.state.title,
                 info: this.state.description,
@@ -173,7 +220,7 @@ class TournamentForm extends Component {
         return (
             <div className="subforms-section">
                 <div className="subforms-header">
-                    What form is this for? (Currently selected: {this.state.selectedSubform})
+                    What type of form is this?
                 </div>
                 <div className="subforms-tab-container">
                     {this.state.subforms.map((subform, index)=>{
@@ -192,38 +239,40 @@ class TournamentForm extends Component {
 
     handleSubformClicked(event) {
         this.setState({
-            selectedSubform: event.target.value
+            subform: event.target.value
         })
     }
 
-    renderTitleAndDescription(event) {
+    renderTitle() {
         return (
-            <div className="title-and-description-section">
-                <div className="section">
-                    <div className="title-container">
-                        Title
-                    </div>
-                    <input type="text" name="title" placeholder="Competition title..." value={this.state.title} onChange={this.handleChange}/>
+            <div className="section">
+                <div className="title-container">
+                    Title
                 </div>
-
-                <div className="section-description">
-                    <div className="title-container">
-                        Description
-                    </div>
-                    <textarea name="description" placeholder="Competition description..." value={this.state.description} onChange={this.handleChange}/>
-                </div>
+                <input type="text" name="title" placeholder="Competition title..." value={this.state.title} onChange={this.handleChange}/>
             </div>
         )
     }
 
-    renderGameAndFormat(event) {
+    renderDescription() {
         return (
-            <div className="game-and-format">
+            <div className="section">
+                <div className="title-container">
+                    Description
+                </div>
+                <textarea name="description" placeholder="Competition description..." value={this.state.description} onChange={this.handleChange}/>
+            </div>
+        )
+    }
+
+    renderGameAndFormat() {
+        return (
+            <div className="section">
                 <div className="section-half">
                     <div className="title-container">
                         Game
                     </div>
-                    <DropdownButton title={this.state.game}>
+                    <DropdownButton title={this.state.game} placeholder="Select DIS">
                         <MenuItem onSelect={this.handleSelect} eventKey="League Of Legends" name="game">League Of Legends</MenuItem>
                         <MenuItem onSelect={this.handleSelect} eventKey="Overwatch" name="game">Overwatch</MenuItem>
                         <MenuItem onSelect={this.handleSelect} eventKey="Hearthstone" name="game">Hearthstone</MenuItem>
@@ -246,9 +295,9 @@ class TournamentForm extends Component {
         )
     }
 
-    renderRoundsAndBestOf(event) {
+    renderRoundsAndBestOf() {
         return (
-            <div className="rounds-and-best-of">
+            <div className="section">
                 <div className="section-half">
                     <div className="title-container">
                         Rounds
@@ -272,9 +321,9 @@ class TournamentForm extends Component {
         )
     }
 
-    renderStartAndEndDates(event) {
+    renderStartAndEndDates() {
         return (
-            <div className="start-and-end-dates">
+            <div className="section">
                 <div className="section-half">
                     <div className="title-container">
                         Start Date
@@ -292,11 +341,11 @@ class TournamentForm extends Component {
         )
     }
 
-    renderOrdering(event) {
+    renderOrdering() {
         return (
             <div className="section">
                 <div className="title-container">
-                    Ordering (Currently selected: {this.state.selectedOrder})
+                    Ordering
                 </div>
                 <div className="competition-order">
                     {this.state.orders.map((order, index)=> {
@@ -313,11 +362,11 @@ class TournamentForm extends Component {
 
     handleOrderClicked(event) {
         this.setState({
-            selectedOrder: event.target.value
+            order: event.target.value
         })
     }
 
-    renderFilters(event) {
+    renderFilters() {
         return (
             <div className="section">
                 <div className="title-container">
@@ -330,7 +379,7 @@ class TournamentForm extends Component {
                                 <div className="filter-title">
                                     {filter}
                                 </div>
-                                <DropdownButton className="drop-down" title={this.state.selectedState} dropup id="split-button-dropup">
+                                <DropdownButton className="drop-down" title={this.state.state} dropup id="split-button-dropup">
                                     {this.state.states.map((s, index)=>{
                                         return (
                                             <div>
@@ -349,59 +398,61 @@ class TournamentForm extends Component {
         )
     }
 
-    renderParticipantList(){
-        // get current participants using get request, store them in array 
-        // var filteredParticipants = this.getFilteredParticipants(this.state.selectedState,this.state.selectedSection);
-        // we would then map over this array to render the left hand side, and once selected we add
-        // the team to our participants list array in the handle select method. 
-        return(
-            <div className="list-section">
-                <div className="title-container">
-                    Select Participants:
-                </div>
-                <div className="list-container">
-                <FormControl id="filteredTeams" componentClass="select" multiple placeholder="select">
-                    {
-                        this.state.participants.map((team,index)=>{
-                            return(
-                            <option key={index} onSelect={this.handleTeamSelect} value="select">{team.name} </option>
-                            );
-                        })
-                    }
-                </FormControl>
-                </div>
-                <div className="list-container">
-                <ListGroup id="selectedTeams" className="half-container">
-                    {
-                        this.state.participants.map((team,index)=>{
-                            return(
-                                <ListGroupItem>
-                                <Button bsSize="small">
-                                    <Glyphicon glyph="ok"/>
-                                </Button>
-                                <Button bsSize="small">
-                                    <Glyphicon glyph="remove"/>
-                                </Button>
-                                    {team.seed}.{team.name}
-                                </ListGroupItem>
-                            );
-                        })
-                    }
-                </ListGroup>
-                </div>
-            </div>
-        );
-    }    
+    
+
+    // renderParticipantList(){
+    //     // get current participants using get request, store them in array 
+    //     // var filteredParticipants = this.getFilteredParticipants(this.state.state,this.state.selectedSection);
+    //     // we would then map over this array to render the left hand side, and once selected we add
+    //     // the team to our participants list array in the handle select method. 
+    //     return(
+    //         <div className="section">
+    //             <div className="title-container">
+    //                 Select Participants:
+    //             </div>
+    //             <div className="list-container">
+    //             <FormControl id="filteredTeams" componentClass="select" multiple placeholder="select">
+    //                 {
+    //                     this.state.participants.map((team,index)=>{
+    //                         return(
+    //                         <option key={index} onSelect={this.handleTeamSelect} value="select">{team.name} </option>
+    //                         );
+    //                     })
+    //                 }
+    //             </FormControl>
+    //             </div>
+    //             <div className="list-container">
+    //             <ListGroup id="selectedTeams" className="half-container">
+    //                 {
+    //                     this.state.participants.map((team,index)=>{
+    //                         return(
+    //                             <ListGroupItem>
+    //                             <Button bsSize="small">
+    //                                 <Glyphicon glyph="ok"/>
+    //                             </Button>
+    //                             <Button bsSize="small">
+    //                                 <Glyphicon glyph="remove"/>
+    //                             </Button>
+    //                                 {team.seed}.{team.name}
+    //                             </ListGroupItem>
+    //                         );
+    //                     })
+    //                 }
+    //             </ListGroup>
+    //             </div>
+    //         </div>
+    //     );
+    // }    
 
     handleStateClicked(eventKey, event) {
         this.setState({
-            selectedState: eventKey
+            state: eventKey
         })
     }
 
     renderSubmitButton(event) {
         return (
-            <div className="submit-button">
+            <div className="section">
                 <input type="submit" value="Submit" />
             </div>
         )
@@ -418,13 +469,17 @@ class TournamentForm extends Component {
 
                         <form className="form-body" onSubmit={this.handleSubmit}>
 
-                            {this.renderTitleAndDescription()}
+                            {this.renderTitle()}
+
+                            {this.renderDescription()}
+
                             {this.renderGameAndFormat()}
                             {this.renderRoundsAndBestOf()}
                             {this.renderStartAndEndDates()}
                             {this.renderOrdering()}
                             {this.renderFilters()}
-                            {this.renderParticipantList()}
+                            {/* {this.renderParticipantList()} */}
+
                             {this.renderSubmitButton()}
                         </form>
                     </div>
