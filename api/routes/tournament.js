@@ -14,22 +14,22 @@ router.get('/',function(req,res){
             res.send(tournaments);
         }
     })
-        // Tournament.remove({},function(err){
-     //     if(err) console.log(err);
-     //   })
- })
+    // Tournament.remove({},function(err){
+    //     if(err) console.log(err);
+    //   })
+})
 
- router.get('/:id',function(req,res){
-     var id = req.params.id;
-     Tournament.findOne({_id : id},function(err,tournament){
-         if(err) {
-             res.status(404); 
-             console.log(err);
-         }
-         else {
-             res.send(tournament);
-         }
-     })
+router.get('/:id',function(req,res){
+    var id = req.params.id;
+    Tournament.findOne({_id : id},function(err,tournament){
+        if(err) {
+            res.status(404); 
+            console.log(err);
+        }
+        else {
+            res.send(tournament);
+        }
+    })
 })
 
 router.post('/create',function(req,res){
