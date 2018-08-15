@@ -221,3 +221,30 @@ div.section input[type=submit] {
     border: none;
     border-radius: 5px;
 }
+
+.team-container {
+    height: auto;
+    width: auto;
+    padding: 5px 5px;
+    border: 1px solid white;
+}
+
+.team-title-container {
+    width: 50%;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    float: left;
+    font-weight: normal;
+    font-size: 1.5em;
+    color: white;
+    padding-top: 1%;
+    padding-bottom: 0.5%;
+}
+
+.team-school, .team-name {
+    width: auto;
+    /* display: flex;
+    justify-content: left;
+    align-items: left; */
+}

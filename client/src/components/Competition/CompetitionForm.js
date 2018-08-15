@@ -65,11 +65,11 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'Hunter College',
-                            team: 'blue tigers'
+                            name: 'blue tigers'
                         },
                         {
                             school: 'Baruch College',
-                            team: 'yellow dogs'
+                            name: 'yellow dogs'
                         }
                     ]   
                 },
@@ -78,11 +78,11 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'BMCC',
-                            team: 'water bottleheads'
+                            name: 'water bottleheads'
                         },
                         {
                             school: 'Brookdale Campus',
-                            team: 'black ravens'
+                            name: 'black ravens'
                         }
                     ]
                 },
@@ -91,11 +91,15 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'Queens College',
-                            team: 'orange naranja'
+                            name: 'orange naranja'
                         },
                         {
                             school: 'Lehman College',
-                            team: 'grassy lawnmowers',
+                            name: 'grassy lawnmowers',
+                        },
+                        {
+                            school: 'Sonos College',
+                            name: 'musical cats'
                         }
                     ]
                 },
@@ -104,11 +108,11 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'City College',
-                            team: 'high clowns'
+                            name: 'high clowns'
                         },
                         {
                             school: 'City Tech College',
-                            team: 'pink snubbles'
+                            name: 'pink snubbles'
                         }
                     ],
                 },
@@ -490,7 +494,7 @@ class TournamentForm extends Component {
         if(this.state.section === null) {
             return (
                 <div>
-                    No teams for display
+                    Filter teams through State AND/OR Section
                 </div>
             )
         }
@@ -498,21 +502,36 @@ class TournamentForm extends Component {
             var selectedSection = this.state.section;
             var teamsObject = this.state.sections[selectedSection].teams;
 
-            teamsObject.forEach()
+            const teamsList = teamsObject.map((obj) =>
+                <div className="team-container">
+                    <div className="team-school">
+                        School: {obj.school}
+                    </div>
+                    <div className="team-name">
+                        Team: {obj.name}
+                    </div>
+                </div>
+            );
+
             return (
-                <div>
-                    {typeof teamsObject}
+                <div className="section-half">
+                    {teamsList}
                 </div>
             )
-            // teamsObject.map((t, index)=>{
-            //     return (
-            //         <div>
-            //             {teamsObject[index].school}
-            //             {teamsObject[index].team}
-            //         </div>
-            //     )
-            // })      
         }
+    }
+
+    renderTeamsHeader() {
+        return (
+            <div className="section">
+                <div className="team-title-container">
+                    Teams
+                </div>
+                <div className="team-title-container">
+                    Competition List
+                </div>
+            </div>
+        )
     }
 
     // renderParticipantList(){
@@ -586,6 +605,7 @@ class TournamentForm extends Component {
                             {this.renderOrdering()}
                             {this.renderFilters()}
 
+                            {this.renderTeamsHeader()}
                             {this.renderTeams()}
 
                             {/* {this.renderParticipantList()} */}
