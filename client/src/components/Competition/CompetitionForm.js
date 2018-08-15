@@ -252,7 +252,7 @@ class TournamentForm extends Component {
 
     renderSubformsSection() {
         return (
-            <div className="subforms-section">
+            <div className="section">
                 <div className="subforms-header">
                     What type of form is this?
                 </div>
@@ -487,23 +487,40 @@ class TournamentForm extends Component {
         })
     }
 
+    renderTeamsHeader() {
+        return (
+            <div className="section">
+                <div className="team-title-container">
+                    Teams
+                </div>
+                <div className="team-title-container">
+                    Competition List
+                </div>
+                {/* <div className="team-list-container"> */}
+                    
+                    {this.renderTeams()}
+
+                {/* </div> */}
+                {/* <div className="competition-list-container">
+                    {this.renderTeams()}
+                </div> */}
+            </div>
+        )
+    }
+
     // This function should be able to render teams based on selected State AND/OR selected Section.
     // Example 1: if only State is selected, then the teams list would show all the teams in that state.
     // Example 2: ff State and Section is selected, then the teams list would show all the teams in that state for a specific section
     renderTeams() {
         if(this.state.section === null) {
-            return (
-                <div>
-                    Filter teams through State AND/OR Section
-                </div>
-            )
+            return null;
         }
         else {
             var selectedSection = this.state.section;
             var teamsObject = this.state.sections[selectedSection].teams;
 
             const teamsList = teamsObject.map((obj) =>
-                <div className="team-container">
+                <div className="team-info-container">
                     <div className="team-school">
                         School: {obj.school}
                     </div>
@@ -514,24 +531,11 @@ class TournamentForm extends Component {
             );
 
             return (
-                <div className="section-half">
+                <div className="team-list-display">
                     {teamsList}
                 </div>
             )
         }
-    }
-
-    renderTeamsHeader() {
-        return (
-            <div className="section">
-                <div className="team-title-container">
-                    Teams
-                </div>
-                <div className="team-title-container">
-                    Competition List
-                </div>
-            </div>
-        )
     }
 
     // renderParticipantList(){
@@ -606,7 +610,6 @@ class TournamentForm extends Component {
                             {this.renderFilters()}
 
                             {this.renderTeamsHeader()}
-                            {this.renderTeams()}
 
                             {/* {this.renderParticipantList()} */}
 
