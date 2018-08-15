@@ -34,8 +34,10 @@ router.get('/:id',function(req,res){
 
 router.post('/create',function(req,res){
     var titleregularexpression = /^[a-zA-Z0-9 ]*$/;
-    // NEED TO ADD IF (!REQ.BODY.PARTICIPANTS) BACK IN AFTER!
-    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds || !req.body.type){
+
+    
+
+    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds){
         res.status(400).json({
             message: 'Please fill in all fields.'
         })
@@ -50,6 +52,16 @@ router.post('/create',function(req,res){
     else if(req.body.rounds < 2 || req.body.rounds > 16 ){
         res.status(400).json({
             message: 'The number of rounds should be between 2 and 16.'
+        })
+        return;
+    }else if(req.body.startDate > req.body.endDate){
+        res.status(400).json({
+            message: 'Start date can not be before end date.'
+        })
+        return;
+    }else if(req.body.startDate < new Date){
+        res.status(400).json({
+            message: 'Start date can not be in the past.'
         })
         return;
     }
