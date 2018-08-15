@@ -11,10 +11,50 @@
 
 .tournament-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: space-between;
-    padding: 5%;
+    flex-direction: row;
+    flex-wrap: wrap;
     background-color: inherit;
     min-height: 200px;
     height: auto;
+}
+
+.tournament-panel { 
+    background-color: #333;
+    border-color: black;
+    margin: 5%;
+    width: 40%;
+    color: #73A744;
+    font-family: 'Forza Medium';
+}
+
+.tournament-panel >.panel-body {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.tournament-panel > .panel-heading {
+    background-color: #101010;
+    background-image: none;
+}
+
+.tournament-panel > .panel-heading > .panel-title {
+    background-color: #101010;
+    color: white;
+}
+
+/* light gray: #505 */
+
+.tournament-modal {
+    color: black;
+    font-family: 'Forza Medium';
+}
+
+.detailsbtn {
+   background-image: none;
+   text-shadow: none;
+   margin-left: auto;
+   margin-right: 0;
+   color: white;
+   background-color: #73A744;
 }
