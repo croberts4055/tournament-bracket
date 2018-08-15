@@ -65,11 +65,11 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'Hunter College',
-                            team: 'blue tigers'
+                            name: 'blue tigers'
                         },
                         {
                             school: 'Baruch College',
-                            team: 'yellow dogs'
+                            name: 'yellow dogs'
                         }
                     ]   
                 },
@@ -78,11 +78,11 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'BMCC',
-                            team: 'water bottleheads'
+                            name: 'water bottleheads'
                         },
                         {
                             school: 'Brookdale Campus',
-                            team: 'black ravens'
+                            name: 'black ravens'
                         }
                     ]
                 },
@@ -91,11 +91,15 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'Queens College',
-                            team: 'orange naranja'
+                            name: 'orange naranja'
                         },
                         {
                             school: 'Lehman College',
-                            team: 'grassy lawnmowers',
+                            name: 'grassy lawnmowers',
+                        },
+                        {
+                            school: 'Sonos College',
+                            name: 'musical cats'
                         }
                     ]
                 },
@@ -104,11 +108,11 @@ class TournamentForm extends Component {
                     teams: [
                         {
                             school: 'City College',
-                            team: 'high clowns'
+                            name: 'high clowns'
                         },
                         {
                             school: 'City Tech College',
-                            team: 'pink snubbles'
+                            name: 'pink snubbles'
                         }
                     ],
                 },
@@ -237,7 +241,7 @@ class TournamentForm extends Component {
 
     renderSubformsSection() {
         return (
-            <div className="subforms-section">
+            <div className="section">
                 <div className="subforms-header">
                     What type of form is this?
                 </div>
@@ -472,35 +476,54 @@ class TournamentForm extends Component {
         })
     }
 
+    renderTeamsHeader() {
+        return (
+            <div className="section">
+                <div className="team-title-container">
+                    Teams
+                </div>
+                <div className="team-title-container">
+                    Competition List
+                </div>
+                {/* <div className="team-list-container"> */}
+                    
+                    {this.renderTeams()}
+
+                {/* </div> */}
+                {/* <div className="competition-list-container">
+                    {this.renderTeams()}
+                </div> */}
+            </div>
+        )
+    }
+
     // This function should be able to render teams based on selected State AND/OR selected Section.
     // Example 1: if only State is selected, then the teams list would show all the teams in that state.
     // Example 2: ff State and Section is selected, then the teams list would show all the teams in that state for a specific section
     renderTeams() {
         if(this.state.section === null) {
-            return (
-                <div>
-                    No teams for display
-                </div>
-            )
+            return null;
         }
         else {
             var selectedSection = this.state.section;
             var teamsObject = this.state.sections[selectedSection].teams;
+          
+            const teamsList = teamsObject.map((obj) =>
+                <div className="team-info-container">
+                    <div className="team-school">
+                        School: {obj.school}
+                    </div>
+                    <div className="team-name">
+                        Team: {obj.name}
+                    </div>
+                </div>
+            );
 
-            // teamsObject.forEach()
             return (
-                <div>
-                    {typeof teamsObject}
+                <div className="team-list-display">
+                    {teamsList}
                 </div>
             )
-            // teamsObject.map((t, index)=>{
-            //     return (
-            //         <div>
-            //             {teamsObject[index].school}
-            //             {teamsObject[index].team}
-            //         </div>
-            //     )
-            // })      
         }
     }
 
@@ -575,7 +598,7 @@ class TournamentForm extends Component {
                             {this.renderOrdering()}
                             {this.renderFilters()}
 
-                            {this.renderTeams()}
+                            {this.renderTeamsHeader()}
 
                             {/* {this.renderParticipantList()} */}
 
