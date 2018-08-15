@@ -172,17 +172,13 @@ class TournamentForm extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                type: {
-                    [this.state.subform] : true
-                },
+                type: this.state.subform,
                 title: this.state.title,
                 info: this.state.description,
                 startDate: this.state.start,
                 endDate: this.state.end,
                 game: this.state.game,
-                format: {
-                    [this.state.format] : true
-                },
+                format: this.state.format,
                 rounds: this.state.rounds,
                 participants: this.state.participants
             })
@@ -198,13 +194,6 @@ class TournamentForm extends Component {
                     }
                 })
             }else{
-                this.setState({
-                    alert: {
-                        show: false,
-                        text: "",
-                        type: "danger"
-                    }
-                })
                 alert("Competition Submitted!");
             }
         })
@@ -331,7 +320,7 @@ class TournamentForm extends Component {
                         Format
                     </div>
                     <DropdownButton title={this.state.format} id="dropdown-size-medium">
-                        <MenuItem onSelect={this.handleSelect} eventKey="roundRobin" name="format">Round Robin</MenuItem>
+                        <MenuItem onSelect={this.handleSelect} eventKey="Round Robin" name="format">Round Robin</MenuItem>
                         <MenuItem onSelect={this.handleSelect} eventKey="Swiss" name="format">Swiss</MenuItem>
                         <MenuItem onSelect={this.handleSelect} eventKey="Single Elimination" name="format">Single Elimination</MenuItem>
                         <MenuItem onSelect={this.handleSelect} eventKey="Rocket League" name="format">Rocket League</MenuItem>
@@ -374,19 +363,19 @@ class TournamentForm extends Component {
                     <div className="title-container">
                         Start Date
                     </div>
-                    <DatePicker name="start" selected={this.state.start} onChange={this.handleStartDate} />
+                    <DatePicker name="start" selected={this.state.start} minDate={new Date()} onChange={this.handleStartDate} />
                 </div>
 
                 <div className="section-half">
                     <div className="title-container">
                         End Date
                     </div>
-                    <DatePicker name="end" selected={this.state.end} onChange={this.handleEndDate} />
+                    <DatePicker name="end" selected={this.state.end} minDate={this.state.start} onChange={this.handleEndDate} />
                 </div>
             </div>
         )
     }
-
+    
     renderOrdering() {
         return (
             <div className="section">
@@ -518,7 +507,7 @@ class TournamentForm extends Component {
         else {
             var selectedSection = this.state.section;
             var teamsObject = this.state.sections[selectedSection].teams;
-
+          
             const teamsList = teamsObject.map((obj) =>
                 <div className="team-info-container">
                     <div className="team-school">

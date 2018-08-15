@@ -14,14 +14,41 @@ router.get('/',function(req,res){
             res.send(tournaments);
         }
     })
+    // Tournament.remove({},function(err){
+    //     if(err) console.log(err);
+    //   })
+})
+
+router.get('/:id',function(req,res){
+    var id = req.params.id;
+    Tournament.findOne({_id : id},function(err,tournament){
+        if(err) {
+            res.status(404); 
+            console.log(err);
+        }
+        else {
+            res.send(tournament);
+        }
+    })
 })
 
 router.post('/create',function(req,res){
     var titleregularexpression = /^[a-zA-Z0-9 ]*$/;
 
-    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds || !req.body.participants){
+    // Checks if data is a date
+    var isDate = function(date) {
+        return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
+    }
+
+    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds){
         res.status(400).json({
             message: 'Please fill in all fields.'
+        })
+        return;
+    }
+    else if (!(req.body.type === 'Season' || req.body.type === 'State' || req.body.type === 'National' || req.body.type === 'Invitational')){
+        res.status(400).json({
+            message: 'Please select the form type. Season, State, National or Invitational'
         })
         return;
     }
@@ -31,9 +58,25 @@ router.post('/create',function(req,res){
         })
         return;
     }
-    else if(req.body.rounds < 2 || req.body.rounds > 16 ){
+    else if(isNaN(req.body.rounds) || req.body.rounds < 2 || req.body.rounds > 16){
         res.status(400).json({
             message: 'The number of rounds should be between 2 and 16.'
+        })
+        return;
+    }else if( !isDate(req.body.startDate) || !isDate(req.body.endDate)){
+        res.status(400).json({
+            message: 'Error with date value.'
+        })
+        return;
+    }
+    else if(req.body.startDate > req.body.endDate){
+        res.status(400).json({
+            message: 'Start date can not be before end date.'
+        })
+        return;
+    }else if(req.body.startDate < new Date){
+        res.status(400).json({
+            message: 'Start date can not be in the past.'
         })
         return;
     }
