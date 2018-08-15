@@ -77,9 +77,9 @@ div.subform-tabs button:hover {
     width: 100%;
     height: auto;
     justify-content: space-evenly;
-    /* border: 1px solid white; */
     float: left;
-    padding: 10px 10px;
+    padding: 5px 10px;
+    /* border: 1px solid white; */
 }
 
 .section-half {
@@ -90,6 +90,8 @@ div.subform-tabs button:hover {
     height: auto;
     justify-content: space-evenly;
     float: left;
+    padding: 5px 5px;
+    /* border: 1px solid white; */
 }
 
 .title-container {
@@ -149,31 +151,27 @@ div.section a {
 }
 
 .filter-container {
+    display: flex;
     width: auto;
+    height: auto;
+    justify-content: space-evenly;
     float: left;
-    padding-right: 20px;
+    padding: 5px 5px;
+    float: left;
+    padding-right: 25px;
+    /* border: 1px solid white; */
 }
 
 .filter-title {
     width: auto;
+    display: flex;
+    align-items: left;
+    justify-content: left;
     float: left;
-    font-weight: bold;
+    font-weight: normal;
+    font-size: 1.25em;
+    color: white;
     padding-right: 10px;
-    font-size: 1em;
-}
-
-.filters {
-    width: 100%;
-    max-height: 75px;
-}
-
-#filteredTeams {
-    width: 50%;
-}
-
-#selectedTeams {
-    color: black;
-    width: 50%;
 }
 
 .list-section {
