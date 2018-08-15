@@ -12,7 +12,7 @@ class Tournament extends Component {
             showDetails: false,
             title: "",
             game: "",
-            selectedTournament: {},
+            selectedTournament: 0,
             tournaments: []
         }
         this.goToCreate = this.goToCreate.bind(this);
@@ -44,6 +44,33 @@ class Tournament extends Component {
         })
     }
 
+    getSelectedTournament(id){
+        var url = "http://localhost:3001/tournament/" + id;
+        if(id){
+            fetch(url,{
+                credentials: 'include',
+                method: "get",
+                headers: {
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                }
+            })
+            .then( (response) => response.json())
+            .then( (response) => {
+                if(response){
+                    this.setState({
+                        selectedTournament : response
+                    })
+                }
+            })
+        }
+    }
+
+    // dark header
+    // white text for title
+    // no white for details
+    // tyler for details to include
+    // remove more details from footer 
     getAuth(){
             fetch("http://localhost:3001/users/auth", {
                 credentials: 'include',
@@ -65,11 +92,9 @@ class Tournament extends Component {
 
     showDetails(event){
         event.preventDefault();
-        console.log(event.target.selectedid);
-        // const {selectedid} = event.target.selectedid;
-        // console.log(selectedid);
+        this.getSelectedTournament(event.target.id);
         this.setState({
-            showDetails : true
+            showDetails : true,
         })
     }
 
@@ -86,70 +111,21 @@ class Tournament extends Component {
     renderDetails(){
         var current = this.state.selectedTournament;
         return(
-            <Modal show={this.state.showDetails} onHide={this.hideDetails}>
+            <Modal className="tournament-modal"show={this.state.showDetails} onHide={this.hideDetails}>
             <Modal.Header closeButton>
-                <Modal.Title>{current.name}</Modal.Title>
+                <Modal.Title>{current.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <h4>Text in a modal</h4>
-            <p>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </p>
-
-            <h4>Popover in a modal</h4>
-            
-
-            <h4>Tooltips in a modal</h4>
-        
-
+            <h4>Game: {current.game}</h4>
+            <h4>Competition Level: {current.type}</h4>
+            <h4>Competition Format: {current.format}</h4>
             <hr />
-
-            <h4>Overflowing text to show scroll behavior</h4>
+            <h4>Details:</h4>
             <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros.
+              Dates: {current.startDate} - {current.endDate}<br/>
+              {current.info}
             </p>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur
-              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-              auctor.
-            </p>
-            <p>
-              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-              dui. Donec ullamcorper nulla non metus auctor fringilla.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros.
-            </p>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur
-              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-              auctor.
-            </p>
-            <p>
-              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-              dui. Donec ullamcorper nulla non metus auctor fringilla.
-            </p>
-            <p>
-              Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-              dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-              ac consectetur ac, vestibulum at eros.
-            </p>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur
-              et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-              auctor.
-            </p>
-            <p>
-              Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-              cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-              dui. Donec ullamcorper nulla non metus auctor fringilla.
-            </p>
+            
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.hideDetails}>Close</Button>
@@ -161,7 +137,6 @@ class Tournament extends Component {
     renderSpectatorView(){
 
         var currentTournaments = this.state.tournaments;
-        
         return(
             <div className="page-wrapper">                  
             {this.state.isAuth ? <Button onClick={this.goToCreate} bsStyle="primary">Create Tournament</Button> : null}
@@ -169,14 +144,15 @@ class Tournament extends Component {
                      { 
                          currentTournaments.map((tourney,index) => {
                              return(
-                                <Panel id={tourney._id} key={index}>
+                                <Panel className="tournament-panel" key={index}>
                                     <Panel.Heading>
                                         <Panel.Title>{tourney.title}</Panel.Title>
                                     </Panel.Heading>
-                                        <Panel.Body>{tourney.game}</Panel.Body>
-                                    <Panel.Footer> 
-                                    <Button selectedid="hi" onClick={this.showDetails} bsSize="small">More Details...</Button>
-                                    </Panel.Footer>
+                                        <Panel.Body>
+                                        {tourney.game}
+                                        <Button pullRight className="detailsbtn" id={tourney._id} onClick={this.showDetails} bsSize="small">More Details...</Button>
+                                        </Panel.Body>
+                                    
                                 </Panel>
                              );
                          })
