@@ -14,6 +14,22 @@ router.get('/',function(req,res){
             res.send(tournaments);
         }
     })
+        // Tournament.remove({},function(err){
+     //     if(err) console.log(err);
+     //   })
+ })
+
+ router.get('/:id',function(req,res){
+     var id = req.params.id;
+     Tournament.findOne({_id : id},function(err,tournament){
+         if(err) {
+             res.status(404); 
+             console.log(err);
+         }
+         else {
+             res.send(tournament);
+         }
+     })
 })
 
 router.post('/create',function(req,res){
@@ -23,7 +39,7 @@ router.post('/create',function(req,res){
     var isDate = function(date) {
         return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
     }
-    
+
     if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds){
         res.status(400).json({
             message: 'Please fill in all fields.'
