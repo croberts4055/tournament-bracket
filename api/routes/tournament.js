@@ -23,14 +23,14 @@ router.post('/create',function(req,res){
     var isDate = function(date) {
         return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
     }
-
+    
     if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds){
         res.status(400).json({
             message: 'Please fill in all fields.'
         })
         return;
     }
-    else if (!(req.body.type.Season || req.body.type.State || req.body.type.National || req.body.type.Invitational)){
+    else if (!(req.body.type === 'Season' || req.body.type === 'State' || req.body.type === 'National' || req.body.type === 'Invitational')){
         res.status(400).json({
             message: 'Please select the form type. Season, State, National or Invitational'
         })
