@@ -25,6 +25,12 @@ router.post('/create',function(req,res){
         })
         return;
     }
+    else if (!(req.body.type.Season || req.body.type.State || req.body.type.National || req.body.type.Invitational)){
+        res.status(400).json({
+            message: 'Please select the form type. Season, State, National or Invitational'
+        })
+        return;
+    }
     else if(!titleregularexpression.test(req.body.title)){
         res.status(400).json({
             message: 'Title can only contain numbers and letters.'
