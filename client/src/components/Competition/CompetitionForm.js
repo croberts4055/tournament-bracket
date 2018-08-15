@@ -359,19 +359,19 @@ class TournamentForm extends Component {
                     <div className="title-container">
                         Start Date
                     </div>
-                    <DatePicker name="start" selected={this.state.start} onChange={this.handleStartDate} />
+                    <DatePicker name="start" selected={this.state.start} minDate={new Date()} onChange={this.handleStartDate} />
                 </div>
 
                 <div className="section-half">
                     <div className="title-container">
                         End Date
                     </div>
-                    <DatePicker name="end" selected={this.state.end} onChange={this.handleEndDate} />
+                    <DatePicker name="end" selected={this.state.end} minDate={this.state.start} onChange={this.handleEndDate} />
                 </div>
             </div>
         )
     }
-
+    
     renderOrdering() {
         return (
             <div className="section">
