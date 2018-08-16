@@ -118,6 +118,55 @@ class TournamentForm extends Component {
                     ],
                 },
             ],
+            allTeams: [
+                {
+                    school: 'Hunter College',
+                    name: 'blue tigers',
+                    category: 'available',
+                },
+                {
+                    school: 'Baruch College',
+                    name: 'yellow dogs',
+                    category: 'available',
+                },
+                {
+                    school: 'BMCC',
+                    name: 'water bottleheads',
+                    category: 'available',
+                },
+                {
+                    school: 'Brookdale Campus',
+                    name: 'black ravens',
+                    category: 'available',
+                },
+                {
+                    school: 'Queens College',
+                    name: 'orange naranja',
+                    category: 'available',
+                },
+                {
+                    school: 'Lehman College',
+                    name: 'grassy lawnmowers',
+                    category: 'available',
+                },
+                {
+                    school: 'Sonos College',
+                    name: 'musical cats',
+                    category: 'available',
+                },
+                {
+                    school: 'City College',
+                    name: 'high clowns',
+                    category: 'available',
+                },
+                {
+                    school: 'City Tech College',
+                    name: 'pink snubbles',
+                    category: 'available',
+                },
+            ],
+            availableList: [],
+            participantsList: [],
         };
 
         this.handleSubformClicked = this.handleSubformClicked.bind(this);
@@ -153,6 +202,7 @@ class TournamentForm extends Component {
         })
     }
 
+    // when submit button is clicked, send data to the api
     handleSubmit(event) {
         event.preventDefault();
         fetch("http://localhost:3001/tournament/create",{
@@ -250,6 +300,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // this function allow user to select the form type, this field will indicate what type of form this is. Maybe it is not necessary (says david)
     renderSubformsSection() {
         return (
             <div className="section">
@@ -277,9 +328,9 @@ class TournamentForm extends Component {
         })
     }
 
+    // renders the title header with the input text
     renderTitle() {
         return (
-
             <div className="title-and-description-section">
                 <div className="section">
                     <div className="title-container">
@@ -287,18 +338,11 @@ class TournamentForm extends Component {
                     </div>
                     <input type="text" name="title" placeholder="Competition title..." value={this.state.title} onChange={this.handleChange}/>
                 </div>
-
-                {/* <div className="section">
-                    <div className="title-container">
-                        Title
-
-                    </div>
-                    <input type="text" name="title" placeholder="Competition title..." value={this.state.title} onChange={this.handleChange}/>
-                </div> */}
             </div>
         )
     }
 
+    // renders the description header with the input textarea
     renderDescription() {
         return (
             <div className="section">
@@ -310,6 +354,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // renders the game and format titles with dropdown selections of the options. if more games and formats are added, this is the function to add them
     renderGameAndFormat() {
         return (
             <div className="section">
@@ -340,6 +385,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // similar to the function above. if more rounds and best of are necessary, should be added here (or can make a request at the bottom of form indicating changing the number of rounds/best of)
     renderRoundsAndBestOf() {
         return (
             <div className="section">
@@ -366,6 +412,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // uses the moment library to let user select the end date. The start date is set by default to the current date
     renderStartAndEndDates() {
         return (
             <div className="section">
@@ -386,6 +433,7 @@ class TournamentForm extends Component {
         )
     }
     
+    // renders the ordering title and the options of how the participant's list should be ordered. if more ordering options are necessary, include them in state.
     renderOrdering() {
         return (
             <div className="section">
@@ -411,6 +459,7 @@ class TournamentForm extends Component {
         })
     }
 
+    // renders the state and filter options
     renderFilters() {
         return (
             <div className="section">
@@ -420,6 +469,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // renders State title and dropdown. when a specific state is clicked, this.state.state will update itself and change the title to the State that was clicked
     renderStateFilter() {
         return (
             <div className="filter-container">
@@ -441,15 +491,15 @@ class TournamentForm extends Component {
         )
     }
 
+    // updates the State clicked in the dropdown
     handleStateClicked(eventKey, event) {
         this.setState({
             state: eventKey
         })
     }
 
+    // this section renders the section title and section number for if it is updated, just like State being updated when clicked
     renderSectionFilter() {
-
-        // rendering title for section filter when changed
         var sectionTitle = '';
         var sectionNumber = this.state.section;
         if(sectionNumber === null) {
@@ -480,46 +530,65 @@ class TournamentForm extends Component {
         )
     }
 
+    // updates this.state.section when specific section is clicked
     handleSectionClicked(eventKey, event) {
         this.setState({
             section: eventKey
         })
     }
 
+    // renders the two headers. the team-title-container is the header for the teams list and the participant-title-container is the container for the players competing in the competition
     renderTeamsHeader() {
         return (
-            <div className="section">
+            <div>
                 <div className="team-title-container">
-                    Teams
+                    All Teams
                 </div>
-                <div className="team-title-container">
-                    Competition List
+                <div className="participant-title-container">
+                    Participant List
                 </div>
-                {/* <div className="team-list-container"> */}
-                    
-                    {this.renderTeams()}
-
-                {/* </div> */}
-                {/* <div className="competition-list-container">
-                    {this.renderTeams()}
-                </div> */}
             </div>
         )
     }
 
     // This function should be able to render teams based on selected State AND/OR selected Section.
     // Example 1: if only State is selected, then the teams list would show all the teams in that state.
-    // Example 2: ff State and Section is selected, then the teams list would show all the teams in that state for a specific section
+    // Example 2: if State and Section is selected, then the teams list would show all the teams in that state for a specific section
+    // Example 3: if both are null (initial form creation), then all the teams will show up on the list
     renderTeams() {
+        this.state.availableList = [];
+        this.state.participantsList = [];
         if(this.state.section === null) {
-            return null;
+            {this.loadAllTeams()}
         }
-        else {
-            var selectedSection = this.state.section;
-            var teamsObject = this.state.sections[selectedSection].teams;
-          
-            const teamsList = teamsObject.map((obj) =>
-                <div className="team-info-container">
+        else if(this.state.section !== null) {
+            {this.loadSectionTeams()}
+        }
+        return (
+            <div>
+                <div className="team-list-container" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, 'available')}>
+                    {this.state.availableList}
+                </div>
+
+                <div className="participants-list-container" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, 'participant')}>
+                    {this.state.participantsList}
+                </div>
+            </div>
+        )
+    }
+
+    // loads the sections teams of a selected section
+    loadSectionTeams() {
+        var selectedSection = this.state.section;
+        var teamsObject = this.state.sections[selectedSection].teams;
+
+        teamsObject.map((obj) => {
+            this.state.participantsList.push(
+                <div
+                key={obj.name}
+                onDragStart={(e)=>this.onDragStart(e, obj.name)}
+                draggable
+                className="participant-info-container">
                     <div className="team-school">
                         School: {obj.school}
                     </div>
@@ -527,59 +596,71 @@ class TournamentForm extends Component {
                         Team: {obj.name}
                     </div>
                 </div>
-            );
-
-            return (
-                <div className="team-list-display">
-                    {teamsList}
-                </div>
             )
-        }
+        })
     }
 
-    // renderParticipantList(){
-    //     // get current participants using get request, store them in array 
-    //     // var filteredParticipants = this.getFilteredParticipants(this.state.state,this.state.selectedSection);
-    //     // we would then map over this array to render the left hand side, and once selected we add
-    //     // the team to our participants list array in the handle select method. 
-    //     return(
-    //         <div className="section">
-    //             <div className="title-container">
-    //                 Select Participants:
-    //             </div>
-    //             <div className="list-container">
-    //             <FormControl id="filteredTeams" componentClass="select" multiple placeholder="select">
-    //                 {
-    //                     this.state.participants.map((team,index)=>{
-    //                         return(
-    //                         <option key={index} onSelect={this.handleTeamSelect} value="select">{team.name} </option>
-    //                         );
-    //                     })
-    //                 }
-    //             </FormControl>
-    //             </div>
-    //             <div className="list-container">
-    //             <ListGroup id="selectedTeams" className="half-container">
-    //                 {
-    //                     this.state.participants.map((team,index)=>{
-    //                         return(
-    //                             <ListGroupItem>
-    //                             <Button bsSize="small">
-    //                                 <Glyphicon glyph="ok"/>
-    //                             </Button>
-    //                             <Button bsSize="small">
-    //                                 <Glyphicon glyph="remove"/>
-    //                             </Button>
-    //                                 {team.seed}.{team.name}
-    //                             </ListGroupItem>
-    //                         );
-    //                     })
-    //                 }
-    //             </ListGroup>
-    //             </div>
-    //         </div>
-    //     );
-    // }    
+    // be default, whenever this form is created, the first instance it will show is a list of all the teams. In the future, it might be best to order them Alphabetically, Seed, State, Section, School Name, etc...
+    loadAllTeams() {
+        this.state.allTeams.forEach((team) => {
+            if(team.category === 'available') {
+                this.state.availableList.push(
+                    <div
+                    key={team.name}
+                    onDragStart={(e)=>this.onDragStart(e, team.name)}
+                    draggable
+                    className="team-info-container">
+                        <div className="team-school">
+                            School: {team.school}
+                        </div>
+                        <div className="team-name">
+                            Team: {team.name}
+                        </div>
+                    </div>
+                )
+            } else {
+                this.state.participantsList.push(
+                    <div
+                    key={team.name}
+                    onDragStart={(e)=>this.onDragStart(e, team.name)}
+                    draggable
+                    className="team-info-container">
+                        <div className="team-school">
+                            School: {team.school}
+                        </div>
+                        <div className="team-name">
+                            Team: {team.name}
+                        </div>
+                    </div>
+                )
+            }
+        })
+    }
+
+    // this function and onDragStart and onDrop allows the elements to be dragged and droped over from one container to the other
+    onDragOver(e) {
+        e.preventDefault();
+    }
+
+    onDragStart(e, teamName) {
+        e.dataTransfer.setData("name", teamName);
+    }
+
+    onDrop(e, category) {
+        let name = e.dataTransfer.getData("name");
+
+        let allTeams = this.state.allTeams.filter((team) => {
+            if(team.name == name) {
+                team.category = category;
+            }
+            return team;
+        })
+
+        this.setState({
+            ...this.state,
+            allTeams
+        })
+    }
 
     renderSubmitButton(event) {
         return (
@@ -600,7 +681,6 @@ class TournamentForm extends Component {
                         {this.renderSubformsSection()}
 
                         <form className="form-body" onSubmit={this.handleSubmit}>
-
                             {this.renderTitle()}
                             {this.renderDescription()}
                             {this.renderGameAndFormat()}
@@ -608,11 +688,8 @@ class TournamentForm extends Component {
                             {this.renderStartAndEndDates()}
                             {this.renderOrdering()}
                             {this.renderFilters()}
-
                             {this.renderTeamsHeader()}
-
-                            {/* {this.renderParticipantList()} */}
-
+                            {this.renderTeams()}
                             {this.renderSubmitButton()}
                         </form>
                     </div>
