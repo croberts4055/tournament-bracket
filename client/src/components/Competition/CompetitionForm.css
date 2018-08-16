@@ -224,24 +224,44 @@ div.section input[type=submit] {
     color: white;
 }
 
-/* .team-list-container, .competition-list-container {
+div.team-list-container {
     width: 50%;
-    border: 1px solid green;
-    height: auto;
-} */
+    border: 2px solid green;
+    padding: 5px 5px;
+    min-height: 200px;
+    float: left;
+    overflow-y: scroll;
+}
+
+div.participants-list-container {
+    width: 50%;
+    border: 2px solid orange;
+    padding: 5px 5px;
+    min-height: 200px;
+    float: left;
+    overflow-y: scroll;
+}
 
 .team-info-container {
+    display: block;
+    flex-direction: row;
+    flex-basis: 100%;
+    width: 100%;
     height: auto;
-    width: 66.66%;
     border: 1px solid white;
-    padding: 5px 0;
-    padding-left: 5px;
+    margin: 5px 0;
 }
 
-.team-school, .team-name {
-    width: auto;
+.participant-info-container {
+    display: block;
+    flex-direction: row;
+    flex-basis: 100%;
+    width: 100%;
+    height: auto;
+    border: 1px solid white;
+    margin: 5px 0;
 }
-
+/* 
 .team-list-display {
     display: block;
     flex-direction: row;
@@ -250,4 +270,4 @@ div.section input[type=submit] {
     height: auto;
     justify-content: space-evenly;
     float: left;
-}
+} */
