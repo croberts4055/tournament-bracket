@@ -15,7 +15,12 @@ class Contact extends Component {
             organization: "",
             location: "",
             subject: "",
-            message: ""
+            message: "",
+            alert : {
+                show: false,
+                text: "",
+                type: ""
+            }
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,10 +58,19 @@ class Contact extends Component {
                 "Location: " + this.state.location + "\n" + "Body: " + this.state.message
             })
         })
-        .then( (response) => response.json())
+        // .then( (response) => response.json())
         .then( (response) => {
-            if(response.message){
-                console.log(response.message);
+
+            if(response.status !== 200){
+                response.json().then(response => {
+                    this.setState({
+                        alert: {
+                            show: true,
+                            text: response,
+                            type: "warning"
+                        }
+                    })
+                })
             }
         })
     }

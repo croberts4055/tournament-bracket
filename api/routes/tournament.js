@@ -42,6 +42,16 @@ router.post('/create',function(req,res){
         return;
     }
 
+    // **************************************************************
+    // **************************************************************
+    // ************************** TO DO *****************************
+    //
+    // data from.... INFO, GAME, PARTICIPANTS... is NOT validatied!!!
+    //
+    // **************************************************************
+    // **************************************************************
+    // **************************************************************
+
     var validationTest = [
         Validate.checkTitle(req.body.title),
         Validate.checkRounds(req.body.rounds),
@@ -80,7 +90,7 @@ router.post('/create',function(req,res){
                 participants: req.body.participants
             })
             Tourney.save().then(result=> {
-                res.status(200);//.json(result);
+                res.status(200).json(result);
                 console.log(result);
             })
             .catch(err => {

@@ -7,7 +7,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import {Alert, Button, Glyphicon, ListGroup, ListGroupItem, FormControl,DropdownButton, MenuItem } from 'react-bootstrap';
+import {Button, Glyphicon, ListGroup, ListGroupItem, FormControl,DropdownButton, MenuItem } from 'react-bootstrap';
+import Alert from '../Alert/SysAlert.js';
 
 class TournamentForm extends Component {
     constructor(props) {
@@ -201,17 +202,6 @@ class TournamentForm extends Component {
         })
     }
 
-    // function to render alert message if fields are not filled in
-    renderAlert(){
-        return(
-            <div className="alert">
-                <Alert bsStyle={this.state.alert.type} onDismiss={this.handleDismiss}>
-                    <p>{this.state.alert.text}</p>
-                </Alert>
-            </div>
-        );
-    }
-
     // when submit button is clicked, send data to the api
     handleSubmit(event) {
         event.preventDefault();
@@ -234,18 +224,38 @@ class TournamentForm extends Component {
                 participants: this.state.participants
             })
         })
-        .then((response)=> response.json())
+        // .then((response)=> response.json())
         .then((response)=> {
-            if(response.message){
+            if(response.status === 200){
                 this.setState({
                     alert: {
                         show: true,
-                        text: response.message,
-                        type: "danger"
+                        text: "Competition Submitted",
+                        type: "success"
                     }
                 })
-            }else{
                 alert("Competition Submitted!");
+            }else{
+                response.json().then(response =>{
+                    if(response.message){
+                        this.setState({
+                            alert: {
+                                show: true,
+                                text: response.message,
+                                type: "danger"
+                            }
+                        })
+                    }
+                    else{
+                        this.setState({
+                            alert: {
+                                show: true,
+                                text: 'Error',
+                                type: "danger"
+                            }
+                        })
+                    }
+                })
             }
         })
     }
@@ -322,7 +332,6 @@ class TournamentForm extends Component {
     renderTitle() {
         return (
             <div className="title-and-description-section">
-            {this.state.alert.show ? this.renderAlert() : null}
                 <div className="section">
                     <div className="title-container">
                         Title
@@ -668,6 +677,7 @@ class TournamentForm extends Component {
                 <div className="competition-form-class">
                     <div className="competition-form-container">
                         {this.renderFormHeader()}
+                        {this.state.alert.show ? <Alert alert={this.state.alert}/> : null}
                         {this.renderSubformsSection()}
 
                         <form className="form-body" onSubmit={this.handleSubmit}>

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
 import './Join.css';
-import {HelpBlock, Alert, ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
+import {HelpBlock, ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
+import Alert from '../Alert/SysAlert.js';
 const cryptoRandomString = require('crypto-random-string');
 
 
@@ -48,17 +49,17 @@ class Join extends Component {
         this.passwordValidate = this.passwordValidate.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-        this.handleDismiss = this.handleDismiss.bind(this);
+        // this.handleDismiss = this.handleDismiss.bind(this);
     }
 
-    handleDismiss(){
-        this.setState({
-            alert : { show: false}
-        })
-        if(this.state.alert.type === "success"){
-            this.props.history.push("/");
-        }
-    }
+    // handleDismiss(){
+    //     this.setState({
+    //         alert : { show: false}
+    //     })
+    //     if(this.state.alert.type === "success"){
+    //         this.props.history.push("/");
+    //     }
+    // }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -346,16 +347,6 @@ class Join extends Component {
         })
     }
 
-    renderAlert(){
-        return(
-            <div className="alert">
-            <Alert bsStyle={this.state.alert.type} onDismiss={this.handleDismiss}>
-                    <p>{this.state.alert.text}</p>
-            </Alert>
-            </div>
-        );
-    }
-
     renderLogin(){
         return(
             <div className="join-egf-form">
@@ -363,7 +354,7 @@ class Join extends Component {
                 <button className="switchButton"onClick={this.goToLogin}>Take Me To Signup.</button>
                 <form className="formBlock" onSubmit={this.handleLogin}>
 
-                {this.state.alert.show ? this.renderAlert() : null}
+                {this.state.alert.show ? <Alert alert={this.state.alert}/> : null}
 
                     <FormGroup className="textfields">
                         <ControlLabel>Username:</ControlLabel>
@@ -413,7 +404,7 @@ class Join extends Component {
             <button className="switchButton" onClick={this.goToLogin}>Take Me To Login.</button>
             <form onSubmit={this.handleSignup}> 
 
-            {this.state.alert.show ? this.renderAlert() : null}
+            {this.state.alert.show ? <Alert alert={this.state.alert}/> : null}
 
                 <FormGroup className="textfields">
                     <ControlLabel>Name: </ControlLabel>
