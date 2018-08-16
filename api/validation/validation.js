@@ -1,5 +1,9 @@
 
+const emailregularexpression  = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const passwordregularexpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+const usernameregularexpression = /^[a-zA-Z0-9]+$/;
 const titleregularexpression = /^[a-zA-Z0-9 ]*$/;
+const nameregularexpression = /^[a-zA-Z ]+$/;
 
 const formTypes = [
     'Invitational',
@@ -25,7 +29,63 @@ module.exports = {
 
     },
 
-    // Checks if 'data' conforms to the RegEx
+    // Checks if 'data' conforms to the email RegEx
+    checkEmail: function(data){
+        if(emailregularexpression.test(data)){
+            return {
+                error : false,
+            } 
+        }else {
+            return {
+                error : true,
+                message: "That's an invalid e-mail. Please use a fully qualified e-mail address!"
+            }
+        }
+    },
+
+    // Checks if 'data' conforms to the username RegEx
+    checkUsername: function(data){
+        if(usernameregularexpression.test(data)){
+            return {
+                error : false,
+            } 
+        }else {
+            return {
+                error : true,
+                message: "That's an invalid username. Please use numbers and letters only!",
+            }
+        }
+    },
+
+    // Checks if 'data' conforms to the name RegEx
+    checkName: function(data){
+        if(nameregularexpression.test(data)){
+            return {
+                error : false,
+            } 
+        }else {
+            return {
+                error : true,
+                message: "That's an invalid name. Please use letters only!",
+            }
+        }
+    },
+
+    // Checks if 'data' conforms to the password RegEx
+    checkPassword: function(data){
+        if(passwordregularexpression.test(data)){
+            return {
+                error : false,
+            } 
+        }else {
+            return {
+                error : true,
+                message: "Your password must have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters."
+            }
+        }
+    },
+
+    // Checks if 'data' conforms to the title RegEx
     checkTitle: function(data){
         if(titleregularexpression.test(data)){
             return {
@@ -63,7 +123,7 @@ module.exports = {
 
     // Checks if end is after start. Checks if start date is not in the past.
     checkStartEndDate: function(start, end){
-        
+
         // Checks if data is a date. Return True or False
         var isDate = function(date) {
             return (new Date(date) !== "Invalid Date") && !isNaN(new Date(date));

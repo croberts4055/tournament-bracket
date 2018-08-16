@@ -2,7 +2,7 @@ const express = require('express'),
     mongoose = require('mongoose'),
     router = express.Router(),
     Schema = mongoose.Schema,
-    Tournament = require('../models/tournament');
+    Tournament = require('../models/tournament'),
     Validate = require('../validation/validation.js');
 
 router.get('/',function(req,res){
