@@ -201,6 +201,7 @@ class TournamentForm extends Component {
         })
     }
 
+    // function to render alert message if fields are not filled in
     renderAlert(){
         return(
             <div className="alert">
@@ -211,6 +212,7 @@ class TournamentForm extends Component {
         );
     }
 
+    // when submit button is clicked, send data to the api
     handleSubmit(event) {
         event.preventDefault();
         fetch("http://localhost:3001/tournament/create",{
@@ -288,6 +290,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // this function allow user to select the form type, this field will indicate what type of form this is. Maybe it is not necessary (says david)
     renderSubformsSection() {
         return (
             <div className="section">
@@ -315,9 +318,9 @@ class TournamentForm extends Component {
         })
     }
 
+    // renders the title header with the input text
     renderTitle() {
         return (
-
             <div className="title-and-description-section">
             {this.state.alert.show ? this.renderAlert() : null}
                 <div className="section">
@@ -326,18 +329,11 @@ class TournamentForm extends Component {
                     </div>
                     <input type="text" name="title" placeholder="Competition title..." value={this.state.title} onChange={this.handleChange}/>
                 </div>
-
-                {/* <div className="section">
-                    <div className="title-container">
-                        Title
-
-                    </div>
-                    <input type="text" name="title" placeholder="Competition title..." value={this.state.title} onChange={this.handleChange}/>
-                </div> */}
             </div>
         )
     }
 
+    // renders the description header with the input textarea
     renderDescription() {
         return (
             <div className="section">
@@ -349,6 +345,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // renders the game and format titles with dropdown selections of the options. if more games and formats are added, this is the function to add them
     renderGameAndFormat() {
         return (
             <div className="section">
@@ -379,6 +376,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // similar to the function above. if more rounds and best of are necessary, should be added here (or can make a request at the bottom of form indicating changing the number of rounds/best of)
     renderRoundsAndBestOf() {
         return (
             <div className="section">
@@ -405,6 +403,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // uses the moment library to let user select the end date. The start date is set by default to the current date
     renderStartAndEndDates() {
         return (
             <div className="section">
@@ -425,6 +424,7 @@ class TournamentForm extends Component {
         )
     }
     
+    // renders the ordering title and the options of how the participant's list should be ordered. if more ordering options are necessary, include them in state.
     renderOrdering() {
         return (
             <div className="section">
@@ -450,6 +450,7 @@ class TournamentForm extends Component {
         })
     }
 
+    // renders the state and filter options
     renderFilters() {
         return (
             <div className="section">
@@ -459,6 +460,7 @@ class TournamentForm extends Component {
         )
     }
 
+    // renders State title and dropdown. when a specific state is clicked, this.state.state will update itself and change the title to the State that was clicked
     renderStateFilter() {
         return (
             <div className="filter-container">
@@ -480,14 +482,15 @@ class TournamentForm extends Component {
         )
     }
 
+    // updates the State clicked in the dropdown
     handleStateClicked(eventKey, event) {
         this.setState({
             state: eventKey
         })
     }
 
+    // this section renders the section title and section number for if it is updated, just like State being updated when clicked
     renderSectionFilter() {
-        // rendering title for section filter when changed
         var sectionTitle = '';
         var sectionNumber = this.state.section;
         if(sectionNumber === null) {
@@ -518,20 +521,22 @@ class TournamentForm extends Component {
         )
     }
 
+    // updates this.state.section when specific section is clicked
     handleSectionClicked(eventKey, event) {
         this.setState({
             section: eventKey
         })
     }
 
+    // renders the two headers. the team-title-container is the header for the teams list and the participant-title-container is the container for the players competing in the competition
     renderTeamsHeader() {
         return (
-            <div className="section">
+            <div>
                 <div className="team-title-container">
-                    Teams
+                    All Teams
                 </div>
-                <div className="team-title-container">
-                    Competition List
+                <div className="participant-title-container">
+                    Participant List
                 </div>
             </div>
         )
@@ -539,9 +544,17 @@ class TournamentForm extends Component {
 
     // This function should be able to render teams based on selected State AND/OR selected Section.
     // Example 1: if only State is selected, then the teams list would show all the teams in that state.
-    // Example 2: ff State and Section is selected, then the teams list would show all the teams in that state for a specific section
+    // Example 2: if State and Section is selected, then the teams list would show all the teams in that state for a specific section
+    // Example 3: if both are null (initial form creation), then all the teams will show up on the list
     renderTeams() {
-        {this.storeAllTeams()}
+        this.state.availableList = [];
+        this.state.participantsList = [];
+        if(this.state.section === null) {
+            {this.loadAllTeams()}
+        }
+        else if(this.state.section !== null) {
+            {this.loadSectionTeams()}
+        }
         return (
             <div>
                 <div className="team-list-container" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, 'available')}>
@@ -553,32 +566,33 @@ class TournamentForm extends Component {
                 </div>
             </div>
         )
-        // else {
-        //     var selectedSection = this.state.section;
-        //     var teamsObject = this.state.sections[selectedSection].teams;
-
-        //     const teamsList = teamsObject.map((obj) =>
-        //         <div className="team-info-container">
-        //             <div className="team-school">
-        //                 School: {obj.school}
-        //             </div>
-        //             <div className="team-name">
-        //                 Team: {obj.name}
-        //             </div>
-        //         </div>
-        //     );
-
-        //     return (
-        //         <div className="team-list-display">
-        //             {teamsList}
-        //         </div>
-        //     )
-        // }
     }
 
-    storeAllTeams() {
-        this.state.availableList = [];
-        this.state.participantsList = [];
+    // loads the sections teams of a selected section
+    loadSectionTeams() {
+        var selectedSection = this.state.section;
+        var teamsObject = this.state.sections[selectedSection].teams;
+
+        teamsObject.map((obj) => {
+            this.state.participantsList.push(
+                <div
+                key={obj.name}
+                onDragStart={(e)=>this.onDragStart(e, obj.name)}
+                draggable
+                className="participant-info-container">
+                    <div className="team-school">
+                        School: {obj.school}
+                    </div>
+                    <div className="team-name">
+                        Team: {obj.name}
+                    </div>
+                </div>
+            )
+        })
+    }
+
+    // be default, whenever this form is created, the first instance it will show is a list of all the teams. In the future, it might be best to order them Alphabetically, Seed, State, Section, School Name, etc...
+    loadAllTeams() {
         this.state.allTeams.forEach((team) => {
             if(team.category === 'available') {
                 this.state.availableList.push(
@@ -614,6 +628,7 @@ class TournamentForm extends Component {
         })
     }
 
+    // this function and onDragStart and onDrop allows the elements to be dragged and droped over from one container to the other
     onDragOver(e) {
         e.preventDefault();
     }
@@ -631,12 +646,6 @@ class TournamentForm extends Component {
             }
             return team;
         })
-
-        // let result = Object.keys(this.state.leftList).filter(function(team) {
-        //     if(team === school) {
-        //         return true;
-        //     }
-        // })
 
         this.setState({
             ...this.state,
@@ -662,7 +671,6 @@ class TournamentForm extends Component {
                         {this.renderSubformsSection()}
 
                         <form className="form-body" onSubmit={this.handleSubmit}>
-
                             {this.renderTitle()}
                             {this.renderDescription()}
                             {this.renderGameAndFormat()}
@@ -670,12 +678,8 @@ class TournamentForm extends Component {
                             {this.renderStartAndEndDates()}
                             {this.renderOrdering()}
                             {this.renderFilters()}
-
                             {this.renderTeamsHeader()}
-
                             {this.renderTeams()}
-                            {/* {this.renderCompetitionTeams()} */}
-
                             {this.renderSubmitButton()}
                         </form>
                     </div>
