@@ -237,20 +237,13 @@ div.section input[type=submit] {
 }
 
 div.team-list-container {
-    width: 45%;
-    border: 2px solid green;
-    padding: 5px 5px;
-    min-height: 200px;
-    max-height: 300px;
-    float: left;
-    overflow-y: scroll;
     margin-right: 10%;
 }
 
-div.participants-list-container {
+div.participants-list-container, div.team-list-container {
     width: 45%;
-    border: 2px solid orange;
-    padding: 5px 5px;
+    border: 2px ridge green;
+    padding: 2.5px 5px;
     min-height: 200px;
     max-height: 300px;
     float: left;

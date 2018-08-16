@@ -528,7 +528,7 @@ class TournamentForm extends Component {
         return (
             <div>
                 <div className="team-title-container">
-                    Teams
+                    All Teams
                 </div>
                 <div className="participant-title-container">
                     Participant List
@@ -542,8 +542,13 @@ class TournamentForm extends Component {
     // Example 2: if State and Section is selected, then the teams list would show all the teams in that state for a specific section
     // Example 3: if both are null (initial form creation), then all the teams will show up on the list
     renderTeams() {
+        this.state.availableList = [];
+        this.state.participantsList = [];
         if(this.state.section === null) {
-            {this.storeAllTeams()}
+            {this.loadAllTeams()}
+        }
+        else if(this.state.section !== null) {
+            {this.loadSectionTeams()}
         }
         return (
             <div>
@@ -556,32 +561,31 @@ class TournamentForm extends Component {
                 </div>
             </div>
         )
-        // else {
-        //     var selectedSection = this.state.section;
-        //     var teamsObject = this.state.sections[selectedSection].teams;
+    }
+    
+    loadSectionTeams() {
+        var selectedSection = this.state.section;
+        var teamsObject = this.state.sections[selectedSection].teams;
 
-        //     const teamsList = teamsObject.map((obj) =>
-        //         <div className="team-info-container">
-        //             <div className="team-school">
-        //                 School: {obj.school}
-        //             </div>
-        //             <div className="team-name">
-        //                 Team: {obj.name}
-        //             </div>
-        //         </div>
-        //     );
-
-        //     return (
-        //         <div className="team-list-display">
-        //             {teamsList}
-        //         </div>
-        //     )
-        // }
+        teamsObject.map((obj) => {
+            this.state.participantsList.push(
+                <div
+                key={obj.name}
+                onDragStart={(e)=>this.onDragStart(e, obj.name)}
+                draggable
+                className="participant-info-container">
+                    <div className="team-school">
+                        School: {obj.school}
+                    </div>
+                    <div className="team-name">
+                        Team: {obj.name}
+                    </div>
+                </div>
+            )
+        });
     }
 
-    storeAllTeams() {
-        this.state.availableList = [];
-        this.state.participantsList = [];
+    loadAllTeams() {
         this.state.allTeams.forEach((team) => {
             if(team.category === 'available') {
                 this.state.availableList.push(
