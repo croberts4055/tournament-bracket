@@ -174,18 +174,38 @@ class TournamentForm extends Component {
                 participants: this.state.participants
             })
         })
-        .then((response)=> response.json())
+        // .then((response)=> response.json())
         .then((response)=> {
-            if(response.message){
+            if(response.status === 200){
                 this.setState({
                     alert: {
                         show: true,
-                        text: response.message,
-                        type: "danger"
+                        text: "Competition Submitted",
+                        type: "success"
                     }
                 })
-            }else{
                 alert("Competition Submitted!");
+            }else{
+                response.json().then(response =>{
+                    if(response.message){
+                        this.setState({
+                            alert: {
+                                show: true,
+                                text: response.message,
+                                type: "danger"
+                            }
+                        })
+                    }
+                    else{
+                        this.setState({
+                            alert: {
+                                show: true,
+                                text: 'Error',
+                                type: "danger"
+                            }
+                        })
+                    }
+                })
             }
         })
     }

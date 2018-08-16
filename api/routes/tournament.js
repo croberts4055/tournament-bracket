@@ -90,7 +90,7 @@ router.post('/create',function(req,res){
                 participants: req.body.participants
             })
             Tourney.save().then(result=> {
-                res.status(200);//.json(result);
+                res.status(200).json(result);
                 console.log(result);
             })
             .catch(err => {
