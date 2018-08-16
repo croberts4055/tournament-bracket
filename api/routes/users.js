@@ -127,6 +127,13 @@ router.post('/signup',function(req,res){
 
   // console.log(req.body)
 
+  if(!req.body.name || !req.body.email || !req.body.password || !req.body.username || !req.body.type || !req.body.subtype || !req.body.token){
+      res.status(400).json({
+          message: 'Please fill in all fields.'
+      })
+      return;
+  }
+
   var validationTest = [
       Validate.checkName(req.body.name),
       Validate.checkEmail(req.body.email),
