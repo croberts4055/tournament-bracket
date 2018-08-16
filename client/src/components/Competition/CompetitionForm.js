@@ -7,7 +7,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import {Alert, Button, Glyphicon, ListGroup, ListGroupItem, FormControl,DropdownButton, MenuItem } from 'react-bootstrap';
+import {Button, Glyphicon, ListGroup, ListGroupItem, FormControl,DropdownButton, MenuItem } from 'react-bootstrap';
+import Alert from '../Alert/SysAlert.js';
 
 class TournamentForm extends Component {
     constructor(props) {
@@ -152,16 +153,6 @@ class TournamentForm extends Component {
         })
     }
 
-    renderAlert(){
-        return(
-            <div className="alert">
-                <Alert bsStyle={this.state.alert.type} onDismiss={this.handleDismiss}>
-                    <p>{this.state.alert.text}</p>
-                </Alert>
-            </div>
-        );
-    }
-
     handleSubmit(event) {
         event.preventDefault();
         fetch("http://localhost:3001/tournament/create",{
@@ -270,7 +261,6 @@ class TournamentForm extends Component {
         return (
 
             <div className="title-and-description-section">
-            {this.state.alert.show ? this.renderAlert() : null}
                 <div className="section">
                     <div className="title-container">
                         Title
@@ -586,6 +576,7 @@ class TournamentForm extends Component {
                 <div className="competition-form-class">
                     <div className="competition-form-container">
                         {this.renderFormHeader()}
+                        {this.state.alert.show ? <Alert alert={this.state.alert}/> : null}
                         {this.renderSubformsSection()}
 
                         <form className="form-body" onSubmit={this.handleSubmit}>

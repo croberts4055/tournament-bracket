@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const Validate = require('../validation/validation.js');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -12,6 +13,21 @@ const transporter = nodemailer.createTransport({
 })
 
   router.post('/contact',function(req,res){
+    console.log(req.body)
+
+      var validationTest = [
+          Validate.checkEmail(req.body.email)
+      ]
+
+      for(var i = 0; i < validationTest.length; i++){
+          if(validationTest[i].error){
+              res.status(400).json({
+                  message: validationTest[i].message
+              })
+              return;
+          }
+      }
+
     var mailOptions = {
         from: 'aarondtaveras@gmail.com',
         to: req.body.email,
