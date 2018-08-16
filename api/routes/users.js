@@ -170,7 +170,7 @@ router.post('/signup',function(req,res){
          if(err) console.log("error");
             const user = new User({
                       _id: new mongoose.Types.ObjectId(),
-                      locked : req.body.locked,
+                      locked : true,
                       token : req.body.token,
                       email: req.body.email,
                       username: req.body.username,
