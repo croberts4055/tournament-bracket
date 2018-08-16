@@ -12,7 +12,6 @@ class Join extends Component {
         super();
 
         this.state = {
-            locked : false,
             type: {
                     student: true,
                     admin: false, 
@@ -67,7 +66,6 @@ class Join extends Component {
   
     handleHighschoolChecked(event) {
         this.setState({
-            locked: false,
             type: {
                 student: true,
                 admin : false
@@ -84,7 +82,6 @@ class Join extends Component {
 
     handleCollegeChecked(event) {
         this.setState({
-            locked: false,
             type: {
                 student: true,
                 admin : false
@@ -101,7 +98,6 @@ class Join extends Component {
 
     handleMediaChecked(event) {
         this.setState({
-            locked: true,
             type: {
                 student: false,
                 admin : true
@@ -289,7 +285,6 @@ class Join extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                locked: true,
                 token: newToken,
                 email : formattedEmail,
                 username: formattedUser,
