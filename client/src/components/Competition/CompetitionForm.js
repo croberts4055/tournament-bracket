@@ -526,12 +526,12 @@ class TournamentForm extends Component {
 
     renderTeamsHeader() {
         return (
-            <div className="section">
+            <div>
                 <div className="team-title-container">
                     Teams
                 </div>
-                <div className="team-title-container">
-                    Competition List
+                <div className="participant-title-container">
+                    Participant List
                 </div>
             </div>
         )
@@ -539,9 +539,12 @@ class TournamentForm extends Component {
 
     // This function should be able to render teams based on selected State AND/OR selected Section.
     // Example 1: if only State is selected, then the teams list would show all the teams in that state.
-    // Example 2: ff State and Section is selected, then the teams list would show all the teams in that state for a specific section
+    // Example 2: if State and Section is selected, then the teams list would show all the teams in that state for a specific section
+    // Example 3: if both are null (initial form creation), then all the teams will show up on the list
     renderTeams() {
-        {this.storeAllTeams()}
+        if(this.state.section === null) {
+            {this.storeAllTeams()}
+        }
         return (
             <div>
                 <div className="team-list-container" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, 'available')}>
@@ -631,12 +634,6 @@ class TournamentForm extends Component {
             }
             return team;
         })
-
-        // let result = Object.keys(this.state.leftList).filter(function(team) {
-        //     if(team === school) {
-        //         return true;
-        //     }
-        // })
 
         this.setState({
             ...this.state,
