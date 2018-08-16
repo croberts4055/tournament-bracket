@@ -117,6 +117,55 @@ class TournamentForm extends Component {
                     ],
                 },
             ],
+            allTeams: [
+                {
+                    school: 'Hunter College',
+                    name: 'blue tigers',
+                    category: 'available',
+                },
+                {
+                    school: 'Baruch College',
+                    name: 'yellow dogs',
+                    category: 'available',
+                },
+                {
+                    school: 'BMCC',
+                    name: 'water bottleheads',
+                    category: 'available',
+                },
+                {
+                    school: 'Brookdale Campus',
+                    name: 'black ravens',
+                    category: 'available',
+                },
+                {
+                    school: 'Queens College',
+                    name: 'orange naranja',
+                    category: 'available',
+                },
+                {
+                    school: 'Lehman College',
+                    name: 'grassy lawnmowers',
+                    category: 'available',
+                },
+                {
+                    school: 'Sonos College',
+                    name: 'musical cats',
+                    category: 'available',
+                },
+                {
+                    school: 'City College',
+                    name: 'high clowns',
+                    category: 'available',
+                },
+                {
+                    school: 'City Tech College',
+                    name: 'pink snubbles',
+                    category: 'available',
+                },
+            ],
+            availableList: [],
+            participantsList: [],
         };
 
         this.handleSubformClicked = this.handleSubformClicked.bind(this);
@@ -438,7 +487,6 @@ class TournamentForm extends Component {
     }
 
     renderSectionFilter() {
-
         // rendering title for section filter when changed
         var sectionTitle = '';
         var sectionNumber = this.state.section;
@@ -485,14 +533,6 @@ class TournamentForm extends Component {
                 <div className="team-title-container">
                     Competition List
                 </div>
-                {/* <div className="team-list-container"> */}
-                    
-                    {this.renderTeams()}
-
-                {/* </div> */}
-                {/* <div className="competition-list-container">
-                    {this.renderTeams()}
-                </div> */}
             </div>
         )
     }
@@ -501,75 +541,108 @@ class TournamentForm extends Component {
     // Example 1: if only State is selected, then the teams list would show all the teams in that state.
     // Example 2: ff State and Section is selected, then the teams list would show all the teams in that state for a specific section
     renderTeams() {
-        if(this.state.section === null) {
-            return null;
-        }
-        else {
-            var selectedSection = this.state.section;
-            var teamsObject = this.state.sections[selectedSection].teams;
-          
-            const teamsList = teamsObject.map((obj) =>
-                <div className="team-info-container">
-                    <div className="team-school">
-                        School: {obj.school}
-                    </div>
-                    <div className="team-name">
-                        Team: {obj.name}
-                    </div>
+        {this.storeAllTeams()}
+        return (
+            <div>
+                <div className="team-list-container" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, 'available')}>
+                    {this.state.availableList}
                 </div>
-            );
 
-            return (
-                <div className="team-list-display">
-                    {teamsList}
+                <div className="participants-list-container" onDragOver={(e)=>this.onDragOver(e)} onDrop={(e)=>this.onDrop(e, 'participant')}>
+                    {this.state.participantsList}
                 </div>
-            )
-        }
+            </div>
+        )
+        // else {
+        //     var selectedSection = this.state.section;
+        //     var teamsObject = this.state.sections[selectedSection].teams;
+
+        //     const teamsList = teamsObject.map((obj) =>
+        //         <div className="team-info-container">
+        //             <div className="team-school">
+        //                 School: {obj.school}
+        //             </div>
+        //             <div className="team-name">
+        //                 Team: {obj.name}
+        //             </div>
+        //         </div>
+        //     );
+
+        //     return (
+        //         <div className="team-list-display">
+        //             {teamsList}
+        //         </div>
+        //     )
+        // }
     }
 
-    // renderParticipantList(){
-    //     // get current participants using get request, store them in array 
-    //     // var filteredParticipants = this.getFilteredParticipants(this.state.state,this.state.selectedSection);
-    //     // we would then map over this array to render the left hand side, and once selected we add
-    //     // the team to our participants list array in the handle select method. 
-    //     return(
-    //         <div className="section">
-    //             <div className="title-container">
-    //                 Select Participants:
-    //             </div>
-    //             <div className="list-container">
-    //             <FormControl id="filteredTeams" componentClass="select" multiple placeholder="select">
-    //                 {
-    //                     this.state.participants.map((team,index)=>{
-    //                         return(
-    //                         <option key={index} onSelect={this.handleTeamSelect} value="select">{team.name} </option>
-    //                         );
-    //                     })
-    //                 }
-    //             </FormControl>
-    //             </div>
-    //             <div className="list-container">
-    //             <ListGroup id="selectedTeams" className="half-container">
-    //                 {
-    //                     this.state.participants.map((team,index)=>{
-    //                         return(
-    //                             <ListGroupItem>
-    //                             <Button bsSize="small">
-    //                                 <Glyphicon glyph="ok"/>
-    //                             </Button>
-    //                             <Button bsSize="small">
-    //                                 <Glyphicon glyph="remove"/>
-    //                             </Button>
-    //                                 {team.seed}.{team.name}
-    //                             </ListGroupItem>
-    //                         );
-    //                     })
-    //                 }
-    //             </ListGroup>
-    //             </div>
-    //         </div>
-    //     );
-    // }    
+    storeAllTeams() {
+        this.state.availableList = [];
+        this.state.participantsList = [];
+        this.state.allTeams.forEach((team) => {
+            if(team.category === 'available') {
+                this.state.availableList.push(
+                    <div
+                    key={team.name}
+                    onDragStart={(e)=>this.onDragStart(e, team.name)}
+                    draggable
+                    className="team-info-container">
+                        <div className="team-school">
+                            School: {team.school}
+                        </div>
+                        <div className="team-name">
+                            Team: {team.name}
+                        </div>
+                    </div>
+                )
+            } else {
+                this.state.participantsList.push(
+                    <div
+                    key={team.name}
+                    onDragStart={(e)=>this.onDragStart(e, team.name)}
+                    draggable
+                    className="team-info-container">
+                        <div className="team-school">
+                            School: {team.school}
+                        </div>
+                        <div className="team-name">
+                            Team: {team.name}
+                        </div>
+                    </div>
+                )
+            }
+        })
+    }
+
+    onDragOver(e) {
+        e.preventDefault();
+    }
+
+    onDragStart(e, teamName) {
+        e.dataTransfer.setData("name", teamName);
+    }
+
+    onDrop(e, category) {
+        let name = e.dataTransfer.getData("name");
+
+        let allTeams = this.state.allTeams.filter((team) => {
+            if(team.name == name) {
+                team.category = category;
+            }
+            return team;
+        })
+
+        // let result = Object.keys(this.state.leftList).filter(function(team) {
+        //     if(team === school) {
+        //         return true;
+        //     }
+        // })
+
+        this.setState({
+            ...this.state,
+            allTeams
+        })
+    }
 
     renderSubmitButton(event) {
         return (
@@ -600,7 +673,8 @@ class TournamentForm extends Component {
 
                             {this.renderTeamsHeader()}
 
-                            {/* {this.renderParticipantList()} */}
+                            {this.renderTeams()}
+                            {/* {this.renderCompetitionTeams()} */}
 
                             {this.renderSubmitButton()}
                         </form>
