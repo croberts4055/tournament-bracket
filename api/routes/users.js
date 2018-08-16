@@ -5,6 +5,7 @@ const User = require('../models/users');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
+const Validate = require('../validation/validation.js');
 var passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 
@@ -123,35 +124,32 @@ router.get('/:userId');
 
 /********************* POST requests ******************************/ 
 router.post('/signup',function(req,res){
-  var emailregularexpression  = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  var passwordregularexpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
-  var usernameregularexpression = /^[a-zA-Z0-9]+$/;
-  var nameregularexpression = /^[a-zA-Z ]+$/;
 
-  if(!emailregularexpression.test(req.body.email)){
-    res.status(200).json({
-      message: "That's an invalid e-mail. Please use a fully qualified e-mail address!",
-    })
-    return;
+  // console.log(req.body)
+
+  if(!req.body.name || !req.body.email || !req.body.password || !req.body.username || !req.body.type || !req.body.subtype || !req.body.token){
+      res.status(400).json({
+          message: 'Please fill in all fields.'
+      })
+      return;
   }
-  else if(!passwordregularexpression.test(req.body.password)){
-    res.status(200).json({
-      message: "Your password must have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters.",
-    })
-    return;    
+
+  var validationTest = [
+      Validate.checkName(req.body.name),
+      Validate.checkEmail(req.body.email),
+      Validate.checkPassword(req.body.password),
+      Validate.checkUsername(req.body.username),
+  ]
+
+  for(var i = 0; i < validationTest.length; i++){
+      if(validationTest[i].error){
+          res.status(400).json({
+              message: validationTest[i].message
+          })
+          return;
+      }
   }
-  else if(!usernameregularexpression.test(req.body.username)){
-    res.status(200).json({
-      message: "That's an invalid username. Please use numbers and letters only!",
-    })
-    return;    
-  }
-  else if(!nameregularexpression.test(req.body.name)){
-    res.status(200).json({
-      message: "That's an invalid name. Please use letters only!",
-    })
-    return;    
-  }
+
   // check if there's already an email OR username that exists
   User.find( {$or: [{email: req.body.email},{username:req.body.username}]},
     function(err,matches){
@@ -172,7 +170,7 @@ router.post('/signup',function(req,res){
          if(err) console.log("error");
             const user = new User({
                       _id: new mongoose.Types.ObjectId(),
-                      locked : req.body.locked,
+                      locked : true,
                       token : req.body.token,
                       email: req.body.email,
                       username: req.body.username,

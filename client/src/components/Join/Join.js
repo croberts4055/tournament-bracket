@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MyNav from '../Navs/Nav';
 import Footer from '../Footer/Footer';
 import './Join.css';
-import {Alert, ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
+import {HelpBlock, Alert, ControlLabel,FormGroup, FormControl, FormLabel, Radio, Checkbox} from 'react-bootstrap';
 import {Redirect} from 'react-router-dom';
 const cryptoRandomString = require('crypto-random-string');
 
@@ -12,7 +12,6 @@ class Join extends Component {
         super();
 
         this.state = {
-            locked : false,
             type: {
                     student: true,
                     admin: false, 
@@ -67,7 +66,6 @@ class Join extends Component {
   
     handleHighschoolChecked(event) {
         this.setState({
-            locked: false,
             type: {
                 student: true,
                 admin : false
@@ -84,7 +82,6 @@ class Join extends Component {
 
     handleCollegeChecked(event) {
         this.setState({
-            locked: false,
             type: {
                 student: true,
                 admin : false
@@ -101,7 +98,6 @@ class Join extends Component {
 
     handleMediaChecked(event) {
         this.setState({
-            locked: true,
             type: {
                 student: false,
                 admin : true
@@ -216,21 +212,21 @@ class Join extends Component {
             })
             return false;
         }
-        else if(this.state.password !== this.state.confirmpassword){
-            this.setState({
-                alert: {
-                    show: true,
-                    text: "Your passwords don't match. Try re-typing them again.",
-                    type: "warning"
-                }
-            })
-            return false;
-        }
         else if(!passwordregularexpression.test(this.state.password)){
             this.setState({
                 alert: {
                     show: true,
                     text: "Your password must have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters.",
+                    type: "warning"
+                }
+            })
+            return false;
+        }
+        else if(this.state.password !== this.state.confirmpassword){
+            this.setState({
+                alert: {
+                    show: true,
+                    text: "Your passwords don't match. Try re-typing them again.",
                     type: "warning"
                 }
             })
@@ -289,7 +285,6 @@ class Join extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                locked: true,
                 token: newToken,
                 email : formattedEmail,
                 username: formattedUser,
@@ -334,10 +329,10 @@ class Join extends Component {
         if(this.state.password.length === 0){
             return null;
         }
-        else if(this.state.password!==this.state.confirmpassword){
+        else if(!passwordregularexpression.test(this.state.password)){
             return 'error';
         }
-        else if(!passwordregularexpression.test(this.state.password)){
+        else if(this.state.password!==this.state.confirmpassword){
             return 'error';
         }
         return 'success';
@@ -447,6 +442,7 @@ class Join extends Component {
                         type="password"
                         name="password"
                         onChange = {this.handleChange} />
+                        {this.passwordValidate() === 'error' ? <HelpBlock> Both passwords must match and have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters.</HelpBlock> : null}
                 </FormGroup>
                 <FormGroup className="textfields" validationState={this.passwordValidate()}>
                     <ControlLabel>Confirm Password:</ControlLabel>

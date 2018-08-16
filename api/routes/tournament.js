@@ -2,7 +2,8 @@ const express = require('express'),
     mongoose = require('mongoose'),
     router = express.Router(),
     Schema = mongoose.Schema,
-    Tournament = require('../models/tournament');
+    Tournament = require('../models/tournament'),
+    Validate = require('../validation/validation.js');
 
 router.get('/',function(req,res){
     Tournament.find({},function(err,tournaments){
@@ -14,28 +15,47 @@ router.get('/',function(req,res){
             res.send(tournaments);
         }
     })
+    // Tournament.remove({},function(err){
+    //     if(err) console.log(err);
+    //   })
+})
+
+router.get('/:id',function(req,res){
+    var id = req.params.id;
+    Tournament.findOne({_id : id},function(err,tournament){
+        if(err) {
+            res.status(404); 
+            console.log(err);
+        }
+        else {
+            res.send(tournament);
+        }
+    })
 })
 
 router.post('/create',function(req,res){
-    var titleregularexpression = /^[a-zA-Z0-9 ]*$/;
 
-    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds || !req.body.participants){
+    if(!req.body.title || !req.body.info || !req.body.startDate || !req.body.endDate || !req.body.game || !req.body.rounds){
         res.status(400).json({
             message: 'Please fill in all fields.'
         })
         return;
     }
-    else if(!titleregularexpression.test(req.body.title)){
-        res.status(400).json({
-            message: 'Title can only contain numbers and letters.'
-        })
-        return;
-    }
-    else if(req.body.rounds < 2 || req.body.rounds > 16 ){
-        res.status(400).json({
-            message: 'The number of rounds should be between 2 and 16.'
-        })
-        return;
+
+    var validationTest = [
+        Validate.checkTitle(req.body.title),
+        Validate.checkRounds(req.body.rounds),
+        Validate.checkFormType(req.body.type),
+        Validate.checkStartEndDate(req.body.startDate, req.body.endDate)
+    ]
+
+    for(var i = 0; i < validationTest.length; i++){
+        if(validationTest[i].error){
+            res.status(400).json({
+                message: validationTest[i].message
+            })
+            return;
+        }
     }
 
     Tournament.find({title: req.body.title},function(err,match){
