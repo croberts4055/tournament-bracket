@@ -1,3 +1,4 @@
+package EGFTesting;
 import java.util.Random;
 import java.util.UUID;
 import org.openqa.selenium.By;
@@ -5,13 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MasterHelper {
-	
+
 	// Webdriver instance
 	public WebDriver driver;
 
 	//Random instance
 	Random random = new Random();
-	
+
 	// URLS for all pages on website
 	String homeURL = "http://localhost:3000/";
 	String schoolURL = "http://localhost:3000/schoolprofile";
@@ -41,7 +42,7 @@ public class MasterHelper {
 	};
 	public int randNum1() {
 		// Returns a number between 0 (inclusive) and 50 (exclusive); Returns 0-49
-		
+
 		int high = 50;
 		int low = 0;
 		int randomNumber = random.nextInt(high-low) +low;
@@ -63,24 +64,45 @@ public class MasterHelper {
 		return "random-" + UUID.randomUUID().toString() + "@example.com";
 	}
 
+	public void signInUser(String username, String password) {
+		driver.get(loginURL);
+
+		driver.findElement(By.className("switchButton")).click();
+
+		// Web Element is created for the name box on the login page.
+		WebElement nameBox = driver.findElement(By.name("username"));
+
+		// Name created above is typed into name box.
+		nameBox.sendKeys(username);
+
+		// Web Element is created for the password box on the login page.
+		WebElement passwordBox = driver.findElement(By.name("password"));
+
+		// Password created above is typed into name box.
+		passwordBox.sendKeys(password);
+
+		// Click the submit button
+		driver.findElement(By.className("submitButton")).click();
+
+	}
 	public void createRandomUser(char communityChoice) {
-		
+
 		/* Automates the process of creating a new user.
 		 * Enter community choice as a char to create an account.
 		 *  Community choices: h = highschool, m = media, c = college */
-		
+
 		// Go to account creation page.
 		driver.get(loginURL);
 
 		// User's name comes from randomNames()
 		String Name = randomNames[randNum1()];
-		
+
 		// User's email comes from randomEmail().
 		String Email = randomEmail();
-		
+
 		// User's username is full name + random Number
 		String Username = Name.replaceAll("\\s+","") + "+" + randNum2();
-		
+
 		String Password = "qwerty123";
 		String ConfirmPassword = "qwerty123";
 
@@ -101,7 +123,7 @@ public class MasterHelper {
 
 		// Web Element is created for the name box on the login page.
 		WebElement nameBox = driver.findElement(By.name("name"));
-		
+
 		// Name created above is typed into name box.
 		nameBox.sendKeys(Name);
 
@@ -116,7 +138,7 @@ public class MasterHelper {
 
 		WebElement confirmPasswordBox = driver.findElement(By.name("confirmpassword"));
 		confirmPasswordBox.sendKeys(ConfirmPassword);
-
+	
 		// Click the submit button
 		driver.findElement(By.className("submitButton")).click();
 	}

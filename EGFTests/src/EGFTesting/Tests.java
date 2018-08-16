@@ -1,13 +1,18 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.junit.Test;
+package EGFTesting;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.After;
-import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import EGFTesting.RepeatTest;
+import EGFTesting.RepeatedTestRule;
 
 public class Tests extends MasterHelper{
-
+		
 	// Runs before every test.
 	@Before
 	public void setUp() {
@@ -20,18 +25,34 @@ public class Tests extends MasterHelper{
 
 		// driver instance is of type Chrome driver. This opens webpage in chrome. (e.g. if using firefox = FirefoxDriver())
 		driver = new ChromeDriver();
+		
+		// Switches to chrome window.
+        String currentWindow = driver.getWindowHandle();
+        driver.switchTo().window(currentWindow);
 	}
 	// Runs after every test.
 	@After
 	public void tearDown() {
 		// dispose of the chrome window and driver.
-		//		driver.quit();
+				driver.quit();
 	}
 
+	@Rule
+	public RepeatedTestRule repeatRule = new RepeatedTestRule();
+	
 	@Test
 	public void LoginFormTest()  {
-		createRandomUser('c');
+//		createRandomUser('c');
+		
+		signInUser("ChasityBruns+399466", "qwerty123");
+		driver.findElement(By.id("login-dropdown"));
+		
+		String myProfileButton = "//*[@id=\"HeaderNav\"]/nav/div/div[2]/ul[4]/li/ul/li[1]/a";
+		
+		driver.findElement(By.xpath(myProfileButton)).click();
+		
 	}
+	
 	@Ignore @Test
 	public void TitleTest()  {
 		// Go to the EGF Website Homepage
@@ -108,7 +129,7 @@ public class Tests extends MasterHelper{
 		// check if url matches video page url
 		assertEquals(currentURL,videoURL);
 	}
-	@Ignore @Test
+	 @Ignore @Test
 	public void loginPageURLTest() {
 		driver.get(homeURL);
 

@@ -1,0 +1,157 @@
+<svg class="bracket-5" 
+	viewBox= "0 0 1500 500"
+	preserveAspectRatio="xMidYMid meet"
+	xmlns="http://www.w3.org/2000/svg">
+	
+	<!-- This makes a grid box so its easier to plot coordinates  -->
+
+
+<!-- <path stroke="green" stroke-width=".2" d="M50 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M100 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M150 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M200 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M250 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M300 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M350 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M400 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M450 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M500 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M550 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M600 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M650 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M700 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M750 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M800 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M850 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M900 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M950 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1000 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1050 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1100 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1150 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1200 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1250 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1300 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1350 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1400 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1450 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1500 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1550 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1600 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1650 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1700 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1750 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1800 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1850 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M1900 0 V2000" />
+<path stroke="green" stroke-width=".2" d="M1950 0 V2000" />
+<path stroke="green" stroke-width=".8" d="M2000 0 V2000" />
+
+
+<path stroke="green" stroke-width=".2" d="M0 50 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 100 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 150 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 200 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 250 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 300 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 350 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 400 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 450 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 500 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 550 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 600 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 650 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 700 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 750 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 800 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 850 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 900 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 950 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1000 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1050 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1100 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1150 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1200 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1250 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1300 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1350 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1400 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1450 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1500 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1550 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1600 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1650 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1700 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1750 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1800 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1850 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 1900 H2000" />
+<path stroke="green" stroke-width=".2" d="M0 1950 H2000" />
+<path stroke="green" stroke-width=".8" d="M0 2000 H2000" /> -->
+
+
+<!-- Name & Number box 1  -->
+<rect x="0" y="0" width="400" height="50" stroke="black" rx="3" ry="3" fill="Gray" stroke-width="1"/>
+<rect x="0" y="0" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="20" y="30" stroke="black" stroke-width="1">4</text>
+
+
+<!-- Name & Number box 2  -->
+<rect x="0" y="50" width="400" height="50" stroke="black" rx="3" ry="3" fill="Gray" stroke-width="1"/>
+<rect x="0" y="50" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="20" y="80" stroke="black" stroke-width="1">5</text>
+
+<!-- Name & Number box 3  -->
+<rect x="500" y="100" width="400" height="50" stroke="black" rx="1" ry="1" fill="Gray" stroke-width="1"/>
+<rect x="500" y="100" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="520" y="130" stroke="black" stroke-width="1">1</text>
+
+<!-- Name & Number box 4  -->
+<rect x="500" y="150" width="400" height="50" stroke="black" rx="1" ry="1" fill="Gray" stroke-width="1"/>
+<rect x="500" y="150" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+
+<!-- Name & Number box 5  -->
+<rect x="500" y="300" width="400" height="50" stroke="black" rx="1" ry="1" fill="Gray" stroke-width="1"/>
+<rect x="500" y="300" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="520" y="330" stroke="black" stroke-width="1">2</text>
+
+<!-- Name & Number box 6  -->
+<rect x="500" y="350" width="400" height="50" stroke="black" rx="1" ry="1" fill="Gray" stroke-width="1"/>
+<rect x="500" y="350" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="520" y="380" stroke="black" stroke-width="1">3</text>
+
+<!-- Name & Number box 7  -->
+<rect x="1000" y="200" width="400" height="50" stroke="black" rx="3" ry="3" fill="Gray" stroke-width="1"/>
+<rect x="1000" y="200" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="20" y="30" stroke="black" stroke-width="1">4</text>
+
+
+<!-- Name & Number box 8  -->
+<rect x="1000" y="250" width="400" height="50" stroke="black" rx="3" ry="3" fill="Gray" stroke-width="1"/>
+<rect x="1000" y="250" width="50" height="50" stroke="black" fill="darkGray" stroke-width="1" rx="1" ry="1"/>
+<text x="20" y="80" stroke="black" stroke-width="1">5</text>
+
+
+
+<!-- First + Second bracket vertical line -->
+<line x1="450" y1="50" x2="450" y2="150" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+<!-- First + Second bracket horizontal line -->
+<line x1="450" y1="150" x2="500" y2="150" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+<!-- First bracket horizontal line -->
+<line x1="400" y1="50" x2="450" y2="50" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Second vertical line -->
+<line x1="950" y1="150" x2="950" y2="350" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Third horizontal line -->
+<line x1="900" y1="150" x2="950" y2="150" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Fourth horizontal line -->
+<line x1="900" y1="350" x2="950" y2="350" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Fifth horizontal line -->
+<line x1="950" y1="250" x2="1000" y2="250" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+</svg> 
