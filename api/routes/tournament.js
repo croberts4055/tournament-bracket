@@ -3,7 +3,7 @@ const express = require('express'),
     router = express.Router(),
     Schema = mongoose.Schema,
     Tournament = require('../models/tournament'),
-    Validate = require('../validation/validation.js');
+    Validate = require('../securityTools/validation.js');
 
 router.get('/',function(req,res){
     Tournament.find({},function(err,tournaments){

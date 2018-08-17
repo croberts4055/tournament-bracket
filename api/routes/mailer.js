@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-const Validate = require('../validation/validation.js');
+const Validate = require('../securityTools/validation.js');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',

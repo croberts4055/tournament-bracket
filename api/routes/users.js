@@ -5,7 +5,8 @@ const User = require('../models/users');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
-const Validate = require('../validation/validation.js');
+const Validate = require('../securityTools/validation.js');
+const RateLimiter = require('../securityTools/rateLimiter.js');
 var passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 
@@ -66,7 +67,6 @@ router.get('/',function(req,res,next){
   User.find(function(err,users){
     res.send(users);
   })
-  
 })
 
 router.get('/auth',function(req, res, next){
@@ -123,10 +123,10 @@ router.get('/verify/:token', function(req,res){
 router.get('/:userId');
 
 /********************* POST requests ******************************/ 
-router.post('/signup',function(req,res){
 
-  // console.log(req.body)
-
+// RateLimiter.signupLoginLimiter is the same one as for login. If limit is hit... user wont be able to signup and login for the set period of time.
+router.post('/signup', RateLimiter.signupLoginLimiter, function(req,res){
+  
   if(!req.body.name || !req.body.email || !req.body.password || !req.body.username || !req.body.type || !req.body.subtype || !req.body.token){
       res.status(400).json({
           message: 'Please fill in all fields.'
@@ -205,7 +205,8 @@ router.post('/signup',function(req,res){
     }) 
 });
 
-router.post('/login',passport.authenticate('local'), function(req,res){
+// RateLimiter.signupLoginLimiter is the same one as for signup. If limit is hit... user wont be able to signup and login for the set period of time.
+router.post('/login', RateLimiter.signupLoginLimiter, passport.authenticate('local'), function(req,res){
   res.end();
 });
 
@@ -220,8 +221,20 @@ passport.deserializeUser(function(id, done) {
 });
 
 // Delete operations
-
 router.delete('/:userId',(req,res,next)=>{
+
+  // ************************************************************************************************************************
+  // ************************************************************************************************************************
+  // ************************************************************************************************************************
+  // ************************************************************************************************************************
+  //
+  // Security flaw.... validation needs to be done to make sure the person deleting the user is authorized to delete the user
+  //
+  // ************************************************************************************************************************
+  // ************************************************************************************************************************
+  // ************************************************************************************************************************
+  // ************************************************************************************************************************
+
   const id = req.params.userId;
   User.remove({ _id: id})
   .exec()
