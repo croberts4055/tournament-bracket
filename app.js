@@ -20,6 +20,7 @@ const passport = require('passport');
 const session = require('express-session');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
+const RateLimit = require('express-rate-limit');
 
 const app = express();
 
@@ -73,6 +74,15 @@ app.use(passport.session());
 //   res.header("Access-Control-Allow-Credentials","Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 // });
+
+
+// *************************************************************************************************************************************
+//
+// app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc)
+//                            // see express-rate-limit for more documentation.
+//
+// *************************************************************************************************************************************
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/articles',articlesRouter);
