@@ -38,7 +38,8 @@ class Join extends Component {
                 show: false,
                 text: "",
                 type: ""
-            }
+            },
+            disabledFields : false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSignup = this.handleSignup.bind(this);
@@ -141,17 +142,35 @@ class Join extends Component {
         })
         // .then( (response) => response.json())
         .then( (response )=> {
-                if(response.message){
+
+            // Login is good, redirect to '/'
+            if(response.status === 200){
+                this.props.history.push("/");
+            }
+            // Too many attempts. disable fields 
+            else if(response.status === 429){
+                this.setState({ disabledFields: true })
+            }
+            // Wrong login credentials
+            else if(response.status === 401){
                 this.setState({
                     alert : {
                         show: true,
                         type: "danger",
-                        text: response.message
+                        text: "Invalid username or password."
                     }
                 })
             }
-            else this.props.history.push("/");
-
+            // Woops something went wrong check response status 
+            else {
+                this.setState({
+                    alert : {
+                        show: true,
+                        type: "danger",
+                        text: "Error"
+                    }
+                })
+            }
         })
     }
 
@@ -361,6 +380,7 @@ class Join extends Component {
                         <FormControl 
                             type="text"
                             name="username"
+                            disabled={this.state.disabledFields}
                             onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup className="textfields">
@@ -368,9 +388,12 @@ class Join extends Component {
                         <FormControl 
                             type="password"
                             name="password"
+                            disabled={this.state.disabledFields}
                             onChange={this.handleChange} />
                     </FormGroup>
-                    <input className="submitButton" type="submit" value="LOG IN"/>    
+
+                    {this.state.disabledFields ? <input className="submitButton" type="submit" disabled value="LOG IN"/> : <input className="submitButton" type="submit" value="LOG IN"/>    }
+                     
                 </form>
                 
             </div>
@@ -385,19 +408,19 @@ class Join extends Component {
                 <div className="logoBlock">
                     <img src="/images/egfh_badge.png"/>
                     <FormGroup>
-                        <Radio defaultChecked onClick={this.handleHighschoolChecked}name="community">Highschool</Radio>
+                        <Radio defaultChecked onClick={this.handleHighschoolChecked} disabled={this.state.disabledFields} name="community">Highschool</Radio>
                     </FormGroup>
                 </div>
                 <div className="logoBlock">
                     <img src="/images/egfc_badge.png"/>
                     <FormGroup>
-                        <Radio onClick={this.handleCollegeChecked} name="community">College</Radio>
+                        <Radio onClick={this.handleCollegeChecked} disabled={this.state.disabledFields} name="community">College</Radio>
                     </FormGroup>
                 </div>
                 <div className="logoBlock">
                     <img src="/images/egfm_badge.png"/>
                     <FormGroup>
-                        <Radio onClick={this.handleMediaChecked} name="community">Media</Radio>
+                        <Radio onClick={this.handleMediaChecked} disabled={this.state.disabledFields} name="community">Media</Radio>
                     </FormGroup>
                 </div>
             </div>
@@ -411,6 +434,7 @@ class Join extends Component {
                     <FormControl
                         type="text"
                         name="name"
+                        disabled={this.state.disabledFields}
                         onChange = {this.handleChange} />
                 </FormGroup>
                 <FormGroup className="textfields">
@@ -418,6 +442,7 @@ class Join extends Component {
                     <FormControl
                         type="text"
                         name="email"
+                        disabled={this.state.disabledFields}
                         onChange = {this.handleChange} />
                 </FormGroup>
                 <FormGroup className="textfields">
@@ -425,6 +450,7 @@ class Join extends Component {
                     <FormControl
                         type="text"
                         name="username"
+                        disabled={this.state.disabledFields}
                         onChange = {this.handleChange} />
                 </FormGroup>
                 <FormGroup className="textfields" validationState={this.passwordValidate()}>
@@ -432,6 +458,7 @@ class Join extends Component {
                     <FormControl
                         type="password"
                         name="password"
+                        disabled={this.state.disabledFields}
                         onChange = {this.handleChange} />
                         {this.passwordValidate() === 'error' ? <HelpBlock> Both passwords must match and have at least one number, one lowercase letter, and one uppercase letter. It must be at least 6 character long. No special characters.</HelpBlock> : null}
                 </FormGroup>
@@ -440,9 +467,10 @@ class Join extends Component {
                     <FormControl
                         type="password"
                         name="confirmpassword"
+                        disabled={this.state.disabledFields}
                         onChange = {this.handleChange} />
                 </FormGroup>
-                <input className="submitButton" type="submit" value="SIGN UP"/>
+                { this.state.disabledFields ? <input className="submitButton" type="submit" disabled value="SIGN UP"/> : <input className="submitButton" type="submit" disable={this.state.disabledFields} value="SIGN UP"/>}
         
             </form>
            

@@ -126,7 +126,7 @@ router.get('/:userId');
 
 // RateLimiter.signupLoginLimiter is the same one as for login. If limit is hit... user wont be able to signup and login for the set period of time.
 router.post('/signup', RateLimiter.signupLoginLimiter, function(req,res){
-  
+
   if(!req.body.name || !req.body.email || !req.body.password || !req.body.username || !req.body.type || !req.body.subtype || !req.body.token){
       res.status(400).json({
           message: 'Please fill in all fields.'
@@ -207,6 +207,9 @@ router.post('/signup', RateLimiter.signupLoginLimiter, function(req,res){
 
 // RateLimiter.signupLoginLimiter is the same one as for signup. If limit is hit... user wont be able to signup and login for the set period of time.
 router.post('/login', RateLimiter.signupLoginLimiter, passport.authenticate('local'), function(req,res){
+
+  // Reset limiter for this IP once login is successful 
+  RateLimiter.signupLoginLimiter.resetKey(req.ip)
   res.end();
 });
 
